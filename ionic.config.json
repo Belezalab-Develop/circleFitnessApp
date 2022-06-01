@@ -1,0 +1,7 @@
+{
+  "name": "circleFitnessApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
