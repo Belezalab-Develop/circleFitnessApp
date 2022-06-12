@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512px" height="512px" class=""><g><g>
+	<g>
+		<g>
+			<path d="M480,68.8V0h-32v59.2L423.44,96h-45.76c-30.699,0.034-59.372-15.315-76.368-40.88l-26.624,17.76     c22.925,34.472,61.594,55.167,102.992,55.12h37.408L400,399.104l-0.256,4.256L448,499.776V512h32v-19.776l-47.776-95.584     l15.504-279.392L480,68.8z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<path d="M134.4,128c41.398,0.047,80.067-20.648,102.992-55.12l-26.624-17.76C193.772,80.685,165.099,96.034,134.4,96H88.56     L64,59.2V0H32v68.8l32.272,48.448L79.856,397.84L48,493.408V512h32v-13.408l32.144-96.432L96.912,128H134.4z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<polygon points="224,192 224,160 167.44,160 130.688,215.12 157.312,232.88 184.56,192    " data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<polygon points="288,160 288,192 327.44,192 354.688,232.88 381.312,215.12 344.56,160    " data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<path d="M272,224h-32c0,17.673-14.327,32-32,32h-48v32h48c18.45-0.057,35.966-8.126,48-22.112     c12.034,13.986,29.55,22.055,48,22.112h48v-32h-48C286.327,256,272,241.673,272,224z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<path d="M272,320h-32c0,17.673-14.327,32-32,32h-48v32h48c18.45-0.057,35.966-8.126,48-22.112     c12.034,13.986,29.55,22.055,48,22.112h48v-32h-48C286.327,352,272,337.673,272,320z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+			<path d="M272,416h-32c0,17.673-14.327,32-32,32h-48v32h48c18.45-0.057,35.966-8.126,48-22.112     c12.034,13.986,29.55,22.055,48,22.112h48v-32h-48C286.327,448,272,433.673,272,416z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+		</g>
+	</g>
+</g></g> </svg>

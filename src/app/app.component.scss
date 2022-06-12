@@ -1,0 +1,326 @@
+.tabbar.show-tabbar {
+  opacity: 0.8 !important;
+  background: #343434 !important;
+}
+
+button.top-rigth {
+  padding: 0;
+}
+
+button.top-rigth span {
+  color: #fff;
+  font-size: 1.7rem;
+}
+
+button.top-rigth img {
+  height: 43px;
+  width: 100px;
+}
+
+/*Tab icons*/
+
+.has-icon .tab-button-text {
+  color: #fff !important;
+}
+
+.ion-ios-exercise-icon-outline,
+.ion-ios-exercise-icon,
+.ion-md-exercise-icon,
+.ion-md-exercise-icon-outline {
+  content: url("../assets/imgs/icons/dumbbell.svg");
+}
+
+.ion-ios-feeding-icon-outline,
+.ion-ios-feeding-icon,
+.ion-md-feeding-icon,
+.ion-md-feeding-icon-outline {
+  content: url("../assets/imgs/icons/folk.png");
+}
+
+.ion-ios-explore-icon-outline,
+.ion-ios-explore-icon,
+.ion-md-explore-icon,
+.ion-md-explore-icon-outline {
+  content: url("../assets/imgs/icons/persons.png");
+}
+
+.ion-ios-fit-feed-icon-outline,
+.ion-ios-fit-feed-icon,
+.ion-md-fit-feed-icon,
+.ion-md-fit-feed-icon-outline {
+  content: url("../assets/imgs/icons/fit-feed.png");
+}
+
+/*Toolbar background*/
+
+.toolbar-background {
+  background: transparent !important;
+}
+
+.toolbar-title {
+  text-align: center !important;
+}
+
+.toolbar-title .center-icon {
+  color: #fff;
+  font-size: 33px;
+  margin-top: 10px;
+}
+
+button.transparent {
+  background: transparent;
+}
+
+.back-button-icon {
+  content: url("../assets/imgs/icons/back.png") !important;
+  width: 20px;
+}
+
+.back-button-text {
+  color: #fff !important;
+}
+
+.picon-back {
+  content: url("../assets/imgs/icons/back.png") !important;
+  width: 12px;
+}
+
+.picon-forward {
+  content: url("../assets/imgs/icons/forward.png") !important;
+  width: 12px;
+}
+
+.picon-whistle {
+  content: url("../assets/imgs/icons/whistle.svg") !important;
+  width: 90px;
+}
+
+.picon-weight {
+  content: url("../assets/imgs/icons/weight.png") !important;
+  width: 105px;
+}
+
+.picon-clock {
+  content: url("../assets/imgs/icons/clock.png") !important;
+  width: 105px;
+}
+
+.picon-forward-video {
+  content: url("../assets/imgs/icons/forward-video.png") !important;
+  width: 25px;
+}
+
+.picon-rewind-video {
+  content: url("../assets/imgs/icons/rewind-video.png") !important;
+  width: 25px;
+}
+
+ion-card {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 2px !important;
+}
+
+.subheader {
+  // margin-top: -50px !important;
+  color: #fff !important;
+  font-family: "HNC-Light";
+  text-transform: capitalize !important;
+  font-size: 18px !important;
+  ion-icon {
+      color: var(--ion-color-danger) !important;
+      font-weight: bold;
+      font-size: 46px;
+      vertical-align: middle;
+  }
+  span {
+      color: #fff !important;
+  }
+}
+
+.radio-checked {
+  border-color: #fff !important;
+  .radio-inner {
+      background-color: #e00f0f;
+  }
+}
+
+.text-rigth {
+  text-align: right;
+}
+
+.page-title {
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 1px solid #ccbbbb;
+}
+
+.fleft {
+  float: left !important;
+}
+
+.frigth {
+  float: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+video {
+  border: 1px solid #fff;
+  box-shadow: 1px 2px 8px #fff;
+}
+
+ion-img {
+  img {
+      height: 100% !important;
+      width: 100% !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+button.top-rigth span,
+button.top-left span {
+  font-size: 1.5rem !important;
+}
+button.top-rigth i.picon-back {
+  margin-right: 8px !important;
+}
+button.top-rigth i.picon-forward {
+  margin-left: 8px !important;
+}
+
+ion-toolbar {
+  // padding: 4px 0 !important;
+}
+
+ion-icon {
+  &[class*="custom-"] {
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 35px;
+      height: 35px;
+  }
+  &[class*="custom-workout"] {
+      mask-image: url("../assets/imgs/icons/weights-dumbells.svg");
+  }
+  &[class*="custom-nutrition"] {
+      mask-image: url("../assets/imgs/icons/nutrition.svg");
+  }
+  &[class*="custom-message"] {
+      mask-image: url("../assets/imgs/icons/message.svg");
+  }
+  &[class*="custom-whistle"] {
+      mask-image: url("../assets/imgs/icons/whistle.svg");
+  }
+  &[class*="custom-home"] {
+      mask-image: url("../assets/imgs/icons/home.svg");
+  }
+  &[class*="custom-olidlogo"] {
+      mask-image: url("../assets/imgs/icons/olidlogo.png");
+  }
+  &[class*="custom-nutrition"] {
+      mask-image: url("../assets/imgs/icons/nutrition.svg");
+  }
+  &[class*="custom-fav"] {
+      mask-image: url("../assets/imgs/icons/star.svg");
+  }
+  &[class*="custom-fav-full"] {
+      mask-image: url("../assets/imgs/icons/star-full.svg");
+  }
+  &[class*="custom-location"] {
+      mask-image: url("../assets/imgs/icons/location-pin.svg");
+  }
+  &[class*="custom-deal"] {
+      mask-image: url("../assets/imgs/icons/deal.svg");
+  }
+  &[class*="custom-hourglass"] {
+      mask-image: url("../assets/imgs/icons/hourglass.svg");
+  }
+  &[class*="custom-dumbells"] {
+      mask-image: url("../assets/imgs/icons/weights-dumbells.svg");
+  }
+  &[class*="custom-arrowl"] {
+      mask-image: url("../assets/imgs/icons/left-arrow.svg");
+      width: 18px;
+      height: 18px;
+  }
+  &[class*="custom-arrowr"] {
+      mask-image: url("../assets/imgs/icons/right-arrow.svg");
+      width: 18px;
+      height: 18px;
+  }
+  &[class*="custom-dot"] {
+      mask-image: url("../assets/imgs/icons/dotcircle.svg");
+      width: 18px;
+      height: 18px;
+  }
+}
+
+ion-list {
+  background: rgba(9, 9, 9, 0);
+}
+
+ion-item {
+  --background: rgba(9, 9, 9, 0);
+  left: -10px;
+  ion-row {
+      width: 100%;
+      color: var(--ion-color-light);
+      img {
+          width: 25px;
+          height: 25px;
+      }
+  }
+
+}
+
+.bg-profile {
+  height: 140px;
+  width: 100%;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.bg-profile:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(7, 7, 7, 0.858);
+}
+
+ion-header.custom-menu {
+  border-bottom: 10px solid var(--ion-color-danger);
+}
+
+ion-back-button {
+// --background: transparent;
+  text-transform: uppercase !important;
+font-size: 12px !important;
+font-weight: bold;
+  --background: transparent !important;
+--icon-font-size: 15px !important;
+--icon-margin-end: 5px !important;
+--color: #ffffff;
+
+}

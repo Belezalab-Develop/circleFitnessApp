@@ -24,3 +24,693 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.reorder-enabled ion-reorder {
+  color: #ffffff;
+}
+
+// geneal styles
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.no.margin {
+  margin: 0px !important;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.bg-transparent {
+  background: rgba(255, 255, 255, 0) !important;
+}
+
+.bg-transparent-- {
+  --background: rgba(255, 255, 255, 0) !important;
+}
+
+div.username {
+  color: #fff !important;
+  font-size: 16px !important;
+  padding-top: 5px;
+  font-family: "HNC-Light";
+}
+
+ion-grid.user-data {
+  ion-avatar {
+      width: 80px !important;
+      height: 80px;
+      // border: 2px solid white;
+      border-radius: 50% !important;
+      margin: 0 auto;
+      img {
+          width: 80px !important;
+          border-radius: 45px !important;
+      }
+  }
+
+  div.username {
+      color: #fff !important;
+      font-size: 16px !important;
+      padding-top: 5px;
+      font-family: "HNC-Light";
+  }
+}
+
+// ------- app
+
+$font-path: "/assets/fonts";
+
+@font-face {
+  font-family: "BigJohn";
+  src: url("/assets/fonts/BigJohn.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SlimJoe";
+  src: url("/assets/fonts/SlimJoe.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "HNC-Heavy";
+  src: url("/assets/fonts/HelveticaNeueCyr-Heavy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HNC-Medium";
+  src: url("/assets/fonts/HelveticaNeueCyr-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HNC-UltraLight";
+  src: url("/assets/fonts/HelveticaNeueCyr-UltraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HNC-Roman";
+  src: url("/assets/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "HNC-Light";
+  src: url("/assets/fonts/HelveticaNeueCyr-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family-base: "HNC-Medium";
+$font-family-md-base: "HNC-Medium";
+$font-family-ios-base: "HNC-Medium";
+$font-family-wp-base: "HNC-Medium";
+
+h4 {
+  font-family: "BigJohn";
+}
+
+$popover-md-width: 320px;
+$popover-ios-width: 320px;
+$popover-wp-width: 320px;
+
+//////////////////
+
+
+.ion-page {
+  background-image: url("/assets/imgs/top-home.png") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-color: #0a0a0a !important;
+}
+
+ion-content {
+  // z-index: 2;
+  --background: none;
+
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-header ion-toolbar:first-of-type {
+  // z-index: 2;
+  --padding-end: 10px;
+  --padding-bottom: 10px;
+  --padding-start: 10px;
+  // --padding-top: 20px;
+}
+
+h3 {
+  font-size: 20px !important;
+}
+h2 {
+  font-size: 18px !important;
+  font-weight: normal !important;
+}
+
+ion-grid {
+  padding: 0 !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+}
+
+ion-item {
+  --border-color: #fff;
+}
+
+.subheader {
+  // margin-top: -50px !important;
+  color: #fff !important;
+  font-family: "HNC-Light";
+  text-transform: capitalize !important;
+  font-size: 13px !important;
+  margin-left: 15px;
+  ion-icon {
+      color: var(--ion-color-danger) !important;
+      font-weight: bold;
+      font-size: 15px;
+      vertical-align: middle;
+      margin-right: 5px;
+  }
+  span {
+      color: #fff !important;
+  }
+}
+
+ion-slides {
+  height: 100%;
+}
+
+.tabbar.show-tabbar {
+  opacity: 0.8 !important;
+  background: #343434 !important;
+}
+
+// ion-content {
+//  // background: #343434 !important;
+//  background-image:url('/assets/imgs/top-home.png');
+//  background-repeat:no-repeat !important;
+// //background-size: cover  !important;
+// background-position:top center;
+// background-color: #0a0a0a  !important;
+
+// }
+
+
+/*Tab icons*/
+
+.has-icon .tab-button-text {
+  color: #fff !important;
+}
+
+.ion-ios-exercise-icon-outline,
+.ion-ios-exercise-icon,
+.ion-md-exercise-icon,
+.ion-md-exercise-icon-outline {
+  content: url("/assets/imgs/icons/dumbbell.svg");
+}
+
+.ion-ios-feeding-icon-outline,
+.ion-ios-feeding-icon,
+.ion-md-feeding-icon,
+.ion-md-feeding-icon-outline {
+  content: url("/assets/imgs/icons/folk.png");
+}
+
+.ion-ios-explore-icon-outline,
+.ion-ios-explore-icon,
+.ion-md-explore-icon,
+.ion-md-explore-icon-outline {
+  content: url("/assets/imgs/icons/persons.png");
+}
+
+.ion-ios-fit-feed-icon-outline,
+.ion-ios-fit-feed-icon,
+.ion-md-fit-feed-icon,
+.ion-md-fit-feed-icon-outline {
+  content: url("/assets/imgs/icons/fit-feed.png");
+}
+
+/*Toolbar background*/
+
+.toolbar-background {
+  background: transparent !important;
+}
+
+.toolbar-title {
+  text-align: center !important;
+}
+
+.toolbar-title .center-icon {
+  color: #fff;
+  font-size: 33px;
+  margin-top: 10px;
+}
+
+
+.back-button-icon {
+  content: url("/assets/imgs/icons/back.png") !important;
+  width: 20px;
+}
+
+.back-button-text {
+  color: #fff !important;
+}
+
+.picon-back {
+  content: url("/assets/imgs/icons/back.png") !important;
+  width: 12px;
+}
+
+.picon-forward {
+  content: url("/assets/imgs/icons/forward.png") !important;
+  width: 12px;
+}
+
+.picon-whistle {
+  content: url("/assets/imgs/icons/whistle.svg") !important;
+  width: 90px;
+}
+
+.picon-weight {
+  content: url("/assets/imgs/icons/weight.png") !important;
+  width: 105px;
+}
+
+.picon-clock {
+  content: url("/assets/imgs/icons/clock.png") !important;
+  width: 105px;
+}
+
+.picon-forward-video {
+  content: url("/assets/imgs/icons/forward-video.png") !important;
+  width: 25px;
+}
+
+.picon-rewind-video {
+  content: url("/assets/imgs/icons/rewind-video.png") !important;
+  width: 25px;
+}
+
+ion-card {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 2px !important;
+}
+
+.radio-checked {
+  border-color: #fff !important;
+  .radio-inner {
+      background-color: #e00f0f;
+  }
+}
+
+.text-rigth {
+  text-align: right;
+}
+
+.page-title {
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 1px solid #ccbbbb;
+}
+
+.fleft {
+  float: left !important;
+}
+
+.frigth {
+  float: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+video {
+  border: 1px solid #fff;
+  box-shadow: 1px 2px 8px #fff;
+}
+
+ion-img {
+  img {
+      height: 100% !important;
+      width: 100% !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+
+
+ion-toolbar {
+  // padding: 4px 0 !important;
+}
+
+ion-icon {
+  &[class*="custom-"] {
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 35px;
+      height: 35px;
+  }
+  &[class*="custom-workout"] {
+      mask-image: url("/assets/imgs/icons/weights-dumbells.svg");
+  }
+  &[class*="custom-nutrition"] {
+      mask-image: url("/assets/imgs/icons/nutrition.svg");
+  }
+  &[class*="custom-message"] {
+      mask-image: url("/assets/imgs/icons/message.svg");
+  }
+  &[class*="custom-whistle"] {
+      mask-image: url("/assets/imgs/icons/whistle.svg");
+  }
+  &[class*="custom-home"] {
+      mask-image: url("/assets/imgs/icons/home.svg");
+  }
+  &[class*="custom-olidlogo"] {
+      mask-image: url("/assets/imgs/icons/olidlogo.png");
+  }
+  &[class*="custom-nutrition"] {
+      mask-image: url("/assets/imgs/icons/nutrition.svg");
+  }
+  &[class*="custom-fav"] {
+      mask-image: url("/assets/imgs/icons/star.svg");
+  }
+  &[class*="custom-fav-full"] {
+      mask-image: url("/assets/imgs/icons/star-full.svg");
+  }
+  &[class*="custom-location"] {
+      mask-image: url("/assets/imgs/icons/location-pin.svg");
+  }
+  &[class*="custom-deal"] {
+      mask-image: url("/assets/imgs/icons/deal.svg");
+  }
+  &[class*="custom-hourglass"] {
+      mask-image: url("/assets/imgs/icons/hourglass.svg");
+  }
+  &[class*="custom-dumbells"] {
+      mask-image: url("/assets/imgs/icons/weights-dumbells.svg");
+  }
+  &[class*="custom-arrowl"] {
+      mask-image: url("/assets/imgs/icons/left-arrow.svg");
+      width: 18px;
+      height: 18px;
+  }
+  &[class*="custom-arrowr"] {
+      mask-image: url("/assets/imgs/icons/right-arrow.svg");
+      width: 18px;
+      height: 18px;
+  }
+  &[class*="custom-dot"] {
+      mask-image: url("/assets/imgs/icons/dotcircle.svg");
+      width: 18px;
+      height: 18px;
+  }
+}
+
+.header-group {
+  vertical-align: middle;
+  color: var(--ion-color-light);
+  font-family: "HNC-Light";
+  padding: 0px 5px !important;
+}
+.header-title {
+  font-size: 15px !important;
+  font-family: "HNC-Light";
+  background-color: var(--ion-color-red);
+  color: var(--ion-color-light);
+  height: 50px;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 35px;
+  padding-left: 10px;
+  ion-icon {
+      text-align: center;
+      justify-content: center;
+  }
+}
+
+.title-program {
+  color: #fff;
+  font-family: "HNC-Light", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 5pt;
+  text-align: center;
+  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.subtitle {
+  color: #fff;
+  font-family: "HNC-Light", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 5pt;
+  text-align: center;
+  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
+  text-transform: uppercase;
+}
+
+
+.picker-wrapper.sc-ion-picker-md,
+.picker-wrapper.sc-ion-picker-ios {
+  border-radius: var(--border-radius);
+  left: 5%;
+  right: 5%;
+  z-index: 10;
+  top: -25%;
+  border-radius: 25px;
+  width: 90%;
+}
+
+.picker-prefix,
+.picker-suffix,
+.picker-opt.picker-opt-selected {
+  color: var(--ion-color-danger, #3880ff);
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.picker-button.sc-ion-picker-md,
+.picker-button.ion-activated.sc-ion-picker-md {
+  color: var(--ion-color-danger, #3880ff);
+}
+
+.picker-button.sc-ion-picker-ios,
+.picker-button.ion-activated.sc-ion-picker-ios {
+  color: var(--ion-color-danger, #3880ff);
+}
+
+
+ion-tab-button[aria-selected="true"] {
+
+      border-bottom: 5px solid red!important
+
+  // box-shadow: 0 -8px 0 0 #0960bd inset!important;
+  // box-shadow: inset  0 -10px 10px -10px #0960BD;
+}
+
+.my-custom-class {
+  .alert-wrapper.sc-ion-alert-ios, .alert-wrapper.sc-ion-alert-md {
+      border-radius: 0px;
+      box-shadow: none;
+      overflow: hidden;
+      background: #000000;
+      color: white;
+      // border: 3px solid #000000;
+  }
+
+
+  .alert-title.sc-ion-alert-ios, .alert-title.sc-ion-alert-md {
+      margin-top: 8px;
+      color: var(--ion-text-color, #000);
+      font-size: 17px;
+      font-weight: 600;
+      color: #ff5757;
+  }
+
+  .alert-message.sc-ion-alert-ios, .alert-input-group.sc-ion-alert-ios {
+      color: white;
+
+  }
+
+  .alert-message.sc-ion-alert-md, .alert-input-group.sc-ion-alert-md {
+      color: white;
+
+  }
+
+  .alert-button.sc-ion-alert-ios, .alert-button.sc-ion-alert-md {
+      color: #ffffff#ff5757;
+
+  }
+
+
+
+  .alert-button {
+      color: #ffffff;
+      background: #950c0c;
+  }
+
+  .alert-button-role-cancel {
+      color: #ffffff;
+      background: #343434;
+  }
+}
+
+.my-ad-class {
+  .alert-wrapper.sc-ion-alert-ios, .alert-wrapper.sc-ion-alert-md {
+      border-radius: 0px!important;
+      box-shadow: none;
+      overflow: hidden;
+      background: #000000;
+      color: white;
+      border: 3px solid #ff5757;
+      position: absolute;
+      bottom: 90px;
+      left: 0px;
+  }
+
+
+  .alert-title.sc-ion-alert-ios, .alert-title.sc-ion-alert-md {
+      margin-top: 8px;
+      color: var(--ion-text-color, #000);
+      font-size: 17px;
+      font-weight: 600;
+      color: #ff5757;
+  }
+
+  .alert-message.sc-ion-alert-ios, .alert-input-group.sc-ion-alert-ios {
+      color: white;
+
+  }
+
+  .alert-message.sc-ion-alert-md, .alert-input-group.sc-ion-alert-md {
+      color: white;
+
+  }
+
+  .alert-button.sc-ion-alert-ios, .alert-button.sc-ion-alert-md {
+      color: #ff5757;
+
+  }
+}
+
+
+.my-nutrition-class {
+  .alert-wrapper.sc-ion-alert-ios, .alert-wrapper.sc-ion-alert-md {
+      border-radius: 0px!important;
+      box-shadow: none;
+      overflow: hidden;
+      background: #000000;
+      color: white;
+      border: 3px solid #ff5757;
+      position: absolute;
+      bottom: 90px;
+
+  }
+
+
+  .alert-title.sc-ion-alert-ios, .alert-title.sc-ion-alert-md {
+      margin-top: 8px;
+      color: var(--ion-text-color, #000);ion-toolbar {
+        // padding: 4px 0 !important;
+      }
+      font-size: 17px;
+      font-weight: 600;
+      color: #ff5757;
+  }
+
+  .alert-message.sc-ion-alert-ios, .alert-input-group.sc-ion-alert-ios {
+      color: white;
+
+  }
+
+  .alert-message.sc-ion-alert-md, .alert-input-group.sc-ion-alert-md {
+      color: white;
+
+  }
+
+  .alert-button.sc-ion-alert-ios, .alert-button.sc-ion-alert-md {
+      color: #ff5757;
+      width: 100%;
+      height: 70%;
+  }
+}
+
+
+// menu and sections
+
+h5.title-h5 {
+  font-size: 16px;
+  color: var(--ion-color-light);
+  text-align: center;
+  font-weight: bold;
+}
+
+.text-info {
+
+  font-size: 14px;
+
+  color: var(--ion-color-light);
+  text-align: justify;
+
+}
+
+.content-login {
+  background-image: url("/assets/imgs/bg-login.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-color: #0a0a0a !important;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-bottom: 0px;
+}
+
+.div-blur{
+  background: rgba(0, 0, 0, 0.543); // Make sure this color has an opacity of less than 1
+  backdrop-filter: blur(4px); // This be the blur
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.wizard-c {
+  z-index: 2;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-bottom: 0px;
+
+}

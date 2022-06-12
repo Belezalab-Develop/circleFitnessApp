@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'wizard',
     loadChildren: () => import('./pages/auth/wizard/wizard.module').then( m => m.WizardPageModule)
   },
+  {
+    path: 'home-auth',
+    loadChildren: () => import('./pages/home-auth/home-auth.module').then( m => m.HomeAuthPageModule)
+  },
 ];
 
 @NgModule({
