@@ -1,0 +1,6 @@
+{
+	"appId": "app.circlefitness.analytics",
+	"appName": "circleFitnessApp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
