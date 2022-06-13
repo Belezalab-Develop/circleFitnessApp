@@ -92,7 +92,6 @@ export class WizardPage implements OnInit {
   ngOnInit() {
     this.buildFormMeasurements();
     this.storageService.getStorage('user').then(user => {
-
       if (user) {
         this.user = user;
       }
@@ -114,7 +113,6 @@ export class WizardPage implements OnInit {
   async nextButton() {
     await this.clickNext();
     if (this.step >= 9) {
-      console.log('fin');
       return;
     }
 
@@ -196,7 +194,7 @@ export class WizardPage implements OnInit {
   }
 
   selectBodyOk(bodies, selection) {
-    _.each(bodies, function (body) {
+    _.each(bodies, function(body) {
       if (body.type !== selection.type) {
         body.isSelected = false;
       }
