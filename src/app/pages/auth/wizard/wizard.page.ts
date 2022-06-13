@@ -6,9 +6,11 @@ import { AuthenticationService } from './../../../services/auxiliar/authenticati
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from './../../../services/register.service';
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import * as _ from 'lodash';
+import { IonDatetime } from '@ionic/angular';
+import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
 
 @Component({
   selector: 'app-wizard',
@@ -16,7 +18,8 @@ import * as _ from 'lodash';
   styleUrls: ['./wizard.page.scss'],
 })
 export class WizardPage implements OnInit {
-
+  @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
+  dateValue = '17/12/1977';
   step = 0;
   progress = 0;
   gender = 'female';
@@ -33,7 +36,7 @@ export class WizardPage implements OnInit {
   pathLocationImage = '../../assets/icon/';
   genders: any[] = [];
   bodies: any[] = [];
-  user: any[]= [];
+  user: any[] = [];
 
   constructor(
     private registerService: RegisterService,
@@ -43,7 +46,7 @@ export class WizardPage implements OnInit {
     private gnrlService: GeneralService,
     private storageService: CachingService
   ) {
-    moment.locale('es-us');
+
     this.genders = [
       {
         type: 1,
@@ -88,9 +91,9 @@ export class WizardPage implements OnInit {
 
   ngOnInit() {
     this.buildFormMeasurements();
-    this.storageService.getStorage('user').then(user =>{
+    this.storageService.getStorage('user').then(user => {
 
-      if(user){
+      if (user) {
         this.user = user;
       }
     });
@@ -102,6 +105,10 @@ export class WizardPage implements OnInit {
       height: ['', Validators.required],
       weight: ['', Validators.required],
     });
+  }
+
+  formatDate(value: string) {
+    return format(parseISO(value), 'yyyy-MM-dd');
   }
 
   async nextButton() {
@@ -119,7 +126,7 @@ export class WizardPage implements OnInit {
       this.setGender(this.genderSelected.value);
     }
     if (this.step === 1) { // save birthdate
-      this.setBirthdate(this.birthdate);
+      this.setBirthdate(this.birthdate, this.dateValue);
     }
     if (this.step === 2) { // save Measurements
       this.setMeasurements(this.formMeasurements.value);
@@ -175,10 +182,10 @@ export class WizardPage implements OnInit {
   }
 
   selectLocationOk(genders, selection) {
-    _.each(genders, function(gender) {
-        if (gender.type !== selection.type) {
-            gender.isSelected = false;
-        }
+    _.each(genders, function (gender) {
+      if (gender.type !== selection.type) {
+        gender.isSelected = false;
+      }
     });
     selection.isSelected = true;
 
@@ -186,176 +193,175 @@ export class WizardPage implements OnInit {
     console.log(this.genderSelected);
     this.getBgConetent(selection.type);
 
-}
+  }
 
-selectBodyOk(bodies, selection) {
-    _.each(bodies, function(body) {
-        if (body.type !== selection.type) {
-            body.isSelected = false;
-        }
+  selectBodyOk(bodies, selection) {
+    _.each(bodies, function (body) {
+      if (body.type !== selection.type) {
+        body.isSelected = false;
+      }
     });
 
     selection.isSelected = true;
     this.bodySelected = selection;
     console.log(this.bodySelected);
-}
+  }
 
 
 
-// methods apis
+  // methods apis
 
-setGender(gender) {
+  setGender(gender) {
     if (gender == null) {
-        this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      return;
     }
     this.registerService.saveGender(gender).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo el sexo correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo el sexo correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setBirthdate(birthdate) {
-    const date = moment(birthdate).format('YYYY') + '-' +
-        moment(birthdate).format('MM') + '-' + moment(birthdate).format('DD');
+  setBirthdate(birthdate, dateValue) {
 
-        console.log(date);
+    console.log(dateValue);
 
-    this.registerService.saveBirthdate(date).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo la fecha de nacimiento correctamente', 'toast-success');
+
+    this.registerService.saveBirthdate(dateValue).subscribe(response => {
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo la fecha de nacimiento correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setMeasurements(measurements) {
+  setMeasurements(measurements) {
     if (measurements == null) {
-        this.gnrlService.showToast('Oops! Debe ingresar las medidas', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe ingresar las medidas', 'toast-success');
+      return;
     }
 
     if (130 > measurements.height || measurements.height > 250) {
-        this.gnrlService.showToast('Oops! Revisa que la altura sea correcta', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Revisa que la altura sea correcta', 'toast-success');
+      return;
     }
 
     if (20 > measurements.weight || measurements.weight > 300) {
-        this.gnrlService.showToast('Oops! Revisa que el peso sea correcto', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Revisa que el peso sea correcto', 'toast-success');
+      return;
     }
 
     this.registerService.saveMeasurements(measurements).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizaron las medidas correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizaron las medidas correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setFatPercentage(fatPercentage) {
+  setFatPercentage(fatPercentage) {
     if (fatPercentage == null) {
-        this.gnrlService.showToast('Oops! Debe ingresar el porcentaje', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe ingresar el porcentaje', 'toast-success');
+      return;
     }
 
     if (0 > fatPercentage || fatPercentage > 100) {
-        this.gnrlService.showToast('Oops! Revisa que el porcentaje sea correcto', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Revisa que el porcentaje sea correcto', 'toast-success');
+      return;
     }
 
     this.registerService.saveFatPercentage(fatPercentage).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo el porcentaje %', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo el porcentaje %', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setGoal(goal) {
+  setGoal(goal) {
     if (goal.length === 0) {
-        this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
+      return;
     }
     this.registerService.saveGoal(goal).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizaron las matas correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizaron las matas correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setExperience(experience) {
+  setExperience(experience) {
     if (experience == null) {
-        this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      return;
     }
 
 
     this.registerService.saveExperience(experience).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo la experiencia correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo la experiencia correctamente', 'toast-success');
     }, _err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setBody(body) {
+  setBody(body) {
     if (body == null) {
-        this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      return;
     }
     this.registerService.saveBody(body).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo el tipo de cuerpo correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo el tipo de cuerpo correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setGymFrequency(frequency) {
-  console.log(Number(frequency));
+  setGymFrequency(frequency) {
+    console.log(Number(frequency));
     if (frequency == null) {
-        this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      return;
     }
     let gym_min_weekly_frequency: number;
     let gym_max_weekly_frequency: number;
     if (Number(frequency) === 1) {
-        gym_min_weekly_frequency = 1;
-        gym_max_weekly_frequency = 3;
+      gym_min_weekly_frequency = 1;
+      gym_max_weekly_frequency = 3;
 
     }
     if (Number(frequency) === 2) {
-        gym_min_weekly_frequency = 4;
-        gym_max_weekly_frequency = 5;
+      gym_min_weekly_frequency = 4;
+      gym_max_weekly_frequency = 5;
     }
     if (Number(frequency) === 3) {
-        gym_min_weekly_frequency = 5;
-        gym_max_weekly_frequency = null;
+      gym_min_weekly_frequency = 5;
+      gym_max_weekly_frequency = null;
     }
 
     console.log(gym_min_weekly_frequency);
@@ -368,33 +374,33 @@ setGymFrequency(frequency) {
     console.log(data);
 
     this.registerService.saveGymFrequency(data).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.gnrlService.showToast('Se actualizo la frecuencia correctamente', 'toast-success');
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.gnrlService.showToast('Se actualizo la frecuencia correctamente', 'toast-success');
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
-setFootRestriction(foot) {
+  setFootRestriction(foot) {
     if (foot == null) {
-        this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
+      return;
     }
     this.registerService.saveFoodRestrictions(foot).subscribe(response => {
-        console.log(response);
-        this.step = this.step + 1;
-        this.progress = this.step / 9;
-        this.authService.setUserStorage();
-        // this.generalService.showToast('Se actualizo correctamente', 'toast-success');
-        this.router.navigate(['/home-auth'], { replaceUrl: true });
+      console.log(response);
+      this.step = this.step + 1;
+      this.progress = this.step / 9;
+      this.authService.setUserStorage();
+      // this.generalService.showToast('Se actualizo correctamente', 'toast-success');
+      this.router.navigate(['/home-auth'], { replaceUrl: true });
     }, err => {
-        this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
-        return;
+      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      return;
     });
-}
+  }
 
 
 }
