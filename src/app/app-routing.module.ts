@@ -65,6 +65,26 @@ const routes: Routes = [
     path: 'profile-settings',
     loadChildren: () => import('./pages/user/profile-settings/profile-settings.module').then( m => m.ProfileSettingsPageModule)
   },
+  {
+    path: 'app-information',
+    loadChildren: () => import('./pages/static/app-information/app-information.module').then( m => m.AppInformationPageModule)
+  },
+  {
+    path: 'functioning',
+    loadChildren: () => import('./pages/static/functioning/functioning.module').then( m => m.FunctioningPageModule)
+  },
+  {
+    path: 'terms',
+    loadChildren: () => import('./pages/static/terms/terms.module').then( m => m.TermsPageModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./pages/static/contact/contact.module').then( m => m.ContactPageModule)
+  },
+  {
+    path: 'subscriptions',
+    loadChildren: () => import('./pages/static/subscriptions/subscriptions.module').then( m => m.SubscriptionsPageModule)
+  },
 ];
 
 @NgModule({
