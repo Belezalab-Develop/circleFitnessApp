@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+//TODO: recordar colocar el guard en las rutas que necesiten authenticacion
 const routes: Routes = [
 
   {

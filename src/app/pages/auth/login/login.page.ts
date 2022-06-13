@@ -62,6 +62,7 @@ export class LoginPage implements OnInit {
       if (token) {
 
         this.saveUserInfo(token);
+        //TODO:extraer en funciones individuales el login y el registro en firebase
         this.firebaseService.signIn(this.formLogin.value).then(
           (res) => {
 

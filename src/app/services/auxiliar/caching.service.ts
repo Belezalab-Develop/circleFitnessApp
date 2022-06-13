@@ -7,7 +7,7 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 // Expire time in seconds
 const TTL = 60 * 60;
 // Key to identify only cached API data
-const CACHE_KEY = '_circlefitness_';
+const CACHE_KEY = 'circlefitness';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +28,16 @@ export class CachingService {
   }
 
   // Store request data
-  cacheRequest(url, data): Promise<any> {
+  cacheRequest(url, individual,  data): Promise<any> {
     const validUntil = (new Date().getTime()) + TTL * 1000;
-    url = `${CACHE_KEY}${url}`;
+    url = `${CACHE_KEY}${individual}`;
     return this.storage.set(url, { validUntil, data });
   }
 
   // Try to load cached data
-  async getCachedRequest(url): Promise<any> {
+  async getCachedRequest(url, individual ): Promise<any> {
     const currentTime = new Date().getTime();
-    url = `${CACHE_KEY}${url}`;
+    url = `${CACHE_KEY}${individual}`;
 
     const storedValue = await this.storage.get(url);
 

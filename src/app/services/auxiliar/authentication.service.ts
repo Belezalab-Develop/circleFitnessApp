@@ -1,3 +1,6 @@
+import { ApiInfluencersService } from './../influencers/api-influencers.service';
+import { ApiNutritionService } from './../nutrition/api-nutrition.service';
+import { ApiWorkoutsService } from './../workouts/api-workouts.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { UserService } from './../user.service';
 import { GeneralService } from './general.service';
@@ -21,7 +24,10 @@ export class AuthenticationService {
     private platform: Platform,
     public toastController: ToastController,
     public generalService: GeneralService,
-    private userService: UserService
+    private userService: UserService,
+    private workoutService: ApiWorkoutsService,
+    private nutritionService: ApiNutritionService,
+    private influencerService: ApiInfluencersService,
   ) {
 
      this.platform.ready().then(async () => {
@@ -75,7 +81,7 @@ export class AuthenticationService {
           this.router.navigate(['/wizard'], { replaceUrl: true });
 
         }
-        //TODO: Agregar aqui logica para cach informacion de la informacion de home Auth
+        this.cacheInfo();
         this.generalService.user = user;
         this.storageService.setStorage('user', user).then(response => {
           if (response) {
@@ -100,6 +106,16 @@ export class AuthenticationService {
     return this.authState.value;
   }
 
+  cacheInfo(){
+    //TODO: Agregar aqui logica para cach informacion de la informacion de home Auth
+    this.workoutService.indexGoals('-work-goals',true).subscribe();
+    this.workoutService.indexSegments('-work-segments',true).subscribe();
+    this.nutritionService.indexConstraint('-nutri-constraint', true).subscribe();
+    this.nutritionService.indexGoals('nutri-goals', true).subscribe();
+    this.nutritionService.indexSegments('nutri-segments', true).subscribe();
+    this.influencerService.index('-influencers', true).subscribe();
+
+  }
 
 
 
