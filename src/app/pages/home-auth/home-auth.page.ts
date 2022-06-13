@@ -17,6 +17,7 @@ export class HomeAuthPage implements OnInit {
 
   workoutListPage: any;
   user: any = {};
+  enabled = this.analyticsService.analyticsEnabled;
 
   constructor(
     private navCtrl: NavController,

@@ -37,7 +37,7 @@ export class AuthenticationService {
 
   ifLoggedIn() {
     this.storageService.getStorage('TOKEN_INFO').then(response => {
-      console.log(response);
+     // console.log(response);
       if (response) {
         this.authState.next(true);
       }
@@ -82,12 +82,8 @@ export class AuthenticationService {
 
         }
         this.cacheInfo();
-        this.generalService.user = user;
-        this.storageService.setStorage('user', user).then(response => {
-          if (response) {
-            console.log('se almaceno el usuario correctamente ', user);
-          }
-        });
+        this.userInfo(user);
+
       }
     }, err => {
       console.log(err);
@@ -95,7 +91,9 @@ export class AuthenticationService {
   }
 
   async logout() {
-    this.storageService.remove('user').then(() => { });
+    this.storageService.remove('user');
+    this.storageService.remove('user_uid');
+    this.storageService.clearCachedData();
     this.storageService.remove('TOKEN_INFO').then(() => {
       this.router.navigate(['login']);
       this.authState.next(false);
@@ -106,13 +104,18 @@ export class AuthenticationService {
     return this.authState.value;
   }
 
+  userInfo(user){
+    this.generalService.user = user;
+        this.storageService.setStorage('user', user);
+  }
+
   cacheInfo(){
-    //TODO: Agregar aqui logica para cach informacion de la informacion de home Auth
+
     this.workoutService.indexGoals('-work-goals',true).subscribe();
     this.workoutService.indexSegments('-work-segments',true).subscribe();
     this.nutritionService.indexConstraint('-nutri-constraint', true).subscribe();
-    this.nutritionService.indexGoals('nutri-goals', true).subscribe();
-    this.nutritionService.indexSegments('nutri-segments', true).subscribe();
+    this.nutritionService.indexGoals('-nutri-goals', true).subscribe();
+    this.nutritionService.indexSegments('-nutri-segments', true).subscribe();
     this.influencerService.index('-influencers', true).subscribe();
 
   }

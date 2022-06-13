@@ -62,45 +62,8 @@ export class LoginPage implements OnInit {
       if (token) {
 
         this.saveUserInfo(token);
-        //TODO:extraer en funciones individuales el login y el registro en firebase
-        this.firebaseService.signIn(this.formLogin.value).then(
-          (res) => {
 
-            this.storageService.setStorage('user_uid', res.user.uid).then(result => {
-
-              console.log('Data is saved');
-
-            }).catch(e => {
-
-
-              console.log('error: ' + e.message);
-
-            });
-
-          },
-          async (err) => {
-            console.log('error: ' + err.message);
-            this.storageService.getStorage('user').then(result => {
-              const form = this.formLogin.value;
-              const data = {
-                email: form.email,
-                password: form.password,
-                nickName: result.nick_name
-              };
-
-              this.firebaseService.signup(data).then( res=> {})
-              // eslint-disable-next-line @typescript-eslint/no-shadow
-              .catch(err => {
-
-                console.log('error: ' + err.message);
-              });
-            }).catch(fail => {
-
-            });
-
-
-          }
-        );
+        this.firebaseLoginLogic();
 
 
       }
@@ -125,6 +88,41 @@ export class LoginPage implements OnInit {
       console.log('user-storage: ' + JSON.stringify(user));
       // this.authService.saveUserStorage(user);
     }
+  }
+
+  firebaseLoginLogic() {
+    this.firebaseService.signIn(this.formLogin.value).then(
+      (res) => {
+
+        this.storageService.setStorage('user_uid', res.user.uid).then(result => { }).catch(e => { });
+
+      },
+      async (err) => {
+        console.log('error: ' + err.message);
+
+        this.firebaseSinUpLogic();
+
+      }
+    );
+
+  }
+
+  firebaseSinUpLogic() {
+    this.storageService.getStorage('user').then(result => {
+      const form = this.formLogin.value;
+      const data = {
+        email: form.email,
+        password: form.password,
+        nickName: result.nick_name
+      };
+
+      this.firebaseService.signup(data).then(res => { })
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        .catch(err => {
+
+          console.log('error: ' + err.message);
+        });
+    });
   }
 
   buildLoginForm() {
@@ -176,6 +174,7 @@ export class LoginPage implements OnInit {
       console.log(response);
       if (response) {
         this.registerService.saveStorageTokenWizard(response);
+        this.firebaseRegisterLogic(this.formRegister.value);
       }
     }, err => {
       console.log(err);
@@ -184,6 +183,23 @@ export class LoginPage implements OnInit {
 
 
     });
+  }
+
+  firebaseRegisterLogic(formResult) {
+
+      const data = {
+        email: formResult.email,
+        password: formResult.password,
+        nickName: formResult.nick_name
+      };
+
+      this.firebaseService.signup(data).then(res => { })
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        .catch(err => {
+
+          console.log('error: ' + err.message);
+        });
+
   }
 
   registerUser() {

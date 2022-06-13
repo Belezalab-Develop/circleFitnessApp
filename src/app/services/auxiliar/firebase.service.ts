@@ -41,7 +41,7 @@ export class FirebaseService {
     });
   }
 
-  //TODO: Agregar nombre de usuario en el momento de registro.
+
   async signup({ email, password, nickName }): Promise<any> {
     const credential = await this.afAuth.createUserWithEmailAndPassword(
       email,

@@ -91,7 +91,7 @@ export class RegisterService {
 
   async saveStorageTokenWizard(token: any) {
     // tslint:disable-next-line: variable-name
-    console.log('token save wizard: ' + JSON.stringify(token));
+    //console.log('token save wizard: ' + JSON.stringify(token));
     /// this.deviceService.setStorage('toke', user.access_token);
     this.storageService.setStorage('TOKEN_INFO', token).then(async (response) => {
         if (response) {
