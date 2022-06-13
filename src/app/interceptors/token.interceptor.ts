@@ -36,6 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return from(this.storageService.getStorage('TOKEN_INFO'))
             .pipe(
                 switchMap(response => {
+
                     const token = response === null ? null : response.access_token;
 
                     if (token) {

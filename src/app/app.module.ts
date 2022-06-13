@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './interceptors/token.interceptor';
 import { PipesModule } from './pipes/pipes.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
@@ -13,7 +14,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { Drivers } from '@ionic/storage';
@@ -21,6 +22,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment.prod';
+import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 
 
 
@@ -42,6 +44,8 @@ export function createTranslateLoader(http: HttpClient) {
     PipesModule,
     IonicStorageModule.forRoot({
       // eslint-disable-next-line no-underscore-dangle
+      name: 'circlefitnessdb',
+      // eslint-disable-next-line no-underscore-dangle
       driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB]
     }),
     TranslateModule.forRoot({
@@ -56,7 +60,17 @@ export function createTranslateLoader(http: HttpClient) {
   exports:[
     PipesModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    StatusBar,
+    { provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

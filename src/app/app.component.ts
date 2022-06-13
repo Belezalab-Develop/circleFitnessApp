@@ -29,9 +29,12 @@ export class AppComponent implements OnInit {
 
   ) {
     this.storageService.initStorage();
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.initializeApp();
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -46,7 +49,6 @@ export class AppComponent implements OnInit {
                 this.userInfo();
             } else {
                 if (state === false) {
-
                     this.navCtrl.navigateRoot('login');
                 }
             }

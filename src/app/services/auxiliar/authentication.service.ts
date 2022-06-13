@@ -24,13 +24,14 @@ export class AuthenticationService {
     private userService: UserService
   ) {
 
-    this.platform.ready().then(async () => {
+     this.platform.ready().then(async () => {
       this.ifLoggedIn();
     });
   }
 
   ifLoggedIn() {
     this.storageService.getStorage('TOKEN_INFO').then(response => {
+      console.log(response);
       if (response) {
         this.authState.next(true);
       }
@@ -74,6 +75,7 @@ export class AuthenticationService {
           this.router.navigate(['/wizard'], { replaceUrl: true });
 
         }
+        //TODO: Agregar aqui logica para cach informacion de la informacion de home Auth
         this.generalService.user = user;
         this.storageService.setStorage('user', user).then(response => {
           if (response) {

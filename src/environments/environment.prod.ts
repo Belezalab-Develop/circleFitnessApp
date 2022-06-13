@@ -29,6 +29,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: 'AIzaSyCENBIymxi_O0N_KjPUDOZlzStUEHRQbFQ',
     authDomain: 'finess-circle.firebaseapp.com',
+    databaseURL: 'https://finess-circle-default-rtdb.firebaseio.com',
     projectId: 'finess-circle',
     storageBucket: 'finess-circle.appspot.com',
     messagingSenderId: '919545462331',

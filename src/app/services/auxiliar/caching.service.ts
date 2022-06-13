@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Capacitor } from '@capacitor/core';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 
@@ -13,11 +14,17 @@ const CACHE_KEY = '_circlefitness_';
 })
 export class CachingService {
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage,) { }
 
   async initStorage() {
-    await this.storage.defineDriver(CordovaSQLiteDriver);
-    await this.storage.create();
+
+    if (Capacitor.isNativePlatform()) {
+      await this.storage.defineDriver(CordovaSQLiteDriver);
+      await this.storage.create();
+    } else {
+      await this.storage.create();
+    }
+
   }
 
   // Store request data
@@ -62,16 +69,21 @@ export class CachingService {
   }
 
 
-  async  setStorage(key: string, value: any): Promise<any> {
+  async setStorage(key: string, value: any): Promise<any> {
 
     return this.storage.set(key, value);
   }
 
-  async  getStorage(key: string): Promise<any> {
+  async getStorage(key: string): Promise<any> {
 
     const storedValue = await this.storage.get(key);
 
-    return storedValue;
+    if (!storedValue) {
+      return null;
+    }
+    else {
+      return storedValue;
+    }
 
   }
 

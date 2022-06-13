@@ -1,3 +1,4 @@
+import { FirebaseService } from './../../../services/auxiliar/firebase.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AuthenticationService } from './../../../services/auxiliar/authentication.service';
 import { CachingService } from './../../../services/auxiliar/caching.service';
@@ -32,6 +33,7 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController,
     private navController: NavController,
+    private firebaseService: FirebaseService,
     public storageService: CachingService,
     public authenticationService: AuthenticationService
 
@@ -42,6 +44,86 @@ export class LoginPage implements OnInit {
     this.buildRegisterForm();
     this.buildLoginForm();
     this.menuCtrl.enable(false);
+  }
+
+  async showLoader() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Un momento por favor...',
+    });
+    await this.loading.present();
+  }
+
+  async login() {
+    this.showLoader();
+
+    this.authenticationService.loginEmail(this.formLogin.value).subscribe(token => {
+      this.loading.dismiss();
+      if (token) {
+
+        this.saveUserInfo(token);
+        this.firebaseService.signIn(this.formLogin.value).then(
+          (res) => {
+
+            this.storageService.setStorage('user_uid', res.user.uid).then(result => {
+
+              console.log('Data is saved');
+
+            }).catch(e => {
+
+
+              console.log('error: ' + e.message);
+
+            });
+
+          },
+          async (err) => {
+            console.log('error: ' + err.message);
+            this.storageService.getStorage('user').then(result => {
+              const form = this.formLogin.value;
+              const data = {
+                email: form.email,
+                password: form.password,
+                nickName: result.nick_name
+              };
+
+              this.firebaseService.signup(data).then( res=> {})
+              // eslint-disable-next-line @typescript-eslint/no-shadow
+              .catch(err => {
+
+                console.log('error: ' + err.message);
+              });
+            }).catch(fail => {
+
+            });
+
+
+          }
+        );
+
+
+      }
+    }, async err => {
+      this.loading.dismiss();
+      console.log('error', err.error.message);
+
+      const msg = err.error.message;
+      this.errorAlert(msg);
+
+    });
+  }
+
+  async saveUserInfo(res) {
+    if (res !== null) {
+      this.authenticationService.saveStorageLogin(res);
+    }
+  }
+
+  async saveUserStorage(user) {
+    if (user !== null) {
+      console.log('user-storage: ' + JSON.stringify(user));
+      // this.authService.saveUserStorage(user);
+    }
   }
 
   buildLoginForm() {
