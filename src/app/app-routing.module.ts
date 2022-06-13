@@ -21,6 +21,38 @@ const routes: Routes = [
     path: 'home-auth',
     loadChildren: () => import('./pages/home-auth/home-auth.module').then( m => m.HomeAuthPageModule)
   },
+  {
+    path: 'workouts-list',
+    loadChildren: () => import('./pages/workOuts/workouts-list/workouts-list.module').then( m => m.WorkoutsListPageModule)
+  },
+  {
+    path: 'nutrition-list',
+    loadChildren: () => import('./pages/nutrition/nutrition-list/nutrition-list.module').then( m => m.NutritionListPageModule)
+  },
+  {
+    path: 'influencer-list',
+    loadChildren: () => import('./pages/influencers/influencer-list/influencer-list.module').then( m => m.InfluencerListPageModule)
+  },
+  {
+    path: 'chats',
+    loadChildren: () => import('./pages/chat/chats/chats.module').then( m => m.ChatsPageModule)
+  },
+  {
+    path: 'workout-details',
+    loadChildren: () => import('./pages/workOuts/workout-details/workout-details.module').then( m => m.WorkoutDetailsPageModule)
+  },
+  {
+    path: 'nutrition-details',
+    loadChildren: () => import('./pages/nutrition/nutrition-details/nutrition-details.module').then( m => m.NutritionDetailsPageModule)
+  },
+  {
+    path: 'influencer-details',
+    loadChildren: () => import('./pages/influencers/influencer-details/influencer-details.module').then( m => m.InfluencerDetailsPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat/chat.module').then( m => m.ChatPageModule)
+  },
 ];
 
 @NgModule({

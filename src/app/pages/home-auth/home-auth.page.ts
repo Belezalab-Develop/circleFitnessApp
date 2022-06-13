@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-auth.page.scss'],
 })
 export class HomeAuthPage implements OnInit {
-
+  //TODO: trabajar en la logica de esta pagina
   constructor() { }
 
   ngOnInit() {
