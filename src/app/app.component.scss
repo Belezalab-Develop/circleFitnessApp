@@ -202,9 +202,7 @@ button.top-rigth i.picon-forward {
   margin-left: 8px !important;
 }
 
-ion-toolbar {
-  // padding: 4px 0 !important;
-}
+
 
 ion-icon {
   &[class*="custom-"] {
@@ -280,7 +278,7 @@ ion-item {
   left: -10px;
   ion-row {
       width: 100%;
-      color: var(--ion-color-light);
+      color: var(--ion-color-white);
       img {
           width: 25px;
           height: 25px;
@@ -310,7 +308,7 @@ ion-item {
 }
 
 ion-header.custom-menu {
-  border-bottom: 10px solid var(--ion-color-danger);
+  border-bottom: 10px solid var(--ion-color-google);
 }
 
 ion-back-button {

@@ -1,0 +1,32 @@
+<div style="width: 100%; background: black;">
+  <ion-row class="ion-text-center" color="light">
+      <ion-col size="8" >
+          <ion-text color="light" class="h-tab">Mis programas</ion-text>
+      </ion-col>
+      <ion-col size="4">
+          <ion-text color="light"class="h-tab">Chat</ion-text>
+      </ion-col>
+  </ion-row>
+</div>
+<ion-tab-bar slot="bottom" color="black"  class="tabbar show-tabbar">
+  <ion-tab-button [class.selected]="tabSelected===1" class="tab-buttonc has-title has-icon"
+      (click)="goToExercise()" role="tab" id="tab-t0-0">
+      <ion-icon src="../../../assets/imgs/icons/dumbbell.svg"></ion-icon>
+      <ion-label class="tab-button-text">{{'workout'| translate| uppercase}}</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button [class.selected]="tabSelected===2" class="tab-buttonc has-title has-icon"
+      (click)="goToNutrition()" id="tab-t0-1">
+      <ion-icon src="../../../assets/imgs/icons/nutrition.svg"></ion-icon>
+      <ion-label class="tab-button-text">{{'nutrition'| translate| uppercase}}</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button [class.selected]="tabSelected===3"
+      style="border-left: 2px solid white;"
+      class="tab-buttonc has-title has-icon" (click)=" goToChat()"
+      id="tab-t0-2">
+      <ion-badge size="large" color="danger" class="messages">10</ion-badge>
+      <ion-icon src="../../../assets/imgs/icons/whistle.svg"></ion-icon>
+      <ion-label class="tab-button-text">{{'Chat'| translate| uppercase}}</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

@@ -17,7 +17,6 @@ export class AnalyticsService {
     this.router.events.pipe(
       filter((e: RouterEvent) => e instanceof NavigationEnd),
     ).subscribe((e: RouterEvent) => {
-      console.log('route changed: ', e.url);
       this.setScreenName(e.url);
     });
   }

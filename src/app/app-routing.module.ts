@@ -53,6 +53,18 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () => import('./pages/chat/chat/chat.module').then( m => m.ChatPageModule)
   },
+  {
+    path: 'user-workout',
+    loadChildren: () => import('./pages/user/user-workout/user-workout.module').then( m => m.UserWorkoutPageModule)
+  },
+  {
+    path: 'user-nutrition',
+    loadChildren: () => import('./pages/user/user-nutrition/user-nutrition.module').then( m => m.UserNutritionPageModule)
+  },
+  {
+    path: 'profile-settings',
+    loadChildren: () => import('./pages/user/profile-settings/profile-settings.module').then( m => m.ProfileSettingsPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,71 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home-auth</ion-title>
+<ion-header lines="none" class="ion-no-border">
+  <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+          <ion-menu-button color="white" menu="firstMenu"> </ion-menu-button>
+
+      </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="no-padding">
+  <div no-padding class="ion-text-center" style="margin-top: 10px">
+      <ion-grid class="ion-margin-top">
+          <ion-row>
+              <ion-col size="12" class="ion-text-center" >
+                  <ion-text>
+                      <img
+                          style="margin-top: 20px; margin-left: 10px; width: 50%;"
+                          src="assets/imgs/logo-fit.png"
+                      />
+                      <h1 style="margin-top: -2px">{{this.generalService?.user?.nick_name}}</h1>
+                  </ion-text>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col offset="2" size="8" offset="2" class="ion-text-center">
+                  <ion-button
+                      color="red"
+                      shape="round"
+                      expand="block"
+                      (click)="goWorkoutRoutine(null)"
+                  >
+                      {{'Mi entrenamiento'|translate}}</ion-button
+                  >
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+  </div>
+  <br />
+  <ion-grid no-padding class="homeB no-padding">
+     <ion-row>
+          <ion-col size="6" tappable (click)="goExploreWorkouts()">
+              <img src="assets/imgs/homeAuth1.png"/>
+              <h4 class="line1">Escoger <br> Programas de</h4>
+              <h4 class="line2">{{'Entrenamiento'|translate}}</h4>
+          </ion-col>
+          <ion-col size="6" tappable (click)="goExploreNutrition()">
+              <img src="assets/imgs/homeAuth2.jpg"/>
+              <h4 class="line1">Escoger <br> Programas de</h4>
+              <h4 class="line2">{{'nutrition'|translate}}</h4>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="6" tappable (click)="goToChat()">
+              <img src="assets/imgs/homeAuth3.jpg"/>
+              <h4 class="line1">{{'Conozca'|translate}}</h4>
+              <h4 class="line2">{{'Gym Partners'|translate}}</h4>
+          </ion-col>
+          <ion-col size="6" tappable (click)="goInfluencers()">
+              <img src="assets/imgs/homeAuth4.jpg"/>
+              <h4 class="line1">{{'Conozca'|translate}}</h4>
+              <h4 class="line2">{{'Influs & Trainers'|translate}}</h4>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+  <!-- <ion-button (click)="alert()">oprime</ion-button> -->
 
 </ion-content>
+
+<app-custom-tab></app-custom-tab>
+

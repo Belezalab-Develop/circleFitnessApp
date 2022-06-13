@@ -1,0 +1,77 @@
+h1,
+h2,
+h3 {
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+}
+ion-img {
+    height: 100%;
+    //border: 2px solid #fff;
+    //opacity: 0.7;
+    width: 100%;
+    margin: auto;
+}
+
+
+ion-badge {
+    left: -12px !important;
+}
+
+ion-grid.homeB {
+    padding: 0 !important;
+    margin-left: -20px;
+    margin-right: -20px;
+    ion-col {
+        height: 185px !important;
+        padding: 0 !important;
+        img {
+            /* -webkit-filter: grayscale(50%);
+        filter: grayscale(60%);*/
+            width: 100%;
+            height: 100%;
+            filter: brightness(50%) !important;
+        }
+        h4 {
+            position: absolute;
+            color: #fff;
+            width: auto;
+            font-size: 14px;
+            font-weight: bold;
+            /// word-spacing: 9999rem;
+            padding-left: 8px;
+            padding-top: 4px;
+        }
+        h4.line1 {
+            bottom: 40px;
+            width: 100%;
+        }
+        h4.line2 {
+            background-color: red !important;
+            bottom: 10px;
+            padding: 3px;
+            padding-left: 8px;
+        }
+    }
+}
+
+.bg-image {
+    //background-image:url('../../assets/imgs/homeAuth1.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center;
+    //object-fit: cover;
+}
+
+.row-user {
+    margin-top: -12px;
+    color: var(--ion-color-light);
+}
+
+ion-tabs {
+    height: 90px;
+    position: absolute;
+    bottom: 0;
+}
+
+

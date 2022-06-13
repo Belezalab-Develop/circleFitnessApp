@@ -1,0 +1,31 @@
+.tabbar.show-tabbar {
+  height: 90px;
+  background-color: black !important;
+
+}
+
+img {
+  width: 42px !important;
+  height: 30px !important;
+}
+
+.messages {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  border-radius: 50%;
+
+}
+
+.h-tab {
+  font-size: 13px;
+  padding: 0px;
+  font-family: "BigJohn";
+  color: white;
+}
