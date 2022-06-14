@@ -385,9 +385,6 @@ ion-img {
 
 
 
-ion-toolbar {
-  // padding: 4px 0 !important;
-}
 
 ion-icon {
   &[class*="custom-"] {
@@ -644,9 +641,7 @@ ion-tab-button[aria-selected="true"] {
 
   .alert-title.sc-ion-alert-ios, .alert-title.sc-ion-alert-md {
       margin-top: 8px;
-      color: var(--ion-text-color, #000);ion-toolbar {
-        // padding: 4px 0 !important;
-      }
+      color: var(--ion-text-color, #000);
       font-size: 17px;
       font-weight: 600;
       color: #ff5757;
