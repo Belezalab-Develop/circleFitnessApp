@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>subscriptions</ion-title>
-  </ion-toolbar>
+  <nav-header ></nav-header>
 </ion-header>
 
 <ion-content>
+  <div class="ion-text-center contact" style="color: #ffffff">
+      <h3>
+          <ion-icon name="wallet-outline" color="light" ></ion-icon>
+          <br>
+          Tu subscripción
+      </h3>
+        <ion-list>
+          <ion-item button *ngFor="let p of products" (click)="purchase(p)" detail="false">
+            <ion-label class="ion-text-wrap">
+              {{ p.label }}
+            </ion-label>
+            <ion-button slot="end">
+              {{ p.price }} BRL
+            </ion-button>
+          </ion-item>
+        </ion-list>
 
+        <ion-button expand="full" (click)="restore()">Restore</ion-button>
+  </div>
 </ion-content>

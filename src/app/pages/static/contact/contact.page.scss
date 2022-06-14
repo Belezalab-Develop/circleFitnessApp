@@ -1,0 +1,19 @@
+.contact {
+  margin: 0;
+  width: 80%;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: var(--ion-colo-light);
+  h3 {
+      color: var(--ion-colo-light);
+      font-size: 28px;
+      font-weight: bold;
+  }
+  p {
+      color: var(--ion-colo-light);
+      font-size: 14px;
+  }
+}

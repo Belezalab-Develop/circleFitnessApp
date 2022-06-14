@@ -1,3 +1,4 @@
+import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -12,7 +13,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 @NgModule({
 	declarations: [
 
-		CustomTabComponent
+		CustomTabComponent,
+    NavHeaderComponent
 
 
 	],
@@ -23,7 +25,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 	],
 	exports: [
 
-		CustomTabComponent
+		CustomTabComponent,
+    NavHeaderComponent
 
 
 	]

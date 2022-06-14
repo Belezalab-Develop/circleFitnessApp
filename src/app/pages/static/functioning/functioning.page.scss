@@ -1,0 +1,35 @@
+.more {
+  position: relative;
+  width: 100%;
+  height: 410px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .img-more {
+      width: 100%;
+      height: 410px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+  }
+}
+
+
+.play {
+  width: 100px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:50%;
+  text-align: center;
+  ion-icon {
+      font-size: 80px;
+  }
+  h6 {
+      margin-top: -5px;
+      letter-spacing: 4px;
+      font-size: 16px;
+  }
+}
