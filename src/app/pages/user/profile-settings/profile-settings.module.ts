@@ -1,3 +1,6 @@
+import { PipesModule } from './../../../pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from './../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +16,10 @@ import { ProfileSettingsPage } from './profile-settings.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileSettingsPageRoutingModule
+    ProfileSettingsPageRoutingModule,
+    ComponentsModule,
+    TranslateModule,
+    PipesModule
   ],
   declarations: [ProfileSettingsPage]
 })

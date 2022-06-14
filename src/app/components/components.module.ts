@@ -1,3 +1,4 @@
+import { CustomBackButtonComponent } from './custom-back-button/custom-back-button.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 	declarations: [
 
 		CustomTabComponent,
-    NavHeaderComponent
+    NavHeaderComponent,
+    CustomBackButtonComponent
 
 
 	],
@@ -26,7 +28,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 	exports: [
 
 		CustomTabComponent,
-    NavHeaderComponent
+    NavHeaderComponent,
+    CustomBackButtonComponent
 
 
 	]

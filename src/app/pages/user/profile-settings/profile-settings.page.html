@@ -1,9 +1,246 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profile-settings</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
-
 <ion-content>
+  <ion-row>
+      <ion-col size="12">
+          <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">MI PERFIL </div>
+      </ion-col>
+      <ion-col size="12">
+          <ion-avatar style="margin: 0 auto; height: 90px; width: 90px;" >
+              <img [src]="user.photo_url" alt="">
+          </ion-avatar>
+      </ion-col>
+  </ion-row>
+  <ion-row style="margin-top: -12px;">
+      <ion-col size="12" class="ion-text-center">
+          <ion-button color="danger" expand="full" style="margin-top: 25px;">
+              Suscribete
+          </ion-button>
+      </ion-col>
+  </ion-row>
+  <ion-grid>
+      <!-- <form> -->
+      <ion-row>
+          <ion-col offset="10" size="2">
+              <ion-text color="light" style="font-size:11px; text-align: center;">Visible</ion-text>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center ion-padding-start ion-padding-end">
+          <ion-col size="12">
+              <ion-row>
+                  <ion-col size="10">
+                      Bio
+                  </ion-col>
+                  <ion-col size="12">
+                      <ion-row class="ion-align-items-center">
+                          <ion-textarea placeholder="Bio" [(ngModel)]="form.bio"></ion-textarea>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center ion-padding-start ion-padding-end">
+          <ion-col size="12">
+              <ion-row>
+                  <ion-col size="10">
+                      Género
+                  </ion-col>
+                  <ion-col size="2">
+                      <ion-toggle color="success" [(ngModel)]="form.is_gender_visible"></ion-toggle>
+                  </ion-col>
+                  <ion-col size="12">
+                      <ion-row class="ion-align-items-center">
+                          <ion-radio-group  [(ngModel)]="form.gender">
+                              <ion-col size="3">
+                                  <ion-radio color="light" mode="md"  value="f" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="2" style="top: -5px">
+                                  <ion-label style="font-size: 12px;">Mujer</ion-label>
+                              </ion-col>
+                              <ion-col size="3" >
+                                  <ion-radio color="light" mode="md"  value="m" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="1" style="top: -5px">
+                                  <span style="font-size: 12px;">Hombre</span>
+                              </ion-col>
+                              <ion-col size="3" >
+                                  <ion-radio color="light" mode="md"  value="g" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="1" style="top: -5px">
+                                  <span style="font-size: 12px;">Otro</span>
+                              </ion-col>
+                          </ion-radio-group>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center ion-padding-start ion-padding-end">
+          <ion-col size="12">
+              <ion-row>
+                  <ion-col size="10">
+                      Me intereso por
+                  </ion-col>
+                  <ion-col size="2">
+                      <ion-toggle color="success" [(ngModel)]="form.is_looking_for_visible"></ion-toggle>
+                  </ion-col>
+                  <ion-col size="12">
+                      <ion-row class="ion-align-items-center">
+                          <ion-radio-group [(ngModel)]="form.looking_for">
+                              <ion-col size="3">
+                                  <ion-radio color="light" mode="md"  value="f" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="2" style="top: -5px">
+                                  <ion-label style="font-size: 12px;">Mujer</ion-label>
+                              </ion-col>
+                              <ion-col size="3" >
+                                  <ion-radio color="light" mode="md"  value="m" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="1" style="top: -5px">
+                                  <span style="font-size: 12px;">Hombre</span>
+                              </ion-col>
+                              <ion-col size="3" >
+                                  <ion-radio color="light" mode="md"  value="g" color="success"></ion-radio>
+                              </ion-col>
+                              <ion-col size="1" style="top: -5px">
+                                  <span style="font-size: 12px;">Ambos</span>
+                              </ion-col>
+                          </ion-radio-group>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Edad
+          </ion-col>
+          <ion-col size="4">
+              <input type="text" pattern="[0-9]*" decimal="true" placeholder="Edad"/>
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Peso kg
+          </ion-col>
+          <ion-col size="4">
+              <input type="text" pattern="[0-9]*" decimal="true" placeholder="Peso Kg" [(ngModel)]="form.weight">
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success" [(ngModel)]="form.is_weight_visible"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Altura cm
+          </ion-col>
+          <ion-col size="4">
+              <input type="text" pattern="[0-9]*" decimal="true" placeholder="Altura cm" [(ngModel)]="form.height"/>
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success" [(ngModel)]="form.is_height_visible"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              % Grasa
+          </ion-col>
+          <ion-col size="4">
+              <input type="text" pattern="[0-9]*" decimal="true" placeholder="Grasa"[(ngModel)]="form.fat_percentage"/>
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Instagram
+          </ion-col>
+          <ion-col size="4">
+              <ion-input placeholder="@instagram" value="@">
+              </ion-input>
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
 
+      //TODO: Ajustar los modelos para poder realizar el binding de los campos
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Plan Workout
+          </ion-col>
+          <ion-col size="4">
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Plan Nutricional
+          </ion-col>
+          <ion-col size="4">
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <ion-row class="row-form ion-align-items-center">
+          <ion-col size="6">
+              Fotos
+          </ion-col>
+          <ion-col size="4">
+          </ion-col>
+          <ion-col size="2">
+              <ion-toggle color="success"></ion-toggle>
+          </ion-col>
+      </ion-row>
+      <!-- </form> -->
+  </ion-grid>
+  <ion-grid class="ion-margin-top">
+      <ion-row>
+          <ion-col size="12" class="ion-text-center">
+              <ion-button (click)="updateUser()" color="danger" size="small" >
+                  Guardar
+              </ion-button>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+  <ion-grid class="ion-margin-top">
+      <ion-text color="light">Agrega una foto a tu perfil</ion-text>
+      <!-- <ion-slides [options]="slideOpts">
+          <ion-slide>
+              <ion-card>
+                  <img src="/assets/imgs/my-profile.png" alt="">
+              </ion-card>
+          </ion-slide>
+          <ion-slide>
+              <ion-card>
+                  <img src="/assets/imgs/my-profile.png" alt="">
+              </ion-card>
+          </ion-slide>
+          <ion-slide>
+              <ion-card>
+                  <img src="/assets/imgs/my-profile.png" alt="">
+              </ion-card>
+          </ion-slide>
+          <ion-slide>
+              <ion-card>
+                  <img src="/assets/imgs/my-profile.png" alt="">
+              </ion-card>
+          </ion-slide>
+      </ion-slides> -->
+      <ion-row>
+          <ion-col size="12" class="ion-text-center">
+              <ion-button color="danger" size="small" >
+                  Subir foto
+              </ion-button>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
 </ion-content>

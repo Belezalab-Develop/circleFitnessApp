@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav-header',
@@ -7,8 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public navCtrl: NavController,
+    private router: Router
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @Output() goNext = new EventEmitter();
+  @Output() goBack = new EventEmitter();
+  @Output() goHome = new EventEmitter();
+
+  goNextPage() {
+    this.goNext.emit(); //{value:this.footerText}
+  }
+  goBackPage() {
+    this.goBack.emit(); //{value:this.footerText}
+  }
+
+  goHomePage() {
+    this.router.navigateByUrl('/home-auth');
+  }
 
 }

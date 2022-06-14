@@ -299,7 +299,7 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizaron las matas correctamente', 'toast-success');
+      this.gnrlService.showToast('Se actualizaron las metas correctamente', 'toast-success');
     }, err => {
       this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
       return;

@@ -16,6 +16,7 @@ export class RegisterService {
     private storageService: CachingService
   ) { }
 
+  //TODO: Agregar campos de escoger idioma tanto al metodo como al backend.
   register(user) {
     const data = {
       name: user.name,

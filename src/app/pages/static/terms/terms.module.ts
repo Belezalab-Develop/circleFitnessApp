@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { TermsPage } from './terms.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TermsPageRoutingModule
+    TermsPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [TermsPage]
 })

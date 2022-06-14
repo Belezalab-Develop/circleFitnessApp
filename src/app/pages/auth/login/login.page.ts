@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
     this.authenticationService.loginEmail(this.formLogin.value).subscribe(token => {
       this.loading.dismiss();
       if (token) {
-
+        //TODO: Agregar analityss, set user, log user
         this.saveUserInfo(token);
 
         this.firebaseLoginLogic();
@@ -150,6 +150,8 @@ export class LoginPage implements OnInit {
   registerFlag() {
     this.register = true;
   }
+
+  //TODO: Agregar campos de escoger idioma tanto al metodo como al backend.
 
   registerEmail() {
     console.log('entra  -> ', this.formRegister.get('password').value + ' = ' + this.formRegister.get('password_confirmation').value);
