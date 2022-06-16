@@ -10,7 +10,7 @@
           <!-- <ion-avatar style="margin: 0 auto; height: 90px; width: 90px;" >
               <img [src]="user.photo_url" alt="">
           </ion-avatar> -->
-          <div class="preview">
+          <div class="preview" *ngIf="profile; else skeleton_avatar;">
             <ion-avatar (click)="changeImage()">
               <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
               <ng-template #placheolder_avatar>
@@ -18,8 +18,18 @@
                   <p>Seleccionar avatar</p>
                 </div>
               </ng-template>
+
             </ion-avatar>
+
           </div>
+          <ng-template #skeleton_avatar>
+            <div class="preview">
+              <ion-avatar>
+                <ion-skeleton-text animated height="128px" width="128px" rounded></ion-skeleton-text>
+              </ion-avatar>
+
+            </div>
+          </ng-template>
       </ion-col>
   </ion-row>
   <ion-row style="margin-top: -12px;">
@@ -171,7 +181,7 @@
               Instagram
           </ion-col>
           <ion-col size="4">
-              <ion-input placeholder="@instagram" value="@">
+              <ion-input placeholder="@instagram" value="@" [(ngModel)]="form.instagram">
               </ion-input>
           </ion-col>
           <ion-col size="2">

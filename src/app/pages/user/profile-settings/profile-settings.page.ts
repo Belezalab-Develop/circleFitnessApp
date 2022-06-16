@@ -36,11 +36,13 @@ export class ProfileSettingsPage implements OnInit {
       });
 
     });
+    this.presentLoadingDefault();
 
   }
 
   ngOnInit() {
     //TODO: Agregar Analitycs.
+
     this.menu.close();
     this.getUser();
   }
@@ -55,11 +57,14 @@ export class ProfileSettingsPage implements OnInit {
 
   }
 
-  updateUser() {
+  async updateUser() {
 
-    //TODO: Aqui cuando realice el update, refrescar la informacion del user en el cache
+
     //TODO: Lanzar un alert para decir que todo salio bien en la actualizacion de los datos
-    this.userService.updateUser(this.form).subscribe(() => {
+    this.userService.updateUser(this.form).subscribe(async () => {
+      const loading = await this.loadingController.create();
+      loading.present();
+
       console.log('se actualizo');
       this.userService.getUser().subscribe(user => {
         console.log('se trajo nueva data');
@@ -68,6 +73,7 @@ export class ProfileSettingsPage implements OnInit {
           this.storageService.setStorage('user', user).then(us => {
             console.log('se actualizo el storage');
             this.buildForm(us);
+            loading.dismiss();
           });
         });
 
@@ -81,7 +87,7 @@ export class ProfileSettingsPage implements OnInit {
 
   buildForm(user) {
     this.user = user;
-    //TODO: realizar check de el porcentaje de grasa y el calculo para la edad.
+    //TODO: el calculo para la edad, agregar idioma de l aplicacion .
     this.form = {
       gender: this.user.personal_information.gender,
       weight: this.user.personal_information.weight,
@@ -121,12 +127,27 @@ export class ProfileSettingsPage implements OnInit {
       if (!result) {
         const alert = await this.alertController.create({
           header: 'Upload failed',
-          message: 'There was a problem uploading your avatar.',
+          message: 'Existe un problema actualizando su avatar.',
           buttons: ['OK'],
         });
         await alert.present();
       }
     }
+  }
+
+  async presentLoadingDefault() {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'un momento por favor ....'
+
+
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1000);
   }
 
 }
