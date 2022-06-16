@@ -17,9 +17,7 @@ export class ProfileSettingsPage implements OnInit {
   form: any = {};
   profile = null;
 
-  slideOpts = {
-    slidesPerView: 2.5,
-  };
+
 
   constructor(
     private userService: UserService,
@@ -62,7 +60,12 @@ export class ProfileSettingsPage implements OnInit {
 
     //TODO: Lanzar un alert para decir que todo salio bien en la actualizacion de los datos
     this.userService.updateUser(this.form).subscribe(async () => {
-      const loading = await this.loadingController.create();
+      const loading = await this.loadingController.create({
+        spinner: 'bubbles',
+        message: 'Actualizando un momento por favor ....'
+
+
+      });
       loading.present();
 
       console.log('se actualizo');
@@ -126,7 +129,7 @@ export class ProfileSettingsPage implements OnInit {
 
       if (!result) {
         const alert = await this.alertController.create({
-          header: 'Upload failed',
+          header: 'Falla en la actualizacion',
           message: 'Existe un problema actualizando su avatar.',
           buttons: ['OK'],
         });
@@ -147,7 +150,7 @@ export class ProfileSettingsPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-    }, 1000);
+    }, 1500);
   }
 
 }
