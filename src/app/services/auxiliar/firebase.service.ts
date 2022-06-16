@@ -6,6 +6,13 @@ import { switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
 
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut
+} from '@angular/fire/auth';
+
 
 export interface User {
   uid: string;
@@ -34,16 +41,18 @@ export class FirebaseService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private storageService: CachingService
+    private storageService: CachingService,
+    private auth: Auth
   ) {
-    this.afAuth.onAuthStateChanged((user) => {
+    /* this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
-    });
+    }); */
   }
 
 
   async signup({ email, password, nickName }): Promise<any> {
-    const credential = await this.afAuth.createUserWithEmailAndPassword(
+    const credential = await createUserWithEmailAndPassword(
+      this.auth,
       email,
       password
     );

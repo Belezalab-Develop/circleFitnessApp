@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         this.translate.use('es');
 
         this.authService.authState.subscribe(state => {
-            console.log('state * : ', state);
+
             if (state === true) {
                 this.userInfo();
             } else {

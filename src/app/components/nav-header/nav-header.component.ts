@@ -30,7 +30,7 @@ export class NavHeaderComponent implements OnInit {
   }
 
   goHomePage() {
-    this.router.navigateByUrl('/home-auth');
+    this.router.navigateByUrl('home-auth', {replaceUrl: true});
   }
 
 }

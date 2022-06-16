@@ -42,31 +42,31 @@ export class HomeAuthPage implements OnInit {
 
       this.generalService.user = user;
       this.user = user;
-      console.log('user in Home', user);
+
     });
   }
 
   goWorkoutRoutine(routines: any) {
-    this.router.navigateByUrl('user-workout');
+    this.router.navigateByUrl('user-workout', {replaceUrl: true});
   }
 
   goInfluencers() {
-    this.router.navigateByUrl('influencer-list');
+    this.router.navigateByUrl('influencer-list', {replaceUrl: true});
   }
 
   goExploreWorkouts() {
-    this.router.navigateByUrl('workouts-list');
+    this.router.navigateByUrl('workouts-list', {replaceUrl: true});
   }
 
   goExploreNutrition() {
-    this.router.navigateByUrl('nutrition-list');
+    this.router.navigateByUrl('nutrition-list', {replaceUrl: true});
   }
   goToChat() {
-    this.router.navigateByUrl('chats');
+    this.router.navigateByUrl('chats', {replaceUrl: true});
   }
 
   goProfile() {
-    this.router.navigateByUrl('profile-settings');
+    this.router.navigateByUrl('profile-settings', {replaceUrl: true});
   }
 
 }
