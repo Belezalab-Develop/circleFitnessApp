@@ -12,7 +12,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['./profile-settings.page.scss'],
 })
 export class ProfileSettingsPage implements OnInit {
-  userUid= null;
+  userUid = null;
   user: any = {};
   form: any = {};
   profile = null;
@@ -59,19 +59,27 @@ export class ProfileSettingsPage implements OnInit {
 
     //TODO: Aqui cuando realice el update, refrescar la informacion del user en el cache
     //TODO: Lanzar un alert para decir que todo salio bien en la actualizacion de los datos
-    this.userService.updateUser(this.form).subscribe();
-    this.userService.getUser().subscribe(user=>{
-      this.storageService.remove('user');
-      this.storageService.setStorage('user', user).then(us =>{
-       this.buildForm(us);
-      });
+    this.userService.updateUser(this.form).subscribe(() => {
+      console.log('se actualizo');
+      this.userService.getUser().subscribe(user => {
+        console.log('se trajo nueva data');
+        this.storageService.remove('user').then(() => {
+          console.log('se removio el usuario');
+          this.storageService.setStorage('user', user).then(us => {
+            console.log('se actualizo el storage');
+            this.buildForm(us);
+          });
+        });
 
+
+      });
     });
+
 
   }
 
 
-  buildForm(user){
+  buildForm(user) {
     this.user = user;
     //TODO: realizar check de el porcentaje de grasa y el calculo para la edad.
     this.form = {

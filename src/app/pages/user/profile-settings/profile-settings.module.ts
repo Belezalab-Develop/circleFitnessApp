@@ -3,7 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from './../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +15,7 @@ import { ProfileSettingsPage } from './profile-settings.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     ProfileSettingsPageRoutingModule,
     ComponentsModule,

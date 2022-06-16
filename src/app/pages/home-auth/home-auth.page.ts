@@ -29,6 +29,7 @@ export class HomeAuthPage implements OnInit {
     private analyticsService: AnalyticsService
   ) {
     this.authService.authState.next(true);
+    this.getUser();
   }
 
   ngOnInit() {
@@ -39,11 +40,12 @@ export class HomeAuthPage implements OnInit {
 
   getUser() {
     this.storageStervice.getStorage('user').then((user) => {
-
+      console.log(user);
       this.generalService.user = user;
       this.user = user;
 
     });
+    ;
   }
 
   goWorkoutRoutine(routines: any) {

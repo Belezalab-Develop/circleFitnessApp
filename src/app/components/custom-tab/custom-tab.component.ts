@@ -18,15 +18,15 @@ export class CustomTabComponent implements OnInit {
   ngOnInit() { }
 
   goToExercise() {
-    this.router.navigateByUrl('/user-workout');
+    this.router.navigateByUrl('user-workout', {replaceUrl:true});
   }
 
   goToNutrition() {
-    this.router.navigateByUrl('/user-nutritition', { state: { isFav: true, showMoreOptions: true } });
+    this.router.navigateByUrl('user-nutrition', { replaceUrl:true, state: { isFav: true, showMoreOptions: true } });
   }
 
   goToChat() {
-    this.router.navigateByUrl('/chats');
+    this.router.navigateByUrl('chats', {replaceUrl:true});
   }
 
 

@@ -38,25 +38,25 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-        this.statusBar.styleDefault();
-        this.translate.addLangs(['en', 'es']);
-        this.translate.setDefaultLang('es');
-        this.translate.use('es');
+      this.statusBar.styleDefault();
+      this.translate.addLangs(['en', 'es']);
+      this.translate.setDefaultLang('es');
+      this.translate.use('es');
 
-        this.authService.authState.subscribe(state => {
+      this.authService.authState.subscribe(state => {
 
-            if (state === true) {
-                this.userInfo();
-            } else {
-                if (state === false) {
-                    this.navCtrl.navigateRoot('login');
-                }
-            }
-        });
+        if (state === true) {
+          this.userInfo();
+        } else {
+          if (state === false) {
+            this.navCtrl.navigateRoot('login');
+          }
+        }
+      });
 
 
     });
-}
+  }
 
 
   async goInfoApp() {
