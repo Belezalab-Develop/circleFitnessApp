@@ -1,9 +1,87 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>workouts-list</ion-title>
-  </ion-toolbar>
+  <app-nav-header (goNext)="goNext()" (goBack)="goBack()"></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content no-padding>
+
+  <div class="title-program ion-padding">EXPLORAR <br>PLAN DE  WORKOUT </div>
+
+
+  <div  >
+
+          <div class="header-title" style="margin-left: -20px">
+              <div style="width: 90%;">
+                  <b style="text-align: left;">SECCIONES</b>
+              </div>
+              <div style="width: 10%;">
+                  <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
+              </div>
+          </div>
+      <div *ngFor="let section of segmentsPrograms">
+
+
+
+          <h3 class="header-group">
+             by {{section.label}}
+          </h3>
+
+          <div>
+              <ion-slides pager="true" #slides [options]="sliderConfig">
+                  <ion-slide class="slides bg-slide" [ngStyle]="{'background-image':'url(' + workout.photo_url + ')'}"
+                      *ngFor="let workout of section.exercise_program" (click)="openDetailWorkout(workout)">
+                      <div *ngIf="workout.is_favourite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="!workout.is_public" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{workout.label}}</div>
+
+                  </ion-slide>
+              </ion-slides>
+          </div>
+      </div>
+
+
+  </div>
+  <div>
+      <div class="header-title" style="margin-left: -20px; margin-top: 1rem;">
+          <div style="width: 90%;">
+              <b style="text-align: left;">OBJETIVOS</b>
+          </div>
+          <div style="width: 10%;">
+              <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
+          </div>
+      </div>
+      <div *ngFor="let category of goalsPrograms">
+
+          <h3 class="header-group">
+              {{category.label}}
+
+          </h3>
+
+          <div>
+              <ion-slides pager="true" #slides [options]="sliderConfig">
+                  <ion-slide class="slides bg-slide"
+                  [ngStyle]="{'background-image':'url(' + workout.photo_url + ')'}"
+                      *ngFor="let workout of category.exercise_program"
+                      (click)="openDetailWorkout(workout)">
+
+                      <div *ngIf="workout.is_favourite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="!workout.is_public" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{workout.label}}</div>
+
+                  </ion-slide>
+              </ion-slides>
+          </div>
+      </div>
+      <br>
+  </div>
+
 
 </ion-content>
+<app-custom-tab></app-custom-tab>

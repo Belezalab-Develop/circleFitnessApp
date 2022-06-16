@@ -1,3 +1,4 @@
+import { AuthProvider } from './providers/auth/auth';
 import { Capacitor } from '@capacitor/core';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { PipesModule } from './pipes/pipes.module';
@@ -82,7 +83,8 @@ export function createTranslateLoader(http: HttpClient) {
   exports:[
     PipesModule,
   ],
-  providers: [
+  providers: [,
+    AuthProvider,
     StatusBar,
     { provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

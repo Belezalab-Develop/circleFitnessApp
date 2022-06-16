@@ -1,3 +1,4 @@
+import { CachedImageComponent } from './cached-image/cached-image.component';
 import { CustomBackButtonComponent } from './custom-back-button/custom-back-button.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 
@@ -16,7 +17,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 
 		CustomTabComponent,
     NavHeaderComponent,
-    CustomBackButtonComponent
+    CustomBackButtonComponent,
+    CachedImageComponent
 
 
 	],
@@ -29,7 +31,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 
 		CustomTabComponent,
     NavHeaderComponent,
-    CustomBackButtonComponent
+    CustomBackButtonComponent,
+    CachedImageComponent
 
 
 	]

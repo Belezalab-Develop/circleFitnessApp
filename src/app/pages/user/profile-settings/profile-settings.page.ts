@@ -58,7 +58,7 @@ export class ProfileSettingsPage implements OnInit {
   async updateUser() {
 
 
-    //TODO: Lanzar un alert para decir que todo salio bien en la actualizacion de los datos
+
     this.userService.updateUser(this.form).subscribe(async () => {
       const loading = await this.loadingController.create({
         spinner: 'bubbles',

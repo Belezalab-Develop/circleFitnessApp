@@ -7,6 +7,7 @@ import { CachingService } from './services/auxiliar/caching.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { App } from '@capacitor/app';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
 
   ) {
     this.storageService.initStorage();
+    this.createCaheFolder();
 
   }
 
@@ -57,7 +59,19 @@ export class AppComponent implements OnInit {
 
     });
   }
+  async createCaheFolder() {
 
+    try {
+      const ret = await Filesystem.mkdir({
+        directory: Directory.Cache,
+        path: `CACHE-IMG`
+      });
+      console.log('folder ', ret);
+    } catch (e) {
+      //console.error("Unable to make directory", e);
+    }
+
+  }
 
   async goInfoApp() {
     this.router.navigateByUrl('app-information');
