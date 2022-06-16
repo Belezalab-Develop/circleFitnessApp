@@ -1,11 +1,10 @@
+import { LoadingController, IonRouterOutlet } from '@ionic/angular';
 
 /* eslint-disable no-console */
 import { CachingService } from './../../../services/auxiliar/caching.service';
-import { ApiWorkoutsService } from './../../../services/workouts/api-workouts.service';
-import { AuthProvider } from './../../../providers/auth/auth';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 
 @Component({
@@ -14,7 +13,7 @@ import { WorkoutListParams } from 'src/app/models/workoutlistparams';
   styleUrls: ['./workouts-list.page.scss'],
 })
 export class WorkoutsListPage implements OnInit {
-
+  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
   exercisePrograms = [];
   goalsPrograms = [];
   segmentsPrograms = [];
@@ -25,20 +24,23 @@ export class WorkoutsListPage implements OnInit {
     slidesPerView: 3,
   };
 
+
   constructor(
     private navCtrl: NavController,
     private router: Router,
-    private authService: AuthProvider,
-    private workout: ApiWorkoutsService,
     private storageService: CachingService,
+    private loadingController: LoadingController
 
-  ) { }
+  ) {
+    this.presentLoadingDefault();
+  }
 
 
 
-  ngOnInit() {
+  async ngOnInit() {
 
     console.log('Workouts List Page');
+
 
     this.storageService.getCachedRequest('test', '-work-goals').then(res => {
       this.goalsPrograms = res;
@@ -49,19 +51,25 @@ export class WorkoutsListPage implements OnInit {
     this.storageService.getCachedRequest('test', '-work-segments').then(res => {
       this.segmentsPrograms = res;
       console.info('segments', this.segmentsPrograms);
-    });
 
+    });
 
 
   }
 
   goBack() {
-    this.navCtrl.navigateRoot('/home-auth');
+    if (this.routerOutlet.canGoBack()) {
+      this.navCtrl.pop();
+    }else {
+      this.navCtrl.navigateRoot('/home-auth');
+    }
   }
 
   goNext() {
-
-    this.router.navigateByUrl('workouts-list', {replaceUrl: true});
+    if (this.routerOutlet.canGoBack())
+      {this.navCtrl.pop();}
+    else
+      {this.navCtrl.navigateRoot('/home-auth');}
   }
 
   openDetailWorkout(workout: any) {
@@ -72,6 +80,21 @@ export class WorkoutsListPage implements OnInit {
     this.router.navigate(['/workout-details'], {
       queryParams: { params,  workout },
     });
+  }
+
+  async presentLoadingDefault() {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'un momento por favor ....'
+
+
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1500);
   }
 
 
