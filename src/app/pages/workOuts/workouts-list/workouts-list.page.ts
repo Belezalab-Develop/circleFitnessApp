@@ -57,6 +57,7 @@ export class WorkoutsListPage implements OnInit {
 
   }
 
+  //TODO:Evaluar si se pueden quitar;
   goBack() {
     if (this.routerOutlet.canGoBack()) {
       this.navCtrl.pop();

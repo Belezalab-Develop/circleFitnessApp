@@ -1,9 +1,130 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>nutrition-list</ion-title>
-  </ion-toolbar>
+  <app-nav-header (goNext)="goNext()" (goBack)="goBack()"></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content class="no-padding">
+  <ion-row>
+      <ion-col size="12">
+          <div class="title-program">{{'explore' | translate}} <br> {{'Plan de Nutrición' | translate}}</div>
+      </ion-col>
+  </ion-row> <br>
+
+  <div  style="margin-left: -20px; margin-right: -20px;">
+      <div class="header-title" >
+          <div style="width: 90%;">
+              <b style="text-align: left;">SEGMENTOS
+                   </b>
+          </div>
+          <div style="width: 10%;">
+              <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
+          </div>
+      </div>
+      <div *ngFor="let categoria of nutritionProgramsSegments">
+          <h3 class="header-group">
+              {{categoria.label}}
+          </h3>
+          <div>
+              <ion-slides pager="true" #slides [options]="slideOpts">
+                  <ion-slide
+                      class="slides"
+                      *ngFor="let nutritionProgram of categoria.nutrition_program"
+                      [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
+                      (click)="openNutrition(nutritionProgram)">
+
+                      <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{nutritionProgram.label}}</div>
+                  </ion-slide>
+
+
+              </ion-slides>
+          </div>
+      </div>
+      <br>
+  </div>
+
+  <div  style="margin-left: -20px; margin-right: -20px;">
+      <div class="header-title" >
+          <div style="width: 90%;">
+              <b style="text-align: left;">OBJETIVOS
+                   </b>
+          </div>
+          <div style="width: 10%;">
+              <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
+          </div>
+      </div>
+      <div *ngFor="let categoria of nutritionProgramsGoals">
+          <h3 class="header-group">
+              {{categoria.label}}
+          </h3>
+          <div>
+              <ion-slides pager="true" #slides [options]="slideOpts">
+                  <ion-slide
+                      class="slides"
+                      *ngFor="let nutritionProgram of categoria.nutrition_program"
+                      [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
+                      (click)="openNutrition(nutritionProgram)">
+
+                      <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{nutritionProgram.label}}</div>
+                  </ion-slide>
+
+
+              </ion-slides>
+
+          </div>
+      </div>
+      <br>
+  </div>
+
+  <div  style="margin-left: -20px; margin-right: -20px;">
+      <div class="header-title" >
+          <div style="width: 90%;">
+              <b style="text-align: left;">RESTRICCIONES
+                   </b>
+          </div>
+          <div style="width: 10%;">
+              <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
+          </div>
+      </div>
+      <div *ngFor="let categoria of nutritionProgramsConstraint">
+          <h3 class="header-group">
+              {{categoria.label}}
+          </h3>
+          <div>
+              <ion-slides pager="true" #slides [options]="slideOpts">
+                  <ion-slide
+                      class="slides"
+                      *ngFor="let nutritionProgram of categoria.nutrition_program"
+                      [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
+                      (click)="openNutrition(nutritionProgram)">
+
+                      <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{nutritionProgram.label}}</div>
+                  </ion-slide>
+
+
+              </ion-slides>
+          </div>
+      </div>
+      <br>
+  </div>
+
+
 
 </ion-content>
+<app-custom-tab></app-custom-tab>
