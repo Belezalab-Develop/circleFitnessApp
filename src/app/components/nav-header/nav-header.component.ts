@@ -19,13 +19,8 @@ export class NavHeaderComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
 
-  @Output() goBack = new EventEmitter();
+
   @Output() goHome = new EventEmitter();
-
-
-  goBackPage() {
-    this.goBack.emit();
-  }
 
   goHomePage() {
     this.router.navigateByUrl('home-auth', {replaceUrl: true});

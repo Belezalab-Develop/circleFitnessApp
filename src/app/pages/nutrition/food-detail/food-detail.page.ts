@@ -2,7 +2,7 @@ import { ImageModalPage } from './../../auxiliar/image-modal/image-modal.page';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,13 +11,14 @@ import * as _ from 'lodash';
   styleUrls: ['./food-detail.page.scss'],
 })
 export class FoodDetailPage implements OnInit {
-  @ViewChild(IonicStorageModule, { static: true }) routerOutlet: IonRouterOutlet;
+  //@ViewChild(IonicStorageModule, { static: true }) routerOutlet: IonRouterOutlet;
   meal: any = {};
   nutritionProgram: any = {};
   showMore = false;
   mealOptions;
 
   constructor(
+    @Optional() private routerOutlet: IonRouterOutlet,
     private navCtrl: NavController,
     private router: Router,
     private modalCtrl: ModalController,
@@ -46,9 +47,10 @@ export class FoodDetailPage implements OnInit {
     }
   }
 
-  goBack() {
-    if (this.routerOutlet.canGoBack()) {
-      this.navCtrl.pop();
+  goBack(): void {
+    if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+      this.navCtrl.setDirection('back');
+      this.routerOutlet.pop();
     } else {
       this.navCtrl.navigateRoot('/home-auth');
     }

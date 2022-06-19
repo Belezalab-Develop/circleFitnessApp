@@ -59,7 +59,7 @@ export class WorkoutsListPage implements OnInit {
 
   //TODO:Evaluar si se pueden quitar;
   goBack() {
-    if (this.routerOutlet.canGoBack()) {
+    if (this.routerOutlet?.canGoBack()) {
       this.navCtrl.pop();
     }else {
       this.navCtrl.navigateRoot('/home-auth');

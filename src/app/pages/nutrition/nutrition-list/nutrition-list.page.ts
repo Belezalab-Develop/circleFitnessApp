@@ -2,7 +2,7 @@
 import { CachingService } from './../../../services/auxiliar/caching.service';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, NavController, LoadingController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nutrition-list',
@@ -10,7 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./nutrition-list.page.scss'],
 })
 export class NutritionListPage implements OnInit {
-  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
+  //@ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
 
 
   nutritionCategory: any;
@@ -26,6 +26,7 @@ export class NutritionListPage implements OnInit {
 
 
   constructor(
+    @Optional() private routerOutlet: IonRouterOutlet,
     private navCtrl: NavController,
     private router: Router,
     private storageService: CachingService,
@@ -62,13 +63,15 @@ export class NutritionListPage implements OnInit {
   }
 
   //TODO:Evaluar si se pueden quitar;
-  goBack() {
-     if (this.routerOutlet.canGoBack()) {
-      this.navCtrl.pop();
+  goBack(): void {
+    if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+      this.navCtrl.setDirection('back');
+      this.routerOutlet.pop();
     } else {
-      this.navCtrl.navigateRoot('/home-auth');
+      this.navCtrl.navigateBack('/home-auth');
     }
   }
+
 
 
 

@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import { UserService } from './../../../services/user.service';
 import { IonRouterOutlet, NavController, AlertController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
@@ -13,7 +13,7 @@ import { WorkoutListParams } from 'src/app/models/workoutlistparams';
   styleUrls: ['./nutrition-details.page.scss'],
 })
 export class NutritionDetailsPage implements OnInit {
-  @ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
+  //@ViewChild(IonRouterOutlet, { static: true }) routerOutlet: IonRouterOutlet;
   custom_url: string;
   user: any;
   influencer: any;
@@ -25,6 +25,7 @@ export class NutritionDetailsPage implements OnInit {
 
 
   constructor(
+    @Optional() private routerOutlet: IonRouterOutlet,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private userService: UserService,
@@ -79,11 +80,12 @@ export class NutritionDetailsPage implements OnInit {
     this.changeNutrition();
   }
 
-  goBack() {
-    if (this.routerOutlet.canGoBack()) {
-      this.navCtrl.pop();
+  goBack(): void {
+    if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+      this.navCtrl.setDirection('back');
+      this.routerOutlet.pop();
     } else {
-      this.navCtrl.navigateRoot('/home-auth');
+      this.navCtrl.navigateBack('/home-auth');
     }
   }
 

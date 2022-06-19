@@ -82,14 +82,14 @@ export class WorkoutDetailsPage implements OnInit {
   }
 
   goBack() {
-    if (this.routerOutlet.canGoBack()) {
+    if (this.routerOutlet?.canGoBack()) {
       this.navCtrl.pop();
     }else {
       this.navCtrl.navigateRoot('/home-auth');
     }
   }
 
- 
+
 
 
   selectedWorkoutRoutine(routines: any) {
