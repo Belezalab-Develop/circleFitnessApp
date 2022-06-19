@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+import { Router } from '@angular/router';
+import { UserService } from './../../../services/user.service';
+import { NavController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +11,97 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserWorkoutPage implements OnInit {
 
-  constructor() { }
+  workout: any;
+  routines: any = {};
+  goals: [];
+  levels: [];
+  workoutsTextSearch: string;
+  user: any = {};
+  viewList = false;
+  viewReorder = true;
+  reorderActive = false;
+  isFav = true;
+  viewLocation = false;
+  influencer: [];
+  subscribe = true;
+  exerciseProgram: any = {};
+  showMore = false;
+
+  constructor(
+    public navCtrl: NavController,
+    private userService: UserService,
+    private alertCtrl: AlertController,
+    public router: Router
+  ) {
+
+  }
 
   ngOnInit() {
+    console.info('USER WORKOUT');
+
+    this.userService.getExerciseProgram().subscribe(
+      (exerciseProgram: any) => {
+        this.exerciseProgram = exerciseProgram;
+        this.routines = this.exerciseProgram.days[0].sessions;
+        this.goals = this.exerciseProgram.prog.goals;
+        this.levels = this.exerciseProgram.prog.levels;
+        console.log('WORKOUT   :>> ', exerciseProgram);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  selectedWorkoutRoutineOutside(routines: any) {
+    if (this.viewReorder) {
+      this.router.navigateByUrl('/workouts-details', {
+        state: {
+          routine: routines.days[0].sessions[0],
+          influencer: routines.influencer,
+        },
+      });
+    }
+  }
+
+  selectedWorkoutRoutine(routines: any, influencer: any) {
+    console.log(routines);
+    console.log(influencer);
+  if (this.viewReorder) {
+    this.router.navigateByUrl('/workouts-details', {
+      state: { routine: routines, influencer },
+    });
+  }
+}
+
+  goInfluencerDetail(influencer: any) {
+    console.log(influencer);
+    this.router.navigate(['/influencer-detail'], {
+      state: { influencer },
+    });
+  }
+
+
+  reorderRoutines(event) {
+    const dayOfWeek = ['monday', 'tuesday', 'webnesday', 'thursday', 'friday'];
+
+    console.log(event);
+    console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);
+    const itemMove = this.routines.splice(event.detail.from, 1)[0];
+    console.log(itemMove);
+    this.routines.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
+
+    this.routines.forEach((routine, index) => {
+      routine.dayOfWeek = dayOfWeek[index];
+    });
+  }
+
+
+  trimString(text, length) {
+    return text.length > length
+      ? text.substring(0, length) + '...'
+      : text;
   }
 
 }
