@@ -24,7 +24,7 @@ export class NavHeaderComponent implements OnInit {
 
 
   goBackPage() {
-    this.goBack.emit(); 
+    this.goBack.emit();
   }
 
   goHomePage() {
