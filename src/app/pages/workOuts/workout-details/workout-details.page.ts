@@ -31,7 +31,7 @@ export class WorkoutDetailsPage implements OnInit {
   showMore = false;
   modfText: string;
   custom_url: string;
- 
+
 
 
   constructor(
