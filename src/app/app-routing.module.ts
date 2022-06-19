@@ -85,6 +85,14 @@ const routes: Routes = [
     path: 'subscriptions',
     loadChildren: () => import('./pages/static/subscriptions/subscriptions.module').then( m => m.SubscriptionsPageModule)
   },
+  {
+    path: 'food-detail',
+    loadChildren: () => import('./pages/nutrition/food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
+  },
+  {
+    path: 'suplements',
+    loadChildren: () => import('./pages/nutrition/suplements/suplements.module').then( m => m.SuplementsPageModule)
+  },
 ];
 
 @NgModule({

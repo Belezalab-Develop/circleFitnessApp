@@ -72,35 +72,14 @@ export class WorkoutDetailsPage implements OnInit {
     this.custom_url = 'https://circlefitness.app/media/';
   }
 
-  setFav(id: number) {
+  setFav(id: number) {};
 
-    if (!this.isFav) {
-      //var coach_name = this.workout.coach.first_name;
-      /* this.message.question('Favorita', '¿desea cambiar su Workout actual por el Workout de ' + coach_name + '?').then(() => {
-          this.isFav = true;
-          this.Workout.setFavourite(id);
-          console.log(this.Workout.all);
-          // this.influencerServices.influencerFavorito = this.influencer;
-      }, () => { }); */
-    } //else {
-    //this.Workout.unsetFavourite();
-    //this.isFav = false;
-  };
-
-  showQuestionAboutLocation() {
-
-    /* this.message.question('Ubicación', 'Veo que estas en Smart Fit ¿Ajustamos tu rutina a este gimnasio?').then(() => {
-
-    }, () => { }); */
-
-  }
+  showQuestionAboutLocation() {}
 
   clickSubscribe(flag) {
     this.subscribe = flag;
     this.changeWorkout();
   }
-
-
 
   goBack() {
     if (this.routerOutlet.canGoBack()) {
@@ -170,7 +149,7 @@ export class WorkoutDetailsPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             console.log('Confirm Okay');
-            // this.adMessage();
+
             this.workoutIndicator = true;
             this.userService.putExerciseProgram({
               exercise_program_id: this.workout.id,

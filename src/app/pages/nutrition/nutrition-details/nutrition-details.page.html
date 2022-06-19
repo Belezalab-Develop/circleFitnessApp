@@ -1,9 +1,181 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>nutrition-details</ion-title>
-  </ion-toolbar>
+  <app-nav-header (goNext)="goNext()" (goBack)="goBack()"></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content class="no-padding">
+  <ion-grid class="user-data" class="ion-padding">
+      <ion-row>
+          <ion-col offset="2" size="8">
+              <div class="title-program">{{ nutritionProgram.label }} </div>
+          </ion-col>
+          <ion-col size="2">
+              <ion-fab-button size="small" color="dark">
+                  <ion-icon name="share-social" color="danger"></ion-icon>
+              </ion-fab-button>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="4" class="user-name" class="ion-text-center">
+              <div style="margin-left: -20px;" (click)="goInfluencerDetail()">
+                  <ion-avatar style="margin: 0 auto;"  *ngIf="nutritionProgram.influencer_id === null">
+                      <!-- <img [src]="nutritionProgram.photo_url"> -->
+                      <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg" alt="">
+                  </ion-avatar>
 
+                  <ion-avatar style="margin: 0 auto;"  *ngIf="nutritionProgram.influencer_id !== null" (click)="goInfluencerDetail(nutritionProgram?.influencer)">
+                      <img [src]="nutritionProgram.influencer.user.photo_url" >
+
+                  </ion-avatar>
+
+                   <ion-text *ngIf="nutritionProgram?.influencer_id === null" color="dark" style="margin-top: 3px;">
+                      Circle Fitness
+                  </ion-text>
+                  <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer" >
+                      {{nutritionProgram?.influencer.user.nick_name | uppercase }}
+                 </div>
+              </div>
+
+
+          </ion-col>
+          <ion-col size="4">
+              <ion-row class="ion-text-start">
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">Proteinas</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">Carboidratos</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">Grasas</ion-text>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+          <ion-col size="4">
+              <ion-row class="ion-text-end">
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">{{ totalCalories() }}kcal</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">{{ totalProteins() }}g</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">{{ totalCarbohydrates() }}g</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                      <ion-text color="dark">{{ totalFats() }}g</ion-text>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" style="font-size: 12px; color: #ffffff;">
+          <ion-col  size="3" *ngFor="let option of optionsPrograms">
+              <ion-row class="ion-align-items-center">
+                  <ion-col size="12" class="ion-no-padding ion-text-center">
+                      <ion-icon *ngIf="option.active" class="option-check" name="checkmark-circle"></ion-icon>
+                      <ion-icon *ngIf="!option.active" class="option-no-check" name="ellipse-outline"></ion-icon>
+                  </ion-col>
+                  <ion-col size="12" class="ion-no-padding ion-text-center">
+                      <span>{{ option.name | translate}} </span>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+      <ion-row >
+
+          <ion-col size="12" class="ion-text-center no-padding">
+              <ion-button class="no-padding" *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
+                  <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
+                  {{'Escoger este Programa' | translate | uppercase}}
+              </ion-button>
+              <ion-button class="no-padding" *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
+                  <ion-icon name="heart" class="ion-padding-end"></ion-icon>
+                  {{'Escoger este Programa' | translate | uppercase}}
+              </ion-button>
+          </ion-col>
+
+      </ion-row>
+      <ion-row style="margin-top: -15px;">
+          <ion-col size="12">
+              <ion-text color="dark">
+                  <h5> {{  'Descripción del programa' | translate }} </h5>
+                  <div *ngIf="!showMore">
+                      {{ nutritionProgram.description | truncate:190 }}
+                  </div>
+                  <div *ngIf="showMore">
+                      <p  [innerHTML]="nutritionProgram.description"></p>
+                  </div>
+                  <a style="color: #d20303; font-weight: bold; float: right;" (click)="showMore = !showMore">Mostrar <span [innerHtml]="showMore ? 'Menos' : 'Más'">  </span></a>
+              </ion-text>
+          </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 15px;">
+          <ion-col size="12">
+
+              <ion-card class="video-card " >
+
+                  <video controls muted="true" playsinline looped preload="auto" *ngIf="nutritionProgram.media[1].mime_type === 'video/mp4'" class="explain-video"  >
+                      <source [src]="custom_url + nutritionProgram.media[1].id + '#t=0.1'" type="video/mp4">
+                  </video>
+
+              </ion-card>
+              <a style="color: #d20303; font-weight: bold; float: right;padding-top: 5px;" >Ver Video</a>
+
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+  <ion-list class="plans no-padding">
+      <ion-item *ngFor="let meal of nutritionProgram.days[0].meals" class="itemwithsep  bg-transparent--" lines="none" (click)="goFoodDetail(meal, nutritionProgram)">
+          <ion-grid class="no-padding">
+              <ion-row>
+                  <ion-col size="5">
+                      <div style="height: 100%; width: 100%;" class="card-img"
+                          [ngStyle]="{'background-image':'url(' + meal.recipes[0]?.photo_url + ')'}">
+                      </div>
+                  </ion-col>
+                  <ion-col size="7" >
+                      <ion-row class="no-padding" style="margin-top: -12px;">
+                          <ion-col size="12" class="no-padding">
+                              <h2>{{ meal.label }}</h2>
+                          </ion-col>
+                          <ion-col size="12" class="no-padding text-des" *ngFor="let recipe of meal.recipes">
+                              <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ recipe.label }}
+                          </ion-col>
+                          <ion-col size="12" class="no-padding">
+                              <span style="font-size: 14px; font-weight: 16px;">Suplementos</span>
+                          </ion-col>
+                          <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
+                              <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>
+                          </ion-col>
+                          <ion-col size="12" class="no-padding">
+                              {{ meal.description }}
+                          </ion-col>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-item>
+  </ion-list>
+
+  <ion-row>
+
+      <ion-col size="12" class="ion-text-center">
+          <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
+              <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
+              {{'Escoger este programa' | translate | uppercase}}
+          </ion-button>
+          <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
+              <ion-icon name="heart" class="ion-padding-end"></ion-icon>
+              {{'Escoger este programa' | translate | uppercase}}
+          </ion-button>
+      </ion-col>
+
+  </ion-row>
 </ion-content>
+<div class="indicator-nutrition" *ngIf="nutritionIndicator">
+  <h6>Encuentra tu nuevo programa</h6>
+<div class="indicator-down"></div>
+</div>
+<app-custom-tab></app-custom-tab>

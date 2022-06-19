@@ -17,11 +17,11 @@
           <ion-col center size="3" class="user-name ion-text-center">
 
 
-              <ion-avatar *ngIf="workout.influencer_id === null">
+              <ion-avatar style="margin: 0 auto;"  *ngIf="workout.influencer_id === null">
                   <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg" >
 
               </ion-avatar>
-              <ion-avatar *ngIf="workout.influencer_id !== null" (click)="goInfluencerDetail(workout?.influencer)">
+              <ion-avatar style="margin: 0 auto;" *ngIf="workout.influencer_id !== null" (click)="goInfluencerDetail(workout?.influencer)">
                   <img [src]="workout.influencer.user.photo_url" >
 
               </ion-avatar>
@@ -103,7 +103,7 @@
           <ion-col size="12">
 
               <ion-card class="video-card " >
-                 
+
                   <video controls muted="true" playsinline looped preload="auto" *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" >
                       <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
                   </video>

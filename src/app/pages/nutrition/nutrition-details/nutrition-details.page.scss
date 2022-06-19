@@ -1,0 +1,128 @@
+ion-list {
+  background: transparent !important;
+
+  ion-item {
+    background: transparent !important;
+    color: #fff !important;
+    padding: 0 !important;
+  }
+}
+p {
+  color: white;
+  font-family: "HNC-Light";
+  font-size: 19px;
+}
+
+ion-avatar {
+  width: 80px !important;
+  height: 80px !important;
+  margin-bottom: 5px;
+}
+
+ion-list.plans {
+  margin-left: -20px !important;
+  margin-right: -20px;
+  ion-item {
+    background-color: #323232 !important;
+  }
+  p {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+  }
+
+}
+
+.itemwithsep {
+  margin-bottom: 4px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+
+.card-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.opt-check-danger {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    background: var(--ion-color-danger);
+    text-align: center;
+    color: var(--ion-color-dark);
+    display: flex;
+    justify-content: center;
+    ion-icon {
+        display:block;
+        margin:auto;
+    }
+}
+
+.opt-check-success {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    background: var(--ion-color-success);
+    text-align: center;
+    color: var(--ion-color-dark);
+    display: flex;
+    justify-content: center;
+    ion-icon {
+        display:block;
+        margin:auto;
+
+    }
+}
+
+.text-des {
+    font-size: 11px;
+    margin-left: 15px;
+}
+
+.indicator-nutrition {
+  position: fixed;
+  z-index: 3;
+  background: #000;
+  width: 90%;
+  height: 50px;
+  left: 5%;
+  border-bottom: 5px solid red;
+  text-align: center;
+  color: #ffffff;
+  padding: 2px;
+  bottom: 96px;
+  .indicator-down {
+    position: absolute;
+    right: 43%;
+    width: 0px;
+    height: 0px;
+    border-left: 25px solid transparent; /* izquierda flecha */
+    border-right: 25px solid transparent; /* derecha flecha */
+    border-top: 25px solid red; /* base flecha y color*/
+    font-size: 0px;
+    line-height: 0px;
+  }
+}
+
+.option-check {
+  font-size: 25px;
+  color: #0bcd8c;
+}
+.option-no-check {
+  font-size: 25px;
+  color: #747474;
+}
+.explain-video{
+  height: 100%;
+  width: 100%;
+}
+
+div.username_influencer {
+  color: #fff !important;
+  font-size: 11px !important;
+  padding-top: 5px;
+  font-family: "HNC-Light";
+}
