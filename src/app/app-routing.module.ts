@@ -93,6 +93,10 @@ const routes: Routes = [
     path: 'suplements',
     loadChildren: () => import('./pages/nutrition/suplements/suplements.module').then( m => m.SuplementsPageModule)
   },
+  {
+    path: 'image-modal',
+    loadChildren: () => import('./pages/auxiliar/image-modal/image-modal.module').then( m => m.ImageModalPageModule)
+  },
 ];
 
 @NgModule({

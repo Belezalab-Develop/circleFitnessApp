@@ -18,15 +18,13 @@ export class NavHeaderComponent implements OnInit {
   ngOnInit() { }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  @Output() goNext = new EventEmitter();
+
   @Output() goBack = new EventEmitter();
   @Output() goHome = new EventEmitter();
 
-  goNextPage() {
-    this.goNext.emit(); //{value:this.footerText}
-  }
+
   goBackPage() {
-    this.goBack.emit(); //{value:this.footerText}
+    this.goBack.emit(); 
   }
 
   goHomePage() {

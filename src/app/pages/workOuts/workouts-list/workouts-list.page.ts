@@ -66,12 +66,7 @@ export class WorkoutsListPage implements OnInit {
     }
   }
 
-  goNext() {
-    if (this.routerOutlet.canGoBack())
-      {this.navCtrl.pop();}
-    else
-      {this.navCtrl.navigateRoot('/home-auth');}
-  }
+
 
   openDetailWorkout(workout: any) {
     const  params = new WorkoutListParams();

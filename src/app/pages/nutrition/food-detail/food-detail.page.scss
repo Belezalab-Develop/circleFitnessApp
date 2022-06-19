@@ -1,0 +1,63 @@
+ion-list {
+  background: transparent !important;
+  ion-item {
+    --background: rgba(255, 0, 0, 0) !important;
+    color: #fff !important;
+    padding: 0 !important;
+  }
+}
+
+ion-list.plans {
+  margin-left: -20px;
+  margin-right: -20px;
+  ion-item {
+    background-color: #323232 !important;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  p {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+  }
+
+  .food_detail {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+    padding-top: 6px;
+  }
+  .food_foot {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .food_value {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  h2 {
+    font-size: 19px;
+  }
+  ion-col {
+    div {
+      padding-left: 16px;
+    }
+  }
+  button {
+    height: 20px !important;
+    font-size: 11px !important;
+  }
+}
+.itemwithsep {
+  margin-bottom: 4px;
+}
+
+.card-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}

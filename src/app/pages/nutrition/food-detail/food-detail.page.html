@@ -1,9 +1,126 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>food-detail</ion-title>
-  </ion-toolbar>
+  <app-nav-header (goNext)="goNext()" (goBack)="goBack()"></app-nav-header>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="user-data" class="ion-padding">
+    <ion-row>
+      <ion-col offset="2" size="8">
+        <div class="title-program">{{ nutritionProgram.label }}</div>
+      </ion-col>
+      <ion-col size="2">
+        <!--  <ion-fab-button size="small" color="dark">
+                  <ion-icon name="share-social" color="danger"></ion-icon>
+              </ion-fab-button> -->
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="5" class="user-name" class="ion-text-center" style="font-weight: bold;">
+        <ion-text color="dark">{{ meal.label | translate }}</ion-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="ion-text-start">
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Proteinas</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Carboidratos</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Grasas</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="ion-text-end">
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalCalories() }}kcal</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalProteins() }}g</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalCarbohydrates() }}g</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalFats() }}g</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br>
+  <ion-list class="plans no-padding">
+    <ion-item *ngFor="let recipe of mealOptions" class="itemwithsep  bg-transparent--" lines="none">
+      <!-- <ion-fab vertical="top" horizontal="end" style="margin-top: -17px;">
+              <ion-fab-button size="small" color="dark">
+                  <ion-icon name="share-social" color="danger"></ion-icon>
+              </ion-fab-button>
+          </ion-fab> -->
+      <ion-grid class="no-padding">
+        <ion-row>
+          <ion-col>
+            <div style="height: 100%; width: 100%;" class="card-img"
+              [ngStyle]="{'background-image':'url(' + recipe.photo_url + ')'}" tappable
+              (click)="openPreview(recipe.photo_url)"></div>
+          </ion-col>
+          <ion-col size="8" style="font-size: 11px;">
+            <ion-row class="no-padding">
+              <ion-col size="12" class="ion-no-padding" style="padding-right: 5px;">
+                <span style="font-size: 14px; font-weight: bold;">{{ recipe.label }}</span>
+                <br> <br>
+                <span *ngIf="!recipe.showMore">
+                  {{trimString(recipe.instruc,190)}}
+                </span>
+                <span *ngIf="recipe.showMore" [innerHTML]="recipe.instruc"> </span>
+                <a style="color: #d20303; font-weight: bold; float: right;"
+                  (click)="recipe.showMore = !recipe.showMore">Mostrar <span
+                    [innerHtml]="recipe.showMore ? 'Menos' : 'Más'"> </span></a>
+                <br>
+                <br>
+
+              </ion-col>
+              <ion-col size="6" class="ion-padding">
+                <ion-row class="ion-text-start">
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">Proteinas</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">Carboidratos</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">Grasas</ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6" class="ion-padding">
+                <ion-row class="ion-text-end">
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">{{ recipe.calories }}g</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">{{ recipe.carbohydrates }}g</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">{{ recipe.proteins }}g</ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="no-padding">
+                    <ion-text color="dark">{{ recipe.fats }}g</ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

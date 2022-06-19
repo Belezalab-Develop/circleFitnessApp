@@ -28,7 +28,8 @@ export class NutritionDetailsPage implements OnInit {
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+
   ) {
     if (this.router.getCurrentNavigation().extras.state.influencer) {
       // entra por influencer
@@ -86,13 +87,7 @@ export class NutritionDetailsPage implements OnInit {
     }
   }
 
-  goNext() {
-    if (this.routerOutlet.canGoBack()) {
-      this.navCtrl.pop();
-    } else {
-      this.navCtrl.navigateRoot('/home-auth');
-    }
-  }
+
 
   goAlarms() {
     this.router.navigate(['/alarms']);

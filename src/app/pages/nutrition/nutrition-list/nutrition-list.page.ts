@@ -30,20 +30,24 @@ export class NutritionListPage implements OnInit {
     private router: Router,
     private storageService: CachingService,
     private loadingController: LoadingController,
+
   ) {
     this.presentLoadingDefault();
+    this.getData();
   }
 
   ngOnInit() {
     console.log('Explore NutritionPage');
-    this.getData();
+
   }
 
   async getData() {
+
+    //TODO: Tratar de crear el componente con swiper.
     await this.storageService.getCachedRequest('test', '-nutri-segments').then(res => {
       this.nutritionProgramsSegments = res;
 
-      console.info('goals', this.nutritionProgramsSegments);
+      console.info('segments', this.nutritionProgramsSegments);
     });
     await this.storageService.getCachedRequest('test', '-nutri-goals').then(res => {
       this.nutritionProgramsGoals = res;
@@ -53,23 +57,20 @@ export class NutritionListPage implements OnInit {
     await this.storageService.getCachedRequest('test', '-nutri-constraint').then(res => {
       this.nutritionProgramsConstraint = res;
 
-      console.info('goals', this.nutritionProgramsConstraint);
+      console.info('constraints', this.nutritionProgramsConstraint);
     });
   }
 
   //TODO:Evaluar si se pueden quitar;
   goBack() {
-    /* if (this.routerOutlet.canGoBack()) {
+     if (this.routerOutlet.canGoBack()) {
       this.navCtrl.pop();
     } else {
       this.navCtrl.navigateRoot('/home-auth');
-    } */
+    }
   }
 
-  goNext() {
-    /* if (this.routerOutlet.canGoBack()) { this.navCtrl.pop(); }
-    else { this.navCtrl.navigateRoot('/home-auth'); } */
-  }
+
 
   openNutrition(nutritionProgram) {
     this.router.navigateByUrl('nutrition-details', {
