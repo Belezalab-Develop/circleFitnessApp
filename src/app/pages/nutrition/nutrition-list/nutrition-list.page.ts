@@ -22,6 +22,7 @@ export class NutritionListPage implements OnInit {
   nutritionProgramsGoals = [];
   nutritionProgramsSegments = [];
   nutritionProgramsConstraint = [];
+  isCharge = false;
 
 
 
@@ -73,10 +74,8 @@ export class NutritionListPage implements OnInit {
   }
 
 
-
-
-  openNutrition(nutritionProgram) {
-    this.router.navigateByUrl('nutrition-details', {
+  async openNutrition(nutritionProgram) {
+    await this.router.navigateByUrl('nutrition-details', {
       state: { showMoreOptions: false, nutritionProgram },
     });
   }
@@ -93,6 +92,7 @@ export class NutritionListPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-    }, 1500);
+      this.isCharge = true;
+    }, 600);
   }
 }

@@ -19,11 +19,12 @@
               <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
           </div>
       </div>
-      <div *ngFor="let categoria of nutritionProgramsSegments">
+
+      <div *ngFor="let categoria of nutritionProgramsSegments" >
           <h3 class="header-group">
               {{categoria.label}}
           </h3>
-          <div>
+          <div *ngIf="isCharge">
               <ion-slides pager="true" #slides [options]="slideOpts">
                   <ion-slide
                       class="slides"
@@ -39,10 +40,18 @@
                       </div>
                       <div class="workout-title">{{nutritionProgram.label}}</div>
                   </ion-slide>
-
-
               </ion-slides>
           </div>
+          <div *ngIf="!isCharge">
+            <ion-slides pager="true" #slides [options]="slideOpts">
+                <ion-slide
+                    class="slides"
+                    *ngFor="let nutritionProgram of categoria.nutrition_program">
+
+                    <ion-skeleton-text animated ></ion-skeleton-text>
+                </ion-slide>
+            </ion-slides>
+        </div>
       </div>
       <br>
   </div>
@@ -50,8 +59,7 @@
   <div  style="margin-left: -20px; margin-right: -20px;">
       <div class="header-title" >
           <div style="width: 90%;">
-              <b style="text-align: left;">OBJETIVOS
-                   </b>
+              <b style="text-align: left;">OBJETIVOS</b>
           </div>
           <div style="width: 10%;">
               <ion-icon class="ion-text-center" style="margin: -2px;" name="chevron-forward" color="light" ></ion-icon>
@@ -61,7 +69,7 @@
           <h3 class="header-group">
               {{categoria.label}}
           </h3>
-          <div>
+          <div  *ngIf="isCharge">
               <ion-slides pager="true" #slides [options]="slideOpts">
                   <ion-slide
                       class="slides"
@@ -77,11 +85,18 @@
                       </div>
                       <div class="workout-title">{{nutritionProgram.label}}</div>
                   </ion-slide>
-
-
               </ion-slides>
-
           </div>
+          <div *ngIf="!isCharge">
+            <ion-slides pager="true" #slides [options]="slideOpts">
+                <ion-slide
+                    class="slides"
+                    *ngFor="let nutritionProgram of categoria.nutrition_program">
+
+                    <ion-skeleton-text animated ></ion-skeleton-text>
+                </ion-slide>
+            </ion-slides>
+        </div>
       </div>
       <br>
   </div>
@@ -100,7 +115,7 @@
           <h3 class="header-group">
               {{categoria.label}}
           </h3>
-          <div>
+          <div *ngIf="isCharge">
               <ion-slides pager="true" #slides [options]="slideOpts">
                   <ion-slide
                       class="slides"
@@ -116,8 +131,6 @@
                       </div>
                       <div class="workout-title">{{nutritionProgram.label}}</div>
                   </ion-slide>
-
-
               </ion-slides>
           </div>
       </div>

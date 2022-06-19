@@ -17,6 +17,7 @@ export class WorkoutsListPage implements OnInit {
   exercisePrograms = [];
   goalsPrograms = [];
   segmentsPrograms = [];
+  isCharge = false;
 
   sliderConfig = {
     spaceBetween: 0,
@@ -33,28 +34,29 @@ export class WorkoutsListPage implements OnInit {
 
   ) {
     this.presentLoadingDefault();
+    this.getData();
   }
 
 
 
   async ngOnInit() {
-
     console.log('Workouts List Page');
 
+  }
 
-    this.storageService.getCachedRequest('test', '-work-goals').then(res => {
+  async getData(){
+
+    await this.storageService.getCachedRequest('test', '-work-goals').then(res => {
       this.goalsPrograms = res;
 
       console.info('goals', this.goalsPrograms);
     });
 
-    this.storageService.getCachedRequest('test', '-work-segments').then(res => {
+    await this.storageService.getCachedRequest('test', '-work-segments').then(res => {
       this.segmentsPrograms = res;
       console.info('segments', this.segmentsPrograms);
 
     });
-
-
   }
 
   //TODO:Evaluar si se pueden quitar;
@@ -66,14 +68,12 @@ export class WorkoutsListPage implements OnInit {
     }
   }
 
-
-
-  openDetailWorkout(workout: any) {
+  async openDetailWorkout(workout: any) {
     const  params = new WorkoutListParams();
      params.ShowSubList = true;
     params.ShowLocation = false;
 
-    this.router.navigate(['/workout-details'], {
+    await this.router.navigate(['/workout-details'], {
       queryParams: { params,  workout },
     });
   }
@@ -90,7 +90,8 @@ export class WorkoutsListPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-    }, 1500);
+      this.isCharge = true;
+    }, 600);
   }
 
 

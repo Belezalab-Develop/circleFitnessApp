@@ -3,8 +3,9 @@ import { UserService } from './../../../services/user.service';
 import { Router } from '@angular/router';
 import { CachingService } from './../../../services/auxiliar/caching.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonRouterOutlet, NavController, AlertController } from '@ionic/angular';
+import { IonRouterOutlet, NavController, AlertController, ModalController } from '@ionic/angular';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
+import { ImageModalPage } from '../../auxiliar/image-modal/image-modal.page';
 
 @Component({
   selector: 'app-workout-details',
@@ -30,6 +31,7 @@ export class WorkoutDetailsPage implements OnInit {
   showMore = false;
   modfText: string;
   custom_url: string;
+ 
 
 
   constructor(
@@ -38,6 +40,7 @@ export class WorkoutDetailsPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private userService: UserService,
+    private modalCtrl: ModalController
 
   ) {
     this.user = {};
@@ -193,7 +196,16 @@ export class WorkoutDetailsPage implements OnInit {
       : text;
   }
 
-
+  async openPreview(img){
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        img
+      },
+      cssClass: 'transparent-modal'
+    });
+    modal.present();
+  }
 
 
 }

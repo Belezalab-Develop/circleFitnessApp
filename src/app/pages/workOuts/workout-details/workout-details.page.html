@@ -3,220 +3,224 @@
 </ion-header>
 <ion-content>
   <ion-grid padding class="user-data">
-      <ion-row>
-          <ion-col offset="2" size="8">
-              <div class="title-program">{{ workout.label }}</div>
-          </ion-col>
-          <ion-col size="2">
-              <ion-fab-button size="small" color="dark">
-                  <ion-icon name="share-social" color="danger"></ion-icon>
-              </ion-fab-button>
-          </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
-          <ion-col center size="3" class="user-name ion-text-center">
+    <ion-row>
+      <ion-col offset="2" size="8">
+        <div class="title-program">{{ workout.label }}</div>
+      </ion-col>
+      <ion-col size="2">
+        <ion-fab-button size="small" color="dark">
+          <ion-icon name="share-social" color="danger"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col center size="3" class="user-name ion-text-center">
 
 
-              <ion-avatar style="margin: 0 auto;"  *ngIf="workout.influencer_id === null">
-                  <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg" >
+        <ion-avatar style="margin: 0 auto;" *ngIf="workout.influencer_id === null">
+          <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg">
 
-              </ion-avatar>
-              <ion-avatar style="margin: 0 auto;" *ngIf="workout.influencer_id !== null" (click)="goInfluencerDetail(workout?.influencer)">
-                  <img [src]="workout.influencer.user.photo_url" >
+        </ion-avatar>
+        <ion-avatar style="margin: 0 auto;" *ngIf="workout.influencer_id !== null"
+          (click)="goInfluencerDetail(workout?.influencer)">
+          <img [src]="workout.influencer.user.photo_url">
 
-              </ion-avatar>
-              <div *ngIf="workout.influencer_id === null" class="username">
-                  Circle Fitness
+        </ion-avatar>
+        <div *ngIf="workout.influencer_id === null" class="username">
+          Circle Fitness
 
-              </div>
-              <div *ngIf="workout.influencer_id !== null" class="username_influencer">
-                   {{workout?.influencer.user.nick_name | uppercase }}
-              </div>
-          </ion-col>
-          <ion-col offset="1" size="8" >
-              <ion-row class="no-padding no-margin" style="color: #ffffff; font-size: 14px;">
-                  <ion-col size="12">
-                      <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Objetivos</ion-col>
-                          <ion-col class="no-padding" size="6">
-                              <ion-row *ngFor="let goal of workout.goals">
-                                  <ion-col class="no-padding" size="12"> {{ goal.label }} </ion-col>
-                              </ion-row>
-                          </ion-col>
-                      </ion-row>
-                      <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Divición de días</ion-col>
-                          <ion-col class="no-padding" size="6">
-                              <ion-row>
-                                  <ion-col class="no-padding" size="12"> X {{ workout.days[0].sessions.length }} </ion-col>
-                              </ion-row>
-                          </ion-col>
-                      </ion-row>
-                      <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Nivel</ion-col>
-                          <ion-col class="no-padding" size="6">
-                              <ion-row *ngFor="let level of workout.levels">
-                                  <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
-                              </ion-row>
-                          </ion-col>
-                      </ion-row>
-                  </ion-col>
-              </ion-row>
-          </ion-col>
-
-      </ion-row>
-      <ion-row>
-          <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === false">
-              <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
-                  <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
-                  {{'Escoger este programa' | translate | uppercase}}
-              </ion-button>
-              <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
-                  <ion-icon name="heart" class="ion-padding-end"></ion-icon>
-                  {{'Escoger este programa' | translate | uppercase}}
-              </ion-button>
-          </ion-col>
-          <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === true">
-              <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="selectedWorkoutRoutine(routines[0])" >
-                  <ion-icon name="play" class="ion-padding-end"></ion-icon>
-                  {{'Iniciar Workout' | translate | uppercase}}
-              </ion-button>
-          </ion-col>
-      </ion-row>
-
-      <ion-row style="margin-top: -15px;">
+        </div>
+        <div *ngIf="workout.influencer_id !== null" class="username_influencer">
+          {{workout?.influencer.user.nick_name | uppercase }}
+        </div>
+      </ion-col>
+      <ion-col offset="1" size="8">
+        <ion-row class="no-padding no-margin" style="color: #ffffff; font-size: 14px;">
           <ion-col size="12">
-              <ion-text color="dark">
-                  <h5> {{  'Descripción del programa' | translate }} </h5>
-
-                  <div *ngIf="!showMore">
-                      {{trimString(workout.description,190)}}
-                  </div>
-                  <div *ngIf="showMore">
-                      <p  [innerHTML]="modfText"></p>
-                  </div>
-                  <a style="color: #d20303; font-weight: bold; float: right;" (click)="showMore = !showMore">Mostrar <span [innerHtml]="showMore ? 'Menos' : 'Más'">  </span></a>
-              </ion-text>
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
+              <ion-col class="no-padding" size="6">Objetivos</ion-col>
+              <ion-col class="no-padding" size="6">
+                <ion-row *ngFor="let goal of workout.goals">
+                  <ion-col class="no-padding" size="12"> {{ goal.label }} </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
+              <ion-col class="no-padding" size="6">Divición de días</ion-col>
+              <ion-col class="no-padding" size="6">
+                <ion-row>
+                  <ion-col class="no-padding" size="12"> X {{ workout.days[0].sessions.length }} </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
+              <ion-col class="no-padding" size="6">Nivel</ion-col>
+              <ion-col class="no-padding" size="6">
+                <ion-row *ngFor="let level of workout.levels">
+                  <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
           </ion-col>
-      </ion-row>
-      <ion-row style="margin-top: 15px;">
-          <ion-col size="12">
+        </ion-row>
+      </ion-col>
 
-              <ion-card class="video-card " >
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === false">
+        <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
+          <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
+          {{'Escoger este programa' | translate | uppercase}}
+        </ion-button>
+        <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
+          <ion-icon name="heart" class="ion-padding-end"></ion-icon>
+          {{'Escoger este programa' | translate | uppercase}}
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === true">
+        <ion-button *ngIf="subscribe === true" expand="full" color="danger"
+          (click)="selectedWorkoutRoutine(routines[0])">
+          <ion-icon name="play" class="ion-padding-end"></ion-icon>
+          {{'Iniciar Workout' | translate | uppercase}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-                  <video controls muted="true" playsinline looped preload="auto" *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" >
-                      <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
-                  </video>
+    <ion-row style="margin-top: -15px;">
+      <ion-col size="12">
+        <ion-text color="dark">
+          <h5> {{ 'Descripción del programa' | translate }} </h5>
 
-              </ion-card>
-              <a style="color: #d20303; font-weight: bold; float: right;padding-top: 5px;" >Ver Video</a>
+          <div *ngIf="!showMore">
+            {{trimString(workout.description,190)}}
+          </div>
+          <div *ngIf="showMore">
+            <p [innerHTML]="modfText"></p>
+          </div>
+          <a style="color: #d20303; font-weight: bold; float: right;" (click)="showMore = !showMore">Mostrar <span
+              [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 15px;">
+      <ion-col size="12">
 
-          </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
+        <ion-card class="video-card ">
 
-          <ion-col size="12">
-              <div *ngIf="this.viewReorder" ion-text color="light" class="text-rigth"
-                  (click)="reorderActive = !reorderActive">
-                  <ion-text color="light">
-                      {{(reorderActive ? 'listo' : 'reordenar') |translate}}
-                  </ion-text>
-              </div>
-          </ion-col>
-      </ion-row>
+          <video controls muted="true" playsinline looped preload="auto"
+            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video">
+            <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
+          </video>
+
+        </ion-card>
+        <a style="color: #d20303; font-weight: bold; float: right;padding-top: 5px;">Ver Video</a>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+
+      <ion-col size="12">
+        <div *ngIf="this.viewReorder" ion-text color="light" class="text-rigth"
+          (click)="reorderActive = !reorderActive">
+          <ion-text color="light">
+            {{(reorderActive ? 'listo' : 'reordenar') |translate}}
+          </ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
 
   <ion-reorder-group disabled="{{reorderActive ? false : true}}" (ionItemReorder)="reorderRoutines($event)">
-      <ion-item *ngFor="let routine of workout.days[0].sessions" class="item-list" lines="none">
-          <ion-row class="no-padding" style="width: 100%;">
-              <ion-col class="no-padding" size="12">
-                  <ion-card tappable (click)="selectedWorkoutRoutine(routine)" class="corner-black">
-                      <ion-card-content>
-                          <ion-grid>
-                              <ion-row>
-                                  <ion-col size="12">
-                                      <h1> {{routine?.label|translate| uppercase}}</h1>
-                                  </ion-col>
-                              </ion-row>
-                              <ion-row class="ion-align-items-center">
-                                  <ion-col size="2" text-right>
-                                      <ion-icon class="icon_larger" src="assets/imgs/icons/dumbbell.svg"></ion-icon>
-                                  </ion-col>
-                                  <ion-col size="2">
-                                      {{routine?.exercises.length}}
-                                  </ion-col>
-                                  <ion-col size="2" text-right>
-                                      <ion-icon class="icon_larger" src="assets/imgs/icons/hourglass.svg"></ion-icon>
-                                  </ion-col>
-                                  <ion-col size="6">
-                                      {{ routine?.duration_in_minutes }} {{'min'|translate}}
-                                  </ion-col>
-                              </ion-row>
-                          </ion-grid>
-                          <ion-grid *ngIf="viewReorder === true" class="resume">
-                              <ion-row>
-                                <ion-col col-6>
-                                  {{routine?.dayOfWeek |translate| uppercase}}
-                                </ion-col>
-                                <ion-col col-6 text-right class="resume_ago">
-                                  {{user?.resume?.first_workout|timeAgo | uppercase}}
-                                </ion-col>
-                              </ion-row>
-                            </ion-grid>
-                          <div class="divider"></div>
-                      </ion-card-content>
-                  </ion-card>
-              </ion-col>
-              <ion-col *ngIf="viewReorder === false" class="no-padding" size="12" >
-                  <div class="detail no-padding" *ngFor="let exercise of routine?.exercises">
-                      <!-- tarjeta de presentacion-->
+    <ion-item *ngFor="let routine of workout.days[0].sessions" class="item-list" lines="none">
+      <ion-row class="no-padding" style="width: 100%;">
+        <ion-col class="no-padding" size="12">
+          <ion-card tappable (click)="selectedWorkoutRoutine(routine)" class="corner-black">
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <h1> {{routine?.label|translate| uppercase}}</h1>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="2" text-right>
+                    <ion-icon class="icon_larger" src="assets/imgs/icons/dumbbell.svg"></ion-icon>
+                  </ion-col>
+                  <ion-col size="2">
+                    {{routine?.exercises.length}}
+                  </ion-col>
+                  <ion-col size="2" text-right>
+                    <ion-icon class="icon_larger" src="assets/imgs/icons/hourglass.svg"></ion-icon>
+                  </ion-col>
+                  <ion-col size="6">
+                    {{ routine?.duration_in_minutes }} {{'min'|translate}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid *ngIf="viewReorder === true" class="resume">
+                <ion-row>
+                  <ion-col col-6>
+                    {{routine?.dayOfWeek |translate| uppercase}}
+                  </ion-col>
+                  <ion-col col-6 text-right class="resume_ago">
+                    {{user?.resume?.first_workout|timeAgo | uppercase}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <div class="divider"></div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col *ngIf="viewReorder === false" class="no-padding" size="12">
+          <div class="detail no-padding" *ngFor="let exercise of routine?.exercises">
+            <!-- tarjeta de presentacion-->
 
-                      <ion-grid no-padding>
-                          <ion-row>
-                              <ion-col size="4" class="header">
-                                  <div style="height: 90px; width: 100%;" class="img-row" [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}">
+            <ion-grid no-padding>
+              <ion-row>
+                <ion-col size="4" class="header">
+                  <div style="height: 90px; width: 100%;" class="img-row"
+                    [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}" tappable
+                    (click)="openPreview(exercise.photo_url)">
 
-                                  </div>
-                              </ion-col>
-
-                              <ion-col size="8" class="title-body">
-                                  <h2 style="margin-left: 10px;">{{exercise.label |translate | uppercase}}</h2>
-
-                              </ion-col>
-
-                          </ion-row>
-                      </ion-grid>
                   </div>
-              </ion-col>
-          </ion-row>
+                </ion-col>
+
+                <ion-col size="8" class="title-body">
+                  <h2 style="margin-left: 10px;">{{exercise.label |translate | uppercase}}</h2>
+
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-col>
+      </ion-row>
 
 
-          <ion-reorder slot="end"></ion-reorder>
-      </ion-item>
+      <ion-reorder slot="end"></ion-reorder>
+    </ion-item>
   </ion-reorder-group>
 
   <ion-row class="ion-margin-top" *ngIf="viewReorder === false">
 
-      <ion-col size="12" class="ion-text-center no-padding">
-          <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
-              <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
-              {{'Escoger este programa' | translate | uppercase}}
-          </ion-button>
-          <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
-              <ion-icon name="heart" class="ion-padding-end"></ion-icon>
-              {{'Escoger este programa' | translate | uppercase}}
-          </ion-button>
-      </ion-col>
+    <ion-col size="12" class="ion-text-center no-padding">
+      <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
+        <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
+        {{'Escoger este programa' | translate | uppercase}}
+      </ion-button>
+      <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
+        <ion-icon name="heart" class="ion-padding-end"></ion-icon>
+        {{'Escoger este programa' | translate | uppercase}}
+      </ion-button>
+    </ion-col>
 
   </ion-row>
 
 </ion-content>
 <div class="indicator-workout" *ngIf="workoutIndicator">
   <h6>Aquí encuentras tu nuevo programa</h6>
-<div class="indicator-down"></div>
+  <div class="indicator-down"></div>
 </div>
 
 <app-custom-tab></app-custom-tab>
-
-
