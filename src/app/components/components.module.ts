@@ -1,3 +1,4 @@
+import { CountdownComponent } from './countdown/countdown.component';
 import { CachedImageComponent } from './cached-image/cached-image.component';
 import { CustomBackButtonComponent } from './custom-back-button/custom-back-button.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
@@ -18,7 +19,8 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 		CustomTabComponent,
     NavHeaderComponent,
     CustomBackButtonComponent,
-    CachedImageComponent
+    CachedImageComponent,
+    CountdownComponent
 
 
 	],
@@ -32,7 +34,9 @@ import { CustomTabComponent } from './custom-tab/custom-tab.component';
 		CustomTabComponent,
     NavHeaderComponent,
     CustomBackButtonComponent,
-    CachedImageComponent
+    CachedImageComponent,
+    CountdownComponent
+
 
 
 	]

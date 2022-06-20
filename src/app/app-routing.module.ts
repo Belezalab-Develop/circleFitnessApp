@@ -97,6 +97,26 @@ const routes: Routes = [
     path: 'image-modal',
     loadChildren: () => import('./pages/auxiliar/image-modal/image-modal.module').then( m => m.ImageModalPageModule)
   },
+  {
+    path: 'user-workout-details',
+    loadChildren: () => import('./pages/user/user-workout-details/user-workout-details.module').then( m => m.UserWorkoutDetailsPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/user/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'workout-settings',
+    loadChildren: () => import('./pages/workOuts/workout-settings/workout-settings.module').then( m => m.WorkoutSettingsPageModule)
+  },
+  {
+    path: 'workout-video-details',
+    loadChildren: () => import('./pages/workOuts/workout-video-details/workout-video-details.module').then( m => m.WorkoutVideoDetailsPageModule)
+  },
+  {
+    path: 'workout-video-finish',
+    loadChildren: () => import('./pages/workOuts/workout-video-finish/workout-video-finish.module').then( m => m.WorkoutVideoFinishPageModule)
+  },
 ];
 
 @NgModule({

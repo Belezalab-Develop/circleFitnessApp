@@ -55,7 +55,7 @@ export class UserWorkoutPage implements OnInit {
 
   selectedWorkoutRoutineOutside(routines: any) {
     if (this.viewReorder) {
-      this.router.navigateByUrl('/workouts-details', {
+      this.router.navigateByUrl('/user-workout-details', {
         state: {
           routine: routines.days[0].sessions[0],
           influencer: routines.influencer,
@@ -68,7 +68,7 @@ export class UserWorkoutPage implements OnInit {
     console.log(routines);
     console.log(influencer);
   if (this.viewReorder) {
-    this.router.navigateByUrl('/workouts-details', {
+    this.router.navigateByUrl('/user-workout-details', {
       state: { routine: routines, influencer },
     });
   }

@@ -1,0 +1,95 @@
+
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+
+export interface CountdownTimer {
+  seconds: number;
+  secondsRemaining: number;
+  runTimer: boolean;
+  hasStarted: boolean;
+  hasFinished: boolean;
+  displayTime: string;
+}
+
+
+@Component({
+  selector: 'app-countdown',
+  templateUrl: './countdown.component.html',
+  styleUrls: ['./countdown.component.scss'],
+})
+export class CountdownComponent implements OnInit {
+  @Input() timeInSeconds: number;
+  timer: CountdownTimer;
+
+
+
+  constructor() { }
+
+  ngOnInit() {
+    this.initTimer();
+    console.log('inicio');
+  }
+
+  hasFinished() {
+
+    return this.timer.hasFinished;
+  }
+
+  initTimer() {
+    if (!this.timeInSeconds) { this.timeInSeconds = 0; }
+
+    this.timer = <CountdownTimer>{
+      seconds: this.timeInSeconds,
+      runTimer: false,
+      hasStarted: false,
+      hasFinished: false,
+      secondsRemaining: this.timeInSeconds
+    };
+
+    this.timer.displayTime = this.getSecondsAsDigitalClock(this.timer.secondsRemaining);
+  }
+
+  startTimer() {
+    this.timer.hasStarted = true;
+    this.timer.runTimer = true;
+    this.timerTick();
+  }
+
+  pauseTimer() {
+    this.timer.runTimer = false;
+  }
+
+  resumeTimer() {
+    this.startTimer();
+  }
+
+  timerTick() {
+    setTimeout(() => {
+      if (!this.timer.runTimer) { return; }
+      this.timer.secondsRemaining--;
+      this.timer.displayTime = this.getSecondsAsDigitalClock(this.timer.secondsRemaining);
+      if (this.timer.secondsRemaining > 0) {
+        this.timerTick();
+      } else {
+        this.timer.hasFinished = true;
+      }
+    }, 1000);
+  }
+
+  getSecondsAsDigitalClock(inputSeconds: number) {
+    const secNum = parseInt(inputSeconds.toString(), 10); // don't forget the second param
+    const hours = Math.floor(secNum / 3600);
+    const minutes = Math.floor((secNum - (hours * 3600)) / 60);
+    const seconds = secNum - (hours * 3600) - (minutes * 60);
+    let hoursString = '';
+    let minutesString = '';
+    let secondsString = '';
+    hoursString = (hours < 10) ? '0' + hours : hours.toString();
+    minutesString = (minutes < 10) ? '0' + minutes : minutes.toString();
+    secondsString = (seconds < 10) ? '0' + seconds : seconds.toString();
+    return hoursString + ':' + minutesString + ':' + secondsString;
+  }
+
+
+
+}

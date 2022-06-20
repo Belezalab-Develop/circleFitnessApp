@@ -1,0 +1,239 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
+<ion-header>
+  <app-nav-header></app-nav-header>
+</ion-header>
+
+<!-- BARRA COMPARTIR Y ALERTAS-->
+<ion-content class="no-padding">
+
+  <ion-grid padding class="user-data">
+    <ion-row>
+      <ion-col size="12">
+        <div class="title-program"> {{ routine.label | uppercase }} </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col center size="3" class="user-name ion-text-center">
+        <ion-avatar *ngIf="influencer == null">
+          <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg">
+        </ion-avatar>
+        <ion-avatar *ngIf="influencer != null" (click)="goInfluencerDetail(influencer)">
+          <img [src]="influencer.user.photo_url">
+        </ion-avatar>
+
+      </ion-col>
+      <ion-col size="9" class="ion-text-center">
+        <ion-button expand="round" (click)="startWorkout()" color="danger" *ngIf="!isStarted">
+          {{ 'start workout' | translate}}
+          <ion-icon slot="end" name="play"></ion-icon>
+        </ion-button>
+        <ion-button expand="round" (click)="finishWorkout()" color="danger" *ngIf="isStarted">
+          <ion-icon slot="end" name="stop-circle"></ion-icon>
+          {{ 'finish workout' | translate}}
+        </ion-button>
+      </ion-col>
+      <ion-col size="3" class="user-name ion-text-center">
+        <div class="username">
+
+
+          <div *ngIf="influencer == null" class="username">
+            Circle Fitness
+
+          </div>
+          <div *ngIf="influencer != null" class="username_influencer">
+            {{influencer.user.nick_name | uppercase }}
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="9"></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <div *ngFor="let exercise of routine?.exercises" class="no-padding">
+      <!-- tarjeta de presentacion-->
+
+      <ion-grid [class.selected]="selected == exercise.id " class="no-padding">
+        <ion-row (click)="nextExercise(exercise.id)">
+          <ion-col size="4" class="header" style="border-right: 6px; height: 90px;">
+            <div style="height: 90px; width: 100%;" class="img-row"
+              [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}">
+
+            </div>
+
+          </ion-col>
+
+          <ion-col size="7" class="title-body" style="border-right: 1px solid #D22026;">
+            <h2 style="margin-left: 10px;">{{exercise.label|translate | uppercase}}</h2>
+
+          </ion-col>
+          <ion-col size="1" class="title-body" style="border-left: 1px solid #D22026;">
+            <ion-icon name="checkmark-circle" *ngIf="exercise.is_completed === 1"
+              style="margin-left: -20px;margin-top: 10px;"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <!--iniciar workout-->
+      <div [class.hide]="selected != exercise?.id">
+        <div class="routine-series ion-margin-bottom">
+          <ion-grid>
+            <ion-row class="series">
+              <ion-col *ngFor="let serie of exercise?.details; let i = index">
+                <ion-card tappable [class.current]="exercise.current_serie_index === i"
+                  (click)="editExerciseSeries(exercise,serie.order)" [attr.data-serie_order]="serie.id">
+                  <ion-card-content>
+                    <!-- <p *ngIf="exercise.type==1">{{serie.weigth}} {{'lbs'|translate}}</p>
+                                      <p *ngIf="exercise.type==1">{{serie.pivot.repetitions}} {{'reps'|translate}}</p>
+                                      <p *ngIf="exercise.type==2">{{serie.duration_time}} {{'minutes'|translate}}</p> -->
+                    <p *ngIf="!exercise.pivot.is_time_based">{{ serie.weight_in_kg }} {{ 'lbs'|translate }}</p>
+                    <p *ngIf="!exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'reps'|translate }}</p>
+                    <p *ngIf="exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'seconds'|translate }}</p>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-icon [attr.data-serie_order]="serie.id" [attr.data-serie_rep]="serie.repetitions"
+                  [attr.data-serie_weight]="serie.weight_in_kg" [id]="serie.id" name="checkmark-circle" size="small"
+                  style="position: absolute; right: 5px; bottom: 3px; font-size: 10px; color:transparent"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <!-- <ion-row class="time-progress" *ngIf="(exercise.status == 1 && exercise.type == 2) || exercise.status == 2"> -->
+            <!-- <ion-row class="time-progress" *ngIf="(exercise.status == 1 && exercise.pivot.is_time_based) || exercise.status == 2"> -->
+            <ion-row class="time-progress" *ngIf="exercise.pivot.is_time_based">
+              <ion-col>
+
+                <div *ngIf="timer" class="time-left">
+
+                  <div *ngIf="timeInSeconds && timeInSeconds > 0" class="timer-button x-large">
+                    {{timer.displayTime}}
+                  </div>
+                  <div *ngIf="!timeInSeconds || timeInSeconds === 0" class="timer-button">Timer
+                    set up incorrectly</div>
+
+                  <div *ngIf="timeInSeconds && timeInSeconds > 0" class="ion-text-center">
+                    <ion-button shape="round" fill="outline" color="danger" (click)="initTimer()"
+                      *ngIf="!timer.runTimer && (timer.hasStarted || timer.hasFinished) || timer.hasFinished">
+                      <ion-icon name="refresh"></ion-icon>
+                      Restart
+                    </ion-button>
+                    <ion-button shape="round" fill="outline" (click)="pauseTimer()"
+                      *ngIf="timer.runTimer && timer.hasStarted && !timer.hasFinished">
+                      <ion-icon name="pause"></ion-icon>
+                      Pause
+                    </ion-button>
+                    <ion-button shape="round" fill="outline" color="dark" (click)="resumeTimer()"
+                      *ngIf="!timer.runTimer && timer.hasStarted && !timer.hasFinished">
+                      <ion-icon name="play"></ion-icon>
+                      Resume
+                    </ion-button>
+
+                    <ion-button shape="round" fill="outline" (click)="startTimer()" color="dark" *ngIf="!timer.hasStarted">
+                      <ion-icon name="play"></ion-icon>
+                      Start
+                    </ion-button>
+                  </div>
+
+                </div>
+                <ion-progress-bar [value]="timeProgress"></ion-progress-bar>
+              </ion-col>
+            </ion-row>
+            <!-- <ion-row class="serie-actions">
+              <ion-col size="6" offset="3">
+                <ion-button [id]="exercise.id" class="circle_especial" expand="full" fill="clear"
+                  (click)="setExerciseStatus( i, exercise.id,1)">
+                  {{'start exercise'|translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row> -->
+            <ion-row class="serie-actions" *ngFor="let item of exerciseDetails; index as i">
+
+              <ion-col size="6" offset="3" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
+
+                <ion-button class="circle_especial" expand="full" fill="clear"
+                  (click)="setCompleteSerie(i , exercise.id)">
+                  {{bottonText}} - {{i+1}}
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6" offset="3" *ngIf="initialIndex === i && exercise.pivot.is_time_based ">
+
+                <ion-button class="circle_especial" expand="full" fill="clear"
+                  (click)="setTimerComplete(i , exercise.id)">
+                  {{bottonText}} - {{i+1}} time
+                </ion-button>
+              </ion-col>
+
+            </ion-row>
+            <!-- <ion-row class="serie-actions ion-align-items-center" *ngIf="exercise.status === 1">
+              <ion-col size="3" class="ion-text-end">
+                <ion-button fill="clear" color="danger" [hidden]="exercise.current_serie_index === 0"
+                  (click)="exercise.current_serie_index = exercise.current_serie_index - 1 ">
+                  <ion-icon name="play-back" color="danger"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button class="circle_especial" expand="full" fill="clear"
+                  (click)="setExerciseStatus(exercise.id,2)">
+                  {{'i did'|translate}}
+                </ion-button>
+              </ion-col>
+              <ion-col size="3" class="ion-text-star">
+                <ion-button fill="clear" color="danger"
+                  [hidden]="exercise.current_serie_index === exercise.details.length-1"
+                  (click)="goToSerie(exercise,exercise.current_serie_index + 1)">
+                  <ion-icon name="play-forward" color="danger"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="serie-actions" *ngIf="exercise.status === 2">
+              <ion-col size="6" offset="3">
+                <ion-button class="circle_especial" expand="full" fill="clear" (click)="doFinishRest(exercise.id)">
+                  {{'skip'|translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="serie-actions" *ngIf="exercise.status === 3">
+              <ion-col size="6" offset="3">
+                <ion-button class="circle_especial" expand="full" fill="clear"
+                  (click)="setExerciseStatus(exercise.id,4)">
+                  {{'proximo_ejercicio'|translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="serie-actions" *ngIf="exercise.status === 4">
+              <ion-col size="8" offset="2">
+                <ion-button expand="full" class="circle_especial" fill="clear"
+                  (click)="setExerciseStatus(exercise.id,5)">
+                  {{'done'|translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row> -->
+          </ion-grid>
+
+          <div class="more" (click)="onClickExercise(exercise, influencer)">
+
+            <div class="img-more" [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}">
+
+            </div>
+            <div class="img-more-line"></div>
+            <div class="img-more" [ngStyle]="{'background-image':'url(' + exercise.photo_url_alt + ')'}">
+
+            </div>
+
+
+            <div class="play">
+
+              <ion-text color="dark">
+                <h6 style="background-color: black; padding: 15px; font-weight: 600;">SABER <br> MAS</h6>
+              </ion-text>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </ion-list>
+</ion-content>
+
+<app-custom-tab></app-custom-tab>
