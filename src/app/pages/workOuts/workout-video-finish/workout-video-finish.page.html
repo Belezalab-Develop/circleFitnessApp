@@ -43,7 +43,7 @@
       <ion-grid class="no-padding">
         <ion-row>
           <ion-col>
-            <ion-item style="margin-left: 1em;" lines="none"  button (click)="seeVideo1()" text-wrap>
+            <ion-item style="margin-left: 1em;" lines="none" button (click)="seeVideo1()" text-wrap>
               <ion-thumbnail slot="start">
                 <ion-img [src]="exerciseProgram.finisher1.photo_url"></ion-img>
               </ion-thumbnail>
@@ -54,16 +54,14 @@
               </ion-label>
 
             </ion-item>
-            <ion-item style="margin: 0 auto;">
-              <div *ngIf="verVideo1">
-                <div class="img-more">
-                  <ion-card class="video-card ">
-                    <video controls muted="true" playsinline looped preload="auto" class="explain-video">
-                      <source [src]="exerciseProgram.finisher1.ptr_video+ '#t=0.1'" type="video/mp4">
-                    </video>
+            <ion-item style="margin: 0 auto;" *ngIf="verVideo1">
+              <div class="img-more">
+                <ion-card class="video-card ">
+                  <video controls muted="true" playsinline looped preload="auto" class="explain-video">
+                    <source [src]="exerciseProgram.finisher1.ptr_video+ '#t=0.1'" type="video/mp4">
+                  </video>
 
-                  </ion-card>
-                </div>
+                </ion-card>
               </div>
             </ion-item>
           </ion-col>
@@ -73,26 +71,23 @@
         <ion-row>
 
           <ion-col>
-            <ion-item style="margin-left: 1em;" lines="none"  button (click)="seeVideo2()">
+            <ion-item style="margin-left: 1em;" lines="none" button (click)="seeVideo2()">
               <ion-thumbnail slot="start">
                 <ion-img [src]="exerciseProgram.finisher2.photo_url"></ion-img>
               </ion-thumbnail>
-              <ion-label text-wrap class="ion-text-justify" >
+              <ion-label text-wrap class="ion-text-justify">
                 <h3>{{ exerciseProgram.finisher2.label }}</h3>
                 <p class="finisher-text">{{exerciseProgram.finisher2.description}}</p>
               </ion-label>
 
             </ion-item>
-            <ion-item style="margin: 0 auto;">
-              <div *ngIf="verVideo2">
-                <div class="img-more">
-                  <ion-card class="video-card ">
-                    <video controls muted="true" playsinline looped preload="auto" class="explain-video">
-                      <source [src]="exerciseProgram.finisher2.ptr_video+ '#t=0.1'" type="video/mp4">
-                    </video>
-
-                  </ion-card>
-                </div>
+            <ion-item style="margin: 0 auto;" *ngIf="verVideo2">
+              <div class="img-more">
+                <ion-card class="video-card ">
+                  <video controls muted="true" playsinline looped preload="auto" class="explain-video">
+                    <source [src]="exerciseProgram.finisher2.ptr_video+ '#t=0.1'" type="video/mp4">
+                  </video>
+                </ion-card>
               </div>
             </ion-item>
 

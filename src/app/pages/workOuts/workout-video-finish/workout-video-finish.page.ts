@@ -82,12 +82,32 @@ export class WorkoutVideoFinishPage implements OnInit {
   }
 
   seeVideo1(){
-    this.verVideo1 = true;
+    this.verVideo2 = false;
+    switch (this.verVideo1) {
+      case true:
+        this.verVideo1 = false;
+        break;
+
+      default:
+        this.verVideo1 = true;
+        break;
+    }
 
   }
   seeVideo2(){
+
     this.verVideo1 = false;
-    this.verVideo2 = true;
+    switch (this.verVideo2) {
+      case true:
+        this.verVideo2 = false;
+        break;
+
+      default:
+        this.verVideo2 = true;
+        break;
+    }
+
+
   }
 
   goVideoDetail() {
