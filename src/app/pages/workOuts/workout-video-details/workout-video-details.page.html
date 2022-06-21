@@ -1,9 +1,97 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>workout-video-details</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+  <ion-row class="ion-align-items-center">
+    <ion-col center size="3" class="user-name ">
+
+      <ion-avatar *ngIf="influencer == null">
+        <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg">
+      </ion-avatar>
+      <ion-avatar *ngIf="influencer != null" (click)="goInfluencerDetail(influencer)">
+        <img [src]="influencer?.user.photo_url">
+      </ion-avatar>
+      <div>
+        <div *ngIf="influencer == null" class="username ion-text-center">
+          Circle Fitness
+
+        </div>
+        <div *ngIf="influencer != null" class="username_influencer ion-text-center">
+          {{influencer?.user.nick_name | uppercase }}
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="9" class="ion-text-center">
+      <div class="title-program"> {{ exercise.label | uppercase }} </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
+    <ion-col class="no-padding" size="12">
+      <div class="triangle">
+        <h1>Descripción</h1>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="ion-text-justify">
+      <ion-text color="dark">
+        {{ exercise.description }}
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
+    <ion-col class="no-padding" size="12">
+      <div class="triangle">
+        <h1>Equipamiento</h1>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 15px;">
+    <ion-col size="12" class="ion-text-justify" style="padding: 0px;">
+      <ion-row>
+        <ion-col style="padding: 0px;" class="ion-text-center" size="6"
+          *ngFor="let exerciseEquipment of exercise.exercise_equipment">
+
+          <img [src]="exerciseEquipment.photo_url" style="border: 2px solid gray;" (click)="openPreview(exerciseEquipment.photo_url)">
+          <ion-text class="ion-text-left" color="dark" style="font-weight: 600; text-align: center !important;">
+            {{ exerciseEquipment.label }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
+    <ion-col class="no-padding" size="12">
+      <div class="triangle">
+        <h1>Comó hacerlo?</h1>
+      </div>
+    </ion-col>
+  </ion-row>
+  <div class="more ion-margin-top no-padding">
+
+    <div *ngIf="exercise?.media[2]">
+      <div class="img-more">
+        <ion-card class="video-card ">
+          <video controls muted="true" playsinline looped preload="auto"
+            *ngIf="exercise?.media[2].mime_type === 'video/mp4'" class="explain-video"
+            poster="assets/imgs/crossfit1.jpg">
+            <source [src]="custom_url + exercise?.media[2].id+ '#t=0.1'" type="video/mp4">
+          </video>
+
+        </ion-card>
+      </div>
+    </div>
+
+
+  </div>
+
+
 
 </ion-content>
+<app-custom-tab></app-custom-tab>

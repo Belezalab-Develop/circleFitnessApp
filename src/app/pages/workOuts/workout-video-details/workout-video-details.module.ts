@@ -1,3 +1,6 @@
+import { ComponentsModule } from './../../../components/components.module';
+import { PipesModule } from './../../../pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +16,11 @@ import { WorkoutVideoDetailsPage } from './workout-video-details.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutVideoDetailsPageRoutingModule
+    WorkoutVideoDetailsPageRoutingModule,
+    TranslateModule.forChild(),
+    PipesModule,
+    ComponentsModule
   ],
   declarations: [WorkoutVideoDetailsPage]
 })
-export class WorkoutVideoDetailsPageModule {}
+export class WorkoutVideoDetailsPageModule { }

@@ -1,9 +1,148 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>workout-settings</ion-title>
+  <ion-toolbar mode="ios" hideBackButton="true">
+    <ion-buttons slot="start">
+      <ion-button icon="../../../assets/imgs/icons/back.svg" text="Atrás" color="white" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">
+      <ion-icon class="center-icon" (click)="goHomePage()" src="../../../assets/imgs/icons/olidlogo.svg"></ion-icon>
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+  <ion-row class="ion-margin">
+      <ion-col size="12">
+          <div class="title-program"> {{exercise?.label | uppercase }} </div>
+      </ion-col>
+  </ion-row>
+  <div class="routine-series">
+      <ion-grid>
+          <ion-row class="series">
+              <ion-col *ngFor="let serie of exercise?.details">
+                  <ion-card tappable (click)="selectSerie(serie)">
+                      <ion-card-content>
+                          <p *ngIf="exercise.pivot.is_time_based" [class.current]="serie.order === currentSerie.order">
+                              {{serie.repetitions}} {{'seg'|translate}}
+                          </p>
+                          <p *ngIf="!exercise.pivot.is_time_based"
+                              [class.current]="serie.order === currentSerie.order && currentSerieValueType=== 1">
+                              <!-- {{(serie.order == currentSerie.order && currentSerieValueType==1 ? serie.weigth : changeWeightUnit(serie.weigth, serie.order))}} {{weightUnit|translate}} -->
+                              {{ serie.weight_in_kg }} {{weightUnit|translate }}
+                          </p>
+                          <p *ngIf="!exercise.pivot.is_time_based"
+                              [class.current]="serie.order === currentSerie.order && currentSerieValueType=== 2">
+                              {{ serie.repetitions }} {{'reps'|translate}}
+                          </p>
+                      </ion-card-content>
+                  </ion-card>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+  </div>
+  <ion-grid class="pad ion-margin-top">
+      <ion-row class="head-pad ion-align-item-center">
+          <ion-col size="3">
+              <ion-button icon-only fill="clear" color="dark" (click)="showPad = !showPad">
+                  <ion-icon *ngIf="showPad"  mode="ios" name="arrow-up"></ion-icon>
+                  <ion-icon *ngIf="!showPad"  mode="ios" name="arrow-down"></ion-icon>
+              </ion-button>
+          </ion-col>
+          <ion-col size="5">
+              <div class="editor-content">
+                  <ion-item line="none" style="margin-right:10px;--background: rgba(228, 206, 206, 0);">
+                      <!-- <ion-input #editor type="" ></ion-input> -->
+                      <input type="text" #editor [(ngModel)]="currentValue" readonly (click)="hideKeyboard()" style="width: 60px;">
+                  </ion-item>
+                  <span *ngIf="!exercise.pivot.is_time_based && currentSerieValueType=== 1" (click)="toggleWeightUnit()">
+                      {{(weightUnit)|translate}}
+                  </span>
+                  <span *ngIf="!exercise.pivot.is_time_based && currentSerieValueType=== 2">
+                      {{'reps'|translate}}
+                  </span>
+                  <span *ngIf="exercise.pivot.is_time_based">
+                      {{'seg'|translate}}
+                  </span>
+              </div>
+          </ion-col>
+          <ion-col size="4">
+              <ion-button  fill="clear" color="dark" (click)="goNext()" >
+                  {{'next'|translate}}
+              </ion-button>
+          </ion-col>
+      </ion-row>
+      <ion-row class="plus-pad" *ngIf="showPad">
+          <ion-col size="3">
+              <ion-button  fill="clear" color="dark" (click)="sum(1)">
+                  +1
+              </ion-button>
+          </ion-col>
+          <ion-col size="3">
+              <ion-button fill="clear" color="dark" (click)="sum(2)">
+                  +2
+              </ion-button>
+          </ion-col>
+          <ion-col size="3">
+              <ion-button fill="clear" color="dark" (click)="sum(5)">
+                  +5
+              </ion-button>
+          </ion-col>
+          <ion-col size="3">
+              <ion-button fill="clear" color="dark" (click)="sum(10)">
+                  +10
+              </ion-button>
+          </ion-col>
+      </ion-row>
+      <ion-row class="num-pad">
+          <ion-col tappable size="4" (click)="keyTouch('1')">
+              1
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('2')">
+              2
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('3')">
+              3
+          </ion-col>
+      </ion-row>
+      <ion-row class="num-pad">
+          <ion-col tappable size="4" (click)="keyTouch('4')">
+              4
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('5')">
+              5
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('6')">
+              6
+          </ion-col>
+      </ion-row>
+      <ion-row class="num-pad">
+          <ion-col tappable size="4" (click)="keyTouch('7')">
+              7
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('8')">
+              8
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('9')">
+              9
+          </ion-col>
+      </ion-row>
+      <ion-row class="num-pad">
+          <ion-col tappable size="4" (click)="keyTouch('.')">
+              .
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('0')">
+              0
+          </ion-col>
+          <ion-col tappable size="4" (click)="keyTouch('-1')">
+              <ion-icon name="backspace"></ion-icon>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
 
 </ion-content>
+
+<app-custom-tab></app-custom-tab>

@@ -83,9 +83,7 @@
                 <ion-card tappable [class.current]="exercise.current_serie_index === i"
                   (click)="editExerciseSeries(exercise,serie.order)" [attr.data-serie_order]="serie.id">
                   <ion-card-content>
-                    <!-- <p *ngIf="exercise.type==1">{{serie.weigth}} {{'lbs'|translate}}</p>
-                                      <p *ngIf="exercise.type==1">{{serie.pivot.repetitions}} {{'reps'|translate}}</p>
-                                      <p *ngIf="exercise.type==2">{{serie.duration_time}} {{'minutes'|translate}}</p> -->
+
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.weight_in_kg }} {{ 'lbs'|translate }}</p>
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'reps'|translate }}</p>
                     <p *ngIf="exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'seconds'|translate }}</p>
@@ -97,8 +95,7 @@
                   style="position: absolute; right: 5px; bottom: 3px; font-size: 10px; color:transparent"></ion-icon>
               </ion-col>
             </ion-row>
-            <!-- <ion-row class="time-progress" *ngIf="(exercise.status == 1 && exercise.type == 2) || exercise.status == 2"> -->
-            <!-- <ion-row class="time-progress" *ngIf="(exercise.status == 1 && exercise.pivot.is_time_based) || exercise.status == 2"> -->
+
             <ion-row class="time-progress" *ngIf="exercise.pivot.is_time_based">
               <ion-col>
 
@@ -134,17 +131,10 @@
                   </div>
 
                 </div>
-                <ion-progress-bar [value]="timeProgress"></ion-progress-bar>
+                <!-- <ion-progress-bar [value]="timeProgress"></ion-progress-bar> -->
               </ion-col>
             </ion-row>
-            <!-- <ion-row class="serie-actions">
-              <ion-col size="6" offset="3">
-                <ion-button [id]="exercise.id" class="circle_especial" expand="full" fill="clear"
-                  (click)="setExerciseStatus( i, exercise.id,1)">
-                  {{'start exercise'|translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row> -->
+
             <ion-row class="serie-actions" *ngFor="let item of exerciseDetails; index as i">
 
               <ion-col size="6" offset="3" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
@@ -159,55 +149,12 @@
 
                 <ion-button class="circle_especial" expand="full" fill="clear"
                   (click)="setTimerComplete(i , exercise.id)">
-                  {{bottonText}} - {{i+1}} time
+                  Inicia la serie - {{i+1}}
                 </ion-button>
               </ion-col>
 
             </ion-row>
-            <!-- <ion-row class="serie-actions ion-align-items-center" *ngIf="exercise.status === 1">
-              <ion-col size="3" class="ion-text-end">
-                <ion-button fill="clear" color="danger" [hidden]="exercise.current_serie_index === 0"
-                  (click)="exercise.current_serie_index = exercise.current_serie_index - 1 ">
-                  <ion-icon name="play-back" color="danger"></ion-icon>
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button class="circle_especial" expand="full" fill="clear"
-                  (click)="setExerciseStatus(exercise.id,2)">
-                  {{'i did'|translate}}
-                </ion-button>
-              </ion-col>
-              <ion-col size="3" class="ion-text-star">
-                <ion-button fill="clear" color="danger"
-                  [hidden]="exercise.current_serie_index === exercise.details.length-1"
-                  (click)="goToSerie(exercise,exercise.current_serie_index + 1)">
-                  <ion-icon name="play-forward" color="danger"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row class="serie-actions" *ngIf="exercise.status === 2">
-              <ion-col size="6" offset="3">
-                <ion-button class="circle_especial" expand="full" fill="clear" (click)="doFinishRest(exercise.id)">
-                  {{'skip'|translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row class="serie-actions" *ngIf="exercise.status === 3">
-              <ion-col size="6" offset="3">
-                <ion-button class="circle_especial" expand="full" fill="clear"
-                  (click)="setExerciseStatus(exercise.id,4)">
-                  {{'proximo_ejercicio'|translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row class="serie-actions" *ngIf="exercise.status === 4">
-              <ion-col size="8" offset="2">
-                <ion-button expand="full" class="circle_especial" fill="clear"
-                  (click)="setExerciseStatus(exercise.id,5)">
-                  {{'done'|translate}}
-                </ion-button>
-              </ion-col>
-            </ion-row> -->
+
           </ion-grid>
 
           <div class="more" (click)="onClickExercise(exercise, influencer)">

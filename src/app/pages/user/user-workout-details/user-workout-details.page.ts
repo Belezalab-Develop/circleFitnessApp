@@ -36,6 +36,13 @@ export class UserWorkoutDetailsPage implements OnInit {
   exerciseDetails: any = [];
 
   initialIndex: any;
+  ind: any;
+  excerciseDetails: any;
+  timeExercise: any;
+  timeIndex: any;
+  lastExercise: boolean;
+  exercisesLength: boolean;
+  serieTime: any;
 
 
   timeProgress: number;
@@ -53,7 +60,7 @@ export class UserWorkoutDetailsPage implements OnInit {
     public router: Router
   ) {
     this.selected = 0;
-    this.timeInSeconds = 10;
+    //this.timeInSeconds = 0;
 
     if (this.router.getCurrentNavigation().extras.state.routine) {
       this.routine = this.router.getCurrentNavigation().extras.state.routine;
@@ -65,7 +72,7 @@ export class UserWorkoutDetailsPage implements OnInit {
 
   ngOnInit() {
     console.log('USER WORKOUT DETAILS');
-    this.initTimer();
+
 
     this.isStarted = false;
   }
@@ -126,7 +133,7 @@ export class UserWorkoutDetailsPage implements OnInit {
               .then(() => {
                 this.isStarted = false;
                 this.selected = 0;
-                this.pauseTimer();
+                this.pauseWorkTimer();
 
                 console.log(this.routine);
 
@@ -222,16 +229,63 @@ export class UserWorkoutDetailsPage implements OnInit {
   }
 
   setTimerComplete(i: any, exercise_id: any) {
-    const exercise = this.routine.exercises.find((r) => r.id === exercise_id);
-    this.exerciseSerieLength = exercise.details.length;
-    this.exerciseDetails = exercise.details;
-    const index = this.routine.exercises.indexOf(exercise);
-    const ind = i;
-    const lastExercise: boolean = this.routine.exercises.length - 1 === index;
-    const exercisesLength: boolean = this.routine.exercises.length;
+
+    console.log(i);
+    console.log(exercise_id);
+    this.timeExercise = this.routine.exercises.find((r) => r.id === exercise_id);
+    const currentSerie = this.timeExercise.details[i];
+    console.log(currentSerie);
+    this.exerciseSerieLength = this.timeExercise.details.length;
+    this.exerciseDetails = this.timeExercise.details;
+    this.timeIndex = this.routine.exercises.indexOf(this.timeExercise);
+    this.ind = i;
+    const test = this.timeExercise.details[this.ind].id;
+    this.excerciseDetails = document.getElementById(test);
+    this.lastExercise = this.routine.exercises.length - 1 === this.timeIndex;
+    this.exercisesLength = this.routine.exercises.length;
+    this.serieTime = currentSerie.repetitions;
+
+    this.bottonText = 'inicia la Serie';
+
+    this.timeInSeconds = this.serieTime;
+    this.timeProgress = this.serieTime;
+    this.initTimer();
+    this.startTimer();
 
 
-    console.log(this.timer.hasFinished);
+    console.log('INDICE DE LA SERIE::', this.ind);
+    console.log('EJERCICIO::', this.timeExercise);
+    console.log('TIEMPO DE LA SERIE::', this.serieTime);
+
+
+
+  }
+
+  setTestTimer() {
+
+    this.excerciseDetails.style.color = 'white';
+    this.initialIndex = this.ind + 1;
+
+    switch (this.lastExercise) {
+      case true:
+        console.log('EN EL ULTIMO EJERCICIO');
+        if (this.exerciseSerieLength === this.ind + 1) {
+          console.log('Este es la ultima serie');
+
+          this.finish();
+        }
+        break;
+
+      default:
+        if (this.exerciseSerieLength === this.ind + 1) {
+          console.log('Este es la ultima serie');
+          const newIndex = this.timeIndex + 1;
+          const newExercise = this.routine.exercises[newIndex].id;
+          this.initialIndex = 0;
+          this.nextExercise(newExercise);
+        }
+        break;
+    }
   }
 
   setExerciseStatus(i: any, exercise_id: any, status: number) {
@@ -299,18 +353,18 @@ export class UserWorkoutDetailsPage implements OnInit {
     }
   }
 
-   startWorkTimer() {
+  startWorkTimer() {
     this.play = true;
     this.interval = setInterval(() => {
       this.time++;
     }, 1000);
   }
 
-  /* pauseTimer() {
+  pauseWorkTimer() {
     this.play = false;
     clearInterval(this.interval);
   }
- */
+
   initTimeCount(minutes: number, next_status: number) {
     this.timeProgress = 0;
     this.timeLeft =
@@ -422,7 +476,9 @@ export class UserWorkoutDetailsPage implements OnInit {
       } else {
         this.timer.hasFinished = true;
         console.log('termino contador');
+        this.setTestTimer();
       }
+
     }, 1000);
   }
 

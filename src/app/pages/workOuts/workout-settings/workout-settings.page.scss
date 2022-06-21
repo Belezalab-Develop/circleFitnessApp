@@ -1,0 +1,105 @@
+input[readonly] {
+  background: white;
+  cursor: text;
+}
+h1.routine-title {
+  text-align: center !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  margin: 0 !important;
+}
+div.routine-series {
+  ion-row.series {
+      border: 1px solid #fff !important;
+      border-radius: 12px !important;
+      padding: 0 !important;
+      ion-col {
+          padding: 0 !important;
+      }
+      ion-card {
+          border-right: 1px solid #fff !important;
+          background: transparent !important;
+          box-shadow: none !important;
+          ion-card-content {
+              padding: 13px 1px !important;
+          }
+          p {
+              color: #fff !important;
+              text-align: center !important;
+              text-transform: uppercase !important;
+          }
+          p.current {
+              color: var(--ion-color-danger) !important;
+              font-weight: bolder;
+          }
+      }
+      ion-col:last-child {
+          ion-card {
+              border: none !important;
+          }
+      }
+  }
+}
+ion-grid.pad {
+  text-align: center !important;
+  color: #fff;
+}
+ion-grid.pad {
+  text-align: center !important;
+  ion-row.head-pad {
+      height: 43px !important;
+      background: #bfcccb;
+      ion-col {
+          background: #bfcccb;
+          padding: 0;
+          font-size: 18px;
+          text-align: center !important;
+          color: #22282a !important;
+          button {
+              color: #22282a !important;
+              height: 100% !important;
+          }
+          div.editor-content {
+              display: flex !important;
+              align-items: center !important;
+              ion-item {
+                  background: transparent !important;
+                  padding: 0 !important;
+                  .item-inner {
+                      border: 0 !important;
+                      input {
+                          width: 100% !important;
+                          text-align: center !important;
+                          background: transparent;
+                          border: 0;
+                          border-bottom: 1px solid #000;
+                          color: #000 !important;
+                      }
+                  }
+              }
+          }
+      }
+  }
+  ion-row.plus-pad {
+      ion-col {
+          border: 1px solid #aab1b0 !important;
+          background: #e8efed;
+          padding: 0;
+          font-size: 18px;
+          font-weight: bold;
+          button {
+              color: #7e908f !important;
+          }
+      }
+  }
+  ion-row.num-pad {
+      ion-col {
+          border: 1px solid #000 !important;
+          background: #fff;
+          color: #000;
+          padding: 16px;
+          font-size: 18px;
+          font-weight: bold;
+      }
+  }
+}
