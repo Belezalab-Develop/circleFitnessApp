@@ -39,7 +39,7 @@ export class FirebaseService {
   allUser: any;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    //private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private storageService: CachingService,
     private auth: Auth
@@ -70,11 +70,17 @@ export class FirebaseService {
     });
   }
 
-  signIn({ email, password }) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  async signIn({ email, password }) {
+
+    try {
+      const user = await signInWithEmailAndPassword(this.auth, email, password);
+      return user;
+    } catch (e) {
+      return null;
+    }
   }
 
   signOut(): Promise<void> {
-    return this.afAuth.signOut();
+    return signOut(this.auth);
   }
 }
