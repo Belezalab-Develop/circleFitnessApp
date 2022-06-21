@@ -1,0 +1,170 @@
+ion-list {
+  background: transparent !important;
+  ion-item {
+    --background: rgba(255, 0, 0, 0) !important;
+    color: #fff !important;
+    padding: 0 !important;
+  }
+}
+
+h1 {
+  text-align: center !important;
+  color: #fff !important;
+  font-size: 35px !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+  text-transform: capitalize !important;
+}
+
+p {
+  text-align: center !important;
+  color: #fff !important;
+  font-family: "HNC-Light", sans-serif;
+  span {
+    color: #9a9896 !important;
+  }
+}
+
+.row-title {
+  margin-left: -20px;
+  margin-right: -20px;
+  background: #000;
+  text-align: center !important;
+  color: #fff !important;
+  font-family: "HNC-Light", sans-serif;
+  padding: 5px;
+}
+
+div.box-border {
+  width: 100% !important;
+  height: 22px !important;
+  border-bottom: 1px solid #fff !important;
+}
+
+button.finish {
+  width: 180px !important;
+  margin: 12px auto !important;
+}
+
+div.video-container {
+  position: relative !important;
+  .video-player {
+    width: 100%;
+  }
+  .video-overload {
+    position: absolute !important;
+    top: 8px !important;
+    width: 100%;
+    .play {
+      color: #fff !important;
+      button {
+        height: auto !important;
+        text-transform: capitalize !important;
+        ion-icon {
+          font-size: 48px !important;
+          color: var(--ion-color-danger) !important;
+        }
+      }
+    }
+  }
+}
+
+.more {
+  position: relative;
+  width: 100%;
+  height: 410px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  .img-more {
+    width: 100%;
+    height: 410px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.play {
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  text-align: center;
+  ion-icon {
+    font-size: 80px;
+  }
+  h6 {
+    margin-top: -5px;
+    letter-spacing: 4px;
+    font-size: 16px;
+  }
+}
+
+.img-row {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+ion-list.plans {
+  margin-left: -20px;
+  margin-right: -20px;
+  ion-item {
+    background-color: #323232 !important;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  p {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+  }
+  .food_detail {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+    padding-top: 6px;
+  }
+  .food_foot {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .food_value {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  h2 {
+    font-size: 19px;
+  }
+  ion-col {
+    div {
+      padding-left: 16px;
+    }
+  }
+  button {
+    height: 20px !important;
+    font-size: 11px !important;
+  }
+}
+.explain-video{
+  padding-top: 2em;
+  width: 35%;
+}
+.video-card{
+  padding: 0px !important;
+  background: none !important;
+  border: none;
+  text-align: center;
+}
+.finisher-text{
+  margin-left: 1em;
+  margin-right: 2em;
+  text-align: justify !important;
+}
