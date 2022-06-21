@@ -168,3 +168,21 @@ ion-list.plans {
   margin-right: 2em;
   text-align: justify !important;
 }
+
+.special-button{
+  --border-color: var(--ion-color-dark);
+  --color: var(--ion-color-dark)!important;
+  ion-icon {
+
+    --color: var(--ion-color-dark) !important;
+  }
+}
+ion-button{
+  --border-color: var(--ion-color-dark)!important;
+  --color: var(--ion-color-dark)!important;
+  ion-icon {
+
+    --color: var(--ion-color-dark) !important;
+  }
+}
+

@@ -1,3 +1,4 @@
+import { ImageModalPage } from './../../auxiliar/image-modal/image-modal.page';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, ModalController } from '@ionic/angular';
@@ -126,4 +127,14 @@ export class WorkoutVideoFinishPage implements OnInit {
      return modal.present();
    } */
 
+   async openPreview(img){
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        img
+      },
+      cssClass: 'transparent-modal'
+    });
+    modal.present();
+  }
 }

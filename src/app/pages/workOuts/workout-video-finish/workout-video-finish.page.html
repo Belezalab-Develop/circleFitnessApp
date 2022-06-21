@@ -43,14 +43,19 @@
       <ion-grid class="no-padding">
         <ion-row>
           <ion-col>
-            <ion-item style="margin-left: 1em;" lines="none" button (click)="seeVideo1()" text-wrap>
-              <ion-thumbnail slot="start">
+            <ion-item style="margin-left: 1em;" lines="none" text-wrap>
+              <ion-thumbnail slot="start" button (click)="openPreview(exerciseProgram.finisher1.photo_url)">
                 <ion-img [src]="exerciseProgram.finisher1.photo_url"></ion-img>
               </ion-thumbnail>
 
               <ion-label text-wrap class="ion-text-justify">
                 <h3>{{ exerciseProgram.finisher1.label }}</h3>
                 <p class="finisher-text">{{exerciseProgram.finisher1.description}}</p>
+
+                <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo1()">
+                  ver video
+                  <ion-icon slot="end" name="play-outline"></ion-icon>
+                </ion-button>
               </ion-label>
 
             </ion-item>
@@ -71,13 +76,17 @@
         <ion-row>
 
           <ion-col>
-            <ion-item style="margin-left: 1em;" lines="none" button (click)="seeVideo2()">
-              <ion-thumbnail slot="start">
+            <ion-item style="margin-left: 1em;" lines="none" >
+              <ion-thumbnail slot="start" button (click)="openPreview(exerciseProgram.finisher2.photo_url)">
                 <ion-img [src]="exerciseProgram.finisher2.photo_url"></ion-img>
               </ion-thumbnail>
               <ion-label text-wrap class="ion-text-justify">
                 <h3>{{ exerciseProgram.finisher2.label }}</h3>
                 <p class="finisher-text">{{exerciseProgram.finisher2.description}}</p>
+                <ion-button outline fill="outline" color="dark"  (click)="seeVideo2()" class="special-button">
+                  ver video
+                  <ion-icon slot="end" name="play-outline"></ion-icon>
+                </ion-button>
               </ion-label>
 
             </ion-item>
