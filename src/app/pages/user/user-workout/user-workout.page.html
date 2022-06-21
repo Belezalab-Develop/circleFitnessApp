@@ -18,11 +18,11 @@
           <ion-col center size="3" class="user-name ion-text-center">
 
                <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
-              <ion-avatar *ngIf="exerciseProgram?.influencer_id == null">
+              <ion-avatar *ngIf="exerciseProgram?.influencer_id == null" style="margin: 0 auto;">
                   <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg" >
 
               </ion-avatar>
-              <ion-avatar *ngIf="exerciseProgram?.influencer_id != null" (click)="goInfluencerDetail(exerciseProgram?.influencer)">
+              <ion-avatar style="margin: 0 auto;" *ngIf="exerciseProgram?.influencer_id != null" (click)="goInfluencerDetail(exerciseProgram?.influencer)">
                   <img [src]="exerciseProgram?.influencer.user.photo_url" >
 
               </ion-avatar>

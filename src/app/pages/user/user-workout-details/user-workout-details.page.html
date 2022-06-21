@@ -14,10 +14,10 @@
     </ion-row>
     <ion-row class="ion-align-items-center">
       <ion-col center size="3" class="user-name ion-text-center">
-        <ion-avatar *ngIf="influencer == null">
+        <ion-avatar *ngIf="influencer == null" style="margin: 0 auto;">
           <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg">
         </ion-avatar>
-        <ion-avatar *ngIf="influencer != null" (click)="goInfluencerDetail(influencer)">
+        <ion-avatar *ngIf="influencer != null" (click)="goInfluencerDetail(influencer)" style="margin: 0 auto;">
           <img [src]="influencer.user.photo_url">
         </ion-avatar>
 
