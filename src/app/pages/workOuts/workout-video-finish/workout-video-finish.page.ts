@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, ModalController } from '@ionic/angular';
 import { GeneralService } from 'src/app/services/auxiliar/general.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-workout-video-finish',
@@ -28,7 +29,8 @@ export class WorkoutVideoFinishPage implements OnInit {
     public navCtrl: NavController,
     public generalService: GeneralService,
     public modalCtrl: ModalController,
-    public router: Router
+    public router: Router,
+
   ) {
     this.routine = {};
     this.exerciseProgram = {};
@@ -42,7 +44,7 @@ export class WorkoutVideoFinishPage implements OnInit {
       this.routine = this.router.getCurrentNavigation().extras.state.routine;
       this.exerciseProgram =
         this.router.getCurrentNavigation().extras.state.routine;
-      console.log('ESTA ES LA RUTINA:::',this.routine);
+      console.log('ESTA ES LA RUTINA:::', this.routine);
     }
   }
 
@@ -82,7 +84,7 @@ export class WorkoutVideoFinishPage implements OnInit {
     this.repetitionsTotal = doubledArray.reduce(this.getSum, 0);
   }
 
-  seeVideo1(){
+  seeVideo1() {
     this.verVideo2 = false;
     switch (this.verVideo1) {
       case true:
@@ -95,7 +97,7 @@ export class WorkoutVideoFinishPage implements OnInit {
     }
 
   }
-  seeVideo2(){
+  seeVideo2() {
 
     this.verVideo1 = false;
     switch (this.verVideo2) {
@@ -127,14 +129,24 @@ export class WorkoutVideoFinishPage implements OnInit {
      return modal.present();
    } */
 
-   async openPreview(img){
-    const modal = await this.modalCtrl.create({
-      component: ImageModalPage,
-      componentProps: {
-        img
-      },
-      cssClass: 'transparent-modal'
+   async shareOptions(){
+    await Share.share({
+      title: 'See cool stuff',
+      text: 'Really awesome thing you need to see right meow',
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies',
     });
-    modal.present();
-  }
+   }
+
+
+   async openPreview(img){
+  const modal = await this.modalCtrl.create({
+    component: ImageModalPage,
+    componentProps: {
+      img
+    },
+    cssClass: 'transparent-modal'
+  });
+  modal.present();
+}
 }
