@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { App } from '@capacitor/app';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+//import { Stripe } from '@capacitor-community/stripe';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,11 @@ export class AppComponent implements OnInit {
   ) {
     this.storageService.initStorage();
     this.createCaheFolder();
+   /*  Stripe.initialize({
+
+      publishableKey: 'pk_test_51HsR5iH2JpR7iSTHBXQquHJEkcYjQkkQQi3s6lkzzXQHdDOecM84Xl88abg1yQVpZWBkTYxHJ7T9vG2jRqgLMZqC00ubQqsVDQ',
+
+    }); */
 
   }
 

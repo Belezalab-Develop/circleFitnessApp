@@ -52,15 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     //AngularFireAuthModule,
     //AngularFirestoreModule,
-    provideAuth(() => {
-      if (Capacitor.isNativePlatform()) {
-        return initializeAuth(getApp(), {
-          persistence: indexedDBLocalPersistence,
-        });
-      } else {
-        return getAuth();
-      }
-    }),
+    provideAuth(() =>  getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
 

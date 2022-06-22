@@ -22,6 +22,7 @@
     "@angular/router": "~13.2.2",
     "@awesome-cordova-plugins/status-bar": "^5.43.0",
     "@capacitor-community/firebase-analytics": "^1.0.1",
+    "@capacitor-community/stripe": "^3.8.1",
     "@capacitor/android": "3.5.1",
     "@capacitor/app": "^1.1.1",
     "@capacitor/camera": "^1.3.1",

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NavController, ModalController } from '@ionic/angular';
 import { GeneralService } from 'src/app/services/auxiliar/general.service';
 import { Share } from '@capacitor/share';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-workout-video-finish',
@@ -134,6 +135,22 @@ export class WorkoutVideoFinishPage implements OnInit {
       title: 'See cool stuff',
       text: 'Really awesome thing you need to see right meow',
       url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies',
+    });
+   }
+
+   async shareImage(){
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+    });
+
+    await Share.share({
+      title: 'Check my Image',
+      text: 'Really awesome thing you need to see right meow',
+      url: image.path,
       dialogTitle: 'Share with buddies',
     });
    }
