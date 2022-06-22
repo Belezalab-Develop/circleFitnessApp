@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InfluencerDetailsPageRoutingModule } from './influencer-details-routing.module';
+import { InfluencerWorkoutPageRoutingModule } from './influencer-workout-routing.module';
 
-import { InfluencerDetailsPage } from './influencer-details.page';
+import { InfluencerWorkoutPage } from './influencer-workout.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
@@ -16,11 +16,11 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InfluencerDetailsPageRoutingModule,
+    InfluencerWorkoutPageRoutingModule,
     ComponentsModule,
     PipesModule,
     TranslateModule
   ],
-  declarations: [InfluencerDetailsPage]
+  declarations: [InfluencerWorkoutPage]
 })
-export class InfluencerDetailsPageModule { }
+export class InfluencerWorkoutPageModule {}

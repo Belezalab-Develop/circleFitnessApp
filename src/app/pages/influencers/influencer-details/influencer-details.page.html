@@ -1,9 +1,76 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>influencer-details</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="2" size="8">
+        <div class="title-program" style="font-size: 16px; margin-top: 10px;">CONOZCA <br> INFLUENCERS </div>
+      </ion-col>
+      <ion-col size="2">
+
+        <ion-fab-button size="small" color="dark">
+          <ion-icon name="share-social" color="danger"></ion-icon>
+        </ion-fab-button>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top" class="row-bg">
+      <ion-col size="12">
+        <div class="influencer-photo" [ngStyle]="{'background-image':'url(' + influencer.user.photo_url + ')'}">
+
+        </div>
+      </ion-col>
+      <ion-col size="12" style="padding: 10px">
+        <ion-row class="ion-align-items-star">
+          <ion-col size="10" style="padding: 0px!important;" class="text-general">
+            <h6 class="title-text">{{influencer?.user.nick_name | uppercase }}</h6>
+            <p>Altura : {{influencer?.height}} cm <br> </p>
+            <p>Peso: {{influencer?.weight}}Kg <br></p>
+            <p> Grasa: {{influencer?.fat}}%</p>
+
+          </ion-col>
+          <ion-col size="2" style="padding: 0px!important;" class="ion-text-end">
+            <ion-button fill="clear" (click)="openInstagram()">
+              <ion-icon slot="icon-only" color="dark" size="large" name="logo-instagram"></ion-icon>
+            </ion-button>
+
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="row-bg ion-margin-top ion-text-center" style="color:#fff">
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerWorkout(influencer?.id)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/weights-dumbells.svg">
+          </ion-icon>
+        </ion-button>
+        Workout
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerNutrition(influencer?.id)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/nutrition.svg">
+          </ion-icon>
+        </ion-button>
+        Nutrición
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerAbs(influencer?.id)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/abs.svg"></ion-icon>
+        </ion-button>
+        HIT Train
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerLifeStyle(influencer)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/muscle.svg">
+          </ion-icon>
+        </ion-button>
+        Sobre Mi
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

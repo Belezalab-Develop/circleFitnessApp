@@ -117,6 +117,22 @@ const routes: Routes = [
     path: 'workout-video-finish',
     loadChildren: () => import('./pages/workOuts/workout-video-finish/workout-video-finish.module').then( m => m.WorkoutVideoFinishPageModule)
   },
+  {
+    path: 'influencer-workout',
+    loadChildren: () => import('./pages/influencers/influencer-workout/influencer-workout.module').then( m => m.InfluencerWorkoutPageModule)
+  },
+  {
+    path: 'influencer-nutrition',
+    loadChildren: () => import('./pages/influencers/influencer-nutrition/influencer-nutrition.module').then( m => m.InfluencerNutritionPageModule)
+  },
+  {
+    path: 'influencer-abs',
+    loadChildren: () => import('./pages/influencers/influencer-abs/influencer-abs.module').then( m => m.InfluencerAbsPageModule)
+  },
+  {
+    path: 'influencer-lifestyle',
+    loadChildren: () => import('./pages/influencers/influencer-lifestyle/influencer-lifestyle.module').then( m => m.InfluencerLifestylePageModule)
+  },
 ];
 
 @NgModule({

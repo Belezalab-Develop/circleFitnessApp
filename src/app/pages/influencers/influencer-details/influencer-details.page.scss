@@ -1,0 +1,33 @@
+.influencer-photo {
+  /*  background-image: url("/assets/imgs/samples/man-user01.jpg") !important; */
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center center;
+   text-align: center;
+   border-radius: 5px;
+   width: 100%;
+   height: 380px;
+}
+
+.title-text {
+   font-family: "HNC-Light";
+   font-size: 18px;
+   font-weight: bold;
+   color: var(--ion-color-dark);
+}
+
+.text-general {
+   font-family: "HNC-Light";
+   font-size: 14px;
+   color: var(--ion-color-dark);
+}
+
+.row-bg {
+   background: #232325;
+   margin-left: -14px;
+   margin-right: -14px;
+}
+
+.btn-icon {
+   height: 60px;
+}

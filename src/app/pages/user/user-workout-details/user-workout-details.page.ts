@@ -426,7 +426,7 @@ export class UserWorkoutDetailsPage implements OnInit {
 
   goInfluencerDetail(influencer: any) {
     console.log(influencer);
-    this.router.navigate(['/influencer-detail'], {
+    this.router.navigate(['/influencer-details'], {
       state: { influencer },
     });
   }

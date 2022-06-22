@@ -44,7 +44,7 @@ export class WorkoutVideoDetailsPage implements OnInit {
   }
 
   goInfluencerDetail(influencer: any) {
-    this.router.navigate(['/influencer-detail'], { state: { influencer } });
+    this.router.navigate(['/influencer-details'], { state: { influencer } });
   }
 
   async openPreview(img){

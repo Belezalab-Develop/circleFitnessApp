@@ -1,3 +1,5 @@
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { AppAvailability } from '@awesome-cordova-plugins/app-availability/ngx';
 import { AuthProvider } from './providers/auth/auth';
 import { Capacitor } from '@capacitor/core';
 import { TokenInterceptor } from './interceptors/token.interceptor';
@@ -33,6 +35,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
 import { getApp } from 'firebase/app';
+
 
 
 
@@ -78,6 +81,8 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [,
     AuthProvider,
     StatusBar,
+    InAppBrowser,
+    AppAvailability,
     { provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },

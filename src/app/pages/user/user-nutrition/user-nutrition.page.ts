@@ -86,7 +86,7 @@ export class UserNutritionPage implements OnInit {
 
   goInfluencerDetail(influencer: any) {
     console.log(influencer);
-    this.router.navigate(['/influencer-detail'], {
+    this.router.navigate(['/influencer-details'], {
       state: { influencer },
     });
   }
