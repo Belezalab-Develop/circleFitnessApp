@@ -130,6 +130,7 @@ export class WorkoutVideoFinishPage implements OnInit {
      return modal.present();
    } */
 
+  //TODO: Pasar esto a un servicio.
    async shareOptions(){
     await Share.share({
       title: 'See cool stuff',

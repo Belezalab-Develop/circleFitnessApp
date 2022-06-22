@@ -1,0 +1,174 @@
+ion-list {
+  background: transparent !important;
+  ion-item {
+    --background: rgba(255, 0, 0, 0) !important;
+    color: #fff !important;
+    padding: 0 !important;
+  }
+}
+
+ion-avatar {
+  width: 80px !important;
+  height: 80px !important;
+  margin-bottom: 5px;
+}
+
+ion-grid.user-data {
+  margin-top: -15px !important;
+  .item-block {
+    min-height: 15px !important;
+  }
+  div.username {
+    color: #fff !important;
+    font-size: 16px !important;
+    padding-top: 5px;
+    font-family: "HNC-Light";
+  }
+  ion-item {
+    span {
+      font-size: 12px !important;
+      margin: 0 !important;
+      font-family: "HNC-Light";
+    }
+    .item-inner {
+      border: 0 !important;
+      padding: 0 !important;
+    }
+  }
+  button {
+    padding: 0 !important;
+    font-size: 9px !important;
+    // height: 23px !important;
+  }
+  ion-col {
+    padding: 0 3px !important;
+  }
+}
+ion-list.plans {
+  margin-left: -20px;
+  margin-right: -20px;
+  ion-item {
+    background-color: #323232 !important;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  p {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+  }
+
+  .food_detail {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 12px;
+    padding-top: 6px;
+  }
+  .food_foot {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .food_value {
+    color: white;
+    font-family: "HNC-Light";
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  h2 {
+    font-size: 19px;
+  }
+  ion-col {
+    div {
+      padding-left: 16px;
+    }
+  }
+  button {
+    height: 20px !important;
+    font-size: 11px !important;
+  }
+}
+.itemwithsep {
+  margin-bottom: 4px;
+}
+/*botones */
+
+.shape1,
+.shape2,
+.shape3 {
+  width: calc(97%);
+  position: absolute;
+  height: 30px;
+  -webkit-transform: skew(30deg);
+  -moz-transform: skew(30deg);
+  transform: skew(30deg);
+  background: red;
+  border: 1px solid var(--ion-color-dark);
+}
+.shape2 {
+  left: calc(48%);
+}
+.shape3 {
+  left: calc(66%);
+}
+.buttonP {
+  color: white;
+  text-align: center;
+  padding-top: 7px;
+  -webkit-transform: skew(150deg);
+  -moz-transform: skew(150deg);
+  transform: skew(150deg);
+  font-size: 12px;
+}
+
+.headers-table {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.list-table {
+  color: var(--ion-color-light);
+}
+
+alert-badge {
+  position: absolute;
+  right: 0px;
+  top: -40px;
+}
+
+.card-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal>.swiper-pagination-bullets {
+    bottom: -10px!important;
+    left: 0;
+    width: 100%;
+}
+
+.text-des {
+    font-size: 11px;
+    margin-left: 15px;
+}
+
+.text-inst {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+div.username {
+  color: #fff !important;
+  font-size: 16px !important;
+  padding-top: 5px;
+  font-family: "HNC-Light";
+}
+
+div.username_influencer {
+  color: #fff !important;
+  font-size: 12px !important;
+  padding-top: 5px;
+  font-family: "HNC-Light";
+}

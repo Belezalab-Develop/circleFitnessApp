@@ -106,9 +106,9 @@
       <ion-col size="12">
 
         <ion-card class="video-card ">
-
+          <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
           <video controls muted="true" playsinline looped preload="auto"
-            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video">
+            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" poster="assets/imgs/hola.png">
             <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
           </video>
 

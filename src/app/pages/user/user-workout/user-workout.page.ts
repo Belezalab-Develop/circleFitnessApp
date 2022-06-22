@@ -38,7 +38,7 @@ export class UserWorkoutPage implements OnInit {
 
   ngOnInit() {
     console.info('USER WORKOUT');
-
+     //TODO: pasar eso a storage en el inicio y llamar  desde ahi.
     this.userService.getExerciseProgram().subscribe(
       (exerciseProgram: any) => {
         this.exerciseProgram = exerciseProgram;

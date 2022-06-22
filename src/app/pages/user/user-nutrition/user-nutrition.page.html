@@ -1,9 +1,112 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>user-nutrition</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
-
-<ion-content>
-
+<ion-content *ngIf="this.nutritionProgram === null" class="no-padding">
+  <p style="color: #ffffff;">Elige uno de nuestros programas de nutrición.</p>
 </ion-content>
+<ion-content *ngIf="this.nutritionProgram !== null" class="no-padding">
+  <div style="height: 20px;"></div>
+  <ion-grid class="user-data" class="ion-padding">
+    <ion-row>
+      <ion-col offset="2" size="8">
+        <div class="title-program">{{ nutritionProgram.label }}</div>
+      </ion-col>
+      <!-- <ion-col size="2">
+              <ion-fab-button size="small" color="dark">
+                  <ion-icon name="share-social" color="danger"></ion-icon>
+              </ion-fab-button>
+          </ion-col> -->
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+
+      <ion-col center size="4" class="user-name ion-text-center">
+        <ion-avatar *ngIf="nutritionProgram?.influencer_id === null" style="margin: 0 auto;">
+          <img src="../../../assets/imgs/icons/Circle Fitness - ISO - pared.jpg">
+
+        </ion-avatar>
+        <ion-avatar *ngIf="nutritionProgram?.influencer_id !== null"
+          (click)="goInfluencerDetail(nutritionProgram?.influencer)" style="margin: 0 auto;">
+          <img [src]="nutritionProgram?.influencer.user.photo_url">
+
+        </ion-avatar>
+
+        <div *ngIf="nutritionProgram?.influencer_id === null" class="username">
+          Circle Fitness
+
+        </div>
+        <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer">
+          {{nutritionProgram?.influencer.user.nick_name | uppercase }}
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="ion-text-start">
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Proteinas</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Carboidratos</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">Grasas</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="ion-text-end">
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalCalories() }}kcal</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalProteins() }}g</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalCarbohydrates() }}g</ion-text>
+          </ion-col>
+          <ion-col size="12" class="no-padding">
+            <ion-text color="dark">{{ totalFats() }}g</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br *ngIf="isFav" />
+  <br *ngIf="isFav" />
+  <ion-list class="plans no-padding" style="margin-top: -30px;">
+    <ion-item *ngFor="let meal of nutritionProgram.days[0].meals" class="itemwithsep  bg-transparent--" lines="none"
+      (click)="goFoodDetail(meal, nutritionProgram)">
+      <ion-grid class="no-padding">
+        <ion-row class="no-padding">
+          <ion-col size="5">
+            <div style="height: 100%; width: 100%;" class="card-img"
+              [ngStyle]="{'background-image':'url(' + meal.recipes[0].photo_url + ')'}">
+            </div>
+          </ion-col>
+          <ion-col size="7" class="no-padding">
+            <ion-row class="no-padding" style="margin-top: -12px;">
+              <ion-col size="12" class="no-padding">
+                <h2>{{ meal.label }} </h2>
+              </ion-col>
+              <ion-col size="12" class="no-padding text-des" *ngFor="let recipe of meal.recipes">
+                <ion-icon color="danger" name="radio-button-on-outline"></ion-icon> {{ recipe.label }} <br>
+              </ion-col>
+              <ion-col size="12" class="no-padding">
+                <span style="font-size: 14px; font-weight: 16px;">Suplementos</span>
+              </ion-col>
+              <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
+                <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>
+              </ion-col>
+              <ion-col size="12" class="no-padding text-inst">
+                {{ meal.description }}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<app-custom-tab></app-custom-tab>

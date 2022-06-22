@@ -164,6 +164,8 @@ export class NutritionDetailsPage implements OnInit {
     await alert.present();
   }
 
+
+
   totalProteins() {
     return _.sumBy(this.nutritionProgram.days[0].meals, (meal) => _.sumBy(meal.recipes, 'proteins'));
   }

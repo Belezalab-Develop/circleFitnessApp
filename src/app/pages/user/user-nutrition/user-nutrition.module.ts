@@ -1,3 +1,6 @@
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from './../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +16,12 @@ import { UserNutritionPage } from './user-nutrition.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    UserNutritionPageRoutingModule
+    UserNutritionPageRoutingModule,
+    ComponentsModule,
+    TranslateModule.forChild(),
+    PipesModule
   ],
+
   declarations: [UserNutritionPage]
 })
 export class UserNutritionPageModule {}
