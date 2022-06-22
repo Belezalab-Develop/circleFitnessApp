@@ -29,12 +29,15 @@ export class HomeAuthPage implements OnInit {
     private analyticsService: AnalyticsService
   ) {
     this.authService.authState.next(true);
-    this.getUser();
+
   }
 
   ngOnInit() {
     console.log('HomeAuthPage');
     this.menuCtrl.enable(true);
+
+  }
+  ionViewWillEnter(){
     this.getUser();
   }
 

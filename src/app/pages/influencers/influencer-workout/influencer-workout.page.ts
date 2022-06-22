@@ -43,7 +43,7 @@ export class InfluencerWorkoutPage implements OnInit {
     console.log('influencer workout page');
   }
 
-  //TODO:: hay un error cuando redirige, revisar si creo nueva pagina
+
  async goWorkoutList(workout: any) {
     console.log(workout);
     const  params = new WorkoutListParams();

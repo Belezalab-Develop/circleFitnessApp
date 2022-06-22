@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    console.log('login');
     this.buildRegisterForm();
     this.buildLoginForm();
     this.menuCtrl.enable(false);
@@ -61,6 +61,7 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
       if (token) {
         //TODO: Agregar analityss, set user, log user
+        console.log(this.formLogin.value);
         this.saveUserInfo(token);
 
         this.firebaseLoginLogic();
@@ -96,14 +97,22 @@ export class LoginPage implements OnInit {
 
         this.storageService.setStorage('user_uid', res.user.uid).then(result => { }).catch(e => { });
 
-      },
+      }).catch(
       async (err) => {
-        console.log('error: ' + err.message);
 
-        this.firebaseSinUpLogic();
+        this.storageService.getStorage('user').then(data=>{
+          if (data) {
+            this.firebaseSinUpLogic();
+          }else{
+            console.log('no se por qu etarda.......');
+          }
+        });
 
-      }
-    );
+        console.log('error login page:: ' + err.message);
+
+
+      });
+
 
   }
 

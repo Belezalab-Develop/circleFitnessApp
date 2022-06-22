@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { GeneralService } from './services/auxiliar/general.service';
 import { AuthenticationService } from './services/auxiliar/authentication.service';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { App } from '@capacitor/app';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+
 //import { Stripe } from '@capacitor-community/stripe';
 
 @Component({
@@ -32,16 +34,17 @@ export class AppComponent implements OnInit {
   ) {
     this.storageService.initStorage();
     this.createCaheFolder();
-   /*  Stripe.initialize({
+    /*  Stripe.initialize({
 
-      publishableKey: 'pk_test_51HsR5iH2JpR7iSTHBXQquHJEkcYjQkkQQi3s6lkzzXQHdDOecM84Xl88abg1yQVpZWBkTYxHJ7T9vG2jRqgLMZqC00ubQqsVDQ',
+       publishableKey: 'pk_test_51HsR5iH2JpR7iSTHBXQquHJEkcYjQkkQQi3s6lkzzXQHdDOecM84Xl88abg1yQVpZWBkTYxHJ7T9vG2jRqgLMZqC00ubQqsVDQ',
 
-    }); */
+     }); */
 
   }
 
   ngOnInit() {
     this.initializeApp();
+
   }
 
   initializeApp() {
@@ -50,6 +53,7 @@ export class AppComponent implements OnInit {
       this.translate.addLangs(['en', 'es']);
       this.translate.setDefaultLang('es');
       this.translate.use('es');
+      console.log('app component');
 
       this.authService.authState.subscribe(state => {
 
@@ -78,6 +82,8 @@ export class AppComponent implements OnInit {
     }
 
   }
+
+
 
   async goInfoApp() {
     this.router.navigateByUrl('app-information');

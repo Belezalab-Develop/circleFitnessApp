@@ -1,9 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>influencer-nutrition</ion-title>
-  </ion-toolbar>
+  <app-nav-header ></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content no-padding>
+
+  <div class="title-program ion-padding">
+      CONOZCA <br> INFLUENCERS
+  </div>
+  <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;">
+      <ion-col size="12" class="item-row">
+          <ion-row class="ion-align-items-start">
+              <ion-col size="4" >
+                  <ion-avatar>
+                      <img [src]="influencerData?.user.photo_url" [alt]="influencerData?.user.nick_name">
+                  </ion-avatar>
+              </ion-col>
+              <ion-col size="8">
+                  <ion-row>
+                      <ion-col size="12">
+                          {{influencerData?.user.nick_name | uppercase }}
+                      </ion-col>
+                      <ion-col size="12">
+                        <p>Altura : {{influencerData?.height}} cm <br> </p>
+                        <p>Peso: {{influencerData?.weight}}Kg <br></p>
+                        <p> Grasa: {{influencerData?.fat}}%</p>
+
+                      </ion-col>
+                  </ion-row>
+              </ion-col>
+          </ion-row>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col size="12">
+          <h4 class="subtitle">NUTRICIÓN <br> by {{influencerData?.user.nick_name | uppercase }}</h4>
+      </ion-col>
+  </ion-row>
+
+  <div >
+
+      <div >
+          <div class="ion-margin-top">
+              <ion-slides pager="true" #slides [options]="sliderConfig">
+                  <ion-slide class="slides bg-slide" [ngStyle]="{'background-image':'url(' + workout.photo_url + ')'}" (click)="openNutrition(workout)"
+                      *ngFor="let workout of influencerData?.nutrition_programs">
+                      <div *ngIf="workout.is_favourite" class="workout-selected">
+                          <ion-icon name="star"></ion-icon>
+                      </div>
+                      <div *ngIf="!workout.is_public" class="workout-public">
+                          <ion-icon name="lock-closed"></ion-icon>
+                      </div>
+                      <div class="workout-title">{{workout.label}}</div>
+
+                  </ion-slide>
+              </ion-slides>
+          </div>
+      </div>
+      <br>
+  </div>
+
 
 </ion-content>
+<app-custom-tab></app-custom-tab>

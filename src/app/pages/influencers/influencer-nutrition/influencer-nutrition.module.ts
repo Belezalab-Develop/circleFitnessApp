@@ -7,14 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { InfluencerNutritionPageRoutingModule } from './influencer-nutrition-routing.module';
 
 import { InfluencerNutritionPage } from './influencer-nutrition.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InfluencerNutritionPageRoutingModule
+    InfluencerNutritionPageRoutingModule,
+    ComponentsModule,
+    PipesModule,
+    TranslateModule
   ],
   declarations: [InfluencerNutritionPage]
 })
-export class InfluencerNutritionPageModule {}
+export class InfluencerNutritionPageModule { }

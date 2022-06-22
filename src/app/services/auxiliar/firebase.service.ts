@@ -76,7 +76,16 @@ export class FirebaseService {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (e) {
-      return null;
+
+      await this.storageService.getStorage('user').then((user)=>{
+        this.signup({email, password, nickName: ''});
+
+      }).catch(err => {
+        console.log('Login firebase error 1::',err);
+       });
+
+
+
     }
   }
 

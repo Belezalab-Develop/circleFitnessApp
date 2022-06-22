@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "919545462331",
-    "project_id": "finess-circle",
-    "storage_bucket": "finess-circle.appspot.com"
+    "project_number": "160794305828",
+    "firebase_url": "https://circlefitnessapp-default-rtdb.firebaseio.com",
+    "project_id": "circlefitnessapp",
+    "storage_bucket": "circlefitnessapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:919545462331:android:1bfc53401370f6cf50661e",
+        "mobilesdk_app_id": "1:160794305828:android:6e5736460c4e8221ea7fb1",
         "android_client_info": {
           "package_name": "app.circlefitness.analytics"
         }
       },
       "oauth_client": [
         {
-          "client_id": "919545462331-nq1ddrl40v15g0dceff4u4s9ov2t1gej.apps.googleusercontent.com",
+          "client_id": "160794305828-af05iadcmq4sisgcotplc9i4fqqvmgrt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-WwIBT6SNAL_S_ehKyYpGiliEUumgta8"
+          "current_key": "AIzaSyC0UIliezJG5kI-9LKF_r54r9--hjFsuSE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "919545462331-nq1ddrl40v15g0dceff4u4s9ov2t1gej.apps.googleusercontent.com",
+              "client_id": "160794305828-af05iadcmq4sisgcotplc9i4fqqvmgrt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

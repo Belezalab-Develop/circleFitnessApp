@@ -29,13 +29,14 @@ export const environment = {
 
   ],
   firebaseConfig: {
-    apiKey: 'AIzaSyCENBIymxi_O0N_KjPUDOZlzStUEHRQbFQ',
-    authDomain: 'finess-circle.firebaseapp.com',
-    projectId: 'finess-circle',
-    storageBucket: 'finess-circle.appspot.com',
-    messagingSenderId: '919545462331',
-    appId: '1:919545462331:web:94623c3e13198a5550661e',
-    measurementId: 'G-0YT7PX8PS0'
+    apiKey: 'AIzaSyBaTmBtUKp-qDbXWaHOSWme5D6AYnFHrIY',
+    authDomain: 'circlefitnessapp.firebaseapp.com',
+    databaseURL: 'https://circlefitnessapp-default-rtdb.firebaseio.com',
+    projectId: 'circlefitnessapp',
+    storageBucket: 'circlefitnessapp.appspot.com',
+    messagingSenderId: '160794305828',
+    appId: '1:160794305828:web:5a61eae103432595ea7fb1',
+    measurementId: 'G-433W1967BP'
 
   }
 
