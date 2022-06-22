@@ -78,6 +78,7 @@ export class UserWorkoutPage implements OnInit {
     console.log(influencer);
     this.router.navigate(['/influencer-details'], {
       state: { influencer },
+      replaceUrl:true
     });
   }
 

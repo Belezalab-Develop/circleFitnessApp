@@ -65,7 +65,7 @@ export class NutritionDetailsPage implements OnInit {
   }
 
   goInfluencerDetail(influencer: any) {
-    this.router.navigate(['/influencer-details'], { state: { influencer } });
+    this.router.navigate(['/influencer-details'], { state: { influencer }, replaceUrl:true });
   }
 
   goDetail() {

@@ -51,7 +51,7 @@ export class InfluencerWorkoutPage implements OnInit {
     params.ShowLocation = false;
 
     await this.router.navigate(['/workout-details'], {
-      queryParams: { params,  workout }, replaceUrl:true
+      queryParams: { params,  workout }
     });
   }
 
