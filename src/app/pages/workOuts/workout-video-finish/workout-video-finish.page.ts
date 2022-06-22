@@ -144,7 +144,7 @@ export class WorkoutVideoFinishPage implements OnInit {
       quality: 100,
       allowEditing: false,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
+      source: CameraSource.Prompt,
     });
 
     await Share.share({

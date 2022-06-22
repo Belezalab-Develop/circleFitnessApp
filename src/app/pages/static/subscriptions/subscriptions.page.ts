@@ -1,6 +1,6 @@
 import { MenuController, Platform, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { InAppPurchase2, IAPProduct } from '@ionic-native/in-app-purchase-2/ngx';
+
 
 @Component({
   selector: 'app-subscriptions',
@@ -29,7 +29,7 @@ export class SubscriptionsPage implements OnInit {
     private menu: MenuController,
     private platform: Platform,
     private alertController: AlertController,
-    private store: InAppPurchase2
+
 
   ) { }
 
@@ -37,7 +37,7 @@ export class SubscriptionsPage implements OnInit {
     this.menu.close();
   }
 
-  registerProducts() {
+  /* registerProducts() {
     this.products.forEach((product) => {
       this.store.register({
         id: product.id,
@@ -46,20 +46,20 @@ export class SubscriptionsPage implements OnInit {
     });
 
     this.store.refresh();
-  }
+  } */
 
-  purchase(product: IAPProduct) {
+  /* purchase(product: IAPProduct) {
     this.store.order(product).then(p => {
       // Purchase in progress!
     }, e => {
       this.presentAlert('Failed', `Failed to purchase: ${e}`);
     });
-  }
+  } */
 
   // To comply with AppStore rules
-  restore() {
+  /* restore() {
     this.store.refresh();
-  }
+  } */
 
   async presentAlert(header, message) {
     const alert = await this.alertController.create({
