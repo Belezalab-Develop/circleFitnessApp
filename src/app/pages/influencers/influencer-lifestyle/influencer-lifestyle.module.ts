@@ -1,3 +1,6 @@
+import { ComponentsModule } from 'src/app/components/components.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +16,10 @@ import { InfluencerLifestylePage } from './influencer-lifestyle.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InfluencerLifestylePageRoutingModule
+    InfluencerLifestylePageRoutingModule,
+    ComponentsModule,
+    PipesModule,
+    TranslateModule.forChild()
   ],
   declarations: [InfluencerLifestylePage]
 })

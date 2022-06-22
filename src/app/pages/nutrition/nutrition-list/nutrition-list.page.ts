@@ -41,11 +41,16 @@ export class NutritionListPage implements OnInit {
   ngOnInit() {
     console.log('Explore NutritionPage');
 
+
+  }
+
+  ionViewWillEnter(){
+    this.getData();
   }
 
   async getData() {
 
-    //TODO: Tratar de crear el componente con swiper.
+
     await this.storageService.getCachedRequest('test', '-nutri-segments').then(res => {
       this.nutritionProgramsSegments = res;
 
@@ -93,6 +98,6 @@ export class NutritionListPage implements OnInit {
     setTimeout(() => {
       loading.dismiss();
       this.isCharge = true;
-    }, 600);
+    }, 800);
   }
 }

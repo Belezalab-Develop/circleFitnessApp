@@ -1,0 +1,138 @@
+
+h1 {
+  text-align: center !important;
+  color: #fff !important;
+  font-size: 35px !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+  text-transform: capitalize !important;
+}
+p {
+  text-align: center !important;
+  color: #fff !important;
+  font-family: "HNC-Light", sans-serif;
+  span {
+      color: #9a9896 !important;
+  }
+}
+
+.row-title {
+  margin-left: -20px;
+  margin-right: -20px;
+
+  text-align: center !important;
+  color: #fff !important;
+  font-family: "HNC-Light", sans-serif;
+  padding: 5px;
+}
+
+div.box-border {
+  width: 100% !important;
+  height: 22px !important;
+  border-bottom: 1px solid #fff !important;
+}
+button.finish {
+  width: 180px !important;
+  margin: 12px auto !important;
+}
+div.video-container {
+  position: relative !important;
+  .video-player {
+      width: 100%;
+  }
+  .video-overload {
+      position: absolute !important;
+      top: 8px !important;
+      width: 100%;
+      .play {
+          color: #fff !important;
+          button {
+              height: auto !important;
+              text-transform: capitalize !important;
+              ion-icon {
+                  font-size: 48px !important;
+                  color: var(--ion-color-danger) !important;
+              }
+          }
+      }
+  }
+}
+
+
+.more {
+  position: relative;
+  margin-left: -17px;
+  width: 110%;
+  height: 410px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .img-more {
+      width: 110%;
+      height: 410px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+  }
+}
+
+
+.play {
+  width: 100px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:50%;
+  text-align: center;
+  ion-icon {
+      font-size: 80px;
+  }
+  h6 {
+      margin-top: -5px;
+      letter-spacing: 4px;
+      font-size: 16px;
+  }
+}
+
+.img-row {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+
+.item-row {
+  background: #232325;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 12px;
+}
+
+.item-row-info {
+  background: #232325;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 12px;
+}
+
+ion-avatar {
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  margin-left: 15px;
+}
+
+ion-row {
+  margin-left: -18px;
+  margin-right: -18px;
+}
+.custom-video{
+  height: 250px;
+  width: 200px;
+}
