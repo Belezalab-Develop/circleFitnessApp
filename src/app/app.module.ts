@@ -1,7 +1,7 @@
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { AppAvailability } from '@awesome-cordova-plugins/app-availability/ngx';
 import { AuthProvider } from './providers/auth/auth';
-import { Capacitor } from '@capacitor/core';
+
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { PipesModule } from './pipes/pipes.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -23,8 +23,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { Drivers } from '@ionic/storage';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 
 import { environment } from '../environments/environment.prod';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
@@ -33,8 +32,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
-import { getApp } from 'firebase/app';
+
 
 
 
@@ -53,8 +51,6 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    //AngularFireAuthModule,
-    //AngularFirestoreModule,
     provideAuth(() =>  getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
