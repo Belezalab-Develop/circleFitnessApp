@@ -56,15 +56,10 @@ export class ProfileSettingsPage implements OnInit {
   }
 
   async updateUser() {
-
-
-
     this.userService.updateUser(this.form).subscribe(async () => {
       const loading = await this.loadingController.create({
         spinner: 'bubbles',
         message: 'Actualizando un momento por favor ....'
-
-
       });
       loading.present();
 
@@ -86,7 +81,6 @@ export class ProfileSettingsPage implements OnInit {
 
 
   }
-
 
   buildForm(user) {
     this.user = user;

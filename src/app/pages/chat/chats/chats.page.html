@@ -1,9 +1,165 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>chats</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
 
-<ion-content>
+<ion-content style="padding: 0px !important">
+  <ion-row>
+      <ion-col size="12">
+          <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CHAT </div>
+          <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
+              <ion-icon slot="start" name="filter-sharp" color="dark"></ion-icon> Filtrar
+          </ion-button>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col>
 
+      </ion-col>
+  </ion-row>
+  <ion-segment mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
+      <ion-segment-button value="0" color="danger">
+          <ion-label>Cerca tuyo</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" color="dark">
+          <ion-label>Ultimos Chat</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="profile">
+    <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
+      <img [src]="profile?.imageUrl" [alt]="" />
+  </ion-avatar>
+  </div>
+  <ion-slides style="height: 100%; width: 100%" #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
+      <ion-slide >
+          <ion-content style="height: 100%">
+              <ion-row class="ion-align-items-start">
+                  <ion-col size="12" class="item-row" *ngFor="let chat of chats">
+                      <ion-row class="ion-align-items-start">
+                          <ion-col size="3">
+                              <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
+                                  <img [src]="profile.imageURL" [alt]="chat.user.name" />
+                              </ion-avatar>
+                              Martin Sanchez
+                          </ion-col>
+                          <ion-col size="9" class="no-padding">
+                              <ion-row>
+                                  <ion-col size="6" class="ion-text-start" style="padding-left: 12px;"> {{
+                                      chat.user.email }} </ion-col>
+                                  <ion-col size="6" class="ion-text-end"> 4.6 Km </ion-col>
+                                  <ion-col size="4">
+                                      <span *ngIf="chat.user.personal_information?.is_height_visible">
+                                          Altura : {{ chat.user.personal_information?.height }} cm<br />
+                                      </span>
+                                      <span *ngIf="chat.user.personal_information?.is_weight_visible">
+                                          Peso: {{ chat.user.personal_information?.height }} kg<br />
+                                      </span>
+                                      <span *ngIf="chat.user.personal_information?.is_fat_percentage_visible">
+                                          Grasa : {{ chat.user.personal_information?.fat_percentage }} %
+                                      </span>
+                                  </ion-col>
+                                  <ion-col size="8">
+                                      <ion-row class="ion-align-items-center">
+                                          <ion-col size="12">
+                                              <ion-row>
+                                                  <ion-col size="8" class="ion-text-center">
+                                                      SUS PROGRAMAS
+                                                  </ion-col>
+                                                  <ion-col size="4">
+
+                                                  </ion-col>
+                                                  <ion-col size="4" (click)="seePlans()">
+                                                      <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
+                                                  </ion-col>
+                                                  <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
+                                                  <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
+                                                      <img class="icon-circle"
+                                                          src="/assets/imgs/icons/nutrition.png" />
+                                                  </ion-col>
+                                                  <ion-col size="4">
+                                                      <img class="icon-circle" src="/assets/imgs/icons/message.png" />
+                                                  </ion-col>
+                                              </ion-row>
+                                          </ion-col>
+                                          <!-- <ion-col size="4" (click)="goWorkoutList()" *ngIf="chat.user.personal_information?.is_workout_program_visible"> -->
+                                      </ion-row>
+                                  </ion-col>
+                              </ion-row>
+                          </ion-col>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-content>
+      </ion-slide>
+      <ion-slide>
+          <ion-content style="height: 100%">
+              <ion-row>
+                  <ion-col size="12" class="item-row" *ngFor="let user of users">
+                      <ion-row class="ion-align-items-start">
+                          <ion-col size="3">
+                              <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
+                                  <img [src]="user.avatar" alt="" />
+                                  <ion-badge size="large" color="danger" class="messages">8</ion-badge>
+                              </ion-avatar>
+                              Martin Sanchez
+                          </ion-col>
+                          <ion-col size="9" class="no-padding">
+                              <ion-row>
+                                  <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
+                                      {{user.first_name }} </ion-col>
+                                  <ion-col size="6" class="ion-text-end"> 4.6 Km </ion-col>
+                                  <ion-col size="4">
+                                      <span *ngIf="user.personal_information?.is_height_visible">
+                                          Altura : {{ user.personal_information?.height }} cm<br />
+                                      </span>
+                                      <span *ngIf="user.personal_information?.is_weight_visible">
+                                          Peso: {{ user.personal_information?.height }} kg<br />
+                                      </span>
+                                      <span *ngIf="user.personal_information?.is_fat_percentage_visible">
+                                          Grasa : {{ user.personal_information?.fat_percentage }} %
+                                      </span>
+                                  </ion-col>
+                                  <ion-col size="8">
+                                      <!-- <ion-row>
+                                          <ion-col size="4" (click)="seePlans()">
+                                              <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
+                                          </ion-col>
+                                          <ion-col size="4" (click)="seePlans()">
+                                              <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
+                                          </ion-col>
+                                          <ion-col size="4" (click)="goChat()">
+                                              <img class="icon-circle" src="/assets/imgs/icons/message.png" />
+                                          </ion-col>
+                                      </ion-row> -->
+                                      <ion-col size="12">
+                                          <ion-row>
+                                              <ion-col size="8" class="ion-text-center">
+                                                  SUS PROGRAMAS
+                                              </ion-col>
+                                              <ion-col size="4">
+
+                                              </ion-col>
+                                              <ion-col size="4" (click)="seePlans()">
+                                                  <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
+                                              </ion-col>
+                                              <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
+                                              <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
+                                                  <img class="icon-circle"
+                                                      src="/assets/imgs/icons/nutrition.png" />
+                                              </ion-col>
+                                              <ion-col size="4" (click)="goChat()">
+                                                  <img class="icon-circle" src="/assets/imgs/icons/message.png" />
+                                              </ion-col>
+                                          </ion-row>
+                                      </ion-col>
+                                  </ion-col>
+                              </ion-row>
+                          </ion-col>
+                      </ion-row>
+                  </ion-col>
+              </ion-row>
+          </ion-content>
+      </ion-slide>
+  </ion-slides>
 </ion-content>
+
+<app-custom-tab></app-custom-tab>

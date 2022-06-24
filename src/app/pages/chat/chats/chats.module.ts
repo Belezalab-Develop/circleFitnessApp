@@ -1,3 +1,6 @@
+import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from './../../../pipes/pipes.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +16,10 @@ import { ChatsPage } from './chats.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatsPageRoutingModule
+    ChatsPageRoutingModule,
+    ComponentsModule,
+    PipesModule,
+    TranslateModule.forChild()
   ],
   declarations: [ChatsPage]
 })
