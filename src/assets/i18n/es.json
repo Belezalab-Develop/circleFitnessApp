@@ -12,7 +12,7 @@
   "ago": "Hace",
   "videos": "Videos",
   "work plan": "Plan entranamiento",
-  "nutrition": "Nutricion",
+  "es_nutrition": "Nutricion",
   "conversations": "Conversaciones",
   "conversation with": "Chat con: ",
   "chats": "Conversaciones",
@@ -191,5 +191,12 @@
   "listo":"Listo",
   "you have done": "Has realizado",
   "repetitions": "repeticiones",
-  "calories": "calorias"
+  "calories": "calorias",
+  "Mi entrenamiento": "seus planos",
+  "iniciar workout": "Iniciar Treinamento",
+  "entrenamiento": "treinamentos",
+  "nutrition": "Plano Nutrição",
+  "Conozca":  "Conheça",
+  "escoger": "procurar",
+  "mis planes": "meus planos"
 }
