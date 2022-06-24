@@ -131,16 +131,16 @@ export class WorkoutVideoFinishPage implements OnInit {
    } */
 
   //TODO: Pasar esto a un servicio.
-   async shareOptions(){
+  async shareOptions() {
     await Share.share({
       title: 'See cool stuff',
       text: 'Really awesome thing you need to see right meow',
       url: 'http://ionicframework.com/',
       dialogTitle: 'Share with buddies',
     });
-   }
+  }
 
-   async shareImage(){
+  async shareImage() {
     const image = await Camera.getPhoto({
       quality: 100,
       allowEditing: false,
@@ -154,17 +154,17 @@ export class WorkoutVideoFinishPage implements OnInit {
       url: image.path,
       dialogTitle: 'Share with buddies',
     });
-   }
+  }
 
 
-   async openPreview(img){
-  const modal = await this.modalCtrl.create({
-    component: ImageModalPage,
-    componentProps: {
-      img
-    },
-    cssClass: 'transparent-modal'
-  });
-  modal.present();
-}
+  async openPreview(img) {
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        img
+      },
+      cssClass: 'transparent-modal'
+    });
+    modal.present();
+  }
 }

@@ -44,6 +44,14 @@ export class ApiInfluencersService {
 
   }
 
+  influencerVideo(id, individual, forceRefresh: boolean){
+    const url = `${environment.apiUlr}/influencer-finisher-videos/${id}`;
+    return this.getData(url, individual, forceRefresh);
+
+
+  }
+
+
   // Caching Functions
 
   private getData(url, individual, forceRefresh = false): Observable<any> {
