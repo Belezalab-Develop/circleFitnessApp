@@ -1,0 +1,49 @@
+ion-row {
+  margin-left: -14px;
+  margin-right: -14px;
+}
+
+.item-row {
+  background: #232325;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 12px;
+}
+
+.detail-row {
+  background: #141414;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 14px;
+}
+
+ion-avatar {
+  left: 0;
+  width: 90px;
+  height: 90px !important;
+  max-height: 90px !important;
+
+  // position: absolute;
+  img {
+    height: 90px !important;
+    width: 90px !important;
+  }
+}
+
+.icon-circle {
+  width: 40px !important;
+  height: 40px !important;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.item-row {
+  background: #232325;
+  margin: 0 auto;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 12px;
+  border-top: 2px solid black;
+}

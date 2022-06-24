@@ -1,6 +1,9 @@
+import { PipesModule } from './../../../pipes/pipes.module';
+import { ComponentsModule } from './../../../components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +16,12 @@ import { InfluencerListPage } from './influencer-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InfluencerListPageRoutingModule
+    InfluencerListPageRoutingModule,
+    ComponentsModule,
+    TranslateModule.forChild(),
+    PipesModule,
+    ReactiveFormsModule
   ],
   declarations: [InfluencerListPage]
 })
-export class InfluencerListPageModule {}
+export class InfluencerListPageModule { }
