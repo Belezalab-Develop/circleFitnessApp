@@ -51,16 +51,16 @@ export class ChatsPage implements OnInit {
 
 
 
-    this.afs.collection('chats', this.userUid).valueChanges()
+    this.afs.collection('chats').doc().get()
     .subscribe(res=>{
-      console.log('chats/user',res);
+      console.log('chats/user',this.flattenDoc(res));
     });
 
 
   }
 
   flattenDoc(res){
-    return{ id: res.id, ...res};
+    return{ id: res.id,};
   }
 
   ngOnInit() {

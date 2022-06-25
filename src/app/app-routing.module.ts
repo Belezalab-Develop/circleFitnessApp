@@ -133,6 +133,10 @@ const routes: Routes = [
     path: 'influencer-lifestyle',
     loadChildren: () => import('./pages/influencers/influencer-lifestyle/influencer-lifestyle.module').then( m => m.InfluencerLifestylePageModule)
   },
+  {
+    path: 'preview-page',
+    loadChildren: () => import('./pages/auxiliar/preview-page/preview-page.module').then( m => m.PreviewPagePageModule)
+  },
 ];
 
 @NgModule({

@@ -132,6 +132,8 @@ export class ProfileSettingsPage implements OnInit {
     }
   }
 
+
+
   async presentLoadingDefault() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
