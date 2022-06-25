@@ -1,4 +1,5 @@
-import { AvatarService } from './../../../services/auxiliar/avatar.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AvatarService, User } from './../../../services/auxiliar/avatar.service';
 
 import { CachingService } from './../../../services/auxiliar/caching.service';
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -23,17 +24,17 @@ import { Auth } from '@angular/fire/auth';
 export class ChatsPage implements OnInit {
   @ViewChild('slides', { static: true }) slider: IonSlides;
   segment = 0;
-  users: any[];
+  users: User[] = [];
   chats: any = [];
-  workouts;
+  chatsUser: any;
   latitude;
   longitude;
   allUser = [];
   userUid: any;
   testId: string;
-  email: any;
+
   profile = null;
-  perfil: any;
+
 
   constructor(
     private navCtrl: NavController,
@@ -42,11 +43,24 @@ export class ChatsPage implements OnInit {
     private storageService: CachingService,
     private avatarService: AvatarService,
     private loadingController: LoadingController,
+    private afs: AngularFirestore,
 
   ) {
     this.getInitialLogicData();
     this.presentLoadingDefault();
 
+
+
+    this.afs.collection('chats', this.userUid).valueChanges()
+    .subscribe(res=>{
+      console.log('chats/user',res);
+    });
+
+
+  }
+
+  flattenDoc(res){
+    return{ id: res.id, ...res};
   }
 
   ngOnInit() {
@@ -55,48 +69,7 @@ export class ChatsPage implements OnInit {
   }
   ionViewDidEnter() {
     console.log('This profile Enter:::', this.profile);
-    this.users = [
-      {
-        id: 0,
-        first_name: 'Martin',
-        last_name: 'Sanchez',
-        avatar: '/assets/imgs/samples/man-user01.jpg',
-        otr_info: '',
-        total_new: 0,
-      },
-      {
-        id: 0,
-        first_name: 'Jonh',
-        last_name: 'Snow2',
-        avatar: '/assets/imgs/samples/man-user02.jpg',
-        otr_info: '',
-        total_new: 4,
-      },
-      {
-        id: 0,
-        first_name: 'Maria',
-        last_name: 'Mar',
-        avatar: '/assets/imgs/samples/man-user03.jpg',
-        otr_info: '',
-        total_new: 1,
-      },
-      {
-        id: 0,
-        first_name: 'Greta',
-        last_name: 'will',
-        avatar: '/assets/imgs/samples/woman-user01.jpg',
-        otr_info: '',
-        total_new: 0,
-      },
-      {
-        id: 0,
-        first_name: 'Yet',
-        last_name: 'Smit',
-        avatar: '/assets/imgs/samples/woman-user02.jpg',
-        otr_info: '',
-        total_new: 0,
-      },
-    ];
+
   }
 
   async getInitialLogicData() {
@@ -104,11 +77,21 @@ export class ChatsPage implements OnInit {
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
-        this.profile= data;
+        this.profile = data;
+        this.getUsers();
+
       });
+
 
     });
 
+
+  }
+  async getUsers() {
+    this.avatarService.getUsers().subscribe(res => {
+      this.users = res.filter(item => item.id !== this.userUid);
+      console.log(this.users);
+    });
   }
 
   async segmentChanged(ev: any) {
@@ -127,8 +110,11 @@ export class ChatsPage implements OnInit {
 
   }
 
-  goChat(chat) {
-    // this.router.navigateByUrl('/chat');
+  goChat( name, oUdi) {
+    sessionStorage.setItem('uid', this.userUid);
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('oUid', oUdi);
+     this.router.navigateByUrl('/chat');
 
   }
 
@@ -171,6 +157,8 @@ export class ChatsPage implements OnInit {
         if (resp) {
           this.latitude = resp.coords.latitude;
           this.longitude = resp.coords.longitude;
+          const result = this.avatarService.updatePosition(this.userUid, this.latitude, this.longitude);
+
         }
       })
       .catch((error) => {
