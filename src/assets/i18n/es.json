@@ -194,9 +194,10 @@
   "calories": "calorias",
   "Mi entrenamiento": "seus planos",
   "iniciar workout": "Iniciar Treinamento",
-  "entrenamiento": "treinamentos",
-  "nutrition": "Plano Nutrição",
-  "Conozca":  "Conheça",
+  "entrenamientos": "treinamentos",
+  "entrenamiento": "treinamento",
+  "nutrition": "NUTRIÇÃO",
+  "Conozca":  "CONHEÇA",
   "escoger": "procurar",
   "mis planes": "meus planos"
 }

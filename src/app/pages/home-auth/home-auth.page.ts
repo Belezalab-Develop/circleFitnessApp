@@ -2,6 +2,7 @@ import { AnalyticsService } from './../../services/analytics.service';
 import { AuthenticationService } from './../../services/auxiliar/authentication.service';
 import { CachingService } from './../../services/auxiliar/caching.service';
 import { GeneralService } from './../../services/auxiliar/general.service';
+import { Title }     from '@angular/platform-browser';
 
 import { Router } from '@angular/router';
 import { NavController, MenuController } from '@ionic/angular';
@@ -26,9 +27,11 @@ export class HomeAuthPage implements OnInit {
     private storageStervice: CachingService,
     private authService: AuthenticationService,
     private menuCtrl: MenuController,
-    private analyticsService: AnalyticsService
+    private analyticsService: AnalyticsService,
+    private titleService: Title
   ) {
     this.authService.authState.next(true);
+    this.titleService.setTitle ('Home Page');
 
   }
 

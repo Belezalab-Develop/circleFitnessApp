@@ -29,8 +29,9 @@
                       shape="round"
                       expand="block"
                       (click)="goWorkoutRoutine(null)"
+                      style="font-family: Roboto-Black;"
                   >
-                      {{'Mi entrenamiento'|translate}}</ion-button
+                      {{'iniciar workout'|translate | uppercase}}</ion-button
                   >
               </ion-col>
           </ion-row>
@@ -41,25 +42,25 @@
      <ion-row>
           <ion-col size="6" tappable (click)="goExploreWorkouts()">
               <img src="assets/imgs/homeAuth1.png"/>
-              <h4 class="line1">Escoger <br></h4>
-              <h4 class="line2">{{'Entrenamiento'|translate}}</h4>
+              <h4 class="line1">{{'escoger'|translate | uppercase}}<br></h4>
+              <h4 class="line2">{{'Entrenamiento'|translate | uppercase}}</h4>
           </ion-col>
           <ion-col size="6" tappable (click)="goExploreNutrition()">
               <img src="assets/imgs/homeAuth2.jpg"/>
-              <h4 class="line1">Escoger <br></h4>
-              <h4 class="line2">{{'nutrition'|translate}}</h4>
+              <h4 class="line1">{{'escoger'|translate | uppercase}} <br></h4>
+              <h4 class="line2">{{'nutrition'|translate | uppercase}}</h4>
           </ion-col>
       </ion-row>
       <ion-row>
           <ion-col size="6" tappable (click)="goToChat()">
               <img src="assets/imgs/homeAuth3.jpg"/>
-              <h4 class="line1">{{'Conozca'|translate}}</h4>
-              <h4 class="line2">{{'Gym Partners'|translate}}</h4>
+              <h4 class="line1">{{'Conozca'|translate | uppercase}}</h4>
+              <h4 class="line2">{{'Gym Partners'|translate | uppercase}}</h4>
           </ion-col>
           <ion-col size="6" tappable (click)="goInfluencers()">
               <img src="assets/imgs/homeAuth4.jpg"/>
-              <h4 class="line1">{{'Conozca'|translate}}</h4>
-              <h4 class="line2">{{'Influs & Trainers'|translate}}</h4>
+              <h4 class="line1">{{'Conozca'|translate | uppercase}}</h4>
+              <h4 class="line2">{{'Influs & Trainers'|translate | uppercase}}</h4>
           </ion-col>
       </ion-row>
   </ion-grid>

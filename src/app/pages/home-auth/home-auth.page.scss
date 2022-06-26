@@ -4,6 +4,8 @@ h3 {
     text-align: center;
     color: #fff;
     font-size: 22px;
+    font-family: 'Roboto-Black';
+
 }
 ion-img {
     height: 100%;
@@ -36,11 +38,12 @@ ion-grid.homeB {
             position: absolute;
             color: #fff;
             width: auto;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: bold;
             /// word-spacing: 9999rem;
             padding-left: 8px;
             padding-top: 4px;
+            font-family: 'Roboto-Black';
         }
         h4.line1 {
             bottom: 40px;
@@ -65,7 +68,7 @@ ion-grid.homeB {
 
 .row-user {
     margin-top: -12px;
-    color: var(--ion-color-light);
+    color: var(--ion-color-dark);
 }
 
 ion-tabs {

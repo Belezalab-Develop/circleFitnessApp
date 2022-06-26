@@ -126,16 +126,16 @@ export class ChatPage implements OnInit {
 
       const imageUrl = await getDownloadURL(storageRef);
 
-      this.afs.collection('chats').doc(this.uid).collection('user' + this.oUid).add({
+      this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
         time: Date.now(),
         uid: this.uid,
         msg: this.newMsg,
         imageUrl
       });
 
-      this.afs.collection('chats').doc(this.oUid).collection('user' + this.uid).add({
+      this.afs.collection('chats').doc(this.oUid).collection( this.uid).add({
         time: Date.now(),
-        uid: this.uid,
+        uid: this.oUid,
         msg: this.newMsg,
         imageUrl
       }).then(() => {
