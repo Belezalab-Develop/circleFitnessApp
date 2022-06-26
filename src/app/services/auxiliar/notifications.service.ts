@@ -50,6 +50,7 @@ export class NotificationsService {
     });
     PushNotifications.addListener('registration',
       (token: Token) => {
+        console.log('Push registration success, token: ' , token.value);
         alert('Push registration success, token: ' + token.value);
       }
     );
