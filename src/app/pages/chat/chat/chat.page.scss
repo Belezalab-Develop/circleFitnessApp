@@ -8,6 +8,9 @@
   color: black;
   --padding-start: 8px;
 }
+p{
+  color: var(--ion-color-dark) !important;
+}
 
 .message {
   padding: 10px !important;
@@ -16,13 +19,22 @@
   white-space: pre-wrap;
 }
 
-.my-message {
-  background: var(--ion-color-tertiary);
+ion-item.my-message {
+
+  --border-radius: 10px !important;
+  --background: var(--ion-color-tertiary);
+  --padding-bottom: 15px;
   color: #fff;
+  width: 75%;
 }
 
-.other-message {
-  background: var(--ion-color-secondary);
+ion-item.other-message {
+  margin-top: .5em;
+
+  --border-radius: 10px !important;
+  --padding-bottom: 15px;
+  width: 75%;
+  --background: var(--ion-color-light);
   color: #fff;
 }
 

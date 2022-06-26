@@ -47,14 +47,7 @@ export class ChatsPage implements OnInit {
 
   ) {
     this.getInitialLogicData();
-    this.presentLoadingDefault();
-
-
-
-    this.afs.collection('chats').doc().get()
-    .subscribe(res=>{
-      console.log('chats/user',this.flattenDoc(res));
-    });
+    //this.presentLoadingDefault();
 
 
   }
@@ -73,13 +66,19 @@ export class ChatsPage implements OnInit {
   }
 
   async getInitialLogicData() {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'un momento por favor ....'
 
+
+    });
+    loading.present();
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
         this.getUsers();
-
+        loading.dismiss();
       });
 
 

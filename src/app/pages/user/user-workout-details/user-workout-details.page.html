@@ -137,7 +137,7 @@
 
             <ion-row class="serie-actions" *ngFor="let item of exerciseDetails; index as i">
 
-              <ion-col size="6" offset="3" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
+              <ion-col size="8" offset="2" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
 
                 <ion-button class="circle_especial" expand="full" fill="clear"
                   (click)="setCompleteSerie(i , exercise.id)">
@@ -145,7 +145,7 @@
                 </ion-button>
               </ion-col>
 
-              <ion-col size="6" offset="3" *ngIf="initialIndex === i && exercise.pivot.is_time_based ">
+              <ion-col size="8" offset="2" *ngIf="initialIndex === i && exercise.pivot.is_time_based ">
 
                 <ion-button class="circle_especial" expand="full" fill="clear"
                   (click)="setTimerComplete(i , exercise.id)">

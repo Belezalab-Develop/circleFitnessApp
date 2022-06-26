@@ -39,18 +39,10 @@ export class NotificationsService {
 
   addListeners() {
 
-    LocalNotifications.schedule({
-      notifications: [
-        {
-          title: 'notificacion local',
-          body: 'notification.body',
-          id: 1,
-        }
-      ]
-    });
+
     PushNotifications.addListener('registration',
       (token: Token) => {
-        console.log('Push registration success, token: ' , token.value);
+        console.log('Push registration success, token: ', token.value);
         alert('Push registration success, token: ' + token.value);
       }
     );
@@ -69,7 +61,7 @@ export class NotificationsService {
         LocalNotifications.schedule({
           notifications: [
             {
-              title: 'notificacion local',
+              title: notification.title,
               body: notification.body,
               id: 1,
               extra: {
@@ -89,20 +81,20 @@ export class NotificationsService {
     );
   }
 
- /*  async guadarToken(token: any) {
+  /*  async guadarToken(token: any) {
 
-    const uid = await this.firebaseService.getUid();
+     const uid = await this.firebaseService.getUid();
 
-    if (uid) {
-      console.log('guardar Token Firebase ->', uid);
-      const path = '/Clientes/';
-      const userUpdate = {
-        token,
-      };
-      this.firestoreService.updateDoc(userUpdate, path, uid);
-      console.log('guardar TokenFirebase()->', userUpdate, path, uid);
-    }
-  } */
+     if (uid) {
+       console.log('guardar Token Firebase ->', uid);
+       const path = '/Clientes/';
+       const userUpdate = {
+         token,
+       };
+       this.firestoreService.updateDoc(userUpdate, path, uid);
+       console.log('guardar TokenFirebase()->', userUpdate, path, uid);
+     }
+   } */
 
 
 }
