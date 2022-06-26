@@ -62,7 +62,7 @@ export class ChatPage implements OnInit {
     this.messages = this.afs.collection('chats')
       .doc(this.uid)
       // eslint-disable-next-line @typescript-eslint/no-shadow
-      .collection('user' + this.oUid, ref => ref.orderBy('time'))
+      .collection(this.oUid, ref => ref.orderBy('time'))
       .valueChanges();
 
     this.messages.subscribe(res => {
@@ -83,15 +83,15 @@ export class ChatPage implements OnInit {
   }
 
   async sendMessage() {
-    this.afs.collection('chats').doc(this.uid).collection('user' + this.oUid).add({
+    this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
       time: Date.now(),
       uid: this.uid,
       msg: this.newMsg
     });
 
-    this.afs.collection('chats').doc(this.oUid).collection('user' + this.uid).add({
+    this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
       time: Date.now(),
-      uid: this.uid,
+      uid: this.oUid,
       msg: this.newMsg
     }).then(() => {
       this.newMsg = '';
@@ -133,7 +133,7 @@ export class ChatPage implements OnInit {
         imageUrl
       });
 
-      this.afs.collection('chats').doc(this.oUid).collection( this.uid).add({
+      this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
         time: Date.now(),
         uid: this.oUid,
         msg: this.newMsg,

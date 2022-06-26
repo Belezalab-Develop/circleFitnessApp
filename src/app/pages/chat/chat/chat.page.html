@@ -13,7 +13,7 @@
           <ion-item lines="none" class="my-message">
             <ion-label class="ion-text-left " color="dark">
 
-              <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' ">
+              <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
               <p color="dark">{{name}}</p>
 
               <h2>
@@ -31,7 +31,7 @@
       <ion-row size="6" class="ion-justify-content-end" *ngIf="chat.uid === uid">
         <ion-item lines="none"  class="other-message">
           <ion-label class="ion-text-right " color="dark">
-            <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' ">
+            <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
             <p>Tu</p>
             <h2>
               <b>
