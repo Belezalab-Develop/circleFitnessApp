@@ -1,3 +1,4 @@
+import { NotificationsService } from './services/auxiliar/notifications.service';
 import { UserService } from './services/user.service';
 import { GeneralService } from './services/auxiliar/general.service';
 import { AuthenticationService } from './services/auxiliar/authentication.service';
@@ -27,13 +28,15 @@ export class AppComponent implements OnInit {
     private authService: AuthenticationService,
     private navCtrl: NavController,
     private generalService: GeneralService,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private notificatiosService: NotificationsService
 
 
 
   ) {
     this.storageService.initStorage();
     this.createCaheFolder();
+    this.notificatiosService.inicializar();
     /*  Stripe.initialize({
 
        publishableKey: 'pk_test_51HsR5iH2JpR7iSTHBXQquHJEkcYjQkkQQi3s6lkzzXQHdDOecM84Xl88abg1yQVpZWBkTYxHJ7T9vG2jRqgLMZqC00ubQqsVDQ',

@@ -76,12 +76,12 @@ export class FirebaseService {
       return user;
     } catch (e) {
 
-      await this.storageService.getStorage('user').then((user)=>{
-        this.signup({email, password, nickName: ''});
+      await this.storageService.getStorage('user').then((user) => {
+        this.signup({ email, password, nickName: '' });
 
       }).catch(err => {
-        console.log('Login firebase error 1::',err);
-       });
+        console.log('Login firebase error 1::', err);
+      });
 
 
 
@@ -90,5 +90,14 @@ export class FirebaseService {
 
   signOut(): Promise<void> {
     return signOut(this.auth);
+  }
+
+  async getUid() {
+    const user = await this.auth.currentUser;
+    if (user === null) {
+      return null;
+    } else {
+      return user.uid;
+    }
   }
 }

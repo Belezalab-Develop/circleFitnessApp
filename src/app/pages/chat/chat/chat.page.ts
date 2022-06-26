@@ -104,55 +104,7 @@ export class ChatPage implements OnInit {
     this.fileToSend.nativeElement.click();
   }
 
-  detectFiles() {
-    const files = this.fileToSend.nativeElement.files;
-    console.log(files);
-    const selectedFiles = [];
 
-
-    for (const file of files) {
-      const obj = {
-        name: file.name,
-        size: file.size,
-        type: file.type
-      };
-      selectedFiles.push(obj);
-    }
-    sessionStorage.setItem('previews', JSON.stringify(selectedFiles));
-    this.previewFiles();
-
-  }
-
-  async previewFiles() {
-    const popover = await this.popoverCtrl.create({
-      component: PreviewPagePage
-    });
-
-    popover.present();
-
-    popover.onDidDismiss().then(() => {
-      if (sessionStorage.getItem('send') === 'true') {
-        sessionStorage.setItem('send', 'false');
-        const files = this.fileToSend.nativeElement.files;
-        for (const file of files) {
-          const fileId = Date.now();
-
-          this.chats.push({
-            fliename: file.name,
-            fileSize: file.size,
-            fileType: file.type,
-            isUploading: true,
-            uid: this.uid,
-            fileId: fileId + file.name,
-            progress: 0
-          });
-
-          //this.uploadFile(file, fileId, file.name, file.type, this.uid);
-        }
-
-      }
-    });
-  }
 
   async uploadImage() {
     const image = await Camera.getPhoto({

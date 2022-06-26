@@ -8,10 +8,8 @@
   <div *ngFor="let chat of chats">
 
     <ion-item lines="none" *ngIf="chat.uid !== uid">
-
-        <img [src]="chat.imageUrl" alt="">
-
       <ion-label class="ion-text-left ">
+        <img [src]="chat.imageUrl" alt="" >
         <p>{{name}}</p>
 
         <h2>
@@ -24,8 +22,9 @@
     </ion-item>
 
     <ion-item lines="none" *ngIf="chat.uid === uid">
-      <img [src]="chat.imageUrl" alt="">
+
       <ion-label class="ion-text-right ">
+        <img [src]="chat.imageUrl" alt="">
         <p>You</p>
         <h2>
           <b>
