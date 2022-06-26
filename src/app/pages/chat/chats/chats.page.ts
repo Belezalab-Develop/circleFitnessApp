@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AvatarService, User } from './../../../services/auxiliar/avatar.service';
 
@@ -44,9 +45,12 @@ export class ChatsPage implements OnInit {
     private avatarService: AvatarService,
     private loadingController: LoadingController,
     private afs: AngularFirestore,
+    private titleService: Title,
+
 
   ) {
     this.getInitialLogicData();
+    this.titleService.setTitle ('All Chats');
     //this.presentLoadingDefault();
 
 
