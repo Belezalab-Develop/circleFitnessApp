@@ -151,8 +151,6 @@ export class ChatsPage implements OnInit {
     await Geolocation
       .getCurrentPosition()
       .then((resp) => {
-        console.log(resp.coords.latitude);
-        console.log(resp.coords.longitude);
         if (resp) {
           this.latitude = resp.coords.latitude;
           this.longitude = resp.coords.longitude;

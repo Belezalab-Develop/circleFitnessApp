@@ -1,3 +1,4 @@
+import { AvatarService } from './../../services/auxiliar/avatar.service';
 import { AnalyticsService } from './../../services/analytics.service';
 import { AuthenticationService } from './../../services/auxiliar/authentication.service';
 import { CachingService } from './../../services/auxiliar/caching.service';
@@ -6,19 +7,20 @@ import { Title }     from '@angular/platform-browser';
 
 import { Router } from '@angular/router';
 import { NavController, MenuController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked  } from '@angular/core';
 
 @Component({
   selector: 'app-home-auth',
   templateUrl: './home-auth.page.html',
   styleUrls: ['./home-auth.page.scss'],
 })
-export class HomeAuthPage implements OnInit {
+export class HomeAuthPage implements OnInit, AfterContentChecked {
 
 
   workoutListPage: any;
   user: any = {};
   enabled = this.analyticsService.analyticsEnabled;
+  uid: any;
 
   constructor(
     private navCtrl: NavController,
@@ -28,7 +30,8 @@ export class HomeAuthPage implements OnInit {
     private authService: AuthenticationService,
     private menuCtrl: MenuController,
     private analyticsService: AnalyticsService,
-    private titleService: Title
+    private titleService: Title,
+    private avatarService: AvatarService,
   ) {
     this.authService.authState.next(true);
     this.titleService.setTitle ('Home Page');
@@ -41,17 +44,25 @@ export class HomeAuthPage implements OnInit {
 
   }
   ionViewWillEnter(){
+    console.log('ChildComponent==>ionViewWillEnter');
     this.getUser();
+    this.avatarService.updateName(this.uid, this.user.nick_name);
+  }
+  ngAfterContentChecked() {
+    console.log('  ChildComponent==>ngAfterContentChecked');
   }
 
-  getUser() {
+  getUser(): void {
     this.storageStervice.getStorage('user').then((user) => {
       console.log(user);
       this.generalService.user = user;
       this.user = user;
+      this.storageStervice.getStorage('user_uid').then(uid =>{
+        this.uid = uid;
+      });
 
     });
-    ;
+
   }
 
   goWorkoutRoutine(routines: any) {
