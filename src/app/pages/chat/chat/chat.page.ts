@@ -103,14 +103,6 @@ export class ChatPage implements OnInit {
 
   formatDate(time) {
     const date = new Date(time.seconds * 1000 + time.nanoseconds / 1000000);
-    const forDate = formatDistance(
-      Date.now(),
-      date,
-      {
-        addSuffix: true,
-        locale: es
-      }
-    );
 
     const fw = formatDistanceToNow(date, { addSuffix: true, locale: es });
     return fw;
