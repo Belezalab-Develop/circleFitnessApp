@@ -89,17 +89,26 @@ export class NotificationsService {
   }
   async guadarToken(token: any) {
 
-    const uid = await this.firebaseService.getUid();
+    console.log('SE EJECUTO LA FUNCION DE GUARDAR TOKEN:::');
+    await this.storageService.getStorage('user_uid').then(res => {
+      if (res) {
+        console.log('guardar Token Firebase ->', res);
 
-    if (uid) {
-      console.log('guardar Token Firebase ->', uid);
+        const userUpdate = {
+          token,
+        };
+        this.avatarService.updateToken(res, userUpdate.token);
+        console.log('guardar TokenFirebase()->', userUpdate, res);
+      } else {
+        console.log('NO LO TIENE::: GUARDAR TOKEN EN EL STORAGE::');
+        this.storageService.setStorage('push_token', token).then(response => {
+          console.log('GUARDADO TOKEN EN STORAGE');
+        });
+      }
 
-      const userUpdate = {
-        token,
-      };
-       this.avatarService.updateToken(uid, userUpdate);
-      console.log('guardar TokenFirebase()->', userUpdate, uid);
-    }
+    });
+
+
   }
 
 

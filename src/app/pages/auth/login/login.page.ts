@@ -1,3 +1,4 @@
+import { AvatarService } from './../../../services/auxiliar/avatar.service';
 import { FirebaseService } from './../../../services/auxiliar/firebase.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AuthenticationService } from './../../../services/auxiliar/authentication.service';
@@ -35,7 +36,8 @@ export class LoginPage implements OnInit {
     private navController: NavController,
     private firebaseService: FirebaseService,
     public storageService: CachingService,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    private avatarService: AvatarService,
 
   ) { }
 
@@ -94,24 +96,36 @@ export class LoginPage implements OnInit {
   firebaseLoginLogic() {
     this.firebaseService.signIn(this.formLogin.value).then(
       (res) => {
-
-        this.storageService.setStorage('user_uid', res.user.uid).then(result => { }).catch(e => { });
-
-      }).catch(
-      async (err) => {
-
-        this.storageService.getStorage('user').then(data=>{
-          if (data) {
-            this.firebaseSinUpLogic();
-          }else{
-            console.log('no se por qu etarda.......');
+        const uid= res.user.uid;
+        this.storageService.setStorage('user_uid', uid).then();
+        this.storageService.getStorage('push_token').then(response => {
+          if (response) {
+            console.log('guardar Token Firebase ->', response);
+            const token = response;
+            const userUpdate = {
+              token,
+            };
+            this.avatarService.updateToken(uid, userUpdate);
+            console.log('guardar TokenFirebase()->', userUpdate, res);
           }
         });
 
-        console.log('error login page:: ' + err.message);
+
+      }).catch(
+        async (err) => {
+
+          this.storageService.getStorage('user').then(data => {
+            if (data) {
+              this.firebaseSinUpLogic();
+            } else {
+              console.log('no se por qu etarda.......');
+            }
+          });
+
+          console.log('error login page:: ' + err.message);
 
 
-      });
+        });
 
 
   }
@@ -198,18 +212,18 @@ export class LoginPage implements OnInit {
 
   firebaseRegisterLogic(formResult) {
 
-      const data = {
-        email: formResult.email,
-        password: formResult.password,
-        nickName: formResult.nick_name
-      };
+    const data = {
+      email: formResult.email,
+      password: formResult.password,
+      nickName: formResult.nick_name
+    };
 
-      this.firebaseService.signup(data).then(res => { })
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        .catch(err => {
+    this.firebaseService.signup(data).then(res => { })
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      .catch(err => {
 
-          console.log('error: ' + err.message);
-        });
+        console.log('error: ' + err.message);
+      });
 
   }
 
