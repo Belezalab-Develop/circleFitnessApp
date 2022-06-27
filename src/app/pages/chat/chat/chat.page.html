@@ -8,36 +8,27 @@
   <ion-grid fixed>
     <div *ngFor="let chat of chats">
 
-      <ion-row  size="6" class="ion-justify-content-start" *ngIf="chat.uid !== uid">
+      <ion-row size="6" class="ion-justify-content-start" *ngIf="chat.uid !== uid">
 
-          <ion-item lines="none" class="my-message">
-            <ion-label class="ion-text-left " color="dark">
+        <ion-item lines="none" class="my-message">
+          <ion-label class="ion-text-left ion-text-wrap " color="dark">
 
-              <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
-              <p color="dark">{{name}}</p>
+            <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
+            <h2 color="dark"><b>{{name}}</b></h2>
+            <p>{{chat.msg}}</p>
+          </ion-label>
 
-              <h2>
-                <b>
-                  {{chat.msg}}
-                </b>
-              </h2>
-            </ion-label>
-
-          </ion-item>
+        </ion-item>
 
 
       </ion-row>
 
       <ion-row size="6" class="ion-justify-content-end" *ngIf="chat.uid === uid">
-        <ion-item lines="none"  class="other-message">
-          <ion-label class="ion-text-right " color="dark">
+        <ion-item lines="none" class="other-message">
+          <ion-label class="ion-text-left ion-text-wrap " color="dark">
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
-            <p>Tu</p>
-            <h2>
-              <b>
-                {{chat.msg}}
-              </b>
-            </h2>
+            <h2 color="dark"><b>tu</b></h2>
+            <p>{{chat.msg}}</p>
           </ion-label>
 
         </ion-item>

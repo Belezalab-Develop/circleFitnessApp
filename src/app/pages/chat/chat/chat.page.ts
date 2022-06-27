@@ -91,7 +91,7 @@ export class ChatPage implements OnInit {
 
     this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
       time: Date.now(),
-      uid: this.oUid,
+      uid: this.uid,
       msg: this.newMsg
     }).then(() => {
       this.newMsg = '';
@@ -135,7 +135,7 @@ export class ChatPage implements OnInit {
 
       this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
         time: Date.now(),
-        uid: this.oUid,
+        uid: this.uid,
         msg: this.newMsg,
         imageUrl
       }).then(() => {
