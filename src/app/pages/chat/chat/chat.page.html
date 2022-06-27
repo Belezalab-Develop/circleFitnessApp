@@ -5,8 +5,7 @@
 
 <ion-content class="ion-padding">
 
-  <ion-grid fixed>
-    <div *ngFor="let chat of chats">
+  <ion-grid fixed *ngFor="let chat of chats">
 
       <ion-row size="6" class="ion-justify-content-start" *ngIf="chat.uid !== uid">
 
@@ -16,6 +15,7 @@
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
             <h2 color="dark"><b>{{name}}</b></h2>
             <p>{{chat.msg}}</p>
+            <p>{{formatDate(chat.time)}}</p>
           </ion-label>
 
         </ion-item>
@@ -25,17 +25,23 @@
 
       <ion-row size="6" class="ion-justify-content-end" *ngIf="chat.uid === uid">
         <ion-item lines="none" class="other-message">
-          <ion-label class="ion-text-left ion-text-wrap " color="dark">
+          <ion-label class="ion-text-right ion-text-wrap " color="dark">
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.2rem;">
             <h2 color="dark"><b>tu</b></h2>
-            <p>{{chat.msg}}</p>
+            <p class="ion-text-left">{{chat.msg}}</p>
+            <p>{{formatDate(chat.time)}}</p>
           </ion-label>
 
         </ion-item>
       </ion-row>
 
 
-    </div>
+
+
+
+
+
+
 
 
   </ion-grid>

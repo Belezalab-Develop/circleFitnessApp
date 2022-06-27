@@ -1,10 +1,11 @@
+
 import { PreviewPagePage } from './../../auxiliar/preview-page/preview-page.page';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AvatarService } from './../../../services/auxiliar/avatar.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { doc, docData, Firestore, setDoc, updateDoc, addDoc } from '@angular/fire/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 import {
   getDownloadURL,
   ref,
@@ -12,9 +13,10 @@ import {
   uploadString,
 } from '@angular/fire/storage';
 import { IonContent, PopoverController, LoadingController, AlertController } from '@ionic/angular';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { format, formatDistance, formatDistanceToNow } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 
 @Component({
@@ -51,13 +53,12 @@ export class ChatPage implements OnInit {
     this.oUid = sessionStorage.getItem('oUid');
     this.uid = sessionStorage.getItem('uid');
 
-
+    console.log('tiempo', serverTimestamp());
 
 
   }
 
   ngOnInit() {
-
 
     this.messages = this.afs.collection('chats')
       .doc(this.uid)
@@ -84,13 +85,13 @@ export class ChatPage implements OnInit {
 
   async sendMessage() {
     this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
-      time: Date.now(),
+      time: serverTimestamp(),
       uid: this.uid,
       msg: this.newMsg
     });
 
     this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
-      time: Date.now(),
+      time: serverTimestamp(),
       uid: this.uid,
       msg: this.newMsg
     }).then(() => {
@@ -100,10 +101,24 @@ export class ChatPage implements OnInit {
 
   }
 
+  formatDate(time) {
+    const date = new Date(time.seconds * 1000 + time.nanoseconds / 1000000);
+    const forDate = formatDistance(
+      Date.now(),
+      date,
+      {
+        addSuffix: true,
+        locale: es
+      }
+    );
+
+    const fw = formatDistanceToNow(date, { addSuffix: true, locale: es });
+    return fw;
+  }
+
   triggerFile() {
     this.fileToSend.nativeElement.click();
   }
-
 
 
   async uploadImage() {
@@ -127,14 +142,14 @@ export class ChatPage implements OnInit {
       const imageUrl = await getDownloadURL(storageRef);
 
       this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
-        time: Date.now(),
+        time: serverTimestamp(),
         uid: this.uid,
         msg: this.newMsg,
         imageUrl
       });
 
       this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
-        time: Date.now(),
+        time: serverTimestamp(),
         uid: this.uid,
         msg: this.newMsg,
         imageUrl

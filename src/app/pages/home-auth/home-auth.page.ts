@@ -49,7 +49,7 @@ export class HomeAuthPage implements OnInit, AfterContentChecked {
     this.avatarService.updateName(this.uid, this.user.nick_name);
   }
   ngAfterContentChecked() {
-    console.log('  ChildComponent==>ngAfterContentChecked');
+    //console.log('  ChildComponent==>ngAfterContentChecked');
   }
 
   getUser(): void {
