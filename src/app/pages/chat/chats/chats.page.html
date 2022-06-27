@@ -2,7 +2,7 @@
   <app-nav-header></app-nav-header>
 </ion-header>
 
-<ion-content style="padding: 0px !important">
+<ion-content style="padding: 0px !important" >
   <ion-row>
     <ion-col size="12">
       <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CHAT </div>
@@ -34,7 +34,7 @@
               <ion-col size="3">
                 <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
                   <img [src]="user.imageUrl" alt="" style="width: 100%; !important"/>
-                  <ion-badge size="large" color="danger" class="messages">8</ion-badge>
+                  <!-- <ion-badge size="large" color="danger" class="messages">8</ion-badge> -->
                 </ion-avatar>
                 {{user.name}}
               </ion-col>
@@ -91,7 +91,7 @@
               <ion-col size="3">
                 <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
                   <img [src]="user.avatar" alt="" />
-                  <ion-badge size="large" color="danger" class="messages">8</ion-badge>
+                  <!-- <ion-badge size="large" color="danger" class="messages">8</ion-badge> -->
                 </ion-avatar>
                 Martin Sanchez
               </ion-col>

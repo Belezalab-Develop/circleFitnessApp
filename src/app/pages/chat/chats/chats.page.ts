@@ -50,14 +50,18 @@ export class ChatsPage implements OnInit {
 
   ) {
     this.getInitialLogicData();
-    this.titleService.setTitle ('All Chats');
+    this.titleService.setTitle('All Chats');
     //this.presentLoadingDefault();
+
+
+
+
 
 
   }
 
-  flattenDoc(res){
-    return{ id: res.id,};
+  flattenDoc(res) {
+    return { id: res.id, };
   }
 
   ngOnInit() {
@@ -76,11 +80,16 @@ export class ChatsPage implements OnInit {
 
 
     });
+
     loading.present();
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
+       const k = this.avatarService.getEspecificChats(this.userUid).subscribe(algo =>{
+        console.log('esto es algo ', algo);
+       });
+       
         this.getUsers();
         loading.dismiss();
       });
@@ -113,11 +122,11 @@ export class ChatsPage implements OnInit {
 
   }
 
-  goChat( name, oUdi) {
+  goChat(name, oUdi) {
     sessionStorage.setItem('uid', this.userUid);
     sessionStorage.setItem('name', name);
     sessionStorage.setItem('oUid', oUdi);
-     this.router.navigateByUrl('/chat');
+    this.router.navigateByUrl('/chat');
 
   }
 

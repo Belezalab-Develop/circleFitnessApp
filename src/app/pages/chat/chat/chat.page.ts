@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 
 import { PreviewPagePage } from './../../auxiliar/preview-page/preview-page.page';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -60,10 +61,12 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
 
+
     this.messages = this.afs.collection('chats')
       .doc(this.uid)
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      .collection(this.oUid, ref => ref.orderBy('time'))
+      .collection('participantes')
+      .doc(this.oUid)
+      .collection('mensajes', ref => ref.orderBy('time'))
       .valueChanges();
 
     this.messages.subscribe(res => {
@@ -84,16 +87,26 @@ export class ChatPage implements OnInit {
   }
 
   async sendMessage() {
-    this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
+    this.afs.collection('chats')
+    .doc(this.uid)
+    .collection('participantes')
+    .doc(this.oUid)
+    .collection('mensajes').add({
       time: serverTimestamp(),
-      uid: this.uid,
-      msg: this.newMsg
+      fromUid: this.uid,
+      msg: this.newMsg,
+      toUid: this.oUid
     });
 
-    this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
+    this.afs.collection('chats')
+    .doc(this.oUid)
+    .collection('participantes')
+    .doc(this.uid)
+    .collection('mensajes').add({
       time: serverTimestamp(),
-      uid: this.uid,
-      msg: this.newMsg
+      fromUid: this.uid,
+      msg: this.newMsg,
+      toUid: this.uid
     }).then(() => {
       this.newMsg = '';
       this.content.scrollToBottom();

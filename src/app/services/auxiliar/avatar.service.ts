@@ -5,7 +5,17 @@ import { CachingService } from './caching.service';
 import { Injectable } from '@angular/core';
 
 import { Auth } from '@angular/fire/auth';
-import { collection, collectionData, doc, docData, Firestore, setDoc, updateDoc , addDoc} from '@angular/fire/firestore';
+import {
+  collection,
+  collectionData,
+  doc, docData,
+  Firestore,
+  setDoc,
+  updateDoc,
+  addDoc,
+  getDocs,
+  getDocsFromServer
+} from '@angular/fire/firestore';
 import {
   getDownloadURL,
   ref,
@@ -31,7 +41,7 @@ export interface User {
 })
 export class AvatarService {
 
-  userUid= null;
+  userUid = null;
   currentUser = null;
 
 
@@ -41,11 +51,11 @@ export class AvatarService {
     private afs: AngularFirestore,
     private storage: Storage,
     private serviceStorage: CachingService
-  ) {}
+  ) { }
 
   getUsers(): Observable<User[]> {
     const userRef = collection(this.firestore, 'users');
-    return collectionData(userRef, { idField: 'id'}) as Observable<User[]>;
+    return collectionData(userRef, { idField: 'id' }) as Observable<User[]>;
   }
 
 
@@ -60,15 +70,16 @@ export class AvatarService {
   getUserChatUsers(uid) {
 
     const userDocRef = collection(this.firestore, `chats`);
-    return collectionData(userDocRef, { idField: 'id' }) ;
+    return collectionData(userDocRef, { idField: 'id' });
 
 
 
   }
 
-  getEspecificChats(uid, ouid){
-    const userChatRef = doc(this.firestore, `chats/${uid}/${ouid}`);
-    return docData(userChatRef, { idField: 'id'});
+  getEspecificChats(uid) {
+    const userChatRef = collection(this.firestore, `chats/${uid}/participantes/`);
+
+    return collectionData(userChatRef);
   }
 
   async updateName(uid, name) {
@@ -76,13 +87,27 @@ export class AvatarService {
     try {
       const userDocRef = doc(this.firestore, `users/${uid}`);
       await updateDoc(userDocRef, {
-       name
+        name
       });
       return true;
     } catch (e) {
       return null;
     }
   }
+
+  async updateToken(uid, pushToken) {
+
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+        pushToken
+      });
+      return true;
+    } catch (e) {
+      return null;
+    }
+  }
+
 
   async updatePosition(uid, lat, long) {
 
@@ -95,6 +120,19 @@ export class AvatarService {
       return true;
     } catch (e) {
       return null;
+    }
+  }
+
+  async update(uid,  data){
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+      data
+      });
+      return true;
+
+    } catch (error) {
+
     }
   }
 

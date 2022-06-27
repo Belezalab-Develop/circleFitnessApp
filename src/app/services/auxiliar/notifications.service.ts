@@ -1,3 +1,5 @@
+import { AvatarService } from './avatar.service';
+import { CachingService } from './caching.service';
 import { FirebaseService } from './firebase.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -20,16 +22,20 @@ export class NotificationsService {
     private platform: Platform,
     private router: Router,
     private http: HttpClient,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private storageService: CachingService,
+    private avatarService: AvatarService,
   ) { }
 
   inicializar() {
+
     if (this.platform.is('capacitor')) {
       PushNotifications.requestPermissions().then(result => {
         console.log(' Pidiendo permisos para el push');
         if (result.receive === 'granted') {
           PushNotifications.register();
           this.addListeners();
+
         }
       });
     } else {
@@ -41,9 +47,10 @@ export class NotificationsService {
 
 
     PushNotifications.addListener('registration',
-      (token: Token) => {
+      async (token: Token) => {
         console.log('Push registration success, token: ', token.value);
         //alert('Push registration success, token: ' + token.value);
+        await this.guadarToken(token.value);
       }
     );
 
@@ -80,21 +87,20 @@ export class NotificationsService {
       }
     );
   }
+  async guadarToken(token: any) {
 
-  /*  async guadarToken(token: any) {
+    const uid = await this.firebaseService.getUid();
 
-     const uid = await this.firebaseService.getUid();
+    if (uid) {
+      console.log('guardar Token Firebase ->', uid);
 
-     if (uid) {
-       console.log('guardar Token Firebase ->', uid);
-       const path = '/Clientes/';
-       const userUpdate = {
-         token,
-       };
-       this.firestoreService.updateDoc(userUpdate, path, uid);
-       console.log('guardar TokenFirebase()->', userUpdate, path, uid);
-     }
-   } */
+      const userUpdate = {
+        token,
+      };
+       this.avatarService.updateToken(uid, userUpdate);
+      console.log('guardar TokenFirebase()->', userUpdate, uid);
+    }
+  }
 
 
 }

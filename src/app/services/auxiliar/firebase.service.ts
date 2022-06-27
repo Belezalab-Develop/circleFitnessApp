@@ -43,9 +43,10 @@ export class FirebaseService {
     private storageService: CachingService,
     private auth: Auth
   ) {
-    /* this.afAuth.onAuthStateChanged((user) => {
+    this.auth.onAuthStateChanged((user) => {
       this.currentUser = user;
-    }); */
+      console.log('Current User::', this.currentUser);
+    });
   }
 
 
@@ -93,10 +94,11 @@ export class FirebaseService {
   }
 
   async getUid() {
-    const user = await this.auth.currentUser;
+    const user = this.currentUser;
     if (user === null) {
       return null;
     } else {
+      console.log('User for Function::', user);
       return user.uid;
     }
   }
