@@ -148,16 +148,18 @@ export class ChatPage implements OnInit {
 
       this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
         time: serverTimestamp(),
-        uid: this.uid,
+        fromUid: this.uid,
         msg: this.newMsg,
-        imageUrl
+        imageUrl,
+        toUid: this.oUid
       });
 
       this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
         time: serverTimestamp(),
-        uid: this.uid,
+        fromUid: this.uid,
         msg: this.newMsg,
-        imageUrl
+        imageUrl,
+        toUid: this.uid
       }).then(() => {
         this.newMsg = '';
         this.content.scrollToBottom();
