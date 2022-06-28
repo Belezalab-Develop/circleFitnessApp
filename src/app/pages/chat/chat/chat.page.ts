@@ -88,29 +88,30 @@ export class ChatPage implements OnInit {
 
   async sendMessage() {
     this.afs.collection('chats')
-    .doc(this.uid)
-    .collection('participantes')
-    .doc(this.oUid)
-    .collection('mensajes').add({
-      time: serverTimestamp(),
-      fromUid: this.uid,
-      msg: this.newMsg,
-      toUid: this.oUid
-    });
+      .doc(this.uid)
+      .collection('participantes')
+      .doc(this.oUid)
+      .collection('mensajes').add({
+        time: serverTimestamp(),
+        fromUid: this.uid,
+        msg: this.newMsg,
+        toUid: this.oUid,
+        toName: this.name
+      });
 
     this.afs.collection('chats')
-    .doc(this.oUid)
-    .collection('participantes')
-    .doc(this.uid)
-    .collection('mensajes').add({
-      time: serverTimestamp(),
-      fromUid: this.uid,
-      msg: this.newMsg,
-      toUid: this.uid
-    }).then(() => {
-      this.newMsg = '';
-      this.content.scrollToBottom();
-    });
+      .doc(this.oUid)
+      .collection('participantes')
+      .doc(this.uid)
+      .collection('mensajes').add({
+        time: serverTimestamp(),
+        fromUid: this.uid,
+        msg: this.newMsg,
+        toUid: this.uid
+      }).then(() => {
+        this.newMsg = '';
+        this.content.scrollToBottom();
+      });
 
   }
 
@@ -146,24 +147,35 @@ export class ChatPage implements OnInit {
 
       const imageUrl = await getDownloadURL(storageRef);
 
-      this.afs.collection('chats').doc(this.uid).collection(this.oUid).add({
-        time: serverTimestamp(),
-        fromUid: this.uid,
-        msg: this.newMsg,
-        imageUrl,
-        toUid: this.oUid
-      });
+      this.afs.collection('chats')
+        .doc(this.uid)
+        .collection('participantes')
+        .doc(this.oUid)
+        .collection('mensajes')
+        .add({
+          time: serverTimestamp(),
+          fromUid: this.uid,
+          msg: this.newMsg,
+          imageUrl,
+          toUid: this.oUid,
+          toName: this.name
+        });
 
-      this.afs.collection('chats').doc(this.oUid).collection(this.uid).add({
-        time: serverTimestamp(),
-        fromUid: this.uid,
-        msg: this.newMsg,
-        imageUrl,
-        toUid: this.uid
-      }).then(() => {
-        this.newMsg = '';
-        this.content.scrollToBottom();
-      });
+      this.afs.collection('chats')
+        .doc(this.oUid)
+        .collection('participantes')
+        .doc(this.uid)
+        .collection('mensajes').
+        add({
+          time: serverTimestamp(),
+          fromUid: this.uid,
+          msg: this.newMsg,
+          imageUrl,
+          toUid: this.uid
+        }).then(() => {
+          this.newMsg = '';
+          this.content.scrollToBottom();
+        });
 
 
       loading.dismiss();

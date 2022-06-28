@@ -10,29 +10,31 @@ exports.newMessage = functions.firestore
       const mensaje = event.data();
       console.log("newMensaje creado");
 
+      if (mensaje.fromUid !== mensaje.toUid) {
+        console.log("Paso al envio del mensaje--->");
+        const path = "/users/" + mensaje.toUid;
 
-      const path = "/users/" + mensaje.toUid;
+        const docInfo = await firestore.doc(path).get();
+        const dataUser = docInfo.data() as any;
+        const token = dataUser.pushToken.token;
 
-      const docInfo = await firestore.doc(path).get();
-      const dataUser = docInfo.data() as any;
-      const token = dataUser.pushToken.token;
+        const registrationTokens = [token];
 
-      const registrationTokens = [token];
+        const dataFcm = {
+          enlace: "/chats",
+        };
 
-      const dataFcm = {
-        enlace: "/chats",
-      };
+        const notification: INotification = {
+          data: dataFcm,
+          tokens: registrationTokens,
+          notification: {
+            title: "Nuevo mensaje",
+            body: "Tienes un nuevo mensaje ",
+          },
+        };
 
-      const notification: INotification = {
-        data: dataFcm,
-        tokens: registrationTokens,
-        notification: {
-          title: "Nuevo mensaje",
-          body: "Tienes un nuevo mensaje ",
-        },
-      };
-
-      return sendNotification(notification);
+        return sendNotification(notification);
+      }
     });
 
 const sendNotification = (notification: INotification) => {
@@ -73,13 +75,13 @@ const sendNotification = (notification: INotification) => {
               }
             });
             console.log("List of tokens that caused failures: " + failedTokens);
-            // elimnar tokens
+          // elimnar tokens
           } else {
             console.log("Send notification exitoso -> ");
           }
           resolve(true);
           return;
-        }).catch( (error) => {
+        }).catch((error) => {
           console.log("Send fcm falló -> ", error);
           resolve(false);
           return;
