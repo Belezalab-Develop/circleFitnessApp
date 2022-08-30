@@ -41,13 +41,10 @@ export class ChatPage implements OnInit {
   chats = [];
 
   constructor(
-    private router: Router,
     private afs: AngularFirestore,
-    private avatarService: AvatarService,
-    private popoverCtrl: PopoverController,
     private storage: Storage,
     private loadingController: LoadingController,
-    private alertController: AlertController
+
 
   ) {
     this.name = sessionStorage.getItem('name');
@@ -84,6 +81,11 @@ export class ChatPage implements OnInit {
         this.chats.push(child.data());
       });
     }); */
+  }
+
+
+  ionViewWillEnter(){
+    this.content.scrollToBottom();
   }
 
   async sendMessage() {

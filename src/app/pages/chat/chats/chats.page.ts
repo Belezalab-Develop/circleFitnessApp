@@ -52,12 +52,6 @@ export class ChatsPage implements OnInit {
     this.getInitialLogicData();
     this.titleService.setTitle('All Chats');
     //this.presentLoadingDefault();
-
-
-
-
-
-
   }
 
   flattenDoc(res) {
@@ -89,7 +83,6 @@ export class ChatsPage implements OnInit {
        const k = this.avatarService.getEspecificChats(this.userUid).subscribe(algo =>{
         console.log('esto es algo ', algo);
        });
-       
         this.getUsers();
         loading.dismiss();
       });

@@ -14,7 +14,7 @@ import { Component, OnInit, AfterContentChecked  } from '@angular/core';
   templateUrl: './home-auth.page.html',
   styleUrls: ['./home-auth.page.scss'],
 })
-export class HomeAuthPage implements OnInit, AfterContentChecked {
+export class HomeAuthPage implements OnInit {
 
 
   workoutListPage: any;
@@ -48,9 +48,7 @@ export class HomeAuthPage implements OnInit, AfterContentChecked {
     this.getUser();
     this.avatarService.updateName(this.uid, this.user.nick_name);
   }
-  ngAfterContentChecked() {
-    //console.log('  ChildComponent==>ngAfterContentChecked');
-  }
+
 
   getUser(): void {
     this.storageStervice.getStorage('user').then((user) => {
