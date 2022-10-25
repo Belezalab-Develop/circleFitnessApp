@@ -32,10 +32,13 @@
 
 
                           </ion-col>
-                          <ion-col offset="2" size="8" offset="2" class="ion-text-center">
-                              <ion-text color="light" >
+                          <ion-col  size="12"  class="ion-text-center">
+                                <ion-button color="light" class="btn-login" expand="block" shape="round" (click)="registerFlag()">
+                                    Aun no tienes una cuenta? Registrate
+                                </ion-button>
+                              <!-- <ion-text color="light" >
                                   <p style="font-size: 12px;" (click)="registerFlag()">Aun no tienes una cuenta? Registrate</p>
-                              </ion-text>
+                              </ion-text> -->
                           </ion-col>
                       </ion-row>
                   </form>
@@ -66,7 +69,7 @@
                       <ion-icon slot="end" name="logo-facebook"></ion-icon>
                   </ion-button> -->
                   <ion-button expand="block" shape="round" color="light" (click)="loginApple()">
-                      Inicia sesión con Apple
+                       Apple
                       <ion-icon slot="end" name="logo-apple"></ion-icon>
                   </ion-button>
                   <ion-button expand="block" shape="round" color="primary" (click)="clickForm()">
@@ -87,29 +90,29 @@
                       <ion-row>
                           <ion-col size="12">
                               <ion-item class="custom-input">
-                                  <ion-input placeholder="Nombre" name="name" formControlName="name"></ion-input>
+                                  <ion-input placeholder="Nome" name="name" formControlName="name"></ion-input>
                               </ion-item>
                               <ion-item class="custom-input">
-                                  <ion-input placeholder="Apellidos" name="paternal_surname" formControlName="paternal_surname"></ion-input>
+                                  <ion-input placeholder="Sobrenome" name="paternal_surname" formControlName="paternal_surname"></ion-input>
                               </ion-item>
                               <ion-item class="custom-input" >
-                                  <ion-input type="email" placeholder="Email" name="email" formControlName="email"></ion-input>
+                                  <ion-input type="E-mail" placeholder="Email" name="email" formControlName="email"></ion-input>
                               </ion-item>
                               <ion-item class="custom-input" >
-                                  <ion-input type="text" placeholder="Alias" name="nick_name" formControlName="nick_name"></ion-input>
+                                  <ion-input type="text" placeholder="Nick Name" name="nick_name" formControlName="nick_name"></ion-input>
                               </ion-item>
                               <ion-item class="custom-input" >
-                                  <ion-input type="password" placeholder="Contraseña" name="password" formControlName="password"></ion-input>
+                                  <ion-input type="password" placeholder="Senha" name="password" formControlName="password"></ion-input>
                               </ion-item>
                               <ion-item class="custom-input" >
-                                  <ion-input  type="password" placeholder="Confirmar contraseña" name="password_confirmation" formControlName="password_confirmation"  ></ion-input>
+                                  <ion-input  type="password" placeholder="Reinserir a Senha" name="password_confirmation" formControlName="password_confirmation"  ></ion-input>
                               </ion-item>
                           </ion-col>
                       </ion-row>
                       <ion-row>
                           <ion-col size="12" >
                               <ion-button color="danger" class="btn-login" expand="block" shape="round" (click)="registerEmail()">
-                                  Crear Cuenta
+                                Criar Conta
                               </ion-button>
                           </ion-col>
                           <ion-col class="ion-text-center">

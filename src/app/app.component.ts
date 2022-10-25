@@ -88,9 +88,9 @@ export class AppComponent implements OnInit {
 
 
 
-  async goInfoApp() {
+  /* async goInfoApp() {
     this.router.navigateByUrl('app-information');
-  }
+  } */
 
   async goFunctioning() {
     this.router.navigateByUrl('functioning');

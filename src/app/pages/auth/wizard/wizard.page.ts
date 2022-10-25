@@ -50,19 +50,19 @@ export class WizardPage implements OnInit {
     this.genders = [
       {
         type: 1,
-        label: 'Mujer',
+        label: 'Mulher',
         isSelected: false,
         value: 'f'
       },
       {
         type: 2,
-        label: 'Hombre',
+        label: 'Home',
         isSelected: false,
         value: 'm'
       },
       {
         type: 3,
-        label: 'Otro',
+        label: 'Outro',
         isSelected: false,
         value: 'o'
       },
