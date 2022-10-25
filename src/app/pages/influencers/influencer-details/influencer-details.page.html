@@ -6,7 +6,7 @@
   <ion-grid>
     <ion-row>
       <ion-col offset="2" size="8">
-        <div class="title-program" style="font-size: 16px; margin-top: 10px;">CONOZCA <br> INFLUENCERS </div>
+        <div class="title-program" style="font-size: 16px; margin-top: 10px;">{{'Conheça ' | uppercase}}  <br> INFLUENCERS </div>
       </ion-col>
       <ion-col size="2">
 
@@ -48,14 +48,14 @@
           <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/weights-dumbells.svg">
           </ion-icon>
         </ion-button>
-        Workout
+        Treinos
       </ion-col>
       <ion-col size="3">
         <ion-button color="danger" class="btn-icon" (click)="goInfluencerNutrition(influencer?.id)">
           <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/nutrition.svg">
           </ion-icon>
         </ion-button>
-        Nutrición
+        Nutrição
       </ion-col>
       <ion-col size="3">
         <ion-button color="danger" class="btn-icon" (click)="goInfluencerAbs(influencer?.id)">
@@ -68,7 +68,7 @@
           <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/muscle.svg">
           </ion-icon>
         </ion-button>
-        Sobre Mi
+        Sobre mim
       </ion-col>
     </ion-row>
   </ion-grid>

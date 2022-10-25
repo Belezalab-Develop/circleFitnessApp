@@ -5,7 +5,7 @@
 <ion-content padding>
 
   <div class="title-program ion-padding">
-    CONOZCA <br>INFLUENCERS
+    {{'Conheça ' | uppercase}} <br> INFLUENCERS
   </div>
 
   <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;">
@@ -18,13 +18,13 @@
         </ion-col>
         <ion-col size="8">
           <ion-row>
-            <ion-col size="12" class="ion-text-center">
-              {{influencerData?.user.nick_name | uppercase }}
+            <ion-col size="12" >
+              <b>{{influencerData?.user.nick_name }}</b>
             </ion-col>
-            <ion-col size="12">
-              <p>Altura : {{influencerData?.height}} cm <br> </p>
-              <p>Peso: {{influencerData?.weight}}Kg <br></p>
-              <p> Grasa: {{influencerData?.fat}}%</p>
+            <ion-col size="12" >
+              <p style="text-align: left !important;">Altura : {{influencerData?.height}} cm <br> </p>
+              <p style="text-align: left !important;">Peso: {{influencerData?.weight}}Kg <br></p>
+              <p style="text-align: left !important;"> Grasa: {{influencerData?.fat}}%</p>
 
             </ion-col>
           </ion-row>
@@ -35,7 +35,7 @@
 
   <ion-row>
     <ion-col size="12">
-      <h4 class="subtitle">HIT Y ESTIRAMIENTO <br> {{influencerData?.user.nick_name | uppercase }}</h4>
+      <h4 class="subtitle">HIT E ALONGAMENTO <br> {{influencerData?.user.nick_name | uppercase }}</h4>
     </ion-col>
   </ion-row>
 
@@ -47,27 +47,27 @@
           <div *ngFor="let item of uniqueVideos; let i=index">
             <ion-row>
               <ion-col>
-                <ion-item style="margin-left: 1em;" lines="none" text-wrap>
-                  <ion-thumbnail slot="start" button (click)="openPreview(item.photo_url)">
+                <ion-item style="margin-left: 1em; margin-right: 1em;" lines="none" text-wrap>
+                  <!-- <ion-thumbnail slot="start" button (click)="openPreview(item.photo_url)">
                     <ion-img [src]="item.photo_url"></ion-img>
-                  </ion-thumbnail>
+                  </ion-thumbnail> -->
 
                   <ion-label text-wrap class="ion-text-justify" style="margin-right: 1em;">
                     <h3>{{ item.label }}</h3>
                     <p class="finisher-text">{{item.description}}</p>
 
-                    <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo(i)">
+                    <!-- <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo(i)">
                       ver video
                       <ion-icon slot="end" name="play-outline"></ion-icon>
-                    </ion-button>
+                    </ion-button> -->
                   </ion-label>
 
                 </ion-item>
-                <ion-item style="margin: 0 auto;" *ngIf="visibleIndex === i" >
+                <ion-item   >
                   <div class="img-more">
                     <ion-card class="video-card ">
                       <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-                      <video controls muted="true" playsinline looped preload="auto" class="explain-video"
+                      <video width="350px" height="300px" controls muted="true" playsinline looped preload="auto" class="explain-video"
                         poster="assets/imgs/hola.png">
                         <source [src]="item.ptr_video+ '#t=0.1'" type="video/mp4">
                       </video>

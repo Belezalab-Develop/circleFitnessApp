@@ -30,7 +30,7 @@
                    <ion-text *ngIf="nutritionProgram?.influencer_id === null" color="dark" style="margin-top: 3px;">
                       Circle Fitness
                   </ion-text>
-                  <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer" style="padding-top: 0.35 em;" >
+                  <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer" style="padding-top: 1em;" >
                       {{nutritionProgram?.influencer.user.nick_name  }}
                  </div>
               </div>
@@ -144,7 +144,7 @@
                               <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ recipe.label }}
                           </ion-col>
                           <ion-col size="12" class="no-padding">
-                              <span style="font-size: 14px; font-weight: 16px;" *ngIf="meal.supplements.length > 0">Suplementos</span>
+                              <span style="font-size: 14px; font-weight: 16px;" *ngIf="meal.supplements">Suplementos</span>
                           </ion-col>
                           <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
                               <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>

@@ -6,7 +6,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <div class="title-program">CONOZCA <br> INFLUENCERS </div>
+        <div class="title-program">{{'Conheça ' | uppercase}} <br> INFLUENCERS </div>
       </ion-col>
     </ion-row>
 
@@ -34,25 +34,23 @@
 
               </ion-col>
               <ion-col size="8">
-                <ion-row class="ion-align-items-center">
+                <ion-row  style="margin-right: 6px;">
                   <ion-col size="12">
                     <ion-row>
-                      <ion-col size="6" class="ion-text-center">
-                        SUS PROGRAMAS
+                      <ion-col size="12" class="ion-text-center">
+                        Os Programas
                       </ion-col>
-                      <ion-col size="6">
 
-                      </ion-col>
-                      <ion-col size="3" (click)="goInfluencerWorkout(faq?.id)">
+                      <ion-col size="6" (click)="goInfluencerWorkout(faq?.id)" class="ion-text-center">
                         <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
                       </ion-col>
                       <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                      <ion-col size="3" (click)="goInfluencerNutrition(faq?.id)" style="border-right: 1px solid #fff;">
+                      <ion-col size="6" (click)="goInfluencerNutrition(faq?.id)"  class="ion-text-center">
                         <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                       </ion-col>
-                      <ion-col size="3">
+                      <!-- <ion-col size="3">
                         <img style="margin-left: 7px;" class="icon-circle" src="/assets/imgs/icons/message.png" />
-                      </ion-col>
+                      </ion-col> -->
                     </ion-row>
                   </ion-col>
                   <!-- <ion-col size="4" (click)="goWorkoutList()" *ngIf="chat.user.personal_information?.is_workout_program_visible"> -->

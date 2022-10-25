@@ -34,8 +34,8 @@
           Circle Fitness
 
         </div>
-        <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer">
-          {{nutritionProgram?.influencer.user.nick_name | uppercase }}
+        <div *ngIf="nutritionProgram?.influencer_id !== null" class="username_influencer" style="padding-top: 1em ;">
+          {{nutritionProgram?.influencer.user.nick_name }}
         </div>
       </ion-col>
       <ion-col size="4">
@@ -94,7 +94,7 @@
                 <ion-icon color="danger" name="radio-button-on-outline"></ion-icon> {{ recipe.label }} <br>
               </ion-col>
               <ion-col size="12" class="no-padding">
-                <span style="font-size: 14px; font-weight: 16px;">Suplementos</span>
+                <span style="font-size: 14px; font-weight: 16px;" >Suplementos</span>
               </ion-col>
               <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
                 <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>

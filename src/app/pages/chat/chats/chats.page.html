@@ -18,10 +18,10 @@
   </ion-row>
   <ion-segment mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
     <ion-segment-button value="0" color="danger">
-      <ion-label>Cerca tuyo</ion-label>
+      <ion-label>PERTO DE VOCÊ</ion-label>
     </ion-segment-button>
     <ion-segment-button value="1" color="dark">
-      <ion-label>Ultimos Chat</ion-label>
+      <ion-label>ULTIMOS PAPOS</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -41,7 +41,7 @@
               <ion-col size="9" class="no-padding">
                 <ion-row>
                   <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
-                    {{user.name }} </ion-col>
+                     </ion-col>
                   <ion-col size="6" class="ion-text-end"> 4.6 Km </ion-col>
                   <ion-col size="4">
                     <span *ngIf="user.personal_information?.is_height_visible">
