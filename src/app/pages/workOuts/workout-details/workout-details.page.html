@@ -30,15 +30,15 @@
           Circle Fitness
 
         </div>
-        <div *ngIf="workout.influencer_id !== null" class="username_influencer">
-          {{workout?.influencer.user.nick_name | uppercase }}
+        <div *ngIf="workout.influencer_id !== null" class="username_influencer" style="padding: top 0.5em;">
+          {{workout?.influencer.user.nick_name }}
         </div>
       </ion-col>
       <ion-col offset="1" size="8">
         <ion-row class="no-padding no-margin" style="color: #ffffff; font-size: 14px;">
           <ion-col size="12">
             <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-              <ion-col class="no-padding" size="6">Objetivos</ion-col>
+              <ion-col class="no-padding" size="6"><b>Objetivos</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row *ngFor="let goal of workout.goals">
                   <ion-col class="no-padding" size="12"> {{ goal.label }} </ion-col>
@@ -46,7 +46,7 @@
               </ion-col>
             </ion-row>
             <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-              <ion-col class="no-padding" size="6">Divición de días</ion-col>
+              <ion-col class="no-padding" size="6"><b>Dias</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row>
                   <ion-col class="no-padding" size="12"> X {{ workout.days[0].sessions.length }} </ion-col>
@@ -54,7 +54,7 @@
               </ion-col>
             </ion-row>
             <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-              <ion-col class="no-padding" size="6">Nivel</ion-col>
+              <ion-col class="no-padding" size="6"><b>Nivel</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row *ngFor="let level of workout.levels">
                   <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
@@ -70,18 +70,18 @@
       <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === false">
         <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
           <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
-          {{'Escoger este programa' | translate | uppercase}}
+          {{'Escolher Programa' | translate | uppercase}}
         </ion-button>
         <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
           <ion-icon name="heart" class="ion-padding-end"></ion-icon>
-          {{'Escoger este programa' | translate | uppercase}}
+          {{'Escolher Programa' | translate | uppercase}}
         </ion-button>
       </ion-col>
       <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === true">
         <ion-button *ngIf="subscribe === true" expand="full" color="danger"
           (click)="selectedWorkoutRoutine(routines[0])">
           <ion-icon name="play" class="ion-padding-end"></ion-icon>
-          {{'Iniciar Workout' | translate | uppercase}}
+          {{'Iniciar Treinamento' | translate | uppercase}}
         </ion-button>
       </ion-col>
     </ion-row>
@@ -89,7 +89,7 @@
     <ion-row style="margin-top: -15px;">
       <ion-col size="12">
         <ion-text color="dark">
-          <h5> {{ 'Descripción del programa' | translate }} </h5>
+          <h5> {{ 'Descrição do Treinamento' | translate }} </h5>
 
           <div *ngIf="!showMore">
             {{trimString(workout.description,190)}}
@@ -97,8 +97,8 @@
           <div *ngIf="showMore">
             <p [innerHTML]="modfText"></p>
           </div>
-          <a style="color: #d20303; font-weight: bold; float: right;" (click)="showMore = !showMore">Mostrar <span
-              [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
+          <a style="color: #d20303; font-weight: bold; float: right;" (click)="showMore = !showMore">Ver <span
+              [innerHtml]="showMore ? 'menos' : 'mais'"> </span></a>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -113,7 +113,7 @@
           </video>
 
         </ion-card>
-        <a style="color: #d20303; font-weight: bold; float: right;padding-top: 5px;">Ver Video</a>
+        <!-- <a style="color: #d20303; font-weight: bold; float: right;padding-top: 5px;">Ver Video</a> -->
 
       </ion-col>
     </ion-row>

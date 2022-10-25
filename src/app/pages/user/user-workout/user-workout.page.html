@@ -30,8 +30,8 @@
               <div *ngIf="exerciseProgram?.influencer_id == null" class="username">
                   Circle Fitness
               </div>
-              <div *ngIf="exerciseProgram?.influencer_id != null" class="username_influencer">
-                  {{exerciseProgram?.influencer.user.nick_name | uppercase }}
+              <div *ngIf="exerciseProgram?.influencer_id != null" class="username_influencer" style="padding-top: 0.5em ;">
+                  {{exerciseProgram?.influencer.user.nick_name  }}
              </div>
           </ion-col>
 
@@ -39,7 +39,7 @@
               <ion-row class="no-padding no-margin" style="color: #ffffff; font-size: 14px">
                   <ion-col size="12">
                       <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Objetivos</ion-col>
+                          <ion-col class="no-padding" size="6"><b>Objetivos</b></ion-col>
                           <ion-col class="no-padding" size="6">
                               <ion-row *ngFor="let goal of goals">
                                   <ion-col class="no-padding" size="12"> {{ goal.label }} </ion-col>
@@ -47,7 +47,7 @@
                           </ion-col>
                       </ion-row>
                       <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Divición de días</ion-col>
+                          <ion-col class="no-padding" size="6"><b>Dias</b></ion-col>
                           <ion-col class="no-padding" size="6">
                               <ion-row>
                                   <ion-col class="no-padding" size="12"> X{{routines.length}} </ion-col>
@@ -55,7 +55,7 @@
                           </ion-col>
                       </ion-row>
                       <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-                          <ion-col class="no-padding" size="6">Nivel</ion-col>
+                          <ion-col class="no-padding" size="6"><b>Nivel</b></ion-col>
                           <ion-col class="no-padding" size="6">
                               <ion-row *ngFor="let level of levels">
                                   <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
@@ -72,21 +72,21 @@
               <ion-button *ngIf="subscribe === true" expand="full" color="danger"
                   (click)="selectedWorkoutRoutineOutside(exerciseProgram)">
                   <ion-icon name="play" class="ion-padding-end"></ion-icon>
-                  {{'Iniciar Workout' | translate | uppercase}}
+                  {{'Iniciar Treinamento' | translate | uppercase}}
               </ion-button>
           </ion-col>
       </ion-row>
       <ion-row style="margin-top: -15px">
           <ion-col size="12">
               <ion-text color="dark">
-                  <h5>{{ 'Descripción del programa' | translate }}</h5>
+                  <h5>{{ 'Descrição do Treinamento' | translate }}</h5>
 
                   <div *ngIf="showMore === false" maxlength="190">
                       {{ exerciseProgram.description + "" | truncate:190}}
                   </div>
                   <div *ngIf="showMore === true">{{exerciseProgram.description}}</div>
-                  <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostrar
-                      <span [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
+                  <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Ver
+                      <span [innerHtml]="showMore ? 'menos' : 'mais'"> </span></a>
               </ion-text>
           </ion-col>
       </ion-row>

@@ -136,7 +136,7 @@ export class WorkoutDetailsPage implements OnInit {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: 'Atención',
-      message: `Al dar continuar, va definir su nuevo programa de entrenamiento "${this.workout.label}"`,
+      message: `Seu novo programa de treinamento será: "${this.workout.label}"`,
       buttons: [
         {
           text: 'Cancelar',
@@ -147,7 +147,7 @@ export class WorkoutDetailsPage implements OnInit {
 
           }
         }, {
-          text: 'Aceptar',
+          text: 'Aceitar',
           handler: () => {
             console.log('Confirm Okay');
 
@@ -172,7 +172,7 @@ export class WorkoutDetailsPage implements OnInit {
   async adMessage() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-ad-class',
-      message: 'Encuentra tu nuevo programa de entrenamiento',
+      message: 'Ache aqui seu novo programa',
       buttons: [
         {
           text: 'Aquí ',

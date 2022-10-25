@@ -105,8 +105,8 @@ export class UserWorkoutDetailsPage implements OnInit {
   async finish() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: '¿Finalizar Workout?',
-      message: '¿Has completado todos los ejercicios del workout?',
+      header: 'Pronto?',
+      message: 'Treino feito',
       buttons: [
         {
           text: 'Cancelar',
@@ -117,7 +117,7 @@ export class UserWorkoutDetailsPage implements OnInit {
           },
         },
         {
-          text: 'Aceptar',
+          text: 'Aceitar',
           handler: () => {
             console.log('Confirm Okay');
             this.isStarted = false;

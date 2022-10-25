@@ -20,7 +20,7 @@
 
         </div>
         <div *ngIf="influencer != null" class="username_influencer ion-text-center">
-          {{influencer?.user.nick_name | uppercase }}
+          {{influencer?.user.nick_name  }}
         </div>
       </div>
     </ion-col>
@@ -32,7 +32,7 @@
   <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
     <ion-col class="no-padding" size="12">
       <div class="triangle">
-        <h1>Descripción</h1>
+        <h1>Como fazer o exercício?</h1>
       </div>
     </ion-col>
   </ion-row>
@@ -47,7 +47,7 @@
   <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
     <ion-col class="no-padding" size="12">
       <div class="triangle">
-        <h1>Equipamiento</h1>
+        <h1>Equipamentos utilizados</h1>
       </div>
     </ion-col>
   </ion-row>
@@ -70,7 +70,7 @@
   <ion-row class="no-padding" style="width: 100%; margin-top: 25px;">
     <ion-col class="no-padding" size="12">
       <div class="triangle">
-        <h1>Comó hacerlo?</h1>
+        <h1>Que ver um vídeo?</h1>
       </div>
     </ion-col>
   </ion-row>
@@ -80,7 +80,7 @@
       <div class="img-more">
         <ion-card class="video-card ">
           <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-          <video controls muted="true" playsinline looped preload="auto"
+          <video width="400px" height="350px" controls muted="true" playsinline looped preload="auto"
             *ngIf="exercise?.media[2].mime_type === 'video/mp4'" class="explain-video"
             poster="assets/imgs/hola.png">
             <source [src]="custom_url + exercise?.media[2].id+ '#t=0.1'" type="video/mp4">
