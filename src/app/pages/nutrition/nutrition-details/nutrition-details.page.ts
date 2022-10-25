@@ -108,7 +108,7 @@ export class NutritionDetailsPage implements OnInit {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: 'Atención',
-      message: `Al dar continuar, va definir su nuevo programa de nutrición ${this.nutritionProgram.label}`,
+      message: `Seu novo Plano Nutricional será: ${this.nutritionProgram.label}`,
       buttons: [
         {
           text: 'Cancelar',
@@ -119,7 +119,7 @@ export class NutritionDetailsPage implements OnInit {
 
           }
         }, {
-          text: 'Aceptar',
+          text: 'Aceitar',
           handler: () => {
             console.log('Confirm Okay');
             // this.adMessage();
@@ -143,7 +143,7 @@ export class NutritionDetailsPage implements OnInit {
   async adMessage() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-nutrition-class',
-      message: 'Encuentra tu nuevo programa de nutrición',
+      message: 'Ache aqui seu novo Plano Nutricional',
       buttons: [
         {
           text: 'Aquí ',
