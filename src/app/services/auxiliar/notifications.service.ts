@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { AvatarService } from './avatar.service';
 import { CachingService } from './caching.service';
 import { FirebaseService } from './firebase.service';
@@ -17,6 +18,8 @@ import { LocalNotifications } from '@capacitor/local-notifications';
   providedIn: 'root'
 })
 export class NotificationsService {
+
+  public badge$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private platform: Platform,
@@ -65,6 +68,7 @@ export class NotificationsService {
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotificationSchema) => {
        // alert('Push received: ' + JSON.stringify(notification));
+       this.badge$.next(true);
         LocalNotifications.schedule({
           notifications: [
             {

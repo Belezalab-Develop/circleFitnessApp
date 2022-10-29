@@ -14,6 +14,8 @@ exports.newMessage = functions.firestore
         console.log("Paso al envio del mensaje--->");
         const path = "/users/" + mensaje.toUid;
 
+        const desde =mensaje.fromUid;
+
         const docInfo = await firestore.doc(path).get();
         const dataUser = docInfo.data() as any;
         const token = dataUser.pushToken.token;
@@ -22,14 +24,15 @@ exports.newMessage = functions.firestore
 
         const dataFcm = {
           enlace: "/chats",
+          custom: desde,
         };
 
         const notification: INotification = {
           data: dataFcm,
           tokens: registrationTokens,
           notification: {
-            title: "Nuevo mensaje",
-            body: "Tienes un nuevo mensaje ",
+            title: "Nuevo mensaje de:  " + dataUser.name,
+            body: mensaje.msg,
           },
         };
 

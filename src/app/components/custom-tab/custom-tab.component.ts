@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { NotificationsService } from 'src/app/services/auxiliar/notifications.service';
 
 @Component({
   selector: 'app-custom-tab',
@@ -10,12 +11,18 @@ import { NavController } from '@ionic/angular';
 export class CustomTabComponent implements OnInit {
   tabSelected = 0;
 
+
   constructor(
     private navCtrl: NavController,
     private router: Router,
-  ) { }
+    public notiService: NotificationsService
+  ) {
+    this.notiService.badge$.subscribe();
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+   }
 
   goToExercise() {
     this.router.navigateByUrl('user-workout', {replaceUrl:true});
@@ -27,6 +34,7 @@ export class CustomTabComponent implements OnInit {
 
   goToChat() {
     this.router.navigateByUrl('chats', {replaceUrl:true});
+    this.notiService.badge$.next(false);
   }
 
 

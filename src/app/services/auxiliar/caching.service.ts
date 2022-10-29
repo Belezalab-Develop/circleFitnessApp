@@ -5,7 +5,7 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 
 // Expire time in seconds
-const TTL = 60 * 300;
+const TTL = 60 * 30000;
 // Key to identify only cached API data
 const CACHE_KEY = 'circlefitness';
 
