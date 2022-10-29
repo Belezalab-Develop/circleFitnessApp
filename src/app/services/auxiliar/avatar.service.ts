@@ -1,3 +1,4 @@
+import { FirebaseService } from './firebase.service';
 import { Observable } from 'rxjs';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -43,6 +44,7 @@ export class AvatarService {
 
   userUid = null;
   currentUser = null;
+  fgh = null;
 
 
   constructor(
@@ -50,7 +52,8 @@ export class AvatarService {
     private firestore: Firestore,
     private afs: AngularFirestore,
     private storage: Storage,
-    private serviceStorage: CachingService
+    private serviceStorage: CachingService,
+    private firebaseService: FirebaseService
   ) { }
 
   getUsers(): Observable<User[]> {
@@ -67,6 +70,8 @@ export class AvatarService {
 
 
   }
+
+
   getUserChatUsers(uid) {
 
     const userDocRef = collection(this.firestore, `chats`);
@@ -94,6 +99,33 @@ export class AvatarService {
       return null;
     }
   }
+
+  async updateRecivedMessage(uid, badge) {
+
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+        badge
+      });
+      return true;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async updatePrincipalBadge(uid, principalBadge) {
+
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+        principalBadge
+      });
+      return true;
+    } catch (e) {
+      return null;
+    }
+  }
+
 
   async updateToken(uid, pushToken) {
 

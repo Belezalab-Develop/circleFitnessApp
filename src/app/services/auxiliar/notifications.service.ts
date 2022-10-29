@@ -21,6 +21,7 @@ export class NotificationsService {
 
   public badge$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+
   constructor(
     private platform: Platform,
     private router: Router,

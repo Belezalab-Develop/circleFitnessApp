@@ -44,6 +44,7 @@ export class ChatPage implements OnInit {
     private afs: AngularFirestore,
     private storage: Storage,
     private loadingController: LoadingController,
+    private avatarService: AvatarService,
 
 
   ) {
@@ -114,6 +115,11 @@ export class ChatPage implements OnInit {
         this.newMsg = '';
         this.content.scrollToBottom();
       });
+
+      const badge = 1;
+
+      this.avatarService.updateRecivedMessage(this.uid, badge);
+      this.avatarService.updatePrincipalBadge(this.oUid, badge);
 
   }
 

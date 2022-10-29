@@ -80,9 +80,9 @@ export class ChatsPage implements OnInit {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
-       const k = this.avatarService.getEspecificChats(this.userUid).subscribe(algo =>{
+      /*  const k = this.avatarService.getEspecificChats(this.userUid).subscribe(algo =>{
         console.log('esto es algo ', algo);
-       });
+       }); */
         this.getUsers();
         loading.dismiss();
       });
@@ -95,7 +95,7 @@ export class ChatsPage implements OnInit {
   async getUsers() {
     this.avatarService.getUsers().subscribe(res => {
       this.users = res.filter(item => item.id !== this.userUid);
-      console.log(this.users);
+
     });
   }
 
@@ -116,10 +116,14 @@ export class ChatsPage implements OnInit {
   }
 
   goChat(name, oUdi) {
+    const badge = 0;
+
+    this.avatarService.updateRecivedMessage(oUdi, badge);
     sessionStorage.setItem('uid', this.userUid);
     sessionStorage.setItem('name', name);
     sessionStorage.setItem('oUid', oUdi);
     this.router.navigateByUrl('/chat');
+
 
   }
 

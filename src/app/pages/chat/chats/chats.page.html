@@ -34,7 +34,6 @@
               <ion-col size="3">
                 <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
                   <img [src]="user.imageUrl" alt="" style="width: 100%; !important"/>
-                  <!-- <ion-badge size="large" color="danger" class="messages">8</ion-badge> -->
                 </ion-avatar>
                 {{user.name}}
               </ion-col>
@@ -71,6 +70,7 @@
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
                         <ion-col size="4" (click)="goChat(user.name, user.uid)">
+                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1">!</ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
                       </ion-row>

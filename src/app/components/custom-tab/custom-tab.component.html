@@ -25,7 +25,7 @@
       style="border-left: 2px solid white;"
       class="tab-buttonc has-title has-icon" (click)=" goToChat()"
       id="tab-t0-2">
-       <ion-badge size="large" color="danger" class="messages" *ngIf="notiService.badge">!</ion-badge>
+       <ion-badge size="large" color="danger" class="messages" *ngIf="profile?.principalBadge === 1">!</ion-badge>
       <ion-icon src="../../../assets/imgs/icons/whistle.svg"></ion-icon>
       <ion-label class="tab-button-text">{{'Chat'| translate| uppercase}}</ion-label>
   </ion-tab-button>
