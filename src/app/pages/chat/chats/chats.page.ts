@@ -15,7 +15,7 @@ import {
   Storage,
   uploadString,
 } from '@angular/fire/storage';
-import { Auth } from '@angular/fire/auth';
+import { Auth, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-chats',
@@ -34,9 +34,11 @@ export class ChatsPage implements OnInit {
   userUid: any;
   testId: string;
 
-  lastChats: any= [];
-
+  lastChats: any = [];
+  geoUsers: any = [];
   profile = null;
+
+
 
 
   constructor(
@@ -53,6 +55,7 @@ export class ChatsPage implements OnInit {
   ) {
     this.getInitialLogicData();
     this.titleService.setTitle('All Chats');
+    this.getLocation();
     //this.presentLoadingDefault();
   }
 
@@ -61,11 +64,11 @@ export class ChatsPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('This profile init:::', this.profile);
-    this.getLocation();
+
+
   }
   ionViewDidEnter() {
-    console.log('This profile Enter:::', this.profile);
+
 
   }
 
@@ -82,10 +85,10 @@ export class ChatsPage implements OnInit {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
-         this.avatarService.getEspecificChats(this.userUid).subscribe(response =>{
+        this.avatarService.getEspecificChats(this.userUid).subscribe(response => {
           this.lastChats = response;
-        console.log('esto es algo ', this.lastChats);
-       });
+
+        });
         this.getUsers();
         loading.dismiss();
       });
@@ -170,11 +173,26 @@ export class ChatsPage implements OnInit {
           this.longitude = resp.coords.longitude;
           const result = this.avatarService.updatePosition(this.userUid, this.latitude, this.longitude);
 
+          this.users.map((us) => {
+
+             us.distance = this.calculateDistance(this.longitude, us.long, this.latitude, us.lat);
+
+            this.geoUsers.push(us);
+          });
+          console.log('users luego del mapGeo--->',this.geoUsers);
         }
       })
       .catch((error) => {
         console.log('Error getting location', error);
       });
+  }
+
+  calculateDistance(lon1, lon2, lat1, lat2) {
+    const p = 0.017453292519943295;
+    const c = Math.cos;
+    const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((lon1 - lon2) * p))) / 2;
+    const dis = (12742 * Math.asin(Math.sqrt(a)));
+    return Math.trunc(dis);
   }
 
   async presentLoadingDefault() {

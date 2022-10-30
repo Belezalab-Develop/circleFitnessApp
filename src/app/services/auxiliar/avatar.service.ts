@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CachingService } from './caching.service';
 import { Injectable } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
 
 import { Auth } from '@angular/fire/auth';
 import {
@@ -36,6 +37,7 @@ export interface User {
   imageUrl?: string;
   lat?: string;
   long?: string;
+  distance?: number;
 
 }
 
@@ -57,7 +59,7 @@ export class AvatarService {
     private serviceStorage: CachingService,
     private firebaseService: FirebaseService
   ) { }
-
+    //TODO::incluir el calculo de la distancia aqui
   getUsers(): Observable<User[]> {
     const userRef = collection(this.firestore, 'users');
     return collectionData(userRef, { idField: 'id' }) as Observable<User[]>;
@@ -90,8 +92,8 @@ export class AvatarService {
 
     return collectionData(userChatRef).pipe(
       map(
-        response => response.
-          sort((a, b) =>
+        response => response
+          .sort((a, b) =>
             new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000).getTime() -
             new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000).getTime())));
   }
@@ -210,6 +212,10 @@ export class AvatarService {
       return null;
     }
   }
+
+
+
+
 
 
 

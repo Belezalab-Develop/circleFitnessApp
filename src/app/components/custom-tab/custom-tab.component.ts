@@ -41,7 +41,6 @@ export class CustomTabComponent implements OnInit {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
-        console.log('perfil en el init-->', this.profile);
       });
 
     });
@@ -57,8 +56,6 @@ export class CustomTabComponent implements OnInit {
   async getUser() {
     this.avatarService.getUserProfile(this.userUid).subscribe(res => {
       this.profile = res;
-
-      console.log('el perfil inside', this.profile);
 
     });
   }
