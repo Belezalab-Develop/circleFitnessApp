@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import { map } from 'rxjs/operators';
 import { FirebaseService } from './firebase.service';
 import { Observable } from 'rxjs';
 
@@ -62,6 +64,8 @@ export class AvatarService {
   }
 
 
+
+
   getUserProfile(uid): Observable<User> {
 
     const userDocRef = doc(this.firestore, `users/${uid}`);
@@ -82,9 +86,14 @@ export class AvatarService {
   }
 
   getEspecificChats(uid) {
-    const userChatRef = collection(this.firestore, `chats/${uid}/participantes/`);
+    const userChatRef = collection(this.firestore, `lastChats/${uid}/participantes/`);
 
-    return collectionData(userChatRef);
+    return collectionData(userChatRef).pipe(
+      map(
+        response => response.
+          sort((a, b) =>
+            new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000).getTime() -
+            new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000).getTime())));
   }
 
   async updateName(uid, name) {
@@ -140,6 +149,21 @@ export class AvatarService {
     }
   }
 
+  async setParticipants(uid, ouid, time, img, toUid, toName) {
+
+    try {
+      const userDocRef = doc(this.firestore, `lastChats/${uid}/participantes/${ouid}/`);
+      await setDoc(userDocRef, {
+        time,
+        img,
+        toUid,
+        toName
+      });
+      return true;
+    } catch (e) {
+      return e;
+    }
+  }
 
   async updatePosition(uid, lat, long) {
 
@@ -155,11 +179,11 @@ export class AvatarService {
     }
   }
 
-  async update(uid,  data){
+  async update(uid, data) {
     try {
       const userDocRef = doc(this.firestore, `users/${uid}`);
       await updateDoc(userDocRef, {
-      data
+        data
       });
       return true;
 

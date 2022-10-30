@@ -1,6 +1,15 @@
 <ion-header>
   <!--  TODO:AJUSTAR EL HEADER CON LA IMAGEN Y EL NOMBRE DEL OTRO USUARIO -->
   <app-nav-header></app-nav-header>
+  <ion-item lines="none" class="item-trns" >
+    <ion-avatar slot="start">
+      <img [src]="imagenUrl" alt="" style="width: 100%; !important"/>
+    </ion-avatar>
+    <ion-label>
+      {{name}}
+    </ion-label>
+  </ion-item>
+
 </ion-header>
 
 <ion-content class="ion-padding">
@@ -13,10 +22,9 @@
           <ion-label class="ion-text-left ion-text-wrap " color="dark">
 
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.5rem;">
-            <h2 color="dark"><b>{{name}}</b></h2>
             <p>{{chat.msg}}</p>
             <div *ngIf="chat.time">
-              <p>{{formatDate(chat.time)}}</p>
+              <small><i>{{formatDate(chat.time)}}</i></small>
             </div>
           </ion-label>
 
@@ -32,7 +40,7 @@
             <h2 color="dark"><b>você</b></h2>
             <p class="ion-text-left">{{chat.msg}}</p>
             <div *ngIf="chat.time">
-              <p>{{formatDate(chat.time)}}</p>
+              <small><i>{{formatDate(chat.time)}}</i></small>
             </div>
 
           </ion-label>

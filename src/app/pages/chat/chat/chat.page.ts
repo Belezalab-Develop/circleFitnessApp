@@ -37,6 +37,7 @@ export class ChatPage implements OnInit {
   name;
   oUid;
   uid;
+  imagenUrl;
 
   chats = [];
 
@@ -50,6 +51,7 @@ export class ChatPage implements OnInit {
   ) {
     this.name = sessionStorage.getItem('name');
     this.oUid = sessionStorage.getItem('oUid');
+    this.imagenUrl = sessionStorage.getItem('imagen');
     this.uid = sessionStorage.getItem('uid');
 
     console.log('tiempo', serverTimestamp());
@@ -116,6 +118,10 @@ export class ChatPage implements OnInit {
         this.content.scrollToBottom();
       });
 
+
+      this.avatarService.setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name ).then(res => {
+        console.log('respuesta respuesta--->', res);
+      });
       const badge = 1;
 
       this.avatarService.updateRecivedMessage(this.uid, badge);

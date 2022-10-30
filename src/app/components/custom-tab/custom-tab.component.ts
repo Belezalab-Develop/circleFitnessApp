@@ -13,7 +13,7 @@ import { NotificationsService } from 'src/app/services/auxiliar/notifications.se
 export class CustomTabComponent implements OnInit {
   tabSelected = 0;
   userUid: any;
-  profile= null;
+  profile = null;
 
   constructor(
     private navCtrl: NavController,
@@ -34,14 +34,20 @@ export class CustomTabComponent implements OnInit {
 
     });
 
-    console.log('el perfil outside', this.profile);
   }
 
   ngOnInit() {
+    this.storageService.getStorage('user_uid').then(res => {
+      this.userUid = res;
+      this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
+        this.profile = data;
+        console.log('perfil en el init-->', this.profile);
+      });
 
+    });
   }
   getUserNotiData() {
-     this.storageService.getStorage('user_uid').then(res => {
+    this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
 
       this.getUser();
@@ -66,8 +72,13 @@ export class CustomTabComponent implements OnInit {
 
   goToChat() {
     const badge = 0;
-    this.avatarService.updatePrincipalBadge(this.profile.uid, badge);
-    this.router.navigateByUrl('chats', { replaceUrl: true });
+    this.storageService.getStorage('user_uid').then(res => {
+      this.userUid = res;
+      this.avatarService.updatePrincipalBadge(this.userUid, badge);
+      this.router.navigateByUrl('chats', { replaceUrl: true });
+    });
+
+
 
   }
 

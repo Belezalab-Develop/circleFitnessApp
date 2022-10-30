@@ -69,7 +69,7 @@
                         <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
-                        <ion-col size="4" (click)="goChat(user.name, user.uid)">
+                        <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl)">
                           <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1">!</ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
@@ -86,20 +86,19 @@
     <ion-slide>
       <ion-content style="height: 100%">
         <ion-row>
-          <ion-col size="12" class="item-row" *ngFor="let user of users">
+          <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
             <ion-row class="ion-align-items-start">
               <ion-col size="3">
                 <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
-                  <img [src]="user.avatar" alt="" />
-                  <!-- <ion-badge size="large" color="danger" class="messages">8</ion-badge> -->
+                  <img [src]="user.img" alt="user.name" style="width: 100%; !important"/>
                 </ion-avatar>
-                Martin Sanchez
+                {{user.toName}}
               </ion-col>
               <ion-col size="9" class="no-padding">
                 <ion-row>
                   <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
                     {{user.first_name }} </ion-col>
-                  <ion-col size="6" class="ion-text-end"> 4.6 Km </ion-col>
+                  <ion-col size="6" class="ion-text-end"> </ion-col>
                   <ion-col size="4">
                     <span *ngIf="user.personal_information?.is_height_visible">
                       Altura : {{ user.personal_information?.height }} cm<br />
@@ -112,17 +111,7 @@
                     </span>
                   </ion-col>
                   <ion-col size="8">
-                    <!-- <ion-row>
-                                          <ion-col size="4" (click)="seePlans()">
-                                              <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
-                                          </ion-col>
-                                          <ion-col size="4" (click)="seePlans()">
-                                              <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
-                                          </ion-col>
-                                          <ion-col size="4" (click)="goChat()">
-                                              <img class="icon-circle" src="/assets/imgs/icons/message.png" />
-                                          </ion-col>
-                                      </ion-row> -->
+
                     <ion-col size="12">
                       <ion-row>
                         <ion-col size="8" class="ion-text-center">
@@ -138,7 +127,7 @@
                         <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
-                        <ion-col size="4" (click)="goChat()">
+                        <ion-col size="4" (click)="goChat(user.toName, user.toUid, user.img)">
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
                       </ion-row>
