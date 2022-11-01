@@ -1,3 +1,7 @@
+import { WorkoutListParams } from 'src/app/models/workoutlistparams';
+import { ApiNutritionService } from './../../../services/nutrition/api-nutrition.service';
+import { ApiWorkoutsService } from './../../../services/workouts/api-workouts.service';
+import { UserService } from './../../../services/user.service';
 import { Title } from '@angular/platform-browser';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AvatarService, User } from './../../../services/auxiliar/avatar.service';
@@ -39,6 +43,10 @@ export class ChatsPage implements OnInit {
   geoUsers: any = [];
   profile = null;
 
+  espUser;
+  nutritionProgram;
+  exerciseProgram;
+
 
 
 
@@ -51,6 +59,9 @@ export class ChatsPage implements OnInit {
     private loadingController: LoadingController,
     private afs: AngularFirestore,
     private titleService: Title,
+    private userService: UserService,
+    private workOutService: ApiWorkoutsService,
+    private nutritionService: ApiNutritionService
 
 
   ) {
@@ -98,7 +109,7 @@ export class ChatsPage implements OnInit {
   async getProfile() {
     this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
       this.profile = data;
-      console.log('el perfil->>', this.profile );
+      console.log('el perfil->>', this.profile);
     });
   }
 
@@ -117,18 +128,56 @@ export class ChatsPage implements OnInit {
     this.segment = await this.slider.getActiveIndex();
   }
 
-  openNutrition() {
+  async openEspecificNutrition(email) {
+
+    this.userService.getIndividualUser(email).subscribe(async (data) => {
+      this.espUser = data[0];
+      if (this.espUser) {
+
+        this.nutritionService.individual(this.espUser.customer.nutrition_program.nutrition_program_id).subscribe(async (res) => {
+          const nutritionProgram = res[0];
+          await this.router.navigateByUrl('nutrition-details', {
+            state: { showMoreOptions: false, nutritionProgram },
+          });
+        });
+
+
+      }
+    });
+
+  }
+
+  openEspecificWorkout(email) {
+
+    this.userService.getIndividualUser(email).subscribe((data) => {
+      this.espUser = data[0];
+      if (this.espUser) {
+        this.workOutService.individual(this.espUser.customer.exercise_program.exercise_program_id).subscribe(async (resp) => {
+          const workout = resp[0];
+
+          const params = new WorkoutListParams();
+          params.ShowSubList = true;
+          params.ShowLocation = false;
+
+          await this.router.navigate(['/workout-details'], {
+            queryParams: { params, workout },
+          });
+        });
+      }
+    });
 
   }
 
   goDetail(email: string, photo_url: string) {
-    this.router.navigateByUrl('/profile', {replaceUrl: true, state: {
-      email,
-      photo_url
-    }});
+    this.router.navigateByUrl('/profile', {
+      replaceUrl: true, state: {
+        email,
+        photo_url
+      }
+    });
   }
 
-  goChat(name, oUdi, imageUrl) {
+  goChat(name, oUdi, imageUrl, toEmail) {
     const badge = 0;
     this.avatarService.updateRecivedMessage(oUdi, badge);
     sessionStorage.setItem('uid', this.userUid);
@@ -136,14 +185,15 @@ export class ChatsPage implements OnInit {
     sessionStorage.setItem('fromName', this.profile.name);
     sessionStorage.setItem('imagen', imageUrl);
     sessionStorage.setItem('oUid', oUdi);
-    this.router.navigateByUrl('/chat', {replaceUrl: true});
+    sessionStorage.setItem('toEmail', toEmail);
+    this.router.navigateByUrl('/chat', { replaceUrl: true });
 
   }
 
-  goSpecificChat(name, oUdi, imageUrl, messageSent, espToUid) {
+  goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail) {
     const badge = 0;
 
-    if (messageSent === 1 ) {
+    if (messageSent === 1) {
       this.avatarService.updateSpecificMessajeSent(this.userUid, oUdi, badge);
     }
 
@@ -152,7 +202,8 @@ export class ChatsPage implements OnInit {
     sessionStorage.setItem('fromName', this.profile.name);
     sessionStorage.setItem('imagen', imageUrl);
     sessionStorage.setItem('oUid', oUdi);
-    this.router.navigateByUrl('/chat', {replaceUrl: true});
+    sessionStorage.setItem('toEmail', toEmail);
+    this.router.navigateByUrl('/chat', { replaceUrl: true });
 
 
   }

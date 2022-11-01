@@ -175,7 +175,7 @@ export class AvatarService {
     }
   }
 
-  async setParticipants(uid, ouid, time, img, toUid, toName, messageSent, fromName) {
+  async setParticipants(uid, ouid, time, img, toUid, toName, messageSent, fromName, toEmail) {
 
     try {
       const userDocRef = doc(this.firestore, `lastChats/${uid}/participantes/${ouid}/`);
@@ -186,7 +186,8 @@ export class AvatarService {
         toName,
         messageSent,
         fromName,
-        fromUid: uid
+        fromUid: uid,
+        toEmail
       });
       return true;
     } catch (e) {

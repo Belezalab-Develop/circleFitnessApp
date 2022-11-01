@@ -62,11 +62,11 @@
                         <ion-col size="4">
 
                         </ion-col>
-                        <ion-col size="4" (click)="seePlans()">
+                        <ion-col size="4" (click)="openEspecificWorkout(user.email)">
                           <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
                         </ion-col>
                         <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                        <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
+                        <ion-col size="4" (click)="openEspecificNutrition(user.email)" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
                         <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl)">
@@ -89,7 +89,7 @@
           <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
             <ion-row class="ion-align-items-start">
               <ion-col size="3">
-                <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
+                <ion-avatar (click)="goDetail(user.toEmail, user.img)" style="margin-bottom: 8px;">
                   <img [src]="user.img" alt="user.name" style="width: 100%; !important"/>
                 </ion-avatar>
                 {{user.toName}}
@@ -120,11 +120,11 @@
                         <ion-col size="4">
 
                         </ion-col>
-                        <ion-col size="4" (click)="seePlans()">
+                        <ion-col size="4" (click)="openEspecificWorkout(user.toEmail)">
                           <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
                         </ion-col>
                         <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                        <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
+                        <ion-col size="4" (click)="openEspecificNutrition(user.toEmail)" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
                         <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toUid)">

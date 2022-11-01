@@ -39,6 +39,7 @@ export class ChatPage implements OnInit {
   uid;
   imagenUrl;
   fromName;
+  toEmail;
 
   chats = [];
 
@@ -55,11 +56,7 @@ export class ChatPage implements OnInit {
     this.imagenUrl = sessionStorage.getItem('imagen');
     this.uid = sessionStorage.getItem('uid');
     this.fromName = sessionStorage.getItem('fromName');
-
-
-    console.log('tiempo', serverTimestamp());
-
-
+    this.toEmail = sessionStorage.getItem('toEmail');
   }
 
   ngOnInit() {
@@ -126,7 +123,7 @@ export class ChatPage implements OnInit {
       const messageSent = 1;
       const messageStand = 0;
       this.avatarService.
-      setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageStand, this.fromName )
+      setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageStand, this.fromName, this.toEmail )
       .then(res => {
         console.log('respuesta respuesta--->', res);
       });
