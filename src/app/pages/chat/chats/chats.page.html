@@ -127,7 +127,8 @@
                         <ion-col size="4" (click)="seePlans()" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
-                        <ion-col size="4" (click)="goChat(user.toName, user.toUid, user.img)">
+                        <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toUid)">
+                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 ">!</ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
                       </ion-row>

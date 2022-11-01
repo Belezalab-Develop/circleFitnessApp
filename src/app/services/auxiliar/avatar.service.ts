@@ -31,7 +31,7 @@ import { Photo } from '@capacitor/camera';
 
 export interface User {
   uid: string;
-  id?: string;
+  id: string;
   name?: string;
   email: string;
   imageUrl?: string;
@@ -49,7 +49,8 @@ export class AvatarService {
   userUid = null;
   currentUser = null;
   fgh = null;
-
+  lat = null;
+  lon = null;
 
   constructor(
     private auth: Auth,
@@ -58,14 +59,37 @@ export class AvatarService {
     private storage: Storage,
     private serviceStorage: CachingService,
     private firebaseService: FirebaseService
-  ) { }
-    //TODO::incluir el calculo de la distancia aqui
+  ) {
+    this.getLocation();
+  }
+  //TODO::incluir el calculo de la distancia aqui
   getUsers(): Observable<User[]> {
     const userRef = collection(this.firestore, 'users');
     return collectionData(userRef, { idField: 'id' }) as Observable<User[]>;
   }
 
+  async getLocation() {
+    await Geolocation
+      .getCurrentPosition()
+      .then((resp) => {
+        if (resp) {
+          this.lat = resp.coords.latitude;
+          this.lon = resp.coords.longitude;
+        }
+      })
+      .catch((error) => {
+        console.log('Error getting location', error);
+      });
+  }
 
+
+  calculateDistance(lon1, lon2, lat1, lat2) {
+    const p = 0.017453292519943295;
+    const c = Math.cos;
+    const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((lon1 - lon2) * p))) / 2;
+    const dis = (12742 * Math.asin(Math.sqrt(a)));
+    return Math.trunc(dis);
+  }
 
 
   getUserProfile(uid): Observable<User> {
@@ -151,7 +175,7 @@ export class AvatarService {
     }
   }
 
-  async setParticipants(uid, ouid, time, img, toUid, toName) {
+  async setParticipants(uid, ouid, time, img, toUid, toName, messageSent, fromName) {
 
     try {
       const userDocRef = doc(this.firestore, `lastChats/${uid}/participantes/${ouid}/`);
@@ -159,7 +183,23 @@ export class AvatarService {
         time,
         img,
         toUid,
-        toName
+        toName,
+        messageSent,
+        fromName,
+        fromUid: uid
+      });
+      return true;
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async updateSpecificMessajeSent(uid, ouid, messageSent) {
+
+    try {
+      const userDocRef = doc(this.firestore, `lastChats/${uid}/participantes/${ouid}/`);
+      await updateDoc(userDocRef, {
+        messageSent,
       });
       return true;
     } catch (e) {

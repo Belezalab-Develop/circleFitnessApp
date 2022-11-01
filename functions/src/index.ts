@@ -31,7 +31,7 @@ exports.newMessage = functions.firestore
           data: dataFcm,
           tokens: registrationTokens,
           notification: {
-            title: "Nuevo mensaje de:  " + dataUser.name,
+            title: "Nuevo mensaje de:  " + mensaje.fromName,
             body: mensaje.msg,
           },
         };

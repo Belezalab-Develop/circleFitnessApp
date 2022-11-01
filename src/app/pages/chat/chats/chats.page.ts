@@ -26,6 +26,7 @@ export class ChatsPage implements OnInit {
   @ViewChild('slides', { static: true }) slider: IonSlides;
   segment = 0;
   users: User[] = [];
+  us: any;
   chats: any = [];
   chatsUser: any;
   latitude;
@@ -53,9 +54,8 @@ export class ChatsPage implements OnInit {
 
 
   ) {
-    this.getInitialLogicData();
     this.titleService.setTitle('All Chats');
-    this.getLocation();
+
     //this.presentLoadingDefault();
   }
 
@@ -68,32 +68,23 @@ export class ChatsPage implements OnInit {
 
   }
   ionViewDidEnter() {
-
-
+    this.getLocation();
+    this.getInitialLogicData();
   }
 
   async getInitialLogicData() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
       message: 'un momento por favor ....'
-
-
     });
 
     loading.present();
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
-      this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
-        this.profile = data;
-        this.avatarService.getEspecificChats(this.userUid).subscribe(response => {
-          this.lastChats = response;
-
-        });
-        this.getUsers();
-        loading.dismiss();
-      });
-
-
+      this.getProfile();
+      this.getLastChats();
+      this.getUsers();
+      loading.dismiss();
     });
 
 
@@ -101,6 +92,19 @@ export class ChatsPage implements OnInit {
   async getUsers() {
     this.avatarService.getUsers().subscribe(res => {
       this.users = res.filter(item => item.id !== this.userUid);
+
+    });
+  }
+  async getProfile() {
+    this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
+      this.profile = data;
+      console.log('el perfil->>', this.profile );
+    });
+  }
+
+  async getLastChats() {
+    this.avatarService.getEspecificChats(this.userUid).subscribe(response => {
+      this.lastChats = response;
 
     });
   }
@@ -123,13 +127,29 @@ export class ChatsPage implements OnInit {
 
   goChat(name, oUdi, imageUrl) {
     const badge = 0;
-
     this.avatarService.updateRecivedMessage(oUdi, badge);
     sessionStorage.setItem('uid', this.userUid);
     sessionStorage.setItem('name', name);
+    sessionStorage.setItem('fromName', this.profile.name);
     sessionStorage.setItem('imagen', imageUrl);
     sessionStorage.setItem('oUid', oUdi);
-    this.router.navigateByUrl('/chat');
+    this.router.navigateByUrl('/chat', {replaceUrl: true});
+
+  }
+
+  goSpecificChat(name, oUdi, imageUrl, messageSent, espToUid) {
+    const badge = 0;
+
+    if (messageSent === 1 ) {
+      this.avatarService.updateSpecificMessajeSent(this.userUid, oUdi, badge);
+    }
+
+    sessionStorage.setItem('uid', this.userUid);
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('fromName', this.profile.name);
+    sessionStorage.setItem('imagen', imageUrl);
+    sessionStorage.setItem('oUid', oUdi);
+    this.router.navigateByUrl('/chat', {replaceUrl: true});
 
 
   }
@@ -175,11 +195,11 @@ export class ChatsPage implements OnInit {
 
           this.users.map((us) => {
 
-             us.distance = this.calculateDistance(this.longitude, us.long, this.latitude, us.lat);
+            us.distance = this.calculateDistance(this.longitude, us.long, this.latitude, us.lat);
 
             this.geoUsers.push(us);
           });
-          console.log('users luego del mapGeo--->',this.geoUsers);
+          console.log('users luego del mapGeo--->', this.geoUsers);
         }
       })
       .catch((error) => {

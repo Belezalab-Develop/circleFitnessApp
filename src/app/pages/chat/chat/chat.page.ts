@@ -38,6 +38,7 @@ export class ChatPage implements OnInit {
   oUid;
   uid;
   imagenUrl;
+  fromName;
 
   chats = [];
 
@@ -53,6 +54,8 @@ export class ChatPage implements OnInit {
     this.oUid = sessionStorage.getItem('oUid');
     this.imagenUrl = sessionStorage.getItem('imagen');
     this.uid = sessionStorage.getItem('uid');
+    this.fromName = sessionStorage.getItem('fromName');
+
 
     console.log('tiempo', serverTimestamp());
 
@@ -101,7 +104,8 @@ export class ChatPage implements OnInit {
         fromUid: this.uid,
         msg: this.newMsg,
         toUid: this.oUid,
-        toName: this.name
+        toName: this.name,
+        fromName: this.fromName
       });
 
     this.afs.collection('chats')
@@ -112,16 +116,27 @@ export class ChatPage implements OnInit {
         time: serverTimestamp(),
         fromUid: this.uid,
         msg: this.newMsg,
-        toUid: this.uid
+        toUid: this.uid,
+        fromName: this.fromName
       }).then(() => {
         this.newMsg = '';
         this.content.scrollToBottom();
       });
 
-
-      this.avatarService.setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name ).then(res => {
+      const messageSent = 1;
+      const messageStand = 0;
+      this.avatarService.
+      setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageStand, this.fromName )
+      .then(res => {
         console.log('respuesta respuesta--->', res);
       });
+
+      this.avatarService.updateSpecificMessajeSent(this.oUid, this.uid, messageSent);
+      /* this.avatarService.
+      setParticipants(this.oUid, this.uid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageSent )
+      .then(res => {
+        console.log('respuesta respuesta--->', res);
+      }); */
       const badge = 1;
 
       this.avatarService.updateRecivedMessage(this.uid, badge);
