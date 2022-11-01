@@ -100,16 +100,13 @@ export class LoginPage implements OnInit {
         this.storageService.setStorage('user_uid', uid).then();
         this.storageService.getStorage('push_token').then(response => {
           if (response) {
-            console.log('guardar Token Firebase ->', response);
             const token = response;
             const userUpdate = {
               token,
             };
             this.avatarService.updateToken(uid, userUpdate);
-            console.log('guardar TokenFirebase()->', userUpdate, res);
           }
         });
-
 
       }).catch(
         async (err) => {
@@ -221,7 +218,6 @@ export class LoginPage implements OnInit {
     this.firebaseService.signup(data).then(res => { })
       // eslint-disable-next-line @typescript-eslint/no-shadow
       .catch(err => {
-
         console.log('error: ' + err.message);
       });
 

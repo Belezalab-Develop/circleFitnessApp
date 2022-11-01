@@ -1,9 +1,77 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
+
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="2" size="8">
+        <div class="title-program" style="font-size: 16px; margin-top: 10px;">{{user?.nick_name | uppercase }}</div>
+      </ion-col>
+      <ion-col size="2">
+
+        <ion-fab-button size="small" color="dark">
+          <ion-icon name="share-social" color="danger"></ion-icon>
+        </ion-fab-button>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top" class="row-bg">
+      <ion-col size="12">
+        <div class="influencer-photo" [ngStyle]="{'background-image':'url(' + userImageUrl + ')'}">
+
+        </div>
+      </ion-col>
+      <ion-col size="12" style="padding: 10px">
+        <ion-row class="ion-align-items-star">
+          <ion-col size="10" style="padding: 0px!important;" class="text-general">
+
+            <p>Altura : {{user?.personal_information.height}} cm <br> </p>
+            <p>Peso: {{user?.personal_information.weight}}Kg <br></p>
+            <p> Grasa: {{user?.personal_information.fat_percentage}}%</p>
+
+          </ion-col>
+          <ion-col size="2" style="padding: 0px!important;" class="ion-text-end">
+            <ion-button fill="clear" (click)="openInstagram()">
+              <ion-icon slot="icon-only" color="dark" size="large" name="logo-instagram"></ion-icon>
+            </ion-button>
+
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="row-bg ion-margin-top ion-text-center" style="color:#fff">
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="openDetailWorkout(exerciseProgram)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/weights-dumbells.svg">
+          </ion-icon>
+        </ion-button>
+        Treinos
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="openNutrition(nutritionProgram)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/nutrition.svg">
+          </ion-icon>
+        </ion-button>
+        Nutrição
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerAbs(influencer?.id)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/abs.svg"></ion-icon>
+        </ion-button>
+        HIT Train
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goInfluencerLifeStyle(influencer)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/muscle.svg">
+          </ion-icon>
+        </ion-button>
+        Sobre mim
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

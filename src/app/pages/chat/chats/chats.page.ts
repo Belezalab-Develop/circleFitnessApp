@@ -121,8 +121,11 @@ export class ChatsPage implements OnInit {
 
   }
 
-  goDetail() {
-
+  goDetail(email: string, photo_url: string) {
+    this.router.navigateByUrl('/profile', {replaceUrl: true, state: {
+      email,
+      photo_url
+    }});
   }
 
   goChat(name, oUdi, imageUrl) {

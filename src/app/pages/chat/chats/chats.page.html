@@ -32,7 +32,7 @@
           <ion-col size="12" class="item-row" *ngFor="let user of geoUsers">
             <ion-row class="ion-align-items-start">
               <ion-col size="3">
-                <ion-avatar (click)="goDetail()" style="margin-bottom: 8px;">
+                <ion-avatar (click)="goDetail(user.email, user.imageUrl)" style="margin-bottom: 8px;">
                   <img [src]="user.imageUrl" alt="" style="width: 100%; !important"/>
                 </ion-avatar>
                 {{user.name}}

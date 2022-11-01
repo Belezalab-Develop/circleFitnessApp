@@ -34,6 +34,10 @@ export class ApiNutritionService {
     );
     //return this.http.get(`${environment.apiUlr}/nutrition-programs`);
   }
+
+  individual(id) {
+    return this.http.get(`${environment.apiUlr}/nutrition-program/${id}`);
+  }
   indexGoals(individual, forceRefresh: boolean) {
     const url = `${environment.apiUlr}/nutrition-programs-goals`;
     return this.getData(url, individual, forceRefresh).pipe(

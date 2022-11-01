@@ -35,6 +35,12 @@ export class ApiWorkoutsService {
     );
     //return this.http.get(`${environment.apiUlr}/exercise-programs`);
   }
+
+  individual(id) {
+    return this.http.get(`${environment.apiUlr}/exercise-program/${id}`);
+  }
+
+
   indexGoals(individual, forceRefresh: boolean) {
     const url = `${environment.apiUlr}/exercise-programs-goals`;
     return this.getData(url, individual, forceRefresh).pipe(

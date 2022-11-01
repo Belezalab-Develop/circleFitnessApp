@@ -41,4 +41,9 @@ export class UserService {
   putNutritionProgram(payload) {
     return this.http.put(`${environment.apiUlr}/me/nutrition-program`, payload);
   }
+
+  getIndividualUser(email){
+
+    return this.http.get(`${environment.apiUlr}/user/${email}`);
+  }
 }
