@@ -16,6 +16,7 @@ export class ProfileSettingsPage implements OnInit {
   user: any = {};
   form: any = {};
   profile = null;
+  showAge;
 
 
 
@@ -31,6 +32,7 @@ export class ProfileSettingsPage implements OnInit {
       this.userUid = res;
       this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
         this.profile = data;
+        console.log(this.profile);
       });
 
     });
@@ -53,6 +55,15 @@ export class ProfileSettingsPage implements OnInit {
       console.log(e);
     });
 
+  }
+
+  ageCalculator(){
+    if(this.user.personal_information.birthday){
+      const convertAge = new Date(this.user.personal_information.birthday);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+
+    }
   }
 
   async updateUser() {

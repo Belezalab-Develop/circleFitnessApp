@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
   userImageUrl: string;
   nutritionProgram;
   exerciseProgram;
+  showAge;
 
   constructor(
     private router: Router,

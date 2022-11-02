@@ -59,9 +59,10 @@ export class ProfileToShowPage implements OnInit {
 
   goalsSplit(){
     if(this.user.personal_information.goals){
-      const textSplit = this.user.personal_information.goals.split('_');
-      console.log(textSplit);
-      this.showGoals = textSplit;
+      const textSplit = this.user.personal_information.goals.split(/[\s,-_|]+/);
+
+
+      this.showGoals =  textSplit;
     }
   }
 
