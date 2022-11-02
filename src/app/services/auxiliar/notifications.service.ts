@@ -68,7 +68,7 @@ export class NotificationsService {
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-       alert('Push received: ' + JSON.stringify(notification));
+       //alert('Push received: ' + JSON.stringify(notification));
        console.log(notification);
        this.badge$.next(true);
         LocalNotifications.schedule({
