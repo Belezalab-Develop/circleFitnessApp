@@ -44,7 +44,10 @@
         <h5>{{ 'Sobre Mi' | translate }}</h5>
 
         <div *ngIf="showMore === false" maxlength="190">
-          {{ user?.personal_information.bio | truncate:190}}
+          <div *ngIf="user?.personal_information.bio !== null">
+            {{ user?.personal_information.bio | truncate:190}}
+          </div>
+
         </div>
         <div *ngIf="showMore === true">{{ user?.personal_information.bio}}</div>
         <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostrar
@@ -97,8 +100,8 @@
     <ion-col class="item-row" size="6">
       <ion-text color="dark">
         <h6>Experiencia</h6> <br>
-        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'beginer'">Principiante</p>intermediate
-        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'intermediate'">Intermedio/p>
+        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'beginer'">Principiante</p>
+        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'intermediate'">Intermedio</p>
         <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'expert'">Experto</p>
       </ion-text>
     </ion-col>
