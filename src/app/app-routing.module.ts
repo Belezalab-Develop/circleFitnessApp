@@ -139,6 +139,14 @@ const routes: Routes = [
     path: 'preview-page',
     loadChildren: () => import('./pages/auxiliar/preview-page/preview-page.module').then( m => m.PreviewPagePageModule)
   },
+  {
+    path: 'profile-to-show',
+    loadChildren: () => import('./pages/user/profile-to-show/profile-to-show.module').then( m => m.ProfileToShowPageModule)
+  },
+  {
+    path: 'galery-to-show',
+    loadChildren: () => import('./pages/user/galery-to-show/galery-to-show.module').then( m => m.GaleryToShowPageModule)
+  },
 ];
 
 @NgModule({
