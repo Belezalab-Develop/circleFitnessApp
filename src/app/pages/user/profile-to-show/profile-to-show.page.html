@@ -1,9 +1,114 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profileToShow</ion-title>
-  </ion-toolbar>
+  <app-nav-header></app-nav-header>
 </ion-header>
 
-<ion-content>
+
+<ion-content padding>
+
+  <div class="title-program ion-padding">
+    {{user?.nick_name | uppercase }}
+  </div>
+  <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;">
+    <ion-col size="12" class="item-row">
+      <ion-row class="ion-align-items-start">
+        <ion-col size="4">
+          <ion-avatar>
+            <img [src]="userImageUrl" [alt]="user?.nick_name">
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="8">
+          <ion-row>
+
+            <ion-col size="12">
+
+              <p>Altura : {{user?.personal_information.height}} cm <br> </p>
+              <p>Peso: {{user?.personal_information.weight}}Kg <br></p>
+              <p> Grasa: {{user?.personal_information.fat_percentage}}%</p>
+
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h4 class="subtitle">Sobre Mi <br> by {{user?.nick_name| uppercase }}</h4>
+    </ion-col>
+  </ion-row>
+  <ion-row style="padding-top: 0 !important; padding-bottom: 0 !important;">
+    <ion-col class="item-row" size="12">
+      <ion-text color="dark">
+        <h5>{{ 'Sobre Mi' | translate }}</h5>
+
+        <div *ngIf="showMore === false" maxlength="190">
+          {{ user?.personal_information.bio | truncate:190}}
+        </div>
+        <div *ngIf="showMore === true">{{ user?.personal_information.bio}}</div>
+        <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostrar
+          <span [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
+      </ion-text>
+    </ion-col>
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Sexo</h6> <br>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'm'">Homen</p>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'f'">Mulher</p>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'o'">Outro</p>
+      </ion-text>
+    </ion-col>
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Busco</h6> <br>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'm'">Homen</p>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'f'">Mulher</p>
+        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'o'">Outro</p>
+
+      </ion-text>
+    </ion-col>
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Fecha de nacimiento</h6> <br>
+        <p style="font-size: 14px;">{{user?.personal_information.birthday}}</p>
+      </ion-text>
+    </ion-col>
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Edad</h6> <br>
+        <p style="font-size: 14px;">{{showAge}}</p>
+      </ion-text>
+    </ion-col>
+
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Metas</h6> <br>
+        <p style="font-size: 14px;">{{showGoals}}</p>
+      </ion-text>
+    </ion-col>
+
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Tipo de cuerpo</h6> <br>
+        <p style="font-size: 14px;">{{user?.personal_information.body}}</p>
+      </ion-text>
+    </ion-col>
+    <ion-col class="item-row" size="6">
+      <ion-text color="dark">
+        <h6>Experiencia</h6> <br>
+        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'beginer'">Principiante</p>intermediate
+        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'intermediate'">Intermedio/p>
+        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'expert'">Experto</p>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+
+
+
+
+
 
 </ion-content>
+<app-custom-tab></app-custom-tab>

@@ -108,6 +108,9 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('subscriptions');
   }
 
+  async goGalery() {
+    this.router.navigateByUrl('user-galery');
+  }
   async goProfile() {
     this.router.navigate(['/profile-settings']);
   }

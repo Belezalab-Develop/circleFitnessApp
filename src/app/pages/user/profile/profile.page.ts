@@ -45,12 +45,12 @@ export class ProfilePage implements OnInit {
       if (this.user) {
         this.workOutService.individual(this.user.customer.exercise_program.exercise_program_id).subscribe((resp) => {
           this.exerciseProgram = resp[0];
-          console.log('El workout::', resp[0]);
+
         });
 
         this.nutritionService.individual(this.user.customer.nutrition_program.nutrition_program_id).subscribe((res)=> {
           this.nutritionProgram = res[0];
-          console.log('Nutricion ::', res[0]);
+
         });
       }
     });
@@ -78,6 +78,12 @@ export class ProfilePage implements OnInit {
   async openNutrition(nutritionProgram): Promise<void> {
     await this.router.navigateByUrl('nutrition-details', {
       state: { showMoreOptions: false, nutritionProgram },
+    });
+  }
+
+  async goUserLifeStyle(user, email, photo_url){
+    await this.router.navigateByUrl('profile-to-show', {
+      state: { showMoreOptions: false, user , email, photo_url},
     });
   }
 

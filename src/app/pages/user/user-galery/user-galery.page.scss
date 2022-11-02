@@ -1,0 +1,62 @@
+ion-row {
+  padding: 5px;
+}
+
+.row-form {
+  color: white;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  background: #4f4f4f;
+  margin-top:5px;
+  padding-left: 5px;
+  height: auto;
+}
+
+ion-content {
+  --background: none;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-bottom: 20px;
+}
+
+ion-input, input {
+  background: #3c3c3c;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+}
+
+ion-slides {
+  background: rgba(7, 7, 7, 0);
+}
+
+ion-slide {
+  --background: rgba(7, 7, 7, 0);
+  padding: 10px
+
+
+}
+
+ion-avatar {
+  width: 128px;
+  height: 128px;
+}
+
+.preview {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.fallback {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: #bfbfbf;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}

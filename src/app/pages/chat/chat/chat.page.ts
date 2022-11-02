@@ -192,7 +192,8 @@ export class ChatPage implements OnInit {
           msg: this.newMsg,
           imageUrl,
           toUid: this.oUid,
-          toName: this.name
+          toName: this.name,
+          fromName: this.fromName
         });
 
       this.afs.collection('chats')
@@ -205,7 +206,8 @@ export class ChatPage implements OnInit {
           fromUid: this.uid,
           msg: this.newMsg,
           imageUrl,
-          toUid: this.uid
+          toUid: this.uid,
+          fromName: this.fromName
         }).then(() => {
           this.newMsg = '';
           this.content.scrollToBottom();

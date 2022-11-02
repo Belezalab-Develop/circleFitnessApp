@@ -1,14 +1,14 @@
-import { ComponentsModule } from 'src/app/components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfileToShowPageRoutingModule } from './profile-to-show-routing.module';
+import { UserGaleryPageRoutingModule } from './user-galery-routing.module';
 
-import { ProfileToShowPage } from './profile-to-show.page';
+import { UserGaleryPage } from './user-galery.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
@@ -16,11 +16,11 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileToShowPageRoutingModule,
-    ComponentsModule,
+    UserGaleryPageRoutingModule,
     PipesModule,
+    ComponentsModule,
     TranslateModule.forChild()
   ],
-  declarations: [ProfileToShowPage]
+  declarations: [UserGaleryPage]
 })
-export class ProfileToShowPageModule {}
+export class UserGaleryPageModule {}

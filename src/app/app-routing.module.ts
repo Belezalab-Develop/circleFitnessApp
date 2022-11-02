@@ -147,6 +147,10 @@ const routes: Routes = [
     path: 'galery-to-show',
     loadChildren: () => import('./pages/user/galery-to-show/galery-to-show.module').then( m => m.GaleryToShowPageModule)
   },
+  {
+    path: 'user-galery',
+    loadChildren: () => import('./pages/user/user-galery/user-galery.module').then( m => m.UserGaleryPageModule)
+  },
 ];
 
 @NgModule({

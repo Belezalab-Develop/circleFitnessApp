@@ -59,19 +59,21 @@
         Nutrição
       </ion-col>
       <ion-col size="3">
-        <ion-button color="danger" class="btn-icon" (click)="goInfluencerAbs(influencer?.id)">
-          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/abs.svg"></ion-icon>
-        </ion-button>
-        HIT Train
-      </ion-col>
-      <ion-col size="3">
-        <ion-button color="danger" class="btn-icon" (click)="goInfluencerLifeStyle(influencer)">
+        <ion-button color="danger" class="btn-icon" (click)="goUserLifeStyle(user, email, userImageUrl)">
           <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/muscle.svg">
           </ion-icon>
         </ion-button>
         Sobre mim
       </ion-col>
+      <ion-col size="3">
+        <ion-button color="danger" class="btn-icon" (click)="goUserGalery(influencer?.id)">
+          <ion-icon slot="icon-only" color="dark" size="large" src="../../../../assets/imgs/icons/abs.svg"></ion-icon>
+        </ion-button>
+        Galeria
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 
 </ion-content>
+<app-custom-tab></app-custom-tab>

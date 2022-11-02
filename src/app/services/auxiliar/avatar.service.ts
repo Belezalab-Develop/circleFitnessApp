@@ -101,13 +101,10 @@ export class AvatarService {
 
   }
 
-
   getUserChatUsers(uid) {
 
     const userDocRef = collection(this.firestore, `chats`);
     return collectionData(userDocRef, { idField: 'id' });
-
-
 
   }
 
@@ -120,6 +117,11 @@ export class AvatarService {
           .sort((a, b) =>
             new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000).getTime() -
             new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000).getTime())));
+  }
+
+  getUserGallery(uid) {
+    const userDocRef = collection(this.firestore, `usersGallery/${uid}/media`);
+    return collectionData(userDocRef, { idField: 'id' });
   }
 
   async updateName(uid, name) {
@@ -254,6 +256,28 @@ export class AvatarService {
     }
   }
 
+
+  async userGaleryImage(cameraFile: Photo, uid) {
+    const fileName = new Date().getTime() + '.jpeg';
+    const path = `uploads/galery/${uid}/${fileName}`;
+    const storageRef = ref(this.storage, path);
+
+    try {
+      await uploadString(storageRef, cameraFile.base64String, 'base64');
+
+      const imageUrl = await getDownloadURL(storageRef);
+
+      const userDocRef = collection(this.firestore, `usersGallery/${uid}/media`);
+      await addDoc(userDocRef, {
+        uid,
+        imageUrl,
+      });
+      return true;
+    } catch (e) {
+      console.log('error en la imagen->>', e);
+      return null;
+    }
+  }
 
 
 
