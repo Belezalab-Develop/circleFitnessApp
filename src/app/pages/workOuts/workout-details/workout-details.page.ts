@@ -6,6 +6,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonRouterOutlet, NavController, AlertController, ModalController } from '@ionic/angular';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { ImageModalPage } from '../../auxiliar/image-modal/image-modal.page';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-workout-details',
@@ -40,7 +42,9 @@ export class WorkoutDetailsPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private userService: UserService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private titleService: Title,
+    private analitycs: AnalyticsService
 
   ) {
     this.user = {};
@@ -58,6 +62,8 @@ export class WorkoutDetailsPage implements OnInit {
     if (this.router.getCurrentNavigation().extras.queryParams) {
       this.workout = this.router.getCurrentNavigation().extras.queryParams.workout;
 
+      this.titleService.setTitle(`WorkOut - ${this.workout.label}`);
+      this.analitycs.setScreenName(`WorkOut - ${this.workout.label}`);
       this.isFav = this.workout.is_favourite;
       this.viewReorder = false;
     }
@@ -75,9 +81,9 @@ export class WorkoutDetailsPage implements OnInit {
     this.custom_url = 'https://circlefitness.app/media/';
   }
 
-  setFav(id: number) {};
+  setFav(id: number) { };
 
-  showQuestionAboutLocation() {}
+  showQuestionAboutLocation() { }
 
   clickSubscribe(flag) {
     this.subscribe = flag;
@@ -87,7 +93,7 @@ export class WorkoutDetailsPage implements OnInit {
   goBack() {
     if (this.routerOutlet?.canGoBack()) {
       this.navCtrl.pop();
-    }else {
+    } else {
       this.navCtrl.navigateRoot('/home-auth');
     }
   }
@@ -126,9 +132,9 @@ export class WorkoutDetailsPage implements OnInit {
 
   goInfluencerDetail(influencer: any) {
     this.router.navigate(['/influencer-details'],
-    {
-      state: { influencer }, replaceUrl:true
-    });
+      {
+        state: { influencer }, replaceUrl: true
+      });
   }
 
 
@@ -199,7 +205,7 @@ export class WorkoutDetailsPage implements OnInit {
       : text;
   }
 
-  async openPreview(img){
+  async openPreview(img) {
     const modal = await this.modalCtrl.create({
       component: ImageModalPage,
       componentProps: {

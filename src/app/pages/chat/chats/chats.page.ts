@@ -178,6 +178,7 @@ export class ChatsPage implements OnInit {
   }
 
   goChat(name, oUdi, imageUrl, toEmail) {
+    console.log('el email->>',toEmail);
     const badge = 0;
     this.avatarService.updateRecivedMessage(oUdi, badge);
     sessionStorage.setItem('uid', this.userUid);
@@ -192,6 +193,7 @@ export class ChatsPage implements OnInit {
 
   goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail) {
     const badge = 0;
+    console.log('el email->>',toEmail);
 
     if (messageSent === 1) {
       this.avatarService.updateSpecificMessajeSent(this.userUid, oUdi, badge);

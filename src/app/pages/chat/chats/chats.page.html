@@ -69,7 +69,7 @@
                         <ion-col size="4" (click)="openEspecificNutrition(user.email)" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
-                        <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl)">
+                        <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl, user.email)">
                           <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1">!</ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
@@ -127,7 +127,7 @@
                         <ion-col size="4" (click)="openEspecificNutrition(user.toEmail)" style="border-right: 1px solid #fff;">
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
-                        <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toUid)">
+                        <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail)">
                           <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 ">!</ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>

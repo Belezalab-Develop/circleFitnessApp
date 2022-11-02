@@ -87,7 +87,7 @@ export class ChatPage implements OnInit {
   }
 
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.content.scrollToBottom();
   }
 
@@ -120,24 +120,32 @@ export class ChatPage implements OnInit {
         this.content.scrollToBottom();
       });
 
-      const messageSent = 1;
-      const messageStand = 0;
-      this.avatarService.
-      setParticipants(this.uid, this.oUid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageStand, this.fromName, this.toEmail )
+    const messageSent = 1;
+    const messageStand = 0;
+    this.avatarService.
+      setParticipants
+      (this.uid, this.oUid,
+        serverTimestamp(),
+        this.imagenUrl,
+        this.oUid,
+        this.name,
+        messageStand,
+        this.fromName,
+        this.toEmail)
       .then(res => {
         console.log('respuesta respuesta--->', res);
       });
 
-      this.avatarService.updateSpecificMessajeSent(this.oUid, this.uid, messageSent);
-      /* this.avatarService.
-      setParticipants(this.oUid, this.uid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageSent )
-      .then(res => {
-        console.log('respuesta respuesta--->', res);
-      }); */
-      const badge = 1;
+    this.avatarService.updateSpecificMessajeSent(this.oUid, this.uid, messageSent);
+    /* this.avatarService.
+    setParticipants(this.oUid, this.uid, serverTimestamp(), this.imagenUrl, this.oUid, this.name, messageSent )
+    .then(res => {
+      console.log('respuesta respuesta--->', res);
+    }); */
+    const badge = 1;
 
-      this.avatarService.updateRecivedMessage(this.uid, badge);
-      this.avatarService.updatePrincipalBadge(this.oUid, badge);
+    this.avatarService.updateRecivedMessage(this.uid, badge);
+    this.avatarService.updatePrincipalBadge(this.oUid, badge);
 
   }
 

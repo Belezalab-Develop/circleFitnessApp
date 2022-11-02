@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-workouts-list',
@@ -30,11 +32,15 @@ export class WorkoutsListPage implements OnInit {
     private navCtrl: NavController,
     private router: Router,
     private storageService: CachingService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private titleService: Title,
+    private analitycs: AnalyticsService
 
   ) {
     this.presentLoadingDefault();
     this.getData();
+    this.titleService.setTitle ('Workout List');
+    this.analitycs.setScreenName('Workout List');
   }
 
 

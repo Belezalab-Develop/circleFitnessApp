@@ -1,3 +1,5 @@
+import { AnalyticsService } from './../../../services/analytics.service';
+import { Title } from '@angular/platform-browser';
 /* eslint-disable no-console */
 import { CachingService } from './../../../services/auxiliar/caching.service';
 import { Router } from '@angular/router';
@@ -32,10 +34,14 @@ export class NutritionListPage implements OnInit {
     private router: Router,
     private storageService: CachingService,
     private loadingController: LoadingController,
+    private titleService: Title,
+    private analitycs: AnalyticsService
 
   ) {
     this.presentLoadingDefault();
     this.getData();
+    this.titleService.setTitle ('Nutrition List');
+    this.analitycs.setScreenName('Nutrition List');
   }
 
   ngOnInit() {
