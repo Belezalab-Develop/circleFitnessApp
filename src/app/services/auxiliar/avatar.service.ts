@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import { FirebaseService } from './firebase.service';
 import { Observable } from 'rxjs';
 
@@ -95,7 +95,7 @@ export class AvatarService {
   getUserProfile(uid): Observable<User> {
 
     const userDocRef = doc(this.firestore, `users/${uid}`);
-    return docData(userDocRef, { idField: 'id' }) as Observable<User>;
+    return docData(userDocRef, { idField: 'id' }).pipe(share()) as Observable<User>;
 
 
 
@@ -104,7 +104,7 @@ export class AvatarService {
   getUserChatUsers(uid) {
 
     const userDocRef = collection(this.firestore, `chats`);
-    return collectionData(userDocRef, { idField: 'id' });
+    return collectionData(userDocRef, { idField: 'id' }).pipe(share());
 
   }
 

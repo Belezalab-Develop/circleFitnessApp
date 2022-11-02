@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit {
   nutritionProgram;
   exerciseProgram;
   showAge;
+  uid: string;
 
   constructor(
     private router: Router,
@@ -37,6 +38,7 @@ export class ProfilePage implements OnInit {
     if (this.router.getCurrentNavigation() != null) {
       this.email = this.router.getCurrentNavigation().extras.state.email;
       this.userImageUrl = this.router.getCurrentNavigation().extras.state.photo_url;
+      this.uid = this.router.getCurrentNavigation().extras.state.uid;
       console.log('la imagen', this.userImageUrl);
     }
 
@@ -85,6 +87,12 @@ export class ProfilePage implements OnInit {
   async goUserLifeStyle(user, email, photo_url){
     await this.router.navigateByUrl('profile-to-show', {
       state: { showMoreOptions: false, user , email, photo_url},
+    });
+  }
+
+  async goUserGalery(user, email, photo_url, uid){
+    await this.router.navigateByUrl('galery-to-show', {
+      state: { showMoreOptions: false, user , email, photo_url, uid},
     });
   }
 

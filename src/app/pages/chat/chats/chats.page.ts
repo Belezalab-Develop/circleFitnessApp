@@ -20,6 +20,7 @@ import {
   uploadString,
 } from '@angular/fire/storage';
 import { Auth, user } from '@angular/fire/auth';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chats',
@@ -101,20 +102,20 @@ export class ChatsPage implements OnInit {
 
   }
   async getUsers() {
-    this.avatarService.getUsers().subscribe(res => {
+    this.avatarService.getUsers().pipe(shareReplay()).subscribe(res => {
       this.users = res.filter(item => item.id !== this.userUid);
 
     });
   }
   async getProfile() {
-    this.avatarService.getUserProfile(this.userUid).subscribe((data) => {
+    this.avatarService.getUserProfile(this.userUid).pipe(shareReplay()).subscribe((data) => {
       this.profile = data;
       console.log('el perfil->>', this.profile);
     });
   }
 
   async getLastChats() {
-    this.avatarService.getEspecificChats(this.userUid).subscribe(response => {
+    this.avatarService.getEspecificChats(this.userUid).pipe(shareReplay()).subscribe(response => {
       this.lastChats = response;
 
     });
@@ -168,11 +169,12 @@ export class ChatsPage implements OnInit {
 
   }
 
-  goDetail(email: string, photo_url: string) {
+  goDetail(email: string, photo_url: string, uid: string) {
     this.router.navigateByUrl('/profile', {
       replaceUrl: true, state: {
         email,
-        photo_url
+        photo_url,
+        uid
       }
     });
   }

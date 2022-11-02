@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { Network } from '@capacitor/network';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +75,7 @@ export class ApiNutritionService {
       }).then(toast => {
         toast.present();
       });
-      return from(this.storageService.getCachedRequest(url, individual));
+      return from(this.storageService.getCachedRequest(url, individual)).pipe(share());
     }
 
     // Handle connected case
