@@ -5,13 +5,16 @@
 <ion-content>
   <ion-row>
     <ion-col size="12">
-      <div class="title-program" style="font-size: 16px; margin-top: 10px; ">Meu Imagenes </div>
+      <div class="title-program" style="font-size: 16px; margin-top: 10px; ">MINHA GALERIA DE FOTOS </div>
     </ion-col>
     <ion-col size="12">
+
+      <p>Este é um espaço para inserir as suas fotos. Serão mostradas quando alguém quiser conhecer mais o seu perfil.
+      </p>
       <!-- <ion-avatar style="margin: 0 auto; height: 90px; width: 90px;" >
               <img [src]="user.photo_url" alt="">
           </ion-avatar> -->
-      <div class="preview" *ngIf="profile; else skeleton_avatar;">
+      <!-- <div class="preview" *ngIf="profile; else skeleton_avatar;">
         <ion-avatar >
           <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
           <ng-template #placheolder_avatar>
@@ -29,7 +32,7 @@
             <ion-skeleton-text animated height="128px" width="128px" rounded></ion-skeleton-text>
           </ion-avatar>
         </div>
-      </ng-template>
+      </ng-template> -->
     </ion-col>
   </ion-row>
 
@@ -37,7 +40,7 @@
     <ion-row>
       <ion-col size="12" class="ion-text-center">
         <ion-button (click)="uploadImage()" color="danger" size="small">
-         Subir imagen
+          Subir imagen
         </ion-button>
       </ion-col>
     </ion-row>
@@ -48,7 +51,7 @@
       <ion-col size="12" class="ion-text-center">
         <ion-item class="itemwithsep  bg-transparent--" lines="none">
           <ion-card>
-            <img [src]="img.imageUrl" alt="" style="width: 100%;" >
+            <img [src]="img.imageUrl" alt="" style="width: 100%;">
           </ion-card>
         </ion-item>
 

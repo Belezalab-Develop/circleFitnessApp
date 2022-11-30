@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { CachingService } from './../../../services/auxiliar/caching.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
@@ -56,7 +57,7 @@ export class WizardPage implements OnInit {
       },
       {
         type: 2,
-        label: 'Home',
+        label: 'Homen',
         isSelected: false,
         value: 'm'
       },
@@ -72,19 +73,22 @@ export class WizardPage implements OnInit {
         type: 1,
         label: 'Ectomorfo',
         isSelected: false,
-        value: 'ectomorph'
+        value: 'ectomorph',
+        descrip: 'Corpo mais magro e esguio, ombros estreitos e membros compridos.'
       },
       {
         type: 2,
         label: 'Mesomorfo',
         isSelected: false,
-        value: 'mesomorph'
+        value: 'mesomorph',
+        descrip: 'Corpo magro e musculoso, mesmo que não pratiquem atividade física. Tronco desenvolvido, pouca gordura abdominal, cintura  fina e metabolismo rápido, '
       },
       {
         type: 3,
         label: 'Endomorfo',
         isSelected: false,
-        value: 'endomorph'
+        value: 'endomorph',
+        descrip: 'Baixa estatura, corpo mais arredondado e mais largo, '
       },
     ];
   }
@@ -248,7 +252,7 @@ export class WizardPage implements OnInit {
     }
 
     if (130 > measurements.height || measurements.height > 250) {
-      this.gnrlService.showToast('Oops! Revisa que la altura sea correcta', 'toast-success');
+      this.gnrlService.showToast('Oopps! Preencha a altura corretamente', 'toast-success');
       return;
     }
 

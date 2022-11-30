@@ -141,7 +141,7 @@ export class WorkoutDetailsPage implements OnInit {
   async changeWorkout() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: 'Atención',
+      header: 'NOVO TREINO?',
       message: `Seu novo programa de treinamento será: "${this.workout.label}"`,
       buttons: [
         {
@@ -178,7 +178,7 @@ export class WorkoutDetailsPage implements OnInit {
   async adMessage() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-ad-class',
-      message: 'Ache aqui seu novo programa',
+      message: 'Aqui você encontrará seu novo programa.',
       buttons: [
         {
           text: 'Aquí ',

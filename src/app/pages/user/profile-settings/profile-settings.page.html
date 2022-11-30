@@ -14,9 +14,9 @@
         <ion-avatar (click)="changeImage()">
           <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
           <ng-template #placheolder_avatar>
-            <div class="fallback">
-              <p>Escolher Foto de Perfil</p>
-            </div>
+            <!-- <div class="fallback">
+              <p>SEM IMAGEM</p>
+            </div> -->
           </ng-template>
 
         </ion-avatar>
@@ -29,6 +29,16 @@
           </ion-avatar>
         </div>
       </ng-template>
+
+      <ion-grid class="ion-margin-top">
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <ion-button (click)="changeImage()" color="danger" size="small">
+              ATUALIZAR FOTO PERFIL
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-col>
   </ion-row>
   <ion-row style="margin-top: -12px;">
@@ -55,6 +65,15 @@
             <ion-row class="ion-align-items-center">
               <ion-textarea placeholder="Escreve mais sobre você!" [(ngModel)]="form.bio"></ion-textarea>
             </ion-row>
+            <ion-grid class="ion-margin-top">
+              <ion-row>
+                <ion-col size="12" class="ion-text-center">
+                  <ion-button (click)="updateUser()" color="danger" size="small">
+                    SALVAR
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -289,7 +308,7 @@
     <ion-row>
       <ion-col size="12" class="ion-text-center">
         <ion-button (click)="updateUser()" color="danger" size="small">
-          Guardar
+          SALVAR
         </ion-button>
       </ion-col>
     </ion-row>

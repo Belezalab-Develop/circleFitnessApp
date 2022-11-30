@@ -6,9 +6,9 @@
   <ion-row>
     <ion-col size="12">
       <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CHAT </div>
-      <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
+      <!-- <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
         <ion-icon slot="start" name="filter-sharp" color="dark"></ion-icon> Filtrar
-      </ion-button>
+      </ion-button> -->
     </ion-col>
   </ion-row>
   <ion-row>
@@ -50,7 +50,7 @@
                       Peso: {{ user.personal_information?.height }} kg<br />
                     </span>
                     <span *ngIf="user.personal_information?.is_fat_percentage_visible">
-                      Grasa : {{ user.personal_information?.fat_percentage }} %
+                      Gordura : {{ user.personal_information?.fat_percentage }} %
                     </span>
                   </ion-col>
                   <ion-col size="8">
@@ -70,7 +70,7 @@
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
                         <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl, user.email)">
-                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1">!</ion-badge>
+                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1"></ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
                       </ion-row>
@@ -107,7 +107,7 @@
                       Peso: {{ user.personal_information?.height }} kg<br />
                     </span>
                     <span *ngIf="user.personal_information?.is_fat_percentage_visible">
-                      Grasa : {{ user.personal_information?.fat_percentage }} %
+                      Gordura : {{ user.personal_information?.fat_percentage }} %
                     </span>
                   </ion-col>
                   <ion-col size="8">
@@ -128,7 +128,7 @@
                           <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                         </ion-col>
                         <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail)">
-                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 ">!</ion-badge>
+                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 "></ion-badge>
                           <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                         </ion-col>
                       </ion-row>

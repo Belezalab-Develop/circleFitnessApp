@@ -86,4 +86,9 @@ export class HomeAuthPage implements OnInit {
     this.router.navigateByUrl('profile-settings', {replaceUrl: true});
   }
 
+  async goGalery() {
+    this.router.navigateByUrl('user-galery');
+  }
+
+
 }

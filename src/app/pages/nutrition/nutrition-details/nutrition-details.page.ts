@@ -107,7 +107,7 @@ export class NutritionDetailsPage implements OnInit {
   async changeNutrition() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: 'Atención',
+      header: 'NOVO PLANO DE NUTRIÇÃO?',
       message: `Seu novo Plano Nutricional será: ${this.nutritionProgram.label}`,
       buttons: [
         {
@@ -143,7 +143,7 @@ export class NutritionDetailsPage implements OnInit {
   async adMessage() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-nutrition-class',
-      message: 'Ache aqui seu novo Plano Nutricional',
+      message: 'Aqui você encontrará seu novo plano',
       buttons: [
         {
           text: 'Aquí ',

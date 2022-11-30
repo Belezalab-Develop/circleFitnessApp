@@ -5,7 +5,7 @@
 <ion-content padding>
 
   <div class="title-program ion-padding">
-    CONOZCA <br>INFLUENCERS
+    INFLUENCERS & TRAINERS
   </div>
   <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;">
     <ion-col size="12" class="item-row">
@@ -24,7 +24,7 @@
 
               <p>Altura : {{info?.height}} cm <br> </p>
               <p>Peso: {{info?.weight}}Kg <br></p>
-              <p> Grasa: {{info?.fat}}%</p>
+              <p> Gordura: {{info?.fat}}%</p>
 
             </ion-col>
           </ion-row>
@@ -35,20 +35,20 @@
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <h4 class="subtitle">Sobre Mi <br> by {{info?.user.nick_name | uppercase }}</h4>
+      <h4 class="subtitle">SOBRE MIM <br> by {{info?.user.nick_name | uppercase }}</h4>
     </ion-col>
   </ion-row>
   <ion-row style="padding-top: 0 !important; padding-bottom: 0 !important;">
     <ion-col class="item-row" size="12">
       <ion-text color="dark">
-        <h5>{{ 'Sobre Mi' | translate }}</h5>
+        <h5>SOBRE MIM</h5>
 
         <div *ngIf="showMore === false" maxlength="190">
           {{ info?.bio | truncate:190}}
         </div>
         <div *ngIf="showMore === true">{{ info?.bio}}</div>
-        <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostrar
-          <span [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
+        <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostre
+          <span [innerHtml]="showMore ? 'Menos' : 'Mais'"> </span></a>
       </ion-text>
     </ion-col>
   </ion-row>
@@ -56,7 +56,7 @@
   <ion-row>
     <ion-col size="12" class="ion-text-center">
       <ion-button color="danger" expand="blok" style="margin-top: 25px;">
-        Suscribete
+        PLANO PREMIUM
       </ion-button>
     </ion-col>
   </ion-row>

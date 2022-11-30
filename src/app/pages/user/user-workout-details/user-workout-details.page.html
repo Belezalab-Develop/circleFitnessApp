@@ -139,7 +139,7 @@
 
               <ion-col size="8" offset="2" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
 
-                <ion-button class="circle_especial" expand="full" fill="clear"
+                <ion-button class="circle_especial" expand="full" fill="solid" color="danger" shape="round"
                   (click)="setCompleteSerie(i , exercise.id)">
                   {{bottonText}} - {{i+1}}
                 </ion-button>
@@ -147,7 +147,7 @@
 
               <ion-col size="8" offset="2" *ngIf="initialIndex === i && exercise.pivot.is_time_based ">
 
-                <ion-button class="circle_especial" expand="full" fill="clear"
+                <ion-button class="circle_especial" expand="full"  fill="solid" color="danger" shape="round"
                   (click)="setTimerComplete(i , exercise.id)">
                   Inicia la serie - {{i+1}}
                 </ion-button>

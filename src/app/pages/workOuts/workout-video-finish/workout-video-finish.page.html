@@ -18,7 +18,7 @@
 
 
   <p>
-    <span></span> {{'routine time'|translate}}
+    <span></span> Tempo em Exercício:
     <strong> {{ excTime }} {{'min'|translate}}</strong>
     <span></span>
   </p>
@@ -27,7 +27,7 @@
     <strong>{{totalReps}} {{'repetitions'|translate}}</strong>
   </p>
   <p>
-    {{'you consumed'|translate}}
+    Queimou
     <strong>{{calories}} {{'calories'|translate}}</strong>
   </p>
 
@@ -60,14 +60,21 @@
 
             </ion-item>
             <ion-item  *ngIf="verVideo1">
-              <div >
-                <ion-card class="video-card ">
-                  <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-                  <video width="390px" height="350px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/hola.png">
-                    <source [src]="exerciseProgram.finisher1.ptr_video+ '#t=0.1'" type="video/mp4">
-                  </video>
+              <ion-grid class="ion-margin-top">
+                <ion-row>
+                  <ion-col size="12" class="ion-text-center">
+                    <ion-card class="video-card ">
+                      <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
+                      <video width="300px" height="190px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
+                        <source [src]="exerciseProgram.finisher1.ptr_video+ '#t=0.1'" type="video/mp4">
+                      </video>
 
-                </ion-card>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <div >
+
               </div>
             </ion-item>
           </ion-col>
@@ -92,13 +99,21 @@
 
             </ion-item>
             <ion-item  *ngIf="verVideo2">
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12" class="ion-align-self-center">
+                      <ion-card class="video-card ">
+                        <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
+                         <video width="300px" height="190px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
+                           <source [src]="exerciseProgram.finisher2.ptr_video+ '#t=0.1'" type="video/mp4">
+                         </video>
+                       </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
               <div>
-                <ion-card class="video-card ">
-                 <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-                  <video width="390px" height="350px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/hola.png">
-                    <source [src]="exerciseProgram.finisher2.ptr_video+ '#t=0.1'" type="video/mp4">
-                  </video>
-                </ion-card>
+
               </div>
             </ion-item>
 

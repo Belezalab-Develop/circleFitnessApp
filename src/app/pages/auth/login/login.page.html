@@ -1,130 +1,140 @@
-
 <ion-content class="ion-padding ">
   <div class="">
-      <ion-grid class="ion-padding" >
-          <ion-row>
-              <ion-col size="12" class="ion-text-center">
-                  <ion-text>
-                      <img
-                          style="margin-top: 20px; margin-left: 10px; width: 50%;"
-                          src="assets/imgs/logo-fit-ola.png" width="50%"
-                      />
-                  </ion-text>
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <ion-text>
+            <img style="margin-top: 20px; margin-left: 10px; width: 50%;" src="assets/imgs/logo-fit-ola.png"
+              width="50%" />
+          </ion-text>
+        </ion-col>
+        <ion-col size="12" *ngIf="!register" style="margin-top: 40px;">
+          <form [formGroup]="formLogin">
+            <ion-row>
+              <ion-col size="12">
+                <ion-item class="custom-input">
+                  <ion-input placeholder="email" name="email" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input placeholder="******" type="password" name="password" formControlName="password">
+                  </ion-input>
+                </ion-item>
               </ion-col>
-              <ion-col size="12" *ngIf="!register" style="margin-top: 40px;">
-                  <form [formGroup]="formLogin">
-                      <ion-row>
-                          <ion-col size="12">
-                              <ion-item class="custom-input">
-                                  <ion-input placeholder="email" name="email" formControlName="email"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input">
-                                  <ion-input placeholder="******" type="password" name="password" formControlName="password"></ion-input>
-                              </ion-item>
-                          </ion-col>
-                      </ion-row>
-                      <ion-row>
-                          <ion-col size="12" class="ion-text-center" >
-                              <ion-button color="danger" class="btn-login" expand="block" shape="round" (click)="login()">
-                                  Iniciar sesión
-                              </ion-button>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12" class="ion-text-center">
+                <ion-button color="danger" class="btn-login" expand="block" shape="round" (click)="login()">
+                  INICIAR SESSÃO
+                </ion-button>
 
 
 
-                          </ion-col>
-                          <ion-col  size="12"  class="ion-text-center">
-                                <ion-button color="light" class="btn-login" expand="block" shape="round" (click)="registerFlag()">
-                                    Aun no tienes una cuenta? Registrate
-                                </ion-button>
-                              <!-- <ion-text color="light" >
+              </ion-col>
+              <ion-col size="12" class="ion-text-center">
+                <ion-button color="light" class="btn-login" expand="block" shape="round" (click)="registerFlag()">
+                  CADASTRE-SE GRÁTIS
+                </ion-button>
+                <!-- <ion-text color="light" >
                                   <p style="font-size: 12px;" (click)="registerFlag()">Aun no tienes una cuenta? Registrate</p>
                               </ion-text> -->
-                          </ion-col>
-                      </ion-row>
-                  </form>
               </ion-col>
-          </ion-row>
+            </ion-row>
+          </form>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <h5>Circle Fitness é GRÁTIS!</h5>
+          <p>Não tem custos de cadastro.
+            Existe alguns programas "premium", com objetivo de manter os custos desta grande comunidade.”</p>
 
 
+        </ion-col>
 
-          <ion-row *ngIf="register && !email" class="ion-padding" style="margin-top: 40px;">
-              <ion-col class="ion-text-center">
-                  <ion-text color="light">
-                      Bievenido a Circle <br> Fitness
-                  </ion-text> <br><br>
-                  <ion-text color="light">
-                      Vamos a iniciar tu<br> registro
-                  </ion-text>
+      </ion-row>
 
-              </ion-col>
-          </ion-row>
-          <ion-row class="ion-padding" *ngIf="register && !email">
-              <ion-col size="12" class="ion-text-center">
-                  <ion-button expand="block" shape="round" color="google" (click)="loginGoogle()">
-                      Google
-                      <ion-icon slot="end" name="logo-google"></ion-icon>
-                  </ion-button>
-                  <!-- <ion-button expand="block" shape="round" color="fb">
+      <ion-row *ngIf="register && !email" class="ion-padding" style="margin-top: 40px;">
+        <ion-col class="ion-text-center">
+          <ion-text color="light">
+            Bem-vindo a  <br> Circle Fitness
+          </ion-text> <br><br>
+          <ion-text color="light">
+            Vamos iniciar o seu cadastro?
+          </ion-text>
+
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding" *ngIf="register && !email">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button expand="block" shape="round" color="google" (click)="loginGoogle()">
+            Google
+            <ion-icon slot="end" name="logo-google"></ion-icon>
+          </ion-button>
+          <!-- <ion-button expand="block" shape="round" color="fb">
                       Facebook
                       <ion-icon slot="end" name="logo-facebook"></ion-icon>
                   </ion-button> -->
-                  <ion-button expand="block" shape="round" color="light" (click)="loginApple()">
-                       Apple
-                      <ion-icon slot="end" name="logo-apple"></ion-icon>
-                  </ion-button>
-                  <ion-button expand="block" shape="round" color="primary" (click)="clickForm()">
-                      Email
-                      <ion-icon slot="end" name="at-outline"></ion-icon>
-                  </ion-button>
-                  <ion-text color="light">
-                      <h3 (click)="register = false">Ya tengo una cuenta</h3>
-                  </ion-text>
-              </ion-col>
-          </ion-row>
-      </ion-grid>
-      <ion-grid *ngIf="email" >
-          <ion-row class="ion-padding">
+          <!-- <ion-button expand="block" shape="round" color="light" (click)="loginApple()">
+            Apple
+            <ion-icon slot="end" name="logo-apple"></ion-icon>
+          </ion-button> -->
+          <ion-button expand="block" shape="round" color="primary" (click)="clickForm()">
+            Email
+            <ion-icon slot="end" name="at-outline"></ion-icon>
+          </ion-button>
+          <ion-text color="light">
+            <h3 (click)="register = false">Já tenho conta!</h3>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="email">
+      <ion-row class="ion-padding">
+        <ion-col size="12">
+
+          <form [formGroup]="formRegister" *ngIf="register === true">
+            <ion-row>
               <ion-col size="12">
-
-                  <form [formGroup]="formRegister" *ngIf="register === true">
-                      <ion-row>
-                          <ion-col size="12">
-                              <ion-item class="custom-input">
-                                  <ion-input placeholder="Nome" name="name" formControlName="name"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input">
-                                  <ion-input placeholder="Sobrenome" name="paternal_surname" formControlName="paternal_surname"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input" >
-                                  <ion-input type="E-mail" placeholder="Email" name="email" formControlName="email"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input" >
-                                  <ion-input type="text" placeholder="Nick Name" name="nick_name" formControlName="nick_name"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input" >
-                                  <ion-input type="password" placeholder="Senha" name="password" formControlName="password"></ion-input>
-                              </ion-item>
-                              <ion-item class="custom-input" >
-                                  <ion-input  type="password" placeholder="Reinserir a Senha" name="password_confirmation" formControlName="password_confirmation"  ></ion-input>
-                              </ion-item>
-                          </ion-col>
-                      </ion-row>
-                      <ion-row>
-                          <ion-col size="12" >
-                              <ion-button color="danger" class="btn-login" expand="block" shape="round" (click)="registerEmail()">
-                                Criar Conta
-                              </ion-button>
-                          </ion-col>
-                          <ion-col class="ion-text-center">
-                              <ion-text color="light">
-                                  <h3 (click)="email = false">Cancelar</h3>
-                              </ion-text>
-
-                          </ion-col>
-                      </ion-row>
-                  </form>
+                <ion-item class="custom-input">
+                  <ion-input placeholder="Nome" name="name" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input placeholder="Sobrenome" name="paternal_surname" formControlName="paternal_surname">
+                  </ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input type="E-mail" placeholder="Email" name="email" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input type="text" placeholder="Nick Name" name="nick_name" formControlName="nick_name">
+                  </ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input type="password" placeholder="Senha" name="password" formControlName="password"></ion-input>
+                </ion-item>
+                <ion-item class="custom-input">
+                  <ion-input type="password" placeholder="Reinserir a Senha" name="password_confirmation"
+                    formControlName="password_confirmation"></ion-input>
+                </ion-item>
               </ion-col>
-          </ion-row>
-      </ion-grid>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-button color="danger" class="btn-login" expand="block" shape="round" (click)="registerEmail()">
+                  Criar Conta
+                </ion-button>
+              </ion-col>
+              <ion-col class="ion-text-center">
+                <ion-text color="light">
+                  <h3 (click)="email = false">Cancelar</h3>
+                </ion-text>
+
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

@@ -147,8 +147,8 @@ export class LoginPage implements OnInit {
 
   buildLoginForm() {
     this.formLogin = this.formB.group({
-      email: ['jorge2@lid.com', Validators.required],
-      password: ['12345678', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 

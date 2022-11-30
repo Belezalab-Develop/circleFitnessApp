@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col size="12" class="ion-text-center ion-padding-top">
           <ion-text>
-            <img style="margin-top: 20px; margin-left: 10px" src="assets/imgs/hola.png" />
+            <img style="margin-top: 20px; margin-left: 10px" src="assets/imgs/logo-fit-ola.png" />
           </ion-text>
         </ion-col>
 
@@ -126,12 +126,12 @@
 
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cúal es tu porcentaje de grasa?
+              ¿Cúal es tu porcentaje de Gordura?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-item class="custom-input">
-              <ion-input [(ngModel)]="fatPercentage" min="0" max="100" placeholder="% grasa" maxlength="3"
+              <ion-input [(ngModel)]="fatPercentage" min="0" max="100" placeholder="% Gordura" maxlength="3"
                 type="number"></ion-input>
             </ion-item>
 
@@ -199,7 +199,7 @@
         <ion-row *ngIf="gender === 'female'">
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cómo describirías tu tipo de cuerpo?
+              Escolha o seu tipo de corpo.
             </ion-text>
           </ion-col>
           <ion-col *ngFor="let body of bodies" size="4" class="ion-text-center">
@@ -293,15 +293,15 @@
   <ion-row>
     <ion-col size="6">
       <ion-button color="danger" (click)="previousButton()" style="width: 120px" fill="clear">
-        Atrás
+        VOLTAR
       </ion-button>
     </ion-col>
     <ion-col size="6" class="ion-text-end">
       <ion-button *ngIf="progress < .8" color="danger" (click)="nextButton()" style="width: 120px" fill="clear">
-        Siguiente
+        PRÓXIMO
       </ion-button>
       <ion-button *ngIf="progress >= .8" color="danger" style="width: 120px" fill="clear" (click)="nextButton()">
-        Fin
+        FIN
       </ion-button>
     </ion-col>
   </ion-row>

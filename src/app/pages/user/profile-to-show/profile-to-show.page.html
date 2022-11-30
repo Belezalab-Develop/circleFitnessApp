@@ -23,7 +23,7 @@
 
               <p>Altura : {{user?.personal_information.height}} cm <br> </p>
               <p>Peso: {{user?.personal_information.weight}}Kg <br></p>
-              <p> Grasa: {{user?.personal_information.fat_percentage}}%</p>
+              <p> Gordura: {{user?.personal_information.fat_percentage}}%</p>
 
 
             </ion-col>
@@ -35,16 +35,16 @@
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <h4 class="subtitle">Sobre Mi <br> by {{user?.nick_name| uppercase }}</h4>
+      <h4 class="subtitle">Sobre Mim <br> by {{user?.nick_name| uppercase }}</h4>
     </ion-col>
   </ion-row>
   <ion-row style="padding-top: 0 !important; padding-bottom: 0 !important;">
     <ion-col class="item-row" size="12">
       <ion-text color="dark">
-        <h5>{{ 'Sobre Mi' | translate }}</h5>
+        <h5>{{ 'Sobre Mim' | translate }}</h5>
 
         <div *ngIf="showMore === false" maxlength="190">
-          <div *ngIf="user?.personal_information.bio !== null">
+          <div *ngIf="user?.personal_information.bio !== null" style="font-size: 12px;">
             {{ user?.personal_information.bio | truncate:190}}
           </div>
 
@@ -54,60 +54,54 @@
           <span [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
       </ion-text>
     </ion-col>
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Sexo</h6> <br>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'm'">Homen</p>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'f'">Mulher</p>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'o'">Outro</p>
-      </ion-text>
-    </ion-col>
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Busco</h6> <br>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'm'">Homen</p>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'f'">Mulher</p>
-        <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'o'">Outro</p>
+    <ion-col class="item-row" size="12">
 
-      </ion-text>
-    </ion-col>
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Fecha de nacimiento</h6> <br>
-        <p style="font-size: 14px;">{{user?.personal_information.birthday}}</p>
-      </ion-text>
-    </ion-col>
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Edad</h6> <br>
-        <p style="font-size: 14px;">{{showAge}}</p>
-      </ion-text>
-    </ion-col>
+      <ion-row class="ion-align-items-start">
+        <ion-col size="4">
+          <h6 style="padding-left: 1em; ">Sexo</h6>
+        </ion-col>
+        <ion-col size="4" offset="-2">
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'm'">Homen</p>
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'f'">Mulher</p>
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'o'">Outro</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-start">
+        <ion-col size="4">
+          <h6 style="padding-left: 1em; ">Busco me relacionar com:</h6>
+        </ion-col>
+        <ion-col size="4" offset="-2">
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'm'">Homen</p>
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'f'">Mulher</p>
+          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'o'">Outro</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-start">
+        <ion-col size="4">
+          <h6 style="padding-left: 1em; ">Edad</h6>
+        </ion-col>
+        <ion-col size="4" offset="-2">
+          <p style="font-size: 14px;">{{showAge}}</p>
+        </ion-col>
+      </ion-row>
 
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Metas</h6> <br>
-        <p style="font-size: 14px;">{{showGoals}}</p>
-      </ion-text>
+
     </ion-col>
 
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Tipo de cuerpo</h6> <br>
-        <p style="font-size: 14px;">{{user?.personal_information.body}}</p>
-      </ion-text>
-    </ion-col>
-    <ion-col class="item-row" size="6">
-      <ion-text color="dark">
-        <h6>Experiencia</h6> <br>
-        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'beginer'">Principiante</p>
-        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'intermediate'">Intermedio</p>
-        <p style="font-size: 16px;" *ngIf="user?.personal_information.experience === 'expert'">Experto</p>
-      </ion-text>
-    </ion-col>
   </ion-row>
 
+  <ion-grid class="ion-margin-top" fixed *ngFor="let img of gallery">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-item class="itemwithsep  bg-transparent--" lines="none">
+          <ion-card>
+            <img [src]="img.imageUrl" alt="" style="width: 100%;">
+          </ion-card>
+        </ion-item>
 
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 

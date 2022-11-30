@@ -2,7 +2,7 @@
   <app-nav-header></app-nav-header>
 </ion-header>
 <ion-content *ngIf="this.nutritionProgram === null" class="no-padding">
-  <p style="color: #ffffff;">Elige uno de nuestros programas de nutrición.</p>
+  <p style="color: #ffffff;">Ainda não tem um Plano de Nutrição escolhido.</p>
 </ion-content>
 <ion-content *ngIf="this.nutritionProgram !== null" class="no-padding">
   <div style="height: 20px;"></div>
@@ -50,7 +50,7 @@
             <ion-text color="dark">Carboidratos</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">Grasas</ion-text>
+            <ion-text color="dark">Gorduras</ion-text>
           </ion-col>
         </ion-row>
       </ion-col>

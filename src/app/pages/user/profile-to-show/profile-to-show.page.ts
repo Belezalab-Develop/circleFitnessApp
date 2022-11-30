@@ -1,3 +1,4 @@
+import { AvatarService } from 'src/app/services/auxiliar/avatar.service';
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
@@ -25,6 +26,8 @@ export class ProfileToShowPage implements OnInit {
   showMore = false;
   showAge;
   showGoals;
+  gallery: any;
+  uid: string;
 
   constructor(
     private router: Router,
@@ -33,14 +36,20 @@ export class ProfileToShowPage implements OnInit {
     private inAppBrowser: InAppBrowser,
     private userService: UserService,
     private workOutService: ApiWorkoutsService,
-    private nutritionService: ApiNutritionService
+    private nutritionService: ApiNutritionService,
+    private avatarService: AvatarService,
   ) {
     if (this.router.getCurrentNavigation() != null) {
       this.email = this.router.getCurrentNavigation().extras.state.email;
       this.userImageUrl = this.router.getCurrentNavigation().extras.state.photo_url;
       this.user = this.router.getCurrentNavigation().extras.state.user;
+      this.uid = this.router.getCurrentNavigation().extras.state.uid;
       this. ageCalculator();
       this.goalsSplit();
+      this.avatarService.getUserGallery(this.uid).subscribe(data => {
+        this.gallery = data;
+        console.log(this.gallery);
+      });
     }
 
   }

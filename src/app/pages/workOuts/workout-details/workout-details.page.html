@@ -37,7 +37,7 @@
       <ion-col offset="1" size="8">
         <ion-row class="no-padding no-margin" style="color: #ffffff; font-size: 14px;">
           <ion-col size="12">
-            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-start">
               <ion-col class="no-padding" size="6"><b>Objetivos</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row *ngFor="let goal of workout.goals">
@@ -45,16 +45,16 @@
                 </ion-row>
               </ion-col>
             </ion-row>
-            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-start">
               <ion-col class="no-padding" size="6"><b>Dias</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row>
-                  <ion-col class="no-padding" size="12"> X {{ workout.days[0].sessions.length }} </ion-col>
+                  <ion-col class="no-padding" size="12"> x{{ workout.days[0].sessions.length }} na semana</ion-col>
                 </ion-row>
               </ion-col>
             </ion-row>
-            <ion-row style="margin-bottom: 8px;" class="ion-align-items-end">
-              <ion-col class="no-padding" size="6"><b>Nivel</b></ion-col>
+            <ion-row style="margin-bottom: 8px;" class="ion-align-items-start">
+              <ion-col class="no-padding" size="6" ><b>Nivel</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row *ngFor="let level of workout.levels">
                   <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
@@ -108,7 +108,7 @@
         <ion-card class="video-card ">
           <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
           <video controls muted="true" playsinline looped preload="auto"
-            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" poster="assets/imgs/hola.png">
+            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
             <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
           </video>
 

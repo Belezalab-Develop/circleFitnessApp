@@ -11,18 +11,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+        tools:replace="android:value"
+        android:name="firebase_analytics_collection_enabled"
+        android:value="true"/>
+
+        <meta-data
+        tools:replace="android:value"
+        android:name="google_analytics_automatic_screen_reporting_enabled"
+        android:value="false"/>
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="app.circlefitness.analytics.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
-          tools:ignore="MissingClass">
+            tools:ignore="MissingClass">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
 

@@ -84,9 +84,9 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async goUserLifeStyle(user, email, photo_url){
+  async goUserLifeStyle(user, email, photo_url, uid){
     await this.router.navigateByUrl('profile-to-show', {
-      state: { showMoreOptions: false, user , email, photo_url},
+      state: { showMoreOptions: false, user , email, photo_url, uid},
     });
   }
 
