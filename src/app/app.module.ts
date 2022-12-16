@@ -33,6 +33,9 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
+import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+
 
 
 
@@ -54,7 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
     provideAuth(() =>  getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-
+    IonicImageLoaderModule,
     PipesModule,
     IonicStorageModule.forRoot({
       // eslint-disable-next-line no-underscore-dangle
@@ -77,6 +80,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [,
     AuthProvider,
     Title,
+    WebView,
     StatusBar,
     InAppBrowser,
     AppAvailability,

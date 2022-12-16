@@ -108,8 +108,8 @@
         <ion-card class="video-card ">
           <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
           <video controls muted="true" playsinline looped preload="auto"
-            *ngIf="workout?.media[1].mime_type === 'video/mp4'" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
-            <source [src]="custom_url + workout?.media[1].id+ '#t=0.1'" type="video/mp4">
+             class="explain-video" >
+            <source [src]=" workout?.portu_video_url + '#t=0.1'" type="video/mp4">
           </video>
 
         </ion-card>
@@ -179,11 +179,21 @@
             <ion-grid no-padding>
               <ion-row>
                 <ion-col size="4" class="header">
-                  <div style="height: 90px; width: 100%;" class="img-row"
-                    [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}" tappable
+                  <!-- <div style="height: 90px; width: 100%;" class="img-row"
+                    [ngStyle]="{'background-image':'url(' + exercise.image_full_min + ')'}" tappable
                     >
 
-                  </div>
+                  </div> -->
+                  <img-loader
+                  tappable
+                  class="img-row"
+                  [src]="exercise.image_full_min"
+                   width="100%"
+                   height="90px"
+                   backgroundSize="cover"
+                   fallbackAsPlaceholder="true"
+                   style="background-position: center;"
+                     > </img-loader>
                 </ion-col>
 
                 <ion-col size="8" class="title-body">

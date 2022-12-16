@@ -8,6 +8,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { Title } from '@angular/platform-browser';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper';
+
+
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation]);
+
 
 @Component({
   selector: 'app-workouts-list',
@@ -25,6 +30,8 @@ export class WorkoutsListPage implements OnInit {
     spaceBetween: 0,
     centeredSlides: false,
     slidesPerView: 3,
+    pager: true,
+    scrollbar: true,
   };
 
 

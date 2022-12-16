@@ -54,36 +54,24 @@
           <span [innerHtml]="showMore ? 'Menos' : 'Más'"> </span></a>
       </ion-text>
     </ion-col>
-    <ion-col class="item-row" size="12">
+    <ion-col class="item-row" size="12" class="ion-text-start">
 
-      <ion-row class="ion-align-items-start">
-        <ion-col size="4">
-          <h6 style="padding-left: 1em; ">Sexo</h6>
-        </ion-col>
-        <ion-col size="4" offset="-2">
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'm'">Homen</p>
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'f'">Mulher</p>
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.gender === 'o'">Outro</p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-start">
-        <ion-col size="4">
-          <h6 style="padding-left: 1em; ">Busco me relacionar com:</h6>
-        </ion-col>
-        <ion-col size="4" offset="-2">
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'm'">Homen</p>
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'f'">Mulher</p>
-          <p style="font-size: 14px;" *ngIf="user?.personal_information.looking_for === 'o'">Outro</p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-start">
-        <ion-col size="4">
-          <h6 style="padding-left: 1em; ">Edad</h6>
-        </ion-col>
-        <ion-col size="4" offset="-2">
-          <p style="font-size: 14px;">{{showAge}}</p>
-        </ion-col>
-      </ion-row>
+      <p style="text-align: left !important; font-size: 16px ; padding-left: 1.5 em;">Sexo :
+        <span *ngIf="user?.personal_information.gender === 'm'" style="font-size: 16px ;">Homen</span>
+        <span *ngIf="user?.personal_information.gender === 'f'" style="font-size: 16px ;">Mulher</span>
+        <span *ngIf="user?.personal_information.gender === 'o'" style="font-size: 16px ;">Outro</span>
+      </p>
+
+      <p style="text-align: left !important; font-size: 16px ; padding-left: 1.5 em;">Busco me relacionar com:
+        <span *ngIf="user?.personal_information.looking_for === 'm'" style="font-size: 16px ;">Homen</span>
+        <span *ngIf="user?.personal_information.looking_for === 'f'" style="font-size: 16px ;">Mulher</span>
+        <span *ngIf="user?.personal_information.looking_for === 'o'" style="font-size: 16px ;">Outro</span>
+      </p>
+
+
+      <p style="text-align: left !important; font-size: 16px ; padding-left: 1.5 em;">Edad :
+        {{showAge}}
+      </p>
 
 
     </ion-col>

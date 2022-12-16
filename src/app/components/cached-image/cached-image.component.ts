@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, Input, OnInit } from '@angular/core';
 import { Directory, Filesystem} from '@capacitor/filesystem';
 import { rejects } from 'assert';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -57,8 +59,15 @@ export class CachedImageComponent implements OnInit {
   }
 
   async storeImage(url, path){
-
-    const response = await fetch(url);
+    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    const response = await fetch(url,{
+      method: 'GET',
+      mode: 'no-cors',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          //'Access-Control-Allow-Origin': '*',
+        }),
+      });
     const blob = await response.blob();
     const base64Data = await this.convertBlobToBase64(blob) as string;
 

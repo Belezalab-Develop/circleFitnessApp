@@ -9,6 +9,8 @@ import { IonicModule } from '@ionic/angular';
 import { WorkoutsListPageRoutingModule } from './workouts-list-routing.module';
 
 import { WorkoutsListPage } from './workouts-list.page';
+import { SwiperModule } from 'swiper/angular';
+import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { WorkoutsListPage } from './workouts-list.page';
     FormsModule,
     IonicModule,
     WorkoutsListPageRoutingModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    SwiperModule,
+    IonicImageLoaderModule
   ],
   declarations: [WorkoutsListPage]
 })

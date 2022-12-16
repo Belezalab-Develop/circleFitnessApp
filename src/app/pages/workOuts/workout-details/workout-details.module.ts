@@ -10,6 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { WorkoutDetailsPageRoutingModule } from './workout-details-routing.module';
 
 import { WorkoutDetailsPage } from './workout-details.page';
+import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { WorkoutDetailsPage } from './workout-details.page';
     IonicModule,
     PipesModule,
     WorkoutDetailsPageRoutingModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    IonicImageLoaderModule
   ],
   declarations: [WorkoutDetailsPage]
 })
