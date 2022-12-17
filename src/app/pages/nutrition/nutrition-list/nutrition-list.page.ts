@@ -5,6 +5,10 @@ import { CachingService } from './../../../services/auxiliar/caching.service';
 import { Router } from '@angular/router';
 import { IonRouterOutlet, NavController, LoadingController } from '@ionic/angular';
 import { Component, OnInit, Optional, ViewChild } from '@angular/core';
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper';
+
+
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation]);
 
 @Component({
   selector: 'app-nutrition-list',
@@ -51,7 +55,7 @@ export class NutritionListPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.getData();
+
   }
 
   async getData() {
@@ -72,6 +76,8 @@ export class NutritionListPage implements OnInit {
 
       console.info('constraints', this.nutritionProgramsConstraint);
     });
+
+    this.isCharge = true;
   }
 
   //TODO:Evaluar si se pueden quitar;
@@ -103,7 +109,7 @@ export class NutritionListPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-      this.isCharge = true;
+
     }, 800);
   }
 }

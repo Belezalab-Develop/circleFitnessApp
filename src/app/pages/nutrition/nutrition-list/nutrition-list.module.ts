@@ -10,6 +10,8 @@ import { IonicModule } from '@ionic/angular';
 import { NutritionListPageRoutingModule } from './nutrition-list-routing.module';
 
 import { NutritionListPage } from './nutrition-list.page';
+import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { NutritionListPage } from './nutrition-list.page';
     TranslateModule.forChild(),
     FormsModule,
     IonicModule,
-    NutritionListPageRoutingModule
+    NutritionListPageRoutingModule,
+    IonicImageLoaderModule,
+    SwiperModule
   ],
   declarations: [NutritionListPage]
 })

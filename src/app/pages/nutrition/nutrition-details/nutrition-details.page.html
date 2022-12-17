@@ -117,7 +117,7 @@
               <ion-card class="video-card " >
 
                   <video width="375px" height="230px" controls muted="true" playsinline looped preload="auto" *ngIf="nutritionProgram.media[1].mime_type === 'video/mp4'" class="explain-video"  >
-                      <source [src]="custom_url + nutritionProgram.media[1].id + '#t=0.1'" type="video/mp4">
+                      <source [src]="nutritionProgram.initial_portu_video + '#t=0.1'" type="video/mp4">
                   </video>
 
               </ion-card>

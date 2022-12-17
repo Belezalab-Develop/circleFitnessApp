@@ -27,11 +27,9 @@ export class WorkoutsListPage implements OnInit {
   isCharge = false;
 
   sliderConfig = {
-    spaceBetween: 0,
-    centeredSlides: false,
+    initialSlide: 1,
     slidesPerView: 3,
-    pager: true,
-    scrollbar: true,
+
   };
 
 
@@ -59,17 +57,22 @@ export class WorkoutsListPage implements OnInit {
 
   async getData(){
 
-    await this.storageService.getCachedRequest('test', '-work-goals').then(res => {
-      this.goalsPrograms = res;
-
-      console.info('goals', this.goalsPrograms);
-    });
 
     await this.storageService.getCachedRequest('test', '-work-segments').then(res => {
       this.segmentsPrograms = res;
       console.info('segments', this.segmentsPrograms);
 
     });
+
+    await this.storageService.getCachedRequest('test', '-work-goals').then(res => {
+      this.goalsPrograms = res;
+
+      console.info('goals', this.goalsPrograms);
+    });
+
+    this.isCharge = true;
+
+
   }
 
   //TODO:Evaluar si se pueden quitar;
@@ -103,8 +106,8 @@ export class WorkoutsListPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-      this.isCharge = true;
-    }, 600);
+
+    }, 800);
   }
 
 
