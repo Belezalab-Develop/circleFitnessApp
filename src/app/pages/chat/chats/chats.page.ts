@@ -87,7 +87,7 @@ export class ChatsPage implements OnInit {
   async getInitialLogicData() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
-      message: 'un momento por favor ....'
+      message: 'carregando as informações.'
     });
 
     loading.present();
@@ -276,7 +276,7 @@ export class ChatsPage implements OnInit {
   async presentLoadingDefault() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
-      message: 'un momento por favor ....'
+      message: 'carregando as informações.'
 
 
     });

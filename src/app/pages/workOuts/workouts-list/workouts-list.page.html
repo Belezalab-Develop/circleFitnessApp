@@ -63,7 +63,7 @@
         </ion-slides> -->
       </div>
       <div *ngIf="!isCharge">
-        <ion-slides pager="true" #slides [options]="slideOpts">
+        <ion-slides pager="true" #slides [options]="sliderOpts">
           <ion-slide class="slides bg-slide" *ngFor="let a of [1,2,3,4]">
             <ion-skeleton-text animated></ion-skeleton-text>
           </ion-slide>
@@ -127,7 +127,7 @@
         </ion-slides> -->
       </div>
       <div *ngIf="!isCharge">
-        <ion-slides pager="true" #slides [options]="slideOpts">
+        <ion-slides pager="true" #slides [options]="sliderOpts">
           <ion-slide class="slides bg-slide" *ngFor="let a of [1,2,3,4]">
 
             <ion-skeleton-text animated></ion-skeleton-text>

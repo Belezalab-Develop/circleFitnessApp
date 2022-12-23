@@ -14,9 +14,9 @@
         <ion-avatar (click)="changeImage()">
           <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
           <ng-template #placheolder_avatar>
-            <!-- <div class="fallback">
+             <div class="fallback">
               <p>SEM IMAGEM</p>
-            </div> -->
+            </div> 
           </ng-template>
 
         </ion-avatar>

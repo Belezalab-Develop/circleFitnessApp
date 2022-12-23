@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { AvatarService } from './../../../services/auxiliar/avatar.service';
 import { FirebaseService } from './../../../services/auxiliar/firebase.service';
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -23,6 +24,7 @@ export class LoginPage implements OnInit {
   formLogin: FormGroup;
   loading;
   retryPass = '';
+  validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   constructor(
     private formB: FormBuilder,
@@ -127,6 +129,11 @@ export class LoginPage implements OnInit {
 
   }
 
+  loginGoogle(){
+    //to set
+  }
+
+
   firebaseSinUpLogic() {
     this.storageService.getStorage('user').then(result => {
       const form = this.formLogin.value;
@@ -155,7 +162,8 @@ export class LoginPage implements OnInit {
   buildRegisterForm() {
     this.formRegister = this.formB.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       paternal_surname: ['',],
       nick_name: ['', Validators.required],
       password: ['', Validators.required],
@@ -176,19 +184,27 @@ export class LoginPage implements OnInit {
   registerEmail() {
     console.log('entra  -> ', this.formRegister.get('password').value + ' = ' + this.formRegister.get('password_confirmation').value);
     if (this.formRegister.get('name').value === '') {
-      this.errorAlert('El nombre es requerido');
+      this.errorAlert('O nome é obrigatório');
+      return;
+    }
+    if (this.formRegister.get('email').value === '') {
+      this.errorAlert('O email é obrigatório');
+      return;
+    }
+    if (!this.formRegister.get('email').value.match(this.validRegex)) {
+      this.errorAlert('Preencha seu e-mail corretamente');
       return;
     }
     if (this.formRegister.get('password').value === '') {
-      this.errorAlert('La contraseña es requerida');
+      this.errorAlert('Senha requerida');
       return;
     }
     if (this.formRegister.get('password').value.length < 8) {
-      this.errorAlert('La contraseña debe tener mas de 8 caracteres');
+      this.errorAlert('A sua senha tem que conter pelo menos 8 caráteres');
       return;
     }
     if (this.formRegister.get('password').value !== this.formRegister.get('password_confirmation').value) {
-      this.errorAlert('La contraseña no coincide');
+      this.errorAlert('Senha não corresponde');
       return;
     }
     console.log(this.formRegister.value);

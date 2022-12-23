@@ -731,3 +731,10 @@ h5.title-h5 {
 .swiper-button-next:after, .swiper-button-prev:after {
   color:#ffffff !important
 }
+.alert-radio-label.sc-ion-alert-md {
+  white-space: break-spaces !important;
+  margin-top: 4px;
+}
+.alert-radio-group.sc-ion-alert-md, .alert-checkbox-group.sc-ion-alert-md {
+  padding-top: 15px;
+}

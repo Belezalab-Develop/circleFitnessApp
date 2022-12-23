@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col size="12" class="ion-text-center ion-padding-top">
           <ion-text>
-            <img style="margin-top: 20px; margin-left: 10px" src="assets/imgs/logo-fit-ola.png" />
+            <img style="height: 50%; margin-top: 5px; margin-left: 10px" src="assets/imgs/logo-fit-ola.png" />
           </ion-text>
         </ion-col>
 
@@ -19,12 +19,15 @@
 
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 0" class="fadeInLeft animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">1 / 9</h6>
+
       <div class="gender-c">
         <ion-row>
           <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
             <ion-text color="white">
-              {{user.nick_name}} Para recomendar o <br />
+              Para recomendar o <br />
               melhor plano de  exercícios e <br />
               nutrição, vamos fazer algumas  <br />
               perguntas rápidas.
@@ -52,10 +55,14 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 1 " class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">2 / 9</h6>
+
       <div class="gender-c">
         <ion-row>
-
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
               Data de nascimento
@@ -86,10 +93,14 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 2" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">3 / 9</h6>
       <div class="gender-c">
         <form [formGroup]="formMeasurements">
           <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <h6>{{user.nick_name}} </h6>
+            </ion-col>
             <ion-col size="12" class="ion-text-center ion-padding">
               <ion-text color="light" class="text-title">
                 ¿Qual é sua altura? (cm)
@@ -97,7 +108,7 @@
             </ion-col>
             <ion-col class="ion-text-center">
               <ion-item class="custom-input">
-                <ion-input name="height" formControlName="height" min="130" max="250" maxlength="3" placeholder="Altura"
+                <ion-input name="height" formControlName="height" max="250" maxlength="3" placeholder="Altura"
                   type="number"></ion-input>
               </ion-item>
             </ion-col>
@@ -108,7 +119,7 @@
             </ion-col>
             <ion-col class="ion-text-center">
               <ion-item class="custom-input">
-                <ion-input name="weight" formControlName="weight" min="20" max="300" maxlength="3" placeholder="Peso"
+                <ion-input name="weight" formControlName="weight"  max="300" maxlength="3" placeholder="Peso"
                   type="number"></ion-input>
               </ion-item>
 
@@ -120,9 +131,13 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 3" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">4 / 9</h6>
       <div class="gender-c">
         <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
 
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
@@ -141,15 +156,17 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 4" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">5 / 9</h6>
       <div class="gender-c">
 
         <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cúales de estos describen
-              mejor tus objetivos en Lid
-              Fitness?
+              Qual é o seu objetivo de Treinos?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
@@ -157,9 +174,9 @@
               <ion-label>Objetivos</ion-label>
               <ion-select [(ngModel)]="goal" multiple="true" cancelText="Cancelar" okText="Ok!">
                 <ion-select-option value="lose_weight">Perder peso</ion-select-option>
-                <ion-select-option value="build_muscle_mass">Ganar masa</ion-select-option>
+                <ion-select-option value="build_muscle_mass">Ganar massa</ion-select-option>
                 <ion-select-option value="tone_up">Tonificar</ion-select-option>
-                <ion-select-option value="other">Otro</ion-select-option>
+                <ion-select-option value="other">Outro</ion-select-option>
               </ion-select>
             </ion-item>
 
@@ -169,22 +186,29 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 5" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">6 / 9</h6>
       <div class="gender-c">
         <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
 
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cómo describirías tu experiencia sobre entrenamientos?
+              Como você descreveria a sua experiencia com treinos na  academia?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-item class="custom-input">
-              <ion-label>Experiencia</ion-label>
+              <ion-label>Experiência</ion-label>
               <ion-select [(ngModel)]="experience" cancelText="Cancelar" okText="Ok!">
-                <ion-select-option value="beginner">Principiante</ion-select-option>
-                <ion-select-option value="intermediate">Intermedio</ion-select-option>
-                <ion-select-option value="expert">Avanzado</ion-select-option>
+                <ion-select-option value="beginner">Principiante:  <br>
+                  Não entendo muito de academia</ion-select-option>
+                <ion-select-option value="intermediate">Intermediário: <br>
+                  Já fui algumas vezes.</ion-select-option>
+                <ion-select-option value="expert">Avançado: <br>
+                  Vou direto na academia! </ion-select-option>
               </ion-select>
             </ion-item>
 
@@ -194,9 +218,13 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 6" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">7 / 9</h6>
       <div class="gender-c">
         <ion-row *ngIf="gender === 'female'">
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
               Escolha o seu tipo de corpo.
@@ -213,12 +241,16 @@
               [src]="pathLocationImage + 'woman-endomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
               class="endomorph" (click)="selectBodyOk(bodies, body)" />
             <p class="text-circle-btn">{{ body.label }}</p>
+            <p class="text-circle-btn">{{ body.descrip }}</p>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="gender === 'male'">
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cómo describirías tu tipo de cuerpo?
+              Escolha o seu tipo de corpo.
             </ion-text>
           </ion-col>
           <ion-col *ngFor="let body of bodies" size="4" class="ion-text-center">
@@ -232,24 +264,51 @@
               [src]="pathLocationImage + 'man-endomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
               class="endomorph" (click)="selectBodyOk(bodies, body)" />
             <p class="text-circle-btn">{{ body.label }}</p>
+            <p class="text-circle-btn">{{ body.descrip }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="gender === 'other'">
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
+          <ion-col size="12" class="ion-text-center ion-padding">
+            <ion-text color="light" class="text-title">
+              Escolha o seu tipo de corpo.
+            </ion-text>
+          </ion-col>
+          <ion-col *ngFor="let body of bodies" size="4" class="ion-text-center">
+            <input *ngIf="body.type === 1" type="image"
+              [src]="pathLocationImage + 'man-ectomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
+              class="ectomorph" (click)="selectBodyOk(bodies, body)" />
+            <input *ngIf="body.type === 2" type="image"
+              [src]="pathLocationImage + 'man-mesomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
+              class="mesomorph" (click)="selectBodyOk(bodies, body)" />
+            <input *ngIf="body.type === 3" type="image"
+              [src]="pathLocationImage + 'man-endomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
+              class="endomorph" (click)="selectBodyOk(bodies, body)" />
+            <p class="text-circle-btn">{{ body.label }}</p>
+            <p class="text-circle-btn">{{ body.descrip }}</p>
           </ion-col>
         </ion-row>
       </div>
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 7" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">8 / 9</h6>
       <div class="gender-c">
         <ion-row>
-
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cúantas veces por semana te gustaría ir al gimnasio?
+              Quantas vezes por semana você gostaria de ir à ginásio?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-item class="custom-input">
-              <ion-label>Ir al Gym</ion-label>
+              <ion-label>ir para o ginásio</ion-label>
               <ion-select [(ngModel)]="frequencyGym" cancelText="Cancelar" okText="Ok!">
                 <ion-select-option value="1">1 - 3</ion-select-option>
                 <ion-select-option value="2">4 - 5</ion-select-option>
@@ -263,22 +322,27 @@
     </ion-content>
     <ion-content class="wizard-c" color="transparent" *ngIf="step >= 8" class="fadeInRight animated"
       style="height: 86%">
-      <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6>
+      <!-- <h6 class="progress-bar">{{ (progress * 100) | number : '.2-2' }}%</h6> -->
+      <h6 class="progress-bar">9 / 9</h6>
       <div class="gender-c">
         <ion-row>
-
+          <ion-col size="12" class="ion-text-center">
+            <h6>{{user.nick_name}} </h6>
+          </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Tenés alguna restricción alimentaria?
+              ¿Você tem alguma restrição alimentar?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-item class="custom-input">
-              <ion-label>Selecciona una</ion-label>
+              <ion-label>Selecione um</ion-label>
               <ion-select [(ngModel)]="footRestriction" multiple="true" cancelText="Cancelar" okText="Ok!">
-                <ion-select-option value="bacon">Vegano</ion-select-option>
-                <ion-select-option value="olives">Vegetariano</ion-select-option>
-                <ion-select-option value="xcheese">Sem lactose ou Glutem</ion-select-option>
+                <ion-select-option value="5">Sem restrições</ion-select-option>
+                <ion-select-option value="1">Vegano</ion-select-option>
+                <ion-select-option value="2">Vegetariano</ion-select-option>
+                <ion-select-option value="3">Sem lactose </ion-select-option>
+                <ion-select-option value="4">Sem  Glutem</ion-select-option>
               </ion-select>
             </ion-item>
 

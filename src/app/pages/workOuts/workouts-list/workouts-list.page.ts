@@ -26,7 +26,7 @@ export class WorkoutsListPage implements OnInit {
   segmentsPrograms = [];
   isCharge = false;
 
-  sliderConfig = {
+  sliderOpts= {
     initialSlide: 1,
     slidesPerView: 3,
 
@@ -97,7 +97,7 @@ export class WorkoutsListPage implements OnInit {
   async presentLoadingDefault() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
-      message: 'un momento por favor ....'
+      message: 'carregando as informações ....'
 
 
     });

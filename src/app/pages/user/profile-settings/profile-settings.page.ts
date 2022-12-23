@@ -70,7 +70,7 @@ export class ProfileSettingsPage implements OnInit {
     this.userService.updateUser(this.form).subscribe(async () => {
       const loading = await this.loadingController.create({
         spinner: 'bubbles',
-        message: 'Actualizando un momento por favor ....'
+        message: 'Actualizando carregando as informações.'
       });
       loading.present();
 
@@ -148,7 +148,7 @@ export class ProfileSettingsPage implements OnInit {
   async presentLoadingDefault() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
-      message: 'un momento por favor ....'
+      message: 'carregando as informações.'
 
 
     });

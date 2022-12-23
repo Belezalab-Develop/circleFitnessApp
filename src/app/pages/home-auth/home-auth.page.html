@@ -5,11 +5,21 @@
 
       </ion-buttons>
       <ion-buttons slot="end">
+
         <ion-button (click)="goGalery()">
-          <ion-icon color="white" slot="start" name="images-outline"></ion-icon>
+          <div class="custom-button-content">
+            <ion-icon color="white" slot="start" name="images-outline"></ion-icon>
+            <ion-label> GALAREIA</ion-label>
+          </div>
+
         </ion-button>
         <ion-button (click)="goProfile()">
-          <ion-icon color="white" slot="end" name="person-outline"></ion-icon>
+          <div class="custom-button-content">
+            <ion-icon color="white" slot="end" name="person-outline"></ion-icon>
+            <ion-label>PERFIL</ion-label>
+          </div>
+
+
         </ion-button>
 
     </ion-buttons>

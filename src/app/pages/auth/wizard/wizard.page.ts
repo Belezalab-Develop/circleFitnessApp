@@ -215,16 +215,16 @@ export class WizardPage implements OnInit {
 
   setGender(gender) {
     if (gender == null) {
-      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
     this.registerService.saveGender(gender).subscribe(response => {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo el sexo correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
@@ -238,16 +238,16 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo la fecha de nacimiento correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setMeasurements(measurements) {
     if (measurements == null) {
-      this.gnrlService.showToast('Oops! Debe ingresar las medidas', 'toast-success');
+      this.gnrlService.showToast('Oops! Você deve inserir as medidas', 'toast-success');
       return;
     }
 
@@ -257,7 +257,7 @@ export class WizardPage implements OnInit {
     }
 
     if (20 > measurements.weight || measurements.weight > 300) {
-      this.gnrlService.showToast('Oops! Revisa que el peso sea correcto', 'toast-success');
+      this.gnrlService.showToast('Oops! Preencher o peso para avançar!', 'toast-success');
       return;
     }
 
@@ -265,16 +265,16 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizaron las medidas correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setFatPercentage(fatPercentage) {
     if (fatPercentage == null) {
-      this.gnrlService.showToast('Oops! Debe ingresar el porcentaje', 'toast-success');
+      this.gnrlService.showToast('Oops! Você deve inserir a porcentagem', 'toast-success');
       return;
     }
 
@@ -287,32 +287,32 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo el porcentaje %', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setGoal(goal) {
     if (goal.length === 0) {
-      this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
     this.registerService.saveGoal(goal).subscribe(response => {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizaron las metas correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setExperience(experience) {
     if (experience == null) {
-      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
 
@@ -321,25 +321,25 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo la experiencia correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, _err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setBody(body) {
     if (body == null) {
-      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
     this.registerService.saveBody(body).subscribe(response => {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo el tipo de cuerpo correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
@@ -347,7 +347,7 @@ export class WizardPage implements OnInit {
   setGymFrequency(frequency) {
     console.log(Number(frequency));
     if (frequency == null) {
-      this.gnrlService.showToast('Oops! Debe seleccionar una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
     let gym_min_weekly_frequency: number;
@@ -379,16 +379,16 @@ export class WizardPage implements OnInit {
       console.log(response);
       this.step = this.step + 1;
       this.progress = this.step / 9;
-      this.gnrlService.showToast('Se actualizo la frecuencia correctamente', 'toast-success');
+      this.gnrlService.showToast('Foi atualizado corretamente', 'toast-success');
     }, err => {
-      this.gnrlService.showToast('Oops! occurrio un problema', 'toast-success');
+      this.gnrlService.showToast('Oops! Verifique os dados', 'toast-success');
       return;
     });
   }
 
   setFootRestriction(foot) {
     if (foot == null) {
-      this.gnrlService.showToast('Oops! Debe seleccionar almenos una opción', 'toast-success');
+      this.gnrlService.showToast('Oops! Você tem que escolher uma opção para avançar', 'toast-success');
       return;
     }
     this.registerService.saveFoodRestrictions(foot).subscribe(response => {
