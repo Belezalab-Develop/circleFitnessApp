@@ -154,14 +154,14 @@
                               <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ recipe.label }}
                           </ion-col>
                           <ion-col size="12" class="no-padding">
-                              <span style="font-size: 14px; font-weight: 16px;" *ngIf="meal.supplements">Suplementos</span>
+                              <span style="font-size: 14px; font-weight: 16px;" *ngIf="meal.supplements.length > 0">Suplementos</span>
                           </ion-col>
                           <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
                               <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>
                           </ion-col>
-                          <ion-col size="12" class="no-padding">
+                          <!-- <ion-col size="12" class="no-padding">
                               {{ meal.description }}
-                          </ion-col>
+                          </ion-col> -->
                       </ion-row>
                   </ion-col>
               </ion-row>
@@ -185,7 +185,7 @@
   </ion-row>
 </ion-content>
 <div class="indicator-nutrition" *ngIf="nutritionIndicator">
-  <h6>Encuentra tu nuevo programa</h6>
+  <h6>Aqui você encontrará seu novo plano</h6>
 <div class="indicator-down"></div>
 </div>
 <app-custom-tab></app-custom-tab>

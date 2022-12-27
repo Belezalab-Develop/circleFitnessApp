@@ -25,7 +25,7 @@ dependencies {
     implementation project(':capacitor-status-bar')
     implementation "com.android.billingclient:billing:4.0.0"
 }
-
+apply from: "../../node_modules/cordova-plugin-smartlook/src/android/plugin.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

@@ -35,7 +35,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-
+import { Smartlook } from '@awesome-cordova-plugins/smartlook/ngx';
 
 
 
@@ -81,6 +81,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthProvider,
     Title,
     WebView,
+    Smartlook,
     StatusBar,
     InAppBrowser,
     AppAvailability,

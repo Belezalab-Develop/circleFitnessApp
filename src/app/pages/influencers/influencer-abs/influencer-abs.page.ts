@@ -27,6 +27,8 @@ export class InfluencerAbsPage implements OnInit {
   uniqueIds = new Set();
   uniqueVideos= [];
 
+  pageInfo=[];
+
 
 
 
@@ -92,6 +94,12 @@ export class InfluencerAbsPage implements OnInit {
     }
 
    this.uniqueVideos = [...map.values()];
+
+   this.pageInfo = this.uniqueVideos.map(item => ({
+    ...item,
+    detail: item.description.split('\n').join('<br />')
+  }));
+  console.log(this.pageInfo);
    console.log(this.uniqueVideos);
   }
 

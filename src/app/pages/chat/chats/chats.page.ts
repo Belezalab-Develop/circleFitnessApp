@@ -29,7 +29,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class ChatsPage implements OnInit {
   @ViewChild('slides', { static: true }) slider: IonSlides;
-  segment = 0;
+  segment ;
   users: User[] = [];
   us: any;
   chats: any = [];
@@ -68,6 +68,19 @@ export class ChatsPage implements OnInit {
   ) {
     this.titleService.setTitle('All Chats');
 
+    if (this.router.getCurrentNavigation() != null) {
+
+
+      console.log(this.router.getCurrentNavigation().extras.state.last);
+      if (this.router.getCurrentNavigation().extras.state.last === 1) {
+        this.segment = 1 ;
+      }else{
+        this.segment = 0;
+
+      }
+    }
+
+
     //this.presentLoadingDefault();
   }
 
@@ -76,12 +89,12 @@ export class ChatsPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getLocation();
+    this.getInitialLogicData();
 
   }
   ionViewDidEnter() {
-    this.getLocation();
-    this.getInitialLogicData();
+
   }
 
   async getInitialLogicData() {
@@ -121,12 +134,13 @@ export class ChatsPage implements OnInit {
     });
   }
 
-  async segmentChanged(ev: any) {
+  async segmentChanged() {
     await this.slider.slideTo(this.segment);
   }
 
   async slideChanged() {
     this.segment = await this.slider.getActiveIndex();
+    //this.segment = k;
   }
 
   async openEspecificNutrition(email) {

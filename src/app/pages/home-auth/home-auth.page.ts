@@ -79,7 +79,8 @@ export class HomeAuthPage implements OnInit {
     this.router.navigateByUrl('nutrition-list', {replaceUrl: true});
   }
   goToChat() {
-    this.router.navigateByUrl('chats', {replaceUrl: true});
+    this.router.navigateByUrl('chats', {replaceUrl: true ,
+      state: { last: 0 }});
   }
 
   goProfile() {

@@ -72,7 +72,7 @@ export class CustomTabComponent implements OnInit {
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.avatarService.updatePrincipalBadge(this.userUid, badge);
-      this.router.navigateByUrl('chats', { replaceUrl: true });
+      this.router.navigateByUrl('chats', { replaceUrl: true, state: { last: 1} });
     });
 
 

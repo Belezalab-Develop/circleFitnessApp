@@ -6,12 +6,14 @@ h1 {
   margin: 0 !important;
   text-transform: capitalize !important;
 }
+
 p {
   text-align: center !important;
   color: #fff !important;
   font-family: "HNC-Light", sans-serif;
+
   span {
-      color: #9a9896 !important;
+    color: #9a9896 !important;
   }
 }
 
@@ -30,30 +32,37 @@ div.box-border {
   height: 22px !important;
   border-bottom: 1px solid #fff !important;
 }
+
 button.finish {
   width: 180px !important;
   margin: 12px auto !important;
 }
+
 div.video-container {
   position: relative !important;
+
   .video-player {
-      width: 100%;
+    width: 100%;
   }
+
   .video-overload {
-      position: absolute !important;
-      top: 8px !important;
-      width: 100%;
-      .play {
-          color: #fff !important;
-          button {
-              height: auto !important;
-              text-transform: capitalize !important;
-              ion-icon {
-                  font-size: 48px !important;
-                  color: var(--ion-color-danger) !important;
-              }
-          }
+    position: absolute !important;
+    top: 8px !important;
+    width: 100%;
+
+    .play {
+      color: #fff !important;
+
+      button {
+        height: auto !important;
+        text-transform: capitalize !important;
+
+        ion-icon {
+          font-size: 48px !important;
+          color: var(--ion-color-danger) !important;
+        }
       }
+    }
   }
 }
 
@@ -67,30 +76,32 @@ div.video-container {
   justify-content: center;
 
   .img-more {
-      width: 100%;
-      height: 410px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
+    width: 100%;
+    height: 410px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
   }
 }
 
 
 .play {
   width: 100px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
   text-align: center;
+
   ion-icon {
-      font-size: 80px;
+    font-size: 80px;
   }
+
   h6 {
-      margin-top: -5px;
-      letter-spacing: 4px;
-      font-size: 16px;
+    margin-top: -5px;
+    letter-spacing: 4px;
+    font-size: 16px;
   }
 }
 
@@ -125,76 +136,107 @@ ion-row {
 ion-list.plans {
   margin-left: -20px;
   margin-right: -20px;
+
   ion-item {
     background-color: #323232 !important;
     margin-left: -20px;
     margin-right: -20px;
   }
+
   p {
     color: white;
     font-family: "HNC-Light";
     font-size: 12px;
   }
+
   .food_detail {
     color: white;
     font-family: "HNC-Light";
     font-size: 12px;
     padding-top: 6px;
   }
+
   .food_foot {
     color: white;
     font-family: "HNC-Light";
     font-size: 10px;
     font-weight: bold;
   }
+
   .food_value {
     color: white;
     font-family: "HNC-Light";
     font-size: 10px;
     padding-top: 10px;
   }
+
   h2 {
     font-size: 19px;
   }
+
   ion-col {
     div {
       padding-left: 16px;
     }
   }
+
   button {
     height: 20px !important;
     font-size: 11px !important;
   }
 }
 
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 50%;
+}
+
 .explain-video{
-  border: none;
+  height: 95%;
+  width: 95%;
 }
 .video-card{
   padding: 0px !important;
   background: none !important;
   border: none;
-  text-align: center;
+  color: none;
 }
-.finisher-text{
+
+.finisher-text {
   margin-left: 1em;
   margin-right: 2em;
   text-align: justify !important;
 }
 
-.special-button{
+.special-button {
   --border-color: var(--ion-color-dark);
-  --color: var(--ion-color-dark)!important;
+  --color: var(--ion-color-dark) !important;
+
   ion-icon {
 
     --color: var(--ion-color-dark) !important;
   }
 }
-ion-button{
-  --border-color: var(--ion-color-dark)!important;
-  --color: var(--ion-color-dark)!important;
+
+ion-button {
+  --border-color: var(--ion-color-dark) !important;
+  --color: var(--ion-color-dark) !important;
+
   ion-icon {
 
     --color: var(--ion-color-dark) !important;
   }
+}
+
+.esp {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
 }

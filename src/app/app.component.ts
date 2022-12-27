@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { App } from '@capacitor/app';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+import { Smartlook, SmartlookSetupConfig } from '@awesome-cordova-plugins/smartlook/ngx';
 
 //import { Stripe } from '@capacitor-community/stripe';
 
@@ -29,9 +30,8 @@ export class AppComponent implements OnInit {
     private navCtrl: NavController,
     private generalService: GeneralService,
     private statusBar: StatusBar,
-    private notificatiosService: NotificationsService
-
-
+    private notificatiosService: NotificationsService,
+    private smartlook: Smartlook
 
   ) {
     this.storageService.initStorage();
@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
       this.translate.addLangs(['en', 'es']);
       this.translate.setDefaultLang('es');
       this.translate.use('es');
+
       console.log('app component');
 
       this.authService.authState.subscribe(state => {
@@ -68,7 +69,7 @@ export class AppComponent implements OnInit {
           }
         }
       });
-
+      this.smartlook.setupAndStartRecording(new SmartlookSetupConfig('2fa7b73903eea3c32a6091ab66b3ea7d6ab951e1'));
 
     });
   }
