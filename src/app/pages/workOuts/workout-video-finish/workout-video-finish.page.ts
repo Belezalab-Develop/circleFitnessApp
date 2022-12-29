@@ -24,6 +24,9 @@ export class WorkoutVideoFinishPage implements OnInit {
   excTime: number;
   verVideo2 = false;
   verVideo1 = false;
+  exerciseFinish: any;
+  textVideo1;
+  textVideo2;
 
   constructor(
 
@@ -45,6 +48,9 @@ export class WorkoutVideoFinishPage implements OnInit {
       this.routine = this.router.getCurrentNavigation().extras.state.routine;
       this.exerciseProgram =
         this.router.getCurrentNavigation().extras.state.routine;
+        this.textVideo1 = this.exerciseProgram.finisher1.description.split('\n').join('<br />');
+        this.textVideo2 = this.exerciseProgram.finisher2.description.split('\n').join('<br />');
+      console.log(this.exerciseFinish);
       console.log('ESTA ES LA RUTINA:::', this.routine);
     }
   }

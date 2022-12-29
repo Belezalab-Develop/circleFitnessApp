@@ -38,14 +38,22 @@ export class UserWorkoutPage implements OnInit {
 
   ngOnInit() {
     console.info('USER WORKOUT');
-     //TODO: pasar eso a storage en el inicio y llamar  desde ahi.
+    //TODO: pasar eso a storage en el inicio y llamar  desde ahi.
     this.userService.getExerciseProgram().subscribe(
       (exerciseProgram: any) => {
-        this.exerciseProgram = exerciseProgram;
-        this.routines = this.exerciseProgram.days[0].sessions;
-        this.goals = this.exerciseProgram.prog.goals;
-        this.levels = this.exerciseProgram.prog.levels;
-        console.log('WORKOUT   :>> ', exerciseProgram);
+
+        if (exerciseProgram !== null) {
+          this.exerciseProgram = exerciseProgram;
+          this.routines = this.exerciseProgram.days[0].sessions;
+          this.goals = this.exerciseProgram.prog.goals;
+          this.levels = this.exerciseProgram.prog.levels;
+          console.log('WORKOUT   :>> ', exerciseProgram);
+        }else{
+          this.exerciseProgram = null;
+        }
+
+
+
       },
       (err) => {
         console.log(err);
@@ -67,24 +75,24 @@ export class UserWorkoutPage implements OnInit {
   selectedWorkoutRoutine(routines: any, influencer: any) {
     console.log(routines);
     console.log(influencer);
-  if (this.viewReorder) {
-    this.router.navigateByUrl('/user-workout-details', {
-      state: { routine: routines, influencer },
-    });
+    if (this.viewReorder) {
+      this.router.navigateByUrl('/user-workout-details', {
+        state: { routine: routines, influencer },
+      });
+    }
   }
-}
 
   goInfluencerDetail(influencer: any) {
     console.log(influencer);
     this.router.navigate(['/influencer-details'], {
       state: { influencer },
-      replaceUrl:true
+      replaceUrl: true
     });
   }
 
 
   reorderRoutines(event) {
-    const dayOfWeek = ['monday', 'tuesday', 'webnesday', 'thursday', 'friday'];
+    const dayOfWeek = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira'];
 
     console.log(event);
     console.log(`Moving item from ${event.detail.from} to ${event.detail.to}`);

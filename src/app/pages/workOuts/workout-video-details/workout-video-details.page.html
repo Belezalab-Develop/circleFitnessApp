@@ -76,14 +76,14 @@
   </ion-row>
   <div class="more ion-margin-top no-padding">
 
-    <div *ngIf="exercise?.media[2]">
+    <div >
       <div class="img-more">
         <ion-card class="video-card ">
           <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
           <video width="400px" height="350px" controls muted="true" playsinline looped preload="auto"
-            *ngIf="exercise?.media[2].mime_type === 'video/mp4'" class="explain-video"
-            poster="assets/imgs/hola.png">
-            <source [src]="custom_url + exercise?.media[2].id+ '#t=0.1'" type="video/mp4">
+             class="explain-video"
+            >
+            <source [src]="exercise?.video_url + '#t=0.1'" type="video/mp4">
           </video>
 
         </ion-card>

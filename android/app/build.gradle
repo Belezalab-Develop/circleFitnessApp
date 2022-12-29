@@ -23,6 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+  buildFeatures {
+    viewBinding true
+  }
 }
 
 repositories {
@@ -43,6 +46,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-iid'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 }
 
 apply from: 'capacitor.build.gradle'

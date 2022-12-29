@@ -46,15 +46,26 @@ export class ProfilePage implements OnInit {
       this.user = data[0];
       console.log(this.user);
       if (this.user) {
-        this.workOutService.individual(this.user.customer.exercise_program.exercise_program_id).subscribe((resp) => {
-          this.exerciseProgram = resp[0];
+        if (this.user.customer.exercise_program === null) {
+          this.exerciseProgram = null;
+        } else {
+          this.workOutService.individual(this.user.customer.exercise_program.exercise_program_id).subscribe((resp) => {
+            this.exerciseProgram = resp[0];
 
-        });
+          });
 
-        this.nutritionService.individual(this.user.customer.nutrition_program.nutrition_program_id).subscribe((res)=> {
-          this.nutritionProgram = res[0];
+        }
 
-        });
+        if (this.user.customer.nutrition_program === null) {
+          this.nutritionProgram = null;
+        } else {
+          this.nutritionService.individual(this.user.customer.nutrition_program.nutrition_program_id).subscribe((res) => {
+            this.nutritionProgram = res[0];
+
+          });
+        }
+
+
       }
     });
 
@@ -73,26 +84,35 @@ export class ProfilePage implements OnInit {
     params.ShowSubList = true;
     params.ShowLocation = false;
 
-    await this.router.navigate(['/workout-details'], {
-      queryParams: { params, workout },
-    });
+    if (workout !== null) {
+      await this.router.navigate(['/workout-details'], {
+        queryParams: { params, workout },
+      });
+    }
+
+    return;
+
+
   }
 
   async openNutrition(nutritionProgram): Promise<void> {
-    await this.router.navigateByUrl('nutrition-details', {
-      state: { showMoreOptions: false, nutritionProgram },
-    });
+    if (nutritionProgram !== null) {
+      await this.router.navigateByUrl('nutrition-details', {
+        state: { showMoreOptions: false, nutritionProgram },
+      });
+    }
+    return;
   }
 
-  async goUserLifeStyle(user, email, photo_url, uid){
+  async goUserLifeStyle(user, email, photo_url, uid) {
     await this.router.navigateByUrl('profile-to-show', {
-      state: { showMoreOptions: false, user , email, photo_url, uid},
+      state: { showMoreOptions: false, user, email, photo_url, uid },
     });
   }
 
-  async goUserGalery(user, email, photo_url, uid){
+  async goUserGalery(user, email, photo_url, uid) {
     await this.router.navigateByUrl('galery-to-show', {
-      state: { showMoreOptions: false, user , email, photo_url, uid},
+      state: { showMoreOptions: false, user, email, photo_url, uid },
     });
   }
 

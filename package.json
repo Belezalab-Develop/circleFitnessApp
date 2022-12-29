@@ -21,12 +21,12 @@
     "@angular/platform-browser-dynamic": "~13.2.2",
     "@angular/router": "~13.2.2",
     "@awesome-cordova-plugins/app-availability": "^5.43.0",
-    "@awesome-cordova-plugins/core": "6.2.0",
+    "@awesome-cordova-plugins/core": "^6.2.0",
     "@awesome-cordova-plugins/file": "6.2.0",
     "@awesome-cordova-plugins/in-app-browser": "^5.43.0",
     "@awesome-cordova-plugins/in-app-purchase-2": "5.43.0",
     "@awesome-cordova-plugins/ionic-webview": "6.2.0",
-    "@awesome-cordova-plugins/smartlook": "6.2.0",
+    "@awesome-cordova-plugins/smartlook": "^6.2.0",
     "@awesome-cordova-plugins/status-bar": "^5.43.0",
     "@capacitor-community/firebase-analytics": "^1.0.1",
     "@capacitor-community/stripe": "^3.8.1",
@@ -52,10 +52,12 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-purchase": "^11.0.0",
-    "cordova-plugin-smartlook": "^1.9.6",
+    "cordova-plugin-smartlook": "github:smartlook/cordova-smartlook#master",
     "cordova-sqlite-storage": "^6.0.0",
     "date-fns": "^2.28.0",
     "firebase": "^9.8.3",
+    "g": "^2.0.1",
+    "geofire": "^6.0.0",
     "ionic-image-loader-v5": "^1.0.2",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "rxjs": "~6.6.0",
@@ -95,7 +97,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.4.4"
+    "typescript": "^4.6.2"
   },
   "description": "An Ionic project"
 }

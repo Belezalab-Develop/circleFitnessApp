@@ -2,11 +2,11 @@
   <app-nav-header></app-nav-header>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding" style="padding-bottom: 1em;">
+<ion-content no-padding>
   <ion-row>
     <ion-col size="12">
       <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CHAT </div>
-      <!-- <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
+      <!--  <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
         <ion-icon slot="start" name="filter-sharp" color="dark"></ion-icon> Filtrar
       </ion-button> -->
     </ion-col>
@@ -25,11 +25,11 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-slides style="height: 100%; width: 100%" #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
+  <ion-slides  #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
     <ion-slide >
-      <ion-content style="height: 100%">
+      <ion-content >
         <ion-row>
-          <ion-col size="12" class="item-row" *ngFor="let user of geoUsers">
+          <ion-col size="12" class="item-row" *ngFor="let user of usersAround">
             <ion-row class="ion-align-items-start">
               <ion-col size="3">
                 <ion-avatar (click)="goDetail(user.email, user.imageUrl, user.id)" style="margin-bottom: 8px;">
@@ -54,7 +54,7 @@
                     </span>
                   </ion-col>
                   <ion-col size="8">
-                    <ion-col size="12">
+                    <ion-col size="12" style="margin-right: 2em;">
                       <ion-row>
                         <ion-col size="8" class="ion-text-center">
                           SEUS PROGRAMAS
@@ -81,13 +81,34 @@
             </ion-row>
           </ion-col>
         </ion-row>
+        <ion-list *ngIf="isLoaded">
+          <ion-list-header>
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+          </ion-list-header>
+          <ion-item *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
       </ion-content>
     </ion-slide>
-    <ion-slide >
-      <ion-content style="height: 100%">
+    <ion-slide style="margin-bottom: 3rem;">
+      <ion-content >
         <ion-row>
           <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
-            <ion-row class="ion-align-items-start">
+            <ion-row class="ion-align-items-start" >
               <ion-col size="3">
                 <ion-avatar (click)="goDetail(user.toEmail, user.img, user.toUid)" style="margin-bottom: 8px;">
                   <img [src]="user.img" alt="user.name" style="width: 100%; !important"/>

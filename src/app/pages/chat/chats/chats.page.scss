@@ -1,81 +1,98 @@
-ion-list, .list-md{
-	--background: transparent !important;
-    --background-color: transparent !important;
-    background: transparent !important;
-	ion-item{
-	    --background: transparent !important;
-	    --color: #fff !important;
-	}
+ion-list,
+.list-md {
+  --background: transparent !important;
+  --background-color: transparent !important;
+  background: transparent !important;
+
+  ion-item {
+    --background: transparent !important;
+    --color: #fff !important;
+  }
 }
 
 ion-content {
-    --background: none;
-    --padding-start: 0px;
-    --padding-end: 0px;
-    --padding-bottom: 20px;
+  --background: none;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-bottom: 20px;
+}
+
+ion-text {
+  color: #fff;
+  font-family: "HNC-Medium", sans-serif;
+  font-size: 20px;
 }
 
 ion-segment {
 
-	width: 100%;
-	height: 30px;
-	ion-segment-button {
-		height: 30px;
-		top: -10px;
-	}
+  width: 100%;
+  height: 30px;
+
+  ion-segment-button {
+    height: 30px;
+    top: -10px;
+  }
 }
-ion-label{
+
+ion-label {
   color: var(--ion-color-dark);
   font-size: medium;
-  font-family: "HNC-Light";
+  font-weight: bolder;
 }
 
 .item-row {
-    background: #232325;
-    margin: 0 auto;
-    color: var(--ion-color-dark);
-    font-family: "HNC-Light";
-	font-size: 12px;
-	border-top: 2px solid black;
+  background: #232325;
+  margin: 0 auto;
+  color: var(--ion-color-dark);
+  font-family: "HNC-Light";
+  font-size: 12px;
+  border-top: 2px solid black;
 }
 
 ion-avatar {
-    left: 0;
-	width: 90px;
-	height: 90px!important;
-    max-height: 90px!important;
-	// position: absolute;
-	img {
-		height: 90px;
-	}
+  left: 0;
+  width: 90px;
+  height: 90px !important;
+  max-height: 90px !important;
+
+  // position: absolute;
+  img {
+    height: 90px;
+  }
 }
 
 
 
 .icon-circle {
-    width: 40px;
-    height: 40px;
-	text-align: center;
-	margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .messages {
-    height: 20px;
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px;
-    font-weight: bold;
-    position: absolute;
-	top: 10px;
-	right: 0px;
-    border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  border-radius: 50%;
 
 }
 
 .fil {
-    position: absolute;
-    right: 10px;
-    top: 5px;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+ion-skeleton-text {
+  --border-radius: 9999px;
+  --background: rgba(8, 8, 8, 0.589);
+  --background-rgb: 188, 0, 255;
 }

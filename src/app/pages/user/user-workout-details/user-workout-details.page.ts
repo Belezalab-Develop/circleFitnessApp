@@ -91,9 +91,10 @@ export class UserWorkoutDetailsPage implements OnInit {
     this.isStarted = true;
     this.startWorkTimer();
     this.selected = 1;
-    this.bottonText = 'Completa la serie';
+    this.bottonText = 'PRÓXIMA SÉRIE';
     this.initialIndex = 0;
     const i = 0;
+
     this.nextExercise(this.routine.exercises[0].id);
     this.setExerciseStatus(i, this.routine.exercises[0].id, 1);
 
@@ -170,6 +171,8 @@ export class UserWorkoutDetailsPage implements OnInit {
     console.log(i);
     console.log(exercise_id);
 
+
+
     const exercise = this.routine.exercises.find((r) => r.id === exercise_id);
     this.exerciseSerieLength = exercise.details.length;
     this.exerciseDetails = exercise.details;
@@ -195,7 +198,7 @@ export class UserWorkoutDetailsPage implements OnInit {
 
     const element = document.getElementById(test);
     const rep = element.dataset.serie_rep;
-
+    exercise.current_serie_index = i + 1;
     this.totalRepetitions.push(rep);
     console.log(this.totalRepetitions);
     element.style.color = 'white';
@@ -220,7 +223,14 @@ export class UserWorkoutDetailsPage implements OnInit {
           const newIndex = index + 1;
           const newExercise = this.routine.exercises[newIndex].id;
           this.initialIndex = 0;
+          const exerc = exercise.id;
+
+          console.log('ejercicio::', exerc);
+          const el = document.getElementById(exerc);
+          console.log('ejercicio::', el);
+          el.style.color = 'white';
           this.nextExercise(newExercise);
+
         }
         break;
     }
@@ -245,7 +255,7 @@ export class UserWorkoutDetailsPage implements OnInit {
     this.exercisesLength = this.routine.exercises.length;
     this.serieTime = currentSerie.repetitions;
 
-    this.bottonText = 'inicia la Serie';
+    this.bottonText = 'PRÓXIMA SÉRIE';
 
     this.timeInSeconds = this.serieTime;
     this.timeProgress = this.serieTime;
@@ -283,6 +293,7 @@ export class UserWorkoutDetailsPage implements OnInit {
           const newExercise = this.routine.exercises[newIndex].id;
           this.initialIndex = 0;
           this.nextExercise(newExercise);
+
         }
         break;
     }
@@ -421,6 +432,12 @@ export class UserWorkoutDetailsPage implements OnInit {
 
     if (id !== this.selected) {
       this.selected = id;
+      console.log(' next not 0');
+      const k = this.routine.exercises[0].id;
+      const exercise = this.routine.exercises.find((r) => r.id === id);
+
+      console.log(exercise);
+      exercise.current_serie_index = 0;
     }
   }
 
@@ -428,7 +445,7 @@ export class UserWorkoutDetailsPage implements OnInit {
     console.log(influencer);
     this.router.navigate(['/influencer-details'], {
       state: { influencer },
-      replaceUrl:true
+      replaceUrl: true
     });
   }
 

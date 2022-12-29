@@ -50,22 +50,22 @@
 
               <ion-label text-wrap class="ion-text-justify" style="padding-left:1.5em ;">
                 <h3>{{ exerciseProgram.finisher1.label }}</h3>
-                <p class="finisher-text">{{exerciseProgram.finisher1.description}}</p>
+                <p class="finisher-text" [innerHTML]="textVideo1"></p>
 
-                <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo1()">
+                <!-- <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo1()">
                   ver video
                   <ion-icon slot="end" name="play-outline"></ion-icon>
-                </ion-button>
+                </ion-button> -->
               </ion-label>
 
             </ion-item>
-            <ion-item  *ngIf="verVideo1">
+            <ion-item  >
               <ion-grid class="ion-margin-top">
                 <ion-row>
-                  <ion-col size="12" class="ion-text-center">
+                  <ion-col size="12" >
                     <ion-card class="video-card ">
                       <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-                      <video width="300px" height="190px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
+                      <video width="390px" height="300px" controls muted="true" playsinline looped preload="auto" class="explain-video" >
                         <source [src]="exerciseProgram.finisher1.ptr_video+ '#t=0.1'" type="video/mp4">
                       </video>
 
@@ -90,22 +90,22 @@
               </ion-thumbnail> -->
               <ion-label text-wrap class="ion-text-justify" style="padding-left:1.5em ;">
                 <h3>{{ exerciseProgram.finisher2.label }}</h3>
-                <p class="finisher-text">{{exerciseProgram.finisher2.description}}</p>
-                <ion-button outline fill="outline" color="dark"  (click)="seeVideo2()" class="special-button">
+                <p class="finisher-text" [innerHTML]="textVideo2"></p>
+                <!-- <ion-button outline fill="outline" color="dark"  (click)="seeVideo2()" class="special-button">
                   ver video
                   <ion-icon slot="end" name="play-outline"></ion-icon>
-                </ion-button>
+                </ion-button> -->
               </ion-label>
 
             </ion-item>
-            <ion-item  *ngIf="verVideo2">
+            <ion-item >
 
               <ion-grid>
                 <ion-row>
                   <ion-col size="12" class="ion-align-self-center">
                       <ion-card class="video-card ">
                         <!--  TODO::implementar component para salvar los videos en el storage (ver image cache) -->
-                         <video width="300px" height="190px" controls muted="true" playsinline looped preload="auto" class="explain-video" poster="assets/imgs/logo-fit-ola.png">
+                         <video width="390px" height="300px" controls muted="true" playsinline looped preload="auto" class="explain-video" >
                            <source [src]="exerciseProgram.finisher2.ptr_video+ '#t=0.1'" type="video/mp4">
                          </video>
                        </ion-card>

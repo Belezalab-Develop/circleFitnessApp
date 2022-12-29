@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
   async showLoader() {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Un momento por favor...',
+      message: 'carregando as informações....',
     });
     await this.loading.present();
   }
@@ -72,8 +72,9 @@ export class LoginPage implements OnInit {
 
 
       }
-    }, async err => {
       this.loading.dismiss();
+    }, async err => {
+
       console.log('error', err.error.message);
 
       const msg = err.error.message;
@@ -98,7 +99,7 @@ export class LoginPage implements OnInit {
   firebaseLoginLogic() {
     this.firebaseService.signIn(this.formLogin.value).then(
       (res) => {
-        const uid= res.user.uid;
+        const uid = res.user.uid;
         this.storageService.setStorage('user_uid', uid).then();
         this.storageService.getStorage('push_token').then(response => {
           if (response) {
@@ -129,7 +130,7 @@ export class LoginPage implements OnInit {
 
   }
 
-  loginGoogle(){
+  loginGoogle() {
     //to set
   }
 

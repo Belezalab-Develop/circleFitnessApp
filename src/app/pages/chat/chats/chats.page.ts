@@ -29,7 +29,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class ChatsPage implements OnInit {
   @ViewChild('slides', { static: true }) slider: IonSlides;
-  segment ;
+  segment = 0;
   users: User[] = [];
   us: any;
   chats: any = [];
@@ -44,9 +44,12 @@ export class ChatsPage implements OnInit {
   geoUsers: any = [];
   profile = null;
 
+  usersAround: any = [];
+
   espUser;
   nutritionProgram;
   exerciseProgram;
+  isLoaded = true;
 
 
 
@@ -68,14 +71,13 @@ export class ChatsPage implements OnInit {
   ) {
     this.titleService.setTitle('All Chats');
 
+    this.getLocation();
+
     if (this.router.getCurrentNavigation() != null) {
-
-
-      console.log(this.router.getCurrentNavigation().extras.state.last);
       if (this.router.getCurrentNavigation().extras.state.last === 1) {
-        this.segment = 1 ;
-      }else{
-        this.segment = 0;
+        /* this.segment = 1 ; */
+      } else {
+        /* this.segment = 0; */
 
       }
     }
@@ -89,7 +91,7 @@ export class ChatsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getLocation();
+
     this.getInitialLogicData();
 
   }
@@ -98,18 +100,13 @@ export class ChatsPage implements OnInit {
   }
 
   async getInitialLogicData() {
-    const loading = await this.loadingController.create({
-      spinner: 'bubbles',
-      message: 'carregando as informações.'
-    });
 
-    loading.present();
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.getProfile();
       this.getLastChats();
       this.getUsers();
-      loading.dismiss();
+
     });
 
 
@@ -194,7 +191,7 @@ export class ChatsPage implements OnInit {
   }
 
   goChat(name, oUdi, imageUrl, toEmail) {
-    console.log('el email->>',toEmail);
+    console.log('el email->>', toEmail);
     const badge = 0;
     this.avatarService.updateRecivedMessage(oUdi, badge);
     sessionStorage.setItem('uid', this.userUid);
@@ -209,7 +206,7 @@ export class ChatsPage implements OnInit {
 
   goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail) {
     const badge = 0;
-    console.log('el email->>',toEmail);
+    console.log('el email->>', toEmail);
 
     if (messageSent === 1) {
       this.avatarService.updateSpecificMessajeSent(this.userUid, oUdi, badge);
@@ -257,6 +254,12 @@ export class ChatsPage implements OnInit {
   // geolocation
 
   async getLocation() {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+
+    loading.present();
     await Geolocation
       .getCurrentPosition()
       .then((resp) => {
@@ -265,13 +268,30 @@ export class ChatsPage implements OnInit {
           this.longitude = resp.coords.longitude;
           const result = this.avatarService.updatePosition(this.userUid, this.latitude, this.longitude);
 
-          this.users.map((us) => {
+          /* this.usersAround = this.users.map(item => ({
+              ...item,
+              distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
+          })).filter(fil => fil.distance < 300).sort((a, b) => a.distance - b.distance); */
+
+          this.usersAround = this.users.map(item => ({
+            ...item,
+            distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
+        })).sort((a, b) => a.distance - b.distance);
+
+          const k = this.usersAround;
+
+          console.log('users around:::', k);
+
+          /* this.users.map((us) => {
 
             us.distance = this.calculateDistance(this.longitude, us.long, this.latitude, us.lat);
 
             this.geoUsers.push(us);
-          });
-          console.log('users luego del mapGeo--->', this.geoUsers);
+          }); */
+          /* console.log('users luego del mapGeo--->', this.geoUsers); */
+          loading.dismiss();
+
+          this.isLoaded = false;
         }
       })
       .catch((error) => {

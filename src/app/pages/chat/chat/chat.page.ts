@@ -17,7 +17,7 @@ import { IonContent, PopoverController, LoadingController, AlertController } fro
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { format, formatDistance, formatDistanceToNow } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { es, pt, ptBR } from 'date-fns/locale';
 
 
 @Component({
@@ -152,7 +152,7 @@ export class ChatPage implements OnInit {
   formatDate(time) {
     const date = new Date(time.seconds * 1000 + time.nanoseconds / 1000000);
 
-    const fw = formatDistanceToNow(date, { addSuffix: true, locale: es });
+    const fw = formatDistanceToNow(date, { addSuffix: true, locale: ptBR });
     return fw;
   }
 

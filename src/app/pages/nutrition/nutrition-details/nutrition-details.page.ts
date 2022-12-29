@@ -183,4 +183,25 @@ export class NutritionDetailsPage implements OnInit {
   }
 
 
+
+  async selectedWorkoutRoutine() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: `<p> Uma vez que você escolhe o Plano de Nutrição ele será definido como Favorito.</p>
+      <p> Você terá aceso em como fazer as receitas.</p> `,
+      buttons: [
+        {
+          text: 'FECHAR',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+
+  }
 }

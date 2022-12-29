@@ -177,7 +177,7 @@
             <!-- tarjeta de presentacion-->
 
             <ion-grid no-padding>
-              <ion-row>
+              <ion-row tappable (click)="selectedWorkoutRoutine(routine)">
                 <ion-col size="4" class="header">
                   <!-- <div style="height: 90px; width: 100%;" class="img-row"
                     [ngStyle]="{'background-image':'url(' + exercise.image_full_min + ')'}" tappable

@@ -116,8 +116,8 @@
 
               <ion-card class="video-card " >
 
-                  <video width="375px" height="230px" controls muted="true" playsinline looped preload="auto" *ngIf="nutritionProgram.media[1].mime_type === 'video/mp4'" class="explain-video"  >
-                      <source [src]="nutritionProgram.initial_portu_video + '#t=0.1'" type="video/mp4">
+                  <video width="375px" height="230px" controls muted="true" playsinline looped preload="auto"  class="explain-video"  >
+                      <source [src]="nutritionProgram?.video_url + '#t=0.1'" type="video/mp4">
                   </video>
 
               </ion-card>
@@ -129,10 +129,10 @@
   <ion-list class="plans no-padding">
       <ion-item *ngFor="let meal of nutritionProgram.days[0].meals" class="itemwithsep  bg-transparent--" lines="none" >
           <ion-grid class="no-padding">
-              <ion-row>
+              <ion-row tappable (click)="selectedWorkoutRoutine()">
                   <ion-col size="5">
                     <img-loader
-                    tappable
+
                     class="card-img"
                     [src]="meal.recipes[0]?.photo_url"
                      width="100%"

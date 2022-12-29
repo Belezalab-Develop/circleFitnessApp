@@ -57,6 +57,7 @@ export class UserNutritionPage implements OnInit {
         this.nutritionProgram = nutritionProgram;
         console.log(nutritionProgram);
       }, err => {
+        this.nutritionProgram = null;
         console.log(err);
       });
   }

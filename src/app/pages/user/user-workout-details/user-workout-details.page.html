@@ -67,8 +67,8 @@
 
           </ion-col>
           <ion-col size="1" class="title-body" style="border-left: 1px solid #D22026;">
-            <ion-icon name="checkmark-circle" *ngIf="exercise.is_completed === 1"
-              style="margin-left: -20px;margin-top: 10px;"></ion-icon>
+            <ion-icon [id]="exercise.id" name="checkmark-circle"
+              style="margin-left: -20px;margin-top: 10px; color:transparent"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -83,7 +83,7 @@
                 <ion-card tappable [class.current]="exercise.current_serie_index === i"
                   (click)="editExerciseSeries(exercise,serie.order)" [attr.data-serie_order]="serie.id">
                   <ion-card-content>
-
+                    
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.weight_in_kg }} {{ 'lbs'|translate }}</p>
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'reps'|translate }}</p>
                     <p *ngIf="exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'seconds'|translate }}</p>
@@ -137,20 +137,24 @@
 
             <ion-row class="serie-actions" *ngFor="let item of exerciseDetails; index as i">
 
-              <ion-col size="8" offset="2" *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
+              <ion-col size="10"  *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
 
-                <ion-button class="circle_especial" expand="full" fill="solid" color="danger" shape="round"
+                <ion-button class="circle_especial" expand="full" fill="solid" color="danger"
                   (click)="setCompleteSerie(i , exercise.id)">
-                  {{bottonText}} - {{i+1}}
+                  {{bottonText}} | {{i+1}}
                 </ion-button>
+              </ion-col>
+              <ion-col size="2"  *ngIf="initialIndex === i && !exercise.pivot.is_time_based">
+                <ion-icon name="caret-forward-outline" fill="solid" color="danger" style="font-size: 45px;"></ion-icon>
               </ion-col>
 
               <ion-col size="8" offset="2" *ngIf="initialIndex === i && exercise.pivot.is_time_based ">
 
                 <ion-button class="circle_especial" expand="full"  fill="solid" color="danger" shape="round"
                   (click)="setTimerComplete(i , exercise.id)">
-                  Inicia la serie - {{i+1}}
+                  PRÓXIMA SÉRIE | {{i+1}}
                 </ion-button>
+                <ion-icon name="caret-forward-outline"></ion-icon>
               </ion-col>
 
             </ion-row>
@@ -162,10 +166,10 @@
             <div class="img-more" [ngStyle]="{'background-image':'url(' + exercise.photo_url + ')'}">
 
             </div>
-            <div class="img-more-line"></div>
+            <!-- <div class="img-more-line"></div>
             <div class="img-more" [ngStyle]="{'background-image':'url(' + exercise.photo_url_alt + ')'}">
 
-            </div>
+            </div> -->
 
 
             <div class="play">

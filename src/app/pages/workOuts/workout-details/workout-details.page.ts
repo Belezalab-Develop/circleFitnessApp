@@ -101,10 +101,26 @@ export class WorkoutDetailsPage implements OnInit {
 
 
 
-  selectedWorkoutRoutine(routines: any) {
-    if (this.viewReorder) {
-      this.router.navigateByUrl('/workouts-details', { state: { routines } });
-    }
+ async selectedWorkoutRoutine() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'NOVO TREINO?',
+      message: `<p> Uma vez que você escolhe o programa ele será definido como Favorito</p>
+      <p> Você terá aceso em como fazer o exercício..</p> `,
+      buttons: [
+        {
+          text: 'FECHAR',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+
   }
 
   goProfile(influencer: any) {
@@ -112,7 +128,7 @@ export class WorkoutDetailsPage implements OnInit {
   }
 
   reorderRoutines(event) {
-    const dayOfWeek = ['monday', 'tuesday', 'webnesday', 'thursday', 'friday'];
+    const dayOfWeek = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira'];
 
 
 
