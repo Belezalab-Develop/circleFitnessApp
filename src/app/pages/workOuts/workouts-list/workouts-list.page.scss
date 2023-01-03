@@ -1,69 +1,81 @@
-
 @import '~swiper/scss';
 @import '~@ionic/angular/css/ionic-swiper';
-  ion-item {
-    background: transparent !important;
-    border-bottom: 1px solid #fff !important;
-    color: #fff !important;
-    ion-icon {
-      color: #D22026 !important;
-    }
-  }
-  .slides{
-    background-color: #222 !important;
-    // padding-top: 5px;
-  }
-  .arrow{
-    font-size: 12px;
-  }
-  .alertB{
-    margin-right: 12px!important;
-  }
 
-  .workout-selected {
-      position: absolute;
-      color: #fff;
-      text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-      padding: 5px;
-      top: 0;
-      left: 0;
-  }
+ion-item {
+  background: transparent !important;
+  border-bottom: 1px solid #fff !important;
+  color: #fff !important;
 
-  .workout-public {
-    position: absolute;
-    color: #fff;
-    text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    padding: 5px;
-    right: 0;
-    top: 0;
+  ion-icon {
+    color: #D22026 !important;
   }
+}
 
-  .workout-title {
-    color: #ffffff;
-    font-family: "Raleway", sans-serif;
-    font-size: 1em;
-    text-align: left;
-    font-weight: 900;
-    text-shadow: 0 4px 1px black, 0 10px 10px black;
-    text-transform: uppercase;
-    position: absolute;
-    bottom: 0;
-    margin: 5px;
-    line-height: 25px;
-    letter-spacing: -1px;
-    left: 0;
-  }
+.slides {
+  background-color: #222 !important;
+  // padding-top: 5px;
+}
 
-  ion-slides {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-  .bg-slide {
-    width: 100%;
-    height: 150px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    white-space: normal;
-  }
+.arrow {
+  font-size: 12px;
+}
 
+.alertB {
+  margin-right: 12px !important;
+}
+
+.workout-selected {
+  position: absolute;
+  color: #fff;
+  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 5px;
+  top: 0;
+  left: 0;
+}
+
+.workout-public {
+  position: absolute;
+  color: #fff;
+  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 5px;
+  right: 0;
+  top: 0;
+}
+
+.workout-title {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 1em;
+  text-align: left;
+  font-weight: 900;
+  text-shadow: 0 4px 1px black, 0 10px 10px black;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
+  margin: 5px;
+  line-height: 25px;
+  letter-spacing: -1px;
+  left: 0;
+}
+
+ion-slides {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.bg-slide {
+  width: 100%;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  white-space: normal;
+}
+
+.img-slider {
+  display: block;
+  width: 132px;
+  height: 150px;
+  object-position: inherit;
+  object-fit: cover;
+}

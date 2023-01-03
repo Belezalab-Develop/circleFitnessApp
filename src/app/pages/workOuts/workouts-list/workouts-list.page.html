@@ -37,6 +37,8 @@
               <img-loader [src]="workout.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true" style="background-position: center;" (click)="openDetailWorkout(workout)">
               </img-loader>
+              <!-- <ion-img [src]="workout.image_min" class="img-slider" (click)="openDetailWorkout(workout)"></ion-img> -->
+              <!-- <app-cached-image [src]="workout.image_min" [spinner]="false"></app-cached-image> -->
               <div *ngIf="workout.is_favourite" class="workout-selected">
                 <ion-icon name="star"></ion-icon>
               </div>

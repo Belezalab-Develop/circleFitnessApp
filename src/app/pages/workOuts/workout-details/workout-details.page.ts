@@ -62,8 +62,8 @@ export class WorkoutDetailsPage implements OnInit {
     if (this.router.getCurrentNavigation().extras.queryParams) {
       this.workout = this.router.getCurrentNavigation().extras.queryParams.workout;
 
-      this.titleService.setTitle(`WorkOut - ${this.workout.label}`);
-      this.analitycs.setScreenName(`WorkOut - ${this.workout.label}`);
+      this.titleService.setTitle(`PLANO DE TREINAMENTO - ${this.workout.label}`);
+      this.analitycs.setScreenName(`PLANO DE TREINAMENTO - ${this.workout.label}`);
       this.isFav = this.workout.is_favourite;
       this.viewReorder = false;
     }

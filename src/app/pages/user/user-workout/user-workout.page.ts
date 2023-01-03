@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from './../../../services/user.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-user-workout',
@@ -31,7 +33,9 @@ export class UserWorkoutPage implements OnInit {
     public navCtrl: NavController,
     private userService: UserService,
     private alertCtrl: AlertController,
-    public router: Router
+    public router: Router,
+    private titleService: Title,
+    private analitycs: AnalyticsService
   ) {
 
   }
@@ -48,7 +52,9 @@ export class UserWorkoutPage implements OnInit {
           this.goals = this.exerciseProgram.prog.goals;
           this.levels = this.exerciseProgram.prog.levels;
           console.log('WORKOUT   :>> ', exerciseProgram);
-        }else{
+          this.titleService.setTitle(`USER - PLANO DE TREINAMENTO - ${this.exerciseProgram.label}`);
+          this.analitycs.setScreenName(`USER - PLANO DE TREINAMENTO - ${this.exerciseProgram.label}`);
+        } else {
           this.exerciseProgram = null;
         }
 

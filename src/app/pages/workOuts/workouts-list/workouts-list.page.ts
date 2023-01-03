@@ -44,8 +44,8 @@ export class WorkoutsListPage implements OnInit {
   ) {
     this.presentLoadingDefault();
     this.getData();
-    this.titleService.setTitle ('Workout List');
-    this.analitycs.setScreenName('Workout List');
+    this.titleService.setTitle ('PLANOS DE TREINAMENTO');
+    this.analitycs.setScreenName('PLANOS DE TREINAMENTO');
   }
 
 

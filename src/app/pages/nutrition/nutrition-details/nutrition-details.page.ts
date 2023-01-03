@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
 import { UserService } from './../../../services/user.service';
@@ -6,6 +7,7 @@ import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-nutrition-details',
@@ -30,6 +32,8 @@ export class NutritionDetailsPage implements OnInit {
     private alertCtrl: AlertController,
     private userService: UserService,
     private router: Router,
+    private titleService: Title,
+    private analitycs: AnalyticsService
 
   ) {
     if (this.router.getCurrentNavigation().extras.state.influencer) {
@@ -43,9 +47,12 @@ export class NutritionDetailsPage implements OnInit {
 
     if (this.router.getCurrentNavigation().extras.state.nutritionProgram) {
       this.nutritionProgram = this.router.getCurrentNavigation().extras.state.nutritionProgram;
+      this.titleService.setTitle(`PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
+      this.analitycs.setScreenName(`PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
       if (this.nutritionProgram.influencer) {
         this.influencer = this.nutritionProgram.influencer;
         console.info('INFLUENCER:', this.influencer);
+       ;
       }
 
       // entra por nutrition program

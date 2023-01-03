@@ -31,10 +31,12 @@ export class HomeAuthPage implements OnInit {
     private menuCtrl: MenuController,
     private analyticsService: AnalyticsService,
     private titleService: Title,
+    private analitycs: AnalyticsService,
     private avatarService: AvatarService,
   ) {
     this.authService.authState.next(true);
-    this.titleService.setTitle ('Home Page');
+    this.titleService.setTitle ('INICIO - Circle Fitness');
+    this.analitycs.setScreenName('INICIO - Circle Fitness');
 
   }
 

@@ -44,8 +44,8 @@ export class NutritionListPage implements OnInit {
   ) {
     this.presentLoadingDefault();
     this.getData();
-    this.titleService.setTitle ('Nutrition List');
-    this.analitycs.setScreenName('Nutrition List');
+    this.titleService.setTitle ('PLANOS DE NUTRIÇÃO');
+    this.analitycs.setScreenName('PLANOS DE NUTRIÇÃO');
   }
 
   ngOnInit() {

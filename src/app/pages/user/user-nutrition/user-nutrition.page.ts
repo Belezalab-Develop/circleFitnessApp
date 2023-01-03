@@ -3,6 +3,8 @@ import { UserService } from './../../../services/user.service';
 import { IonSlides, NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-user-nutrition',
@@ -20,6 +22,8 @@ export class UserNutritionPage implements OnInit {
     public navCtrl: NavController,
     private userService: UserService,
     public router: Router,
+    private titleService: Title,
+    private analitycs: AnalyticsService
   ) { }
 
   ngOnInit() {
@@ -55,6 +59,8 @@ export class UserNutritionPage implements OnInit {
     this.userService.getNutritionProgram()
       .subscribe((nutritionProgram: any) => {
         this.nutritionProgram = nutritionProgram;
+        this.titleService.setTitle(`USER - PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
+          this.analitycs.setScreenName(`USER - PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
         console.log(nutritionProgram);
       }, err => {
         this.nutritionProgram = null;
