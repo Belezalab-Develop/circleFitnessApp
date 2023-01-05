@@ -9,6 +9,8 @@ import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { Title } from '@angular/platform-browser';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper';
+import { AngularFirePerformance } from '@angular/fire/compat/performance';
+import { Smartlook, SmartlookNavigationEvent, SmartlookViewState} from '@awesome-cordova-plugins/smartlook/ngx';
 
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation]);
@@ -39,13 +41,16 @@ export class WorkoutsListPage implements OnInit {
     private storageService: CachingService,
     private loadingController: LoadingController,
     private titleService: Title,
-    private analitycs: AnalyticsService
+    private analitycs: AnalyticsService,
+    private performance: AngularFirePerformance,
+    private smartlook: Smartlook
 
   ) {
     this.presentLoadingDefault();
     this.getData();
     this.titleService.setTitle ('PLANOS DE TREINAMENTO');
     this.analitycs.setScreenName('PLANOS DE TREINAMENTO');
+    this.smartlook.trackNavigationEvent(new SmartlookNavigationEvent('PLANOS DE TREINAMENTO', SmartlookViewState.START));
   }
 
 
@@ -57,7 +62,8 @@ export class WorkoutsListPage implements OnInit {
 
   async getData(){
 
-
+    const trace = await this.performance.trace('workouts -list');
+    trace.start();
     await this.storageService.getCachedRequest('test', '-work-segments').then(res => {
       this.segmentsPrograms = res;
       console.info('segments', this.segmentsPrograms);
@@ -71,6 +77,8 @@ export class WorkoutsListPage implements OnInit {
     });
 
     this.isCharge = true;
+
+    trace.stop();
 
 
   }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { from, Observable, of } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { CachingService } from './../auxiliar/caching.service';
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { Network } from '@capacitor/network';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { AngularFirePerformance, trace } from '@angular/fire/compat/performance';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class ApiWorkoutsService {
   constructor(
     private http: HttpClient,
     private storageService: CachingService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private performance: AngularFirePerformance,
   ) {
     Network.addListener('networkStatusChange', async status => {
       this.connected = status.connected;
@@ -30,7 +33,7 @@ export class ApiWorkoutsService {
     const url=`${environment.apiUlr}/exercise-programs`;
 
     return this.getData(url, individual, forceRefresh).pipe(
-      // eslint-disable-next-line @typescript-eslint/dot-notation
+      trace('getWorkouts'),
       map(res => res['results'])
     );
     //return this.http.get(`${environment.apiUlr}/exercise-programs`);
@@ -45,6 +48,7 @@ export class ApiWorkoutsService {
     const url = `${environment.apiUlr}/exercise-programs-goals`;
     return this.getData(url, individual, forceRefresh).pipe(
       // eslint-disable-next-line @typescript-eslint/dot-notation
+      trace('getWorkouts-Goals'),
       map(res => res['results'])
     );
     //return this.http.get(`${environment.apiUlr}/exercise-programs-goals`);

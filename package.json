@@ -50,6 +50,7 @@
     "@ionic/storage-angular": "^3.0.6",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "cap-image-cache": "^1.0.5",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-purchase": "^11.0.0",
     "cordova-plugin-smartlook": "github:smartlook/cordova-smartlook#master",

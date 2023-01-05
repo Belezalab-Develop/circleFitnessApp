@@ -268,11 +268,6 @@ export class ChatsPage implements OnInit {
           this.longitude = resp.coords.longitude;
           const result = this.avatarService.updatePosition(this.userUid, this.latitude, this.longitude);
 
-          /* this.usersAround = this.users.map(item => ({
-              ...item,
-              distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
-          })).filter(fil => fil.distance < 300).sort((a, b) => a.distance - b.distance); */
-
           this.usersAround = this.users.map(item => ({
             ...item,
             distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)

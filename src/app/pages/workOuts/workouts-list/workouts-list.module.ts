@@ -11,6 +11,7 @@ import { WorkoutsListPageRoutingModule } from './workouts-list-routing.module';
 import { WorkoutsListPage } from './workouts-list.page';
 import { SwiperModule } from 'swiper/angular';
 import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
+import { CapImageCacheModule } from 'cap-image-cache';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
     WorkoutsListPageRoutingModule,
     TranslateModule.forChild(),
     SwiperModule,
-    IonicImageLoaderModule
+    IonicImageLoaderModule,
+    CapImageCacheModule
   ],
   declarations: [WorkoutsListPage]
 })

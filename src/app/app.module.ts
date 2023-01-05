@@ -37,12 +37,18 @@ import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { Smartlook} from '@awesome-cordova-plugins/smartlook/ngx';
+import { CapImageCacheModule } from 'cap-image-cache';
+
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService, DEBUG_MODE  } from '@angular/fire/compat/analytics';
+import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
 
 
-
-export function createTranslateLoader(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+const config = {
+	cachePath: 'CACHE_IMAGES'
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,11 +58,14 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    CapImageCacheModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() =>  getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    AngularFireAnalyticsModule,
+    AngularFirePerformanceModule,
     IonicImageLoaderModule,
     PipesModule,
     IonicStorageModule.forRoot({
@@ -85,6 +94,13 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     InAppBrowser,
     AppAvailability,
+    ScreenTrackingService,
+    UserTrackingService,
+    PerformanceMonitoringService,
+    {
+      provide: DEBUG_MODE,
+      useValue: true
+    },
     { provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
