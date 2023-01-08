@@ -71,7 +71,7 @@ export class ChatsPage implements OnInit {
   ) {
     this.titleService.setTitle('All Chats');
 
-    this.getLocation();
+    this.getInitialLogicData();
 
     if (this.router.getCurrentNavigation() != null) {
       if (this.router.getCurrentNavigation().extras.state.last === 1) {
@@ -92,7 +92,7 @@ export class ChatsPage implements OnInit {
 
   ngOnInit() {
 
-    this.getInitialLogicData();
+
 
   }
   ionViewDidEnter() {
@@ -106,6 +106,7 @@ export class ChatsPage implements OnInit {
       this.getProfile();
       this.getLastChats();
       this.getUsers();
+      this.getLocation();
 
     });
 
@@ -125,8 +126,21 @@ export class ChatsPage implements OnInit {
   }
 
   async getLastChats() {
-    this.avatarService.getEspecificChats(this.userUid).pipe(shareReplay()).subscribe(response => {
-      this.lastChats = response;
+    this.avatarService.getEspecificChats(this.userUid).pipe(
+      shareReplay()
+      ).subscribe(response => {
+      this.lastChats = response.map(item =>{
+        if(item.img === 'undefined'){
+          return{
+            ...item,
+            img: '',
+          };
+        }else{
+          return item;
+        }
+
+      });
+      console.log(this.lastChats);
 
     });
   }
@@ -259,6 +273,7 @@ export class ChatsPage implements OnInit {
       message: 'carregando as informações.'
     });
 
+
     loading.present();
     await Geolocation
       .getCurrentPosition()
@@ -271,19 +286,12 @@ export class ChatsPage implements OnInit {
           this.usersAround = this.users.map(item => ({
             ...item,
             distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
-        })).sort((a, b) => a.distance - b.distance);
+          })).sort((a, b) => a.distance - b.distance);
 
           const k = this.usersAround;
 
           console.log('users around:::', k);
 
-          /* this.users.map((us) => {
-
-            us.distance = this.calculateDistance(this.longitude, us.long, this.latitude, us.lat);
-
-            this.geoUsers.push(us);
-          }); */
-          /* console.log('users luego del mapGeo--->', this.geoUsers); */
           loading.dismiss();
 
           this.isLoaded = false;

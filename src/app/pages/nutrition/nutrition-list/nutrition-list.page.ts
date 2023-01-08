@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { IonRouterOutlet, NavController, LoadingController } from '@ionic/angular';
 import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper';
+import { FirebasePerformance } from '@capacitor-firebase/performance';
 
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation]);
@@ -50,8 +51,6 @@ export class NutritionListPage implements OnInit {
 
   ngOnInit() {
     console.log('Explore NutritionPage');
-
-
   }
 
   ionViewWillEnter(){
@@ -60,7 +59,7 @@ export class NutritionListPage implements OnInit {
 
   async getData() {
 
-
+    await FirebasePerformance.startTrace({ traceName: 'nutrition -list' });
     await this.storageService.getCachedRequest('test', '-nutri-segments').then(res => {
       this.nutritionProgramsSegments = res;
 
@@ -78,6 +77,7 @@ export class NutritionListPage implements OnInit {
     });
 
     this.isCharge = true;
+    await FirebasePerformance.stopTrace({ traceName: 'nutrition -list' });
   }
 
   //TODO:Evaluar si se pueden quitar;

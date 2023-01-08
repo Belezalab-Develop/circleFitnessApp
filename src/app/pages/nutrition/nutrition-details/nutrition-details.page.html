@@ -40,32 +40,32 @@
           <ion-col size="4">
               <ion-row class="ion-text-start">
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+                      <ion-text color="white">{{ 'Total calorias' | translate }}</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">Proteinas</ion-text>
+                      <ion-text color="white">Proteinas</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">Carboidratos</ion-text>
+                      <ion-text color="white">Carboidratos</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">Gorduras</ion-text>
+                      <ion-text color="white">Gorduras</ion-text>
                   </ion-col>
               </ion-row>
           </ion-col>
           <ion-col size="4">
               <ion-row class="ion-text-end">
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">{{ totalCalories() }}kcal</ion-text>
+                      <ion-text color="white">{{ totalCalories() }}kcal</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">{{ totalProteins() }}g</ion-text>
+                      <ion-text color="white">{{ totalProteins() }}g</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">{{ totalCarbohydrates() }}g</ion-text>
+                      <ion-text color="white">{{ totalCarbohydrates() }}g</ion-text>
                   </ion-col>
                   <ion-col size="12" class="no-padding">
-                      <ion-text color="dark">{{ totalFats() }}g</ion-text>
+                      <ion-text color="white">{{ totalFats() }}g</ion-text>
                   </ion-col>
               </ion-row>
           </ion-col>
@@ -178,7 +178,7 @@
           </ion-button>
           <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
               <ion-icon name="heart" class="ion-padding-end"></ion-icon>
-              {{'Escoger este programa' | translate | uppercase}}
+              {{'Escolher este programa' | translate | uppercase}}
           </ion-button>
       </ion-col>
 

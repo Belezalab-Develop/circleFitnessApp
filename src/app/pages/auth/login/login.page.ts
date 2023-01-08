@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-login',
@@ -40,8 +42,13 @@ export class LoginPage implements OnInit {
     public storageService: CachingService,
     public authenticationService: AuthenticationService,
     private avatarService: AvatarService,
+    private titleService: Title,
+    private analitycs: AnalyticsService,
 
-  ) { }
+  ) {
+    this.titleService.setTitle('Login');
+    this.analitycs.setScreenName('Login');
+  }
 
   ngOnInit() {
     console.log('login');
@@ -192,12 +199,16 @@ export class LoginPage implements OnInit {
       this.errorAlert('O email é obrigatório');
       return;
     }
+    if (this.formRegister.get('nick_name').value === '') {
+      this.errorAlert('Preencher todos os campos');
+      return;
+    }
     if (!this.formRegister.get('email').value.match(this.validRegex)) {
       this.errorAlert('Preencha seu e-mail corretamente');
       return;
     }
     if (this.formRegister.get('password').value === '') {
-      this.errorAlert('Senha requerida');
+      this.errorAlert('Preencher Senha');
       return;
     }
     if (this.formRegister.get('password').value.length < 8) {

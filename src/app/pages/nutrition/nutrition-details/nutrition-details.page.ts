@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { FirebasePerformance } from '@capacitor-firebase/performance';
+
 
 @Component({
   selector: 'app-nutrition-details',
@@ -36,6 +38,8 @@ export class NutritionDetailsPage implements OnInit {
     private analitycs: AnalyticsService
 
   ) {
+
+    FirebasePerformance.startTrace({ traceName: 'nutrition - Detail' });
     if (this.router.getCurrentNavigation().extras.state.influencer) {
       // entra por influencer
       console.log('entra por influencer', this.router.getCurrentNavigation().extras.state.influencer);
@@ -57,9 +61,9 @@ export class NutritionDetailsPage implements OnInit {
 
       // entra por nutrition program
       console.info('// entra por nutrition program', this.nutritionProgram);
-
-
     }
+
+    FirebasePerformance.stopTrace({ traceName: 'nutrition - Detail' });
   }
 
   ngOnInit() {

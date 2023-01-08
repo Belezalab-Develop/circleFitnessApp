@@ -32,12 +32,12 @@
 
         <swiper [slidesPerView]="3" [loop]="true" [navigation]="true" [scrollbar]="{ draggable: true }"
           style="margin-left: -20px !important; margin-right: -20px !important;">
-          <ng-template swiperSlide *ngFor="let workout of section.exercise_program">
+          <ng-template swiperSlide *ngFor="let workout of section.exercise_program" class="test">
             <div class="slides bg-slide">
              <!--  <img-loader [src]="workout.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true" style="background-position: center;" (click)="openDetailWorkout(workout)">
               </img-loader> -->
-              <img [lazy]="true" cache-img={{workout.image_min}} (click)="openDetailWorkout(workout)" class="img-slider"/>
+              <div [lazy]="false" cache-img={{workout.image_min}} (click)="openDetailWorkout(workout)" class="img-bag"></div>
               <!-- <ion-img [src]="workout.image_min" class="img-slider" (click)="openDetailWorkout(workout)"></ion-img> -->
               <!-- <app-cached-image [src]="workout.image_min" [spinner]="false"></app-cached-image> -->
               <div *ngIf="workout.is_favourite" class="workout-selected">
@@ -51,19 +51,6 @@
             <div class="workout-title">{{workout.label}}</div>
           </ng-template>
         </swiper>
-        <!-- <ion-slides pager="true" #slides [options]="sliderConfig">
-          <ion-slide class="slides bg-slide" [ngStyle]="{'background-image':'url(' + workout.photo_url + ')'}"
-            *ngFor="let workout of section.exercise_program" (click)="openDetailWorkout(workout)">
-            <div *ngIf="workout.is_favourite" class="workout-selected">
-              <ion-icon name="star"></ion-icon>
-            </div>
-            <div *ngIf="!workout.is_public" class="workout-public">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <div class="workout-title">{{workout.label}}</div>
-
-          </ion-slide>
-        </ion-slides> -->
       </div>
       <div *ngIf="!isCharge">
         <ion-slides pager="true" #slides [options]="sliderOpts">
@@ -98,9 +85,10 @@
           style="margin-left: -20px !important; margin-right: -20px !important;">
           <ng-template swiperSlide *ngFor="let workout of category.exercise_program">
             <div class="slides bg-slide">
-              <img-loader [src]="workout.image_min" width="100%" height="150px" backgroundSize="cover"
+              <!-- <img-loader [src]="workout.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true" style="background-position: center;" (click)="openDetailWorkout(workout)">
-              </img-loader>
+              </img-loader> -->
+              <div [lazy]="false" cache-img={{workout.image_min}} (click)="openDetailWorkout(workout)" class="img-bag"></div>
               <div *ngIf="workout.is_favourite" class="workout-selected">
                 <ion-icon name="star"></ion-icon>
               </div>

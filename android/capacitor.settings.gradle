@@ -8,6 +8,12 @@ project(':capacitor-community-firebase-analytics').projectDir = new File('../nod
 include ':capacitor-community-stripe'
 project(':capacitor-community-stripe').projectDir = new File('../node_modules/@capacitor-community/stripe/android')
 
+include ':capacitor-firebase-crashlytics'
+project(':capacitor-firebase-crashlytics').projectDir = new File('../node_modules/@capacitor-firebase/crashlytics/android')
+
+include ':capacitor-firebase-performance'
+project(':capacitor-firebase-performance').projectDir = new File('../node_modules/@capacitor-firebase/performance/android')
+
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
 

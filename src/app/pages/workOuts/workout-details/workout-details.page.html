@@ -54,7 +54,7 @@
               </ion-col>
             </ion-row>
             <ion-row style="margin-bottom: 8px;" class="ion-align-items-start">
-              <ion-col class="no-padding" size="6" ><b>Nivel</b></ion-col>
+              <ion-col class="no-padding" size="6" ><b>Nível</b></ion-col>
               <ion-col class="no-padding" size="6">
                 <ion-row *ngFor="let level of workout.levels">
                   <ion-col class="no-padding" size="12"> {{ level.label }} </ion-col>
@@ -88,7 +88,7 @@
 
     <ion-row style="margin-top: -15px;">
       <ion-col size="12">
-        <ion-text color="dark">
+        <ion-text color="white">
           <h5> {{ 'Descrição do Treinamento' | translate }} </h5>
 
           <div *ngIf="!showMore">
@@ -217,11 +217,11 @@
     <ion-col size="12" class="ion-text-center no-padding">
       <ion-button *ngIf="subscribe === false" expand="full" color="danger" (click)="clickSubscribe(true)">
         <ion-icon name="heart-outline" class="ion-padding-end"></ion-icon>
-        {{'Escoger este programa' | translate | uppercase}}
+        {{'Escolher Programa' | uppercase}}
       </ion-button>
       <ion-button *ngIf="subscribe === true" expand="full" color="danger" (click)="clickSubscribe(false)">
         <ion-icon name="heart" class="ion-padding-end"></ion-icon>
-        {{'Escoger este programa' | translate | uppercase}}
+        {{'Escolher Programa' | uppercase}}
       </ion-button>
     </ion-col>
 

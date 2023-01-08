@@ -29,9 +29,10 @@
         <swiper [slidesPerView]="3" [loop]="true" [navigation]="true" [scrollbar]="{ draggable: true }">
           <ng-template swiperSlide *ngFor="let nutritionProgram of categoria.nutrition_program">
             <div class="slides bg-slide">
-              <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
+              <!-- <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true"  style="background-position: center;" (click)="openNutrition(nutritionProgram)">
-              </img-loader>
+              </img-loader> -->
+              <div [lazy]="false" cache-img={{nutritionProgram.image_min}} (click)="openNutrition(nutritionProgram)" class="img-bag"></div>
               <div *ngIf="nutritionProgram.is_favourite" class="workout-selected">
                 <ion-icon name="star"></ion-icon>
               </div>
@@ -43,20 +44,7 @@
             <div class="workout-title">{{nutritionProgram.label}}</div>
           </ng-template>
         </swiper>
-        <!-- <ion-slides pager="true" #slides [options]="slideOpts">
-          <ion-slide class="slides" *ngFor="let nutritionProgram of categoria.nutrition_program"
-            [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
-            (click)="openNutrition(nutritionProgram)">
 
-            <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
-              <ion-icon name="star"></ion-icon>
-            </div>
-            <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <div class="workout-title">{{nutritionProgram.label}}</div>
-          </ion-slide>
-        </ion-slides> -->
       </div>
       <div *ngIf="!isCharge">
         <ion-slides pager="true" #slides [options]="slideOpts">
@@ -88,9 +76,10 @@
         <swiper [slidesPerView]="3" [loop]="true" [navigation]="true" [scrollbar]="{ draggable: true }">
           <ng-template swiperSlide *ngFor="let nutritionProgram of categoria.nutrition_program">
             <div class="slides bg-slide">
-              <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
+            <!--   <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true"  style="background-position: center;" (click)="openNutrition(nutritionProgram)">
-              </img-loader>
+              </img-loader> -->
+              <div [lazy]="false" cache-img={{nutritionProgram.image_min}} (click)="openNutrition(nutritionProgram)" class="img-bag"></div>
               <div *ngIf="nutritionProgram.is_favourite" class="workout-selected">
                 <ion-icon name="star"></ion-icon>
               </div>
@@ -102,20 +91,6 @@
             <div class="workout-title">{{nutritionProgram.label}}</div>
           </ng-template>
         </swiper>
-        <!-- <ion-slides pager="true" #slides [options]="slideOpts">
-          <ion-slide class="slides" *ngFor="let nutritionProgram of categoria.nutrition_program"
-            [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
-            (click)="openNutrition(nutritionProgram)">
-
-            <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
-              <ion-icon name="star"></ion-icon>
-            </div>
-            <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <div class="workout-title">{{nutritionProgram.label}}</div>
-          </ion-slide>
-        </ion-slides> -->
       </div>
       <div *ngIf="!isCharge">
         <ion-slides pager="true" #slides [options]="slideOpts">
@@ -148,9 +123,10 @@
         <swiper [slidesPerView]="3" [loop]="true" [navigation]="true" [scrollbar]="{ draggable: true }">
           <ng-template swiperSlide *ngFor="let nutritionProgram of categoria.nutrition_program">
             <div class="slides bg-slide">
-              <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
+              <!-- <img-loader [src]="nutritionProgram.image_min" width="100%" height="150px" backgroundSize="cover"
                 fallbackAsPlaceholder="true"  style="background-position: center;" (click)="openNutrition(nutritionProgram)">
-              </img-loader>
+              </img-loader> -->
+              <div [lazy]="false" cache-img={{nutritionProgram.image_min}} (click)="openNutrition(nutritionProgram)" class="img-bag"></div>
               <div *ngIf="nutritionProgram.is_favourite" class="workout-selected">
                 <ion-icon name="star"></ion-icon>
               </div>
@@ -162,20 +138,6 @@
             <div class="workout-title">{{nutritionProgram.label}}</div>
           </ng-template>
         </swiper>
-        <!-- <ion-slides pager="true" #slides [options]="slideOpts">
-          <ion-slide class="slides" *ngFor="let nutritionProgram of categoria.nutrition_program"
-            [ngStyle]="{'background-image':'url(' + nutritionProgram.photo_url + ')'}"
-            (click)="openNutrition(nutritionProgram)">
-
-            <div *ngIf="nutritionProgram.is_favorite" class="workout-selected">
-              <ion-icon name="star"></ion-icon>
-            </div>
-            <div *ngIf="nutritionProgram.is_public === false" class="workout-public">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <div class="workout-title">{{nutritionProgram.label}}</div>
-          </ion-slide>
-        </ion-slides> -->
       </div>
     </div>
     <br>

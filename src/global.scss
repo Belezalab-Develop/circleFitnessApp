@@ -726,7 +726,8 @@ h5.title-h5 {
 }
 
 .swiper-button-next, .swiper-button-prev{
-  color:#ffffff !important
+  color:#ffffff !important;
+  background-image: none !important;
 }
 .swiper-button-next:after, .swiper-button-prev:after {
   color:#ffffff !important
@@ -737,4 +738,17 @@ h5.title-h5 {
 }
 .alert-radio-group.sc-ion-alert-md, .alert-checkbox-group.sc-ion-alert-md {
   padding-top: 15px;
+}
+
+.swiper {
+  --bullet-background: white;
+  --bullet-background-active: white;
+  --progress-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+  --progress-bar-background-active: white;
+  --scroll-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+  --scroll-bar-background-active: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }

@@ -12,6 +12,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { IonDatetime } from '@ionic/angular';
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-wizard',
@@ -45,8 +47,13 @@ export class WizardPage implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private gnrlService: GeneralService,
-    private storageService: CachingService
+    private storageService: CachingService,
+    private titleService: Title,
+    private analitycs: AnalyticsService,
   ) {
+
+    this.titleService.setTitle('Cadastro - User - Data');
+    this.analitycs.setScreenName('Cadastro - User - Data');
 
     this.genders = [
       {
@@ -81,14 +88,14 @@ export class WizardPage implements OnInit {
         label: 'Mesomorfo',
         isSelected: false,
         value: 'mesomorph',
-        descrip: 'Corpo magro e musculoso, mesmo que não pratiquem atividade física. Tronco desenvolvido, pouca gordura abdominal, cintura  fina e metabolismo rápido, '
+        descrip: 'Corpo magro e musculoso, mesmo que não pratique atividade física. Tronco desenvolvido, pouca gordura abdominal, cintura  fina e metabolismo rápido. '
       },
       {
         type: 3,
         label: 'Endomorfo',
         isSelected: false,
         value: 'endomorph',
-        descrip: 'Baixa estatura, corpo mais arredondado e mais largo, '
+        descrip: 'Baixa estatura, corpo mais arredondado e mais largo. '
       },
     ];
   }
@@ -251,10 +258,10 @@ export class WizardPage implements OnInit {
       return;
     }
 
-    if (130 > measurements.height || measurements.height > 250) {
+    /* if (130 > measurements.height || measurements.height > 250) {
       this.gnrlService.showToast('Oopps! Preencha a altura corretamente', 'toast-success');
       return;
-    }
+    } */
 
     if (20 > measurements.weight || measurements.weight > 300) {
       this.gnrlService.showToast('Oops! Preencher o peso para avançar!', 'toast-success');

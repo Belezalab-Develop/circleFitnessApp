@@ -12,6 +12,7 @@ import { NutritionListPageRoutingModule } from './nutrition-list-routing.module'
 import { NutritionListPage } from './nutrition-list.page';
 import { IonicImageLoaderModule } from 'ionic-image-loader-v5';
 import { SwiperModule } from 'swiper/angular';
+import { CapImageCacheModule } from 'cap-image-cache';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SwiperModule } from 'swiper/angular';
     IonicModule,
     NutritionListPageRoutingModule,
     IonicImageLoaderModule,
-    SwiperModule
+    SwiperModule,
+    CapImageCacheModule
   ],
   declarations: [NutritionListPage]
 })

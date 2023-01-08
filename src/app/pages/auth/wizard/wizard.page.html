@@ -14,7 +14,7 @@
 
         </ion-col>
         <ion-col size="1"></ion-col>
-      </ion-row> 
+      </ion-row>
     </ion-content>
 
     <ion-content class="wizard-c" color="transparent" *ngIf="step === 0" class="fadeInLeft animated"
@@ -35,7 +35,7 @@
           </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Qual é o seu sexo?
+              Qual é o seu sexo?
             </ion-text>
           </ion-col>
           <ion-col *ngFor="let gender of genders" size="4" class="ion-text-center">
@@ -103,18 +103,18 @@
             </ion-col>
             <ion-col size="12" class="ion-text-center ion-padding">
               <ion-text color="light" class="text-title">
-                ¿Qual é sua altura? (cm)
+                Qual é sua altura? (cm)
               </ion-text>
             </ion-col>
             <ion-col class="ion-text-center">
               <ion-item class="custom-input">
-                <ion-input name="height" formControlName="height" max="250" maxlength="3" placeholder="Altura"
+                <ion-input name="height" formControlName="height"  maxlength="3" placeholder="Altura"
                   type="number"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="12" class="ion-text-center ion-padding">
               <ion-text color="light" class="text-title">
-                ¿Quanto pesa? (kg)
+                Quanto pesa? (kg)
               </ion-text>
             </ion-col>
             <ion-col class="ion-text-center">
@@ -141,7 +141,7 @@
 
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Cúal es tu porcentaje de Gordura?
+              Qual é seu percentual de gordura?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
@@ -174,7 +174,7 @@
               <ion-label>Objetivos</ion-label>
               <ion-select [(ngModel)]="goal" multiple="true" cancelText="Cancelar" okText="Ok!">
                 <ion-select-option value="lose_weight">Perder peso</ion-select-option>
-                <ion-select-option value="build_muscle_mass">Ganar massa</ion-select-option>
+                <ion-select-option value="build_muscle_mass">Ganhar massa</ion-select-option>
                 <ion-select-option value="tone_up">Tonificar</ion-select-option>
                 <ion-select-option value="other">Outro</ion-select-option>
               </ion-select>
@@ -203,11 +203,11 @@
             <ion-item class="custom-input">
               <ion-label>Experiência</ion-label>
               <ion-select [(ngModel)]="experience" cancelText="Cancelar" okText="Ok!">
-                <ion-select-option value="beginner">Principiante:  <br>
+                <ion-select-option class="especial" value="beginner">Principiante:  <br>
                   Não entendo muito de academia</ion-select-option>
-                <ion-select-option value="intermediate">Intermediário: <br>
+                <ion-select-option class="especial"  value="intermediate">Intermediário: <br>
                   Já fui algumas vezes.</ion-select-option>
-                <ion-select-option value="expert">Avançado: <br>
+                <ion-select-option class="especial"  value="expert">Avançado: <br>
                   Vou direto na academia! </ion-select-option>
               </ion-select>
             </ion-item>
@@ -241,7 +241,7 @@
               [src]="pathLocationImage + 'woman-endomorph' + '-' + (body.isSelected ? 'active' : 'unactive') + '.svg'"
               class="endomorph" (click)="selectBodyOk(bodies, body)" />
             <p class="text-circle-btn">{{ body.label }}</p>
-            <p class="text-circle-btn">{{ body.descrip }}</p>
+            <p class="text-circle">{{ body.descrip }}</p>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="gender === 'male'">
@@ -303,16 +303,16 @@
           </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              Quantas vezes por semana você gostaria de ir à ginásio?
+              Quantas vezes por semana você gostaria de ir à academia?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-item class="custom-input">
-              <ion-label>ir para o ginásio</ion-label>
+              <ion-label>ir à academia</ion-label>
               <ion-select [(ngModel)]="frequencyGym" cancelText="Cancelar" okText="Ok!">
                 <ion-select-option value="1">1 - 3</ion-select-option>
                 <ion-select-option value="2">4 - 5</ion-select-option>
-                <ion-select-option value="3">Más de 5</ion-select-option>
+                <ion-select-option value="3">Mais de 5</ion-select-option>
               </ion-select>
             </ion-item>
 
@@ -331,7 +331,7 @@
           </ion-col>
           <ion-col size="12" class="ion-text-center ion-padding">
             <ion-text color="light" class="text-title">
-              ¿Você tem alguma restrição alimentar?
+              Você tem alguma restrição alimentar?
             </ion-text>
           </ion-col>
           <ion-col class="ion-text-center">
@@ -342,7 +342,7 @@
                 <ion-select-option value="1">Vegano</ion-select-option>
                 <ion-select-option value="2">Vegetariano</ion-select-option>
                 <ion-select-option value="3">Sem lactose </ion-select-option>
-                <ion-select-option value="4">Sem  Glutem</ion-select-option>
+                <ion-select-option value="4">Sem  glúten</ion-select-option>
               </ion-select>
             </ion-item>
 
@@ -365,7 +365,7 @@
         PRÓXIMO
       </ion-button>
       <ion-button *ngIf="progress >= .8" color="danger" style="width: 120px" fill="clear" (click)="nextButton()">
-        FIN
+        FIM
       </ion-button>
     </ion-col>
   </ion-row>

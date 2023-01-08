@@ -11,6 +11,7 @@ import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { App } from '@capacitor/app';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Smartlook, SmartlookSetupConfig } from '@awesome-cordova-plugins/smartlook/ngx';
+import { FirebasePerformance } from '@capacitor-firebase/performance';
 
 //import { Stripe } from '@capacitor-community/stripe';
 
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
     this.storageService.initStorage();
     this.createCaheFolder();
     this.notificatiosService.inicializar();
+    FirebasePerformance.setEnabled({ enabled: true });
     /*  Stripe.initialize({
 
        publishableKey: 'pk_test_51HsR5iH2JpR7iSTHBXQquHJEkcYjQkkQQi3s6lkzzXQHdDOecM84Xl88abg1yQVpZWBkTYxHJ7T9vG2jRqgLMZqC00ubQqsVDQ',

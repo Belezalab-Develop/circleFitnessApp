@@ -8,6 +8,7 @@ import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { ImageModalPage } from '../../auxiliar/image-modal/image-modal.page';
 import { Title } from '@angular/platform-browser';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { FirebasePerformance } from '@capacitor-firebase/performance';
 
 @Component({
   selector: 'app-workout-details',
@@ -49,6 +50,7 @@ export class WorkoutDetailsPage implements OnInit {
   ) {
     this.user = {};
 
+    FirebasePerformance.startTrace({ traceName: 'workout - Detail' });
     if (this.router.getCurrentNavigation().extras.state instanceof WorkoutListParams) {
       this.viewList = (this.router.getCurrentNavigation().extras.state.WorkoutListParams.ShowSubList);
       this.viewLocation = (this.router.getCurrentNavigation().extras.state.WorkoutListParams.ShowLocation);
@@ -72,6 +74,7 @@ export class WorkoutDetailsPage implements OnInit {
     this.reorderActive = false;
     this.modfText = this.workout.description.split('\n').join('<br />');
 
+    FirebasePerformance.stopTrace({ traceName: 'workout - Detail' });
 
   }
 
@@ -105,8 +108,8 @@ export class WorkoutDetailsPage implements OnInit {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: 'NOVO TREINO?',
-      message: `<p> Uma vez que você escolhe o programa ele será definido como Favorito</p>
-      <p> Você terá aceso em como fazer o exercício..</p> `,
+      message: `<p> Uma vez que você escolhe o programa ele será definido como Favorito.</p>
+      <p> Você terá aceso em como fazer o exercício.</p> `,
       buttons: [
         {
           text: 'FECHAR',

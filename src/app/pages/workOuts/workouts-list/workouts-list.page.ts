@@ -11,7 +11,7 @@ import { AnalyticsService } from 'src/app/services/analytics.service';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { Smartlook, SmartlookNavigationEvent, SmartlookViewState} from '@awesome-cordova-plugins/smartlook/ngx';
-
+import { FirebasePerformance } from '@capacitor-firebase/performance';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation]);
 
@@ -42,7 +42,6 @@ export class WorkoutsListPage implements OnInit {
     private loadingController: LoadingController,
     private titleService: Title,
     private analitycs: AnalyticsService,
-    private performance: AngularFirePerformance,
     private smartlook: Smartlook
 
   ) {
@@ -60,10 +59,15 @@ export class WorkoutsListPage implements OnInit {
 
   }
 
+  ionViewDidEnter(): void{
+    console.log('Finish load page');
+  }
+
   async getData(){
 
-    const trace = await this.performance.trace('workouts -list');
-    trace.start();
+    /* const trace = await this.performance.trace('workouts -list');
+    trace.start(); */
+    await FirebasePerformance.startTrace({ traceName: 'workouts -list' });
     await this.storageService.getCachedRequest('test', '-work-segments').then(res => {
       this.segmentsPrograms = res;
       console.info('segments', this.segmentsPrograms);
@@ -78,7 +82,8 @@ export class WorkoutsListPage implements OnInit {
 
     this.isCharge = true;
 
-    trace.stop();
+    /* trace.stop(); */
+    await FirebasePerformance.stopTrace({ traceName: 'workouts -list' });
 
 
   }

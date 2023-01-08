@@ -12,7 +12,7 @@ ion-item {
 }
 
 .slides {
-  background-color: #222 !important;
+  //background-color: #222 !important;
   // padding-top: 5px;
 }
 
@@ -70,6 +70,7 @@ ion-slides {
   background-size: cover;
   background-position: center center;
   white-space: normal;
+  border-color: transparent;
 }
 
 .img-slider {
@@ -78,4 +79,14 @@ ion-slides {
   height: 150px !important;
   object-position: inherit;
   object-fit: cover;
+  border-color: transparent;
+}
+
+.img-bag{
+  background-position: center center;
+  display: block;
+  height: 150px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

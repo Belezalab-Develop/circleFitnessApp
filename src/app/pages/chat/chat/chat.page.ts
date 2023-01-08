@@ -18,6 +18,8 @@ import { IonContent, PopoverController, LoadingController, AlertController } fro
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { format, formatDistance, formatDistanceToNow } from 'date-fns';
 import { es, pt, ptBR } from 'date-fns/locale';
+import { Title } from '@angular/platform-browser';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 
 @Component({
@@ -48,9 +50,14 @@ export class ChatPage implements OnInit {
     private storage: Storage,
     private loadingController: LoadingController,
     private avatarService: AvatarService,
+    private titleService: Title,
+    private analitycs: AnalyticsService,
 
 
   ) {
+    this.titleService.setTitle('User - Individual Chat');
+    this.analitycs.setScreenName('User - Individual Chat');
+
     this.name = sessionStorage.getItem('name');
     this.oUid = sessionStorage.getItem('oUid');
     this.imagenUrl = sessionStorage.getItem('imagen');
@@ -77,13 +84,6 @@ export class ChatPage implements OnInit {
       });
     });
 
-    /* firebase.firestore().collection('chats').doc(this.uid).collection(this.oUid).orderBy('time').onSnapshot(snap => {
-
-      this.chats = [];
-      snap.forEach(child => {
-        this.chats.push(child.data());
-      });
-    }); */
   }
 
 
