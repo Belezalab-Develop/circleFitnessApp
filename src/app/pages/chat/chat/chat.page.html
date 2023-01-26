@@ -3,7 +3,8 @@
   <app-nav-header></app-nav-header>
   <ion-item lines="none" class="item-trns" >
     <ion-avatar slot="start">
-      <img [src]="imagenUrl" alt="" style="width: 100%; !important"/>
+      <img *ngIf="!imagenUrl || imagenUrl === 'undefined' "  src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;"/>
+      <img *ngIf="imagenUrl !== '' || imagenUrl !== 'undefined' " [src]="imagenUrl" alt="" style="width: 100%; !important"/>
     </ion-avatar>
     <ion-label>
       {{name}}
@@ -58,7 +59,7 @@
 
 <ion-footer>
   <input type="file" id="file" style="display: none" (change)="detectFiles()" multiple #fileToSend>
-  <ion-toolbar color="light">
+  <ion-toolbar color="black">
     <ion-row class="ion-align-items-center">
       <ion-col size="8">
         <ion-textarea autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg">

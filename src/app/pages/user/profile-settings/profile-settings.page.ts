@@ -51,6 +51,7 @@ export class ProfileSettingsPage implements OnInit {
   getUser() {
     this.storageService.getStorage('user').then(user => {
       this.buildForm(user);
+      console.log('user:::', user);
     }).catch(e => {
       console.log(e);
     });

@@ -2,7 +2,36 @@
 <ion-header>
   <app-nav-header ></app-nav-header>
 </ion-header>
-<ion-content *ngIf="this.exerciseProgram === null" class="no-padding">
+<ion-content *ngIf="isLoaded">
+  <ion-list >
+    <ion-list-header>
+      <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+    </ion-list-header>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-content *ngIf="this.exerciseProgram === null && !isLoaded" class="no-padding">
   <p style="color: #ffffff;">Ainda não tem um Treino escolhido.</p>
 </ion-content>
 <ion-content *ngIf="this.exerciseProgram !== null">
@@ -11,11 +40,11 @@
           <ion-col offset="2" size="8">
               <div class="title-program">{{ exerciseProgram?.label }}</div>
           </ion-col>
-          <ion-col size="2">
+          <!-- <ion-col size="2">
               <ion-fab-button size="small" color="dark">
                   <ion-icon name="share-social" color="danger"></ion-icon>
               </ion-fab-button>
-          </ion-col>
+          </ion-col> -->
       </ion-row>
       <ion-row class="ion-align-items-center">
           <ion-col center size="3" class="user-name ion-text-center">

@@ -12,6 +12,7 @@ import { App } from '@capacitor/app';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Smartlook, SmartlookSetupConfig } from '@awesome-cordova-plugins/smartlook/ngx';
 import { FirebasePerformance } from '@capacitor-firebase/performance';
+import { BackButtonService } from './services/auxiliar/back-button.service';
 
 //import { Stripe } from '@capacitor-community/stripe';
 
@@ -32,12 +33,14 @@ export class AppComponent implements OnInit {
     private generalService: GeneralService,
     private statusBar: StatusBar,
     private notificatiosService: NotificationsService,
-    private smartlook: Smartlook
+    private smartlook: Smartlook,
+    private backButtonService: BackButtonService,
 
   ) {
     this.storageService.initStorage();
     this.createCaheFolder();
     this.notificatiosService.inicializar();
+
     FirebasePerformance.setEnabled({ enabled: true });
     /*  Stripe.initialize({
 
@@ -72,6 +75,7 @@ export class AppComponent implements OnInit {
         }
       });
       this.smartlook.setupAndStartRecording(new SmartlookSetupConfig('2fa7b73903eea3c32a6091ab66b3ea7d6ab951e1'));
+      //this.backButtonService.init();
 
     });
   }

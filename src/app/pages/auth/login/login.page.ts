@@ -228,7 +228,8 @@ export class LoginPage implements OnInit {
       }
     }, err => {
       console.log(err);
-      const msg = err.error.message;
+      /* const msg = err.error.message; */
+      const msg = 'Ocorreu um erro. Por favor, tente novamente';
       this.errorAlert(msg);
 
 

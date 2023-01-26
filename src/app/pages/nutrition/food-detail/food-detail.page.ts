@@ -32,10 +32,11 @@ export class FoodDetailPage implements OnInit {
   optainData() {
     if (this.router.getCurrentNavigation().extras.state.food) {
       this.meal = this.router.getCurrentNavigation().extras.state.food;
-      //console.log('comidas', this.meal);
+      console.log('comidas', this.meal);
       this.mealOptions = this.meal.recipes.map(item => ({
         ...item,
         instruc: item.instructions.split('\n').join('<br />'),
+        instrucTrunc: item.instructions.split('\n').slice(0, 190),
         showMore: false
       }));
       console.log('mealoption', this.mealOptions);

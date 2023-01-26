@@ -83,7 +83,7 @@
           <video width="400px" height="350px" controls muted="true" playsinline looped preload="auto"
              class="explain-video"
             >
-            <source [src]="exercise?.video_url" type="video/mp4">
+            <source [src]="exercise?.video_url+ '#t=0.0001'" type="video/mp4">
           </video>
 
         </ion-card>

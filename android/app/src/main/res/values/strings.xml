@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">circleFitnessApp</string>
-    <string name="title_activity_main">circleFitnessApp</string>
+    <string name="app_name">Circle Fitness</string>
+    <string name="title_activity_main">Circle Fitness</string>
     <string name="package_name">app.circlefitness.analytics</string>
     <string name="custom_url_scheme">app.circlefitness.analytics</string>
 </resources>

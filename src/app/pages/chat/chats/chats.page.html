@@ -5,167 +5,85 @@
 <ion-content no-padding>
   <ion-row>
     <ion-col size="12">
-      <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CHAT </div>
+      <div class="title-program" style="font-size: 16px; margin-top: 10px; margin-bottom: 6px;">CONVERSAS</div>
       <!--  <ion-button size="small" color="danger" class="fil" (click)="goFilter()">
         <ion-icon slot="start" name="filter-sharp" color="dark"></ion-icon> Filtrar
       </ion-button> -->
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
 
+  <ion-row *ngIf="lastChats.length === 0">
+    <ion-col size="12" class="item-row" >
+      <ion-card >
+        <ion-card-content>
+          Você ainda não tem conversas, para bater um papo, vá para nossa seção de Gym Partners
+        </ion-card-content>
+
+        <ion-button fill="clear" (click)="goToGymPartners()">Gym Partners</ion-button>
+
+      </ion-card>
     </ion-col>
   </ion-row>
-  <ion-segment mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
-    <ion-segment-button value="0" color="danger">
-      <ion-label>PERTO DE VOCÊ</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="1" color="dark">
-      <ion-label>ÚLTIMAS CONVERSAS</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <ion-row *ngIf="lastChats.length > 0">
+    <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
+      <ion-row class="ion-align-items-start">
+        <ion-col size="3">
+          <ion-avatar (click)="goDetail(user.toEmail, user.img, user.toUid)" style="margin-bottom: 8px;">
+            <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
+            <img *ngIf="user?.img === ''" src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;" />
+            <img *ngIf="user?.img" [src]="user.img" alt="user.name" style="width: 100% !important; " />
+          </ion-avatar>
+          {{user.toName}}
+        </ion-col>
+        <ion-col size="9" class="no-padding">
+          <ion-row>
+            <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
+              {{user.first_name }} </ion-col>
+            <ion-col size="6" class="ion-text-end"> </ion-col>
+            <ion-col size="4">
+              <span *ngIf="user.personal_information?.is_height_visible">
+                Altura : {{ user.personal_information?.height }} cm<br />
+              </span>
+              <span *ngIf="user.personal_information?.is_weight_visible">
+                Peso: {{ user.personal_information?.height }} kg<br />
+              </span>
+              <span *ngIf="user.personal_information?.is_fat_percentage_visible">
+                Gordura : {{ user.personal_information?.fat_percentage }} %
+              </span>
+            </ion-col>
+            <ion-col size="8">
 
-  <ion-slides  #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
-    <ion-slide >
-      <ion-content >
-        <ion-row>
-          <ion-col size="12" class="item-row" *ngFor="let user of usersAround">
-            <ion-row class="ion-align-items-start">
-              <ion-col size="3">
-                <ion-avatar (click)="goDetail(user.email, user.imageUrl, user.id)" style="margin-bottom: 8px;">
-                  <img *ngIf="!user.imageUrl" src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;"/>
-                  <img *ngIf="user.imageUrl" [src]="user.imageUrl " alt="" style="width: 100%; !important"/>
-                </ion-avatar>
-                {{user.name}}
-              </ion-col>
-              <ion-col size="9" class="no-padding">
+              <ion-col size="12">
                 <ion-row>
-                  <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
-                     </ion-col>
-                  <ion-col size="6" class="ion-text-end"> {{user.distance | number:'1.2-2'}} Km </ion-col>
-                  <ion-col size="4">
-                    <span *ngIf="user.personal_information?.is_height_visible">
-                      Altura : {{ user.personal_information?.height }} cm<br />
-                    </span>
-                    <span *ngIf="user.personal_information?.is_weight_visible">
-                      Peso: {{ user.personal_information?.height }} kg<br />
-                    </span>
-                    <span *ngIf="user.personal_information?.is_fat_percentage_visible">
-                      Gordura : {{ user.personal_information?.fat_percentage }} %
-                    </span>
+                  <ion-col size="8" class="ion-text-center">
+                    SUS PROGRAMAS
                   </ion-col>
-                  <ion-col size="8">
-                    <ion-col size="12" style="margin-right: 2em;">
-                      <ion-row>
-                        <ion-col size="8" class="ion-text-center">
-                          SEUS PROGRAMAS
-                        </ion-col>
-                        <ion-col size="4">
+                  <ion-col size="4">
 
-                        </ion-col>
-                        <ion-col size="4" (click)="openEspecificWorkout(user.email)">
-                          <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
-                        </ion-col>
-                        <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                        <ion-col size="4" (click)="openEspecificNutrition(user.email)" style="border-right: 1px solid #fff;">
-                          <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
-                        </ion-col>
-                        <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl, user.email)">
-                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1"></ion-badge>
-                          <img class="icon-circle" src="/assets/imgs/icons/message.png" />
-                        </ion-col>
-                      </ion-row>
-                    </ion-col>
+                  </ion-col>
+                  <ion-col size="4" (click)="openEspecificWorkout(user.toEmail)">
+                    <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
+                  </ion-col>
+                  <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
+                  <ion-col size="4" (click)="openEspecificNutrition(user.toEmail)"
+                    style="border-right: 1px solid #fff;">
+                    <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
+                  </ion-col>
+                  <ion-col size="4"
+                    (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail)">
+                    <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 "></ion-badge>
+                    <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                   </ion-col>
                 </ion-row>
               </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-list *ngIf="isLoaded">
-          <ion-list-header>
-            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
-          </ion-list-header>
-          <ion-item *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
-            <ion-thumbnail slot="start">
-              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            </ion-thumbnail>
-            <ion-label>
-              <h3>
-                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
-              </h3>
-              <p>
-                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
-              </p>
-              <p>
-                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
-              </p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-slide>
-    <ion-slide style="margin-bottom: 3rem;">
-      <ion-content >
-        <ion-row>
-          <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
-            <ion-row class="ion-align-items-start" >
-              <ion-col size="3">
-                <ion-avatar (click)="goDetail(user.toEmail, user.img, user.toUid)" style="margin-bottom: 8px;">
-                   <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
-                  <img *ngIf="user?.img === ''"  src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;"/>
-                  <img *ngIf="user?.img" [src]="user.img" alt="user.name" style="width: 100% !important; "/>
-                </ion-avatar>
-                {{user.toName}}
-              </ion-col>
-              <ion-col size="9" class="no-padding">
-                <ion-row>
-                  <ion-col size="6" class="ion-text-start" style="padding-left: 12px;">
-                    {{user.first_name }} </ion-col>
-                  <ion-col size="6" class="ion-text-end"> </ion-col>
-                  <ion-col size="4">
-                    <span *ngIf="user.personal_information?.is_height_visible">
-                      Altura : {{ user.personal_information?.height }} cm<br />
-                    </span>
-                    <span *ngIf="user.personal_information?.is_weight_visible">
-                      Peso: {{ user.personal_information?.height }} kg<br />
-                    </span>
-                    <span *ngIf="user.personal_information?.is_fat_percentage_visible">
-                      Gordura : {{ user.personal_information?.fat_percentage }} %
-                    </span>
-                  </ion-col>
-                  <ion-col size="8">
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 
-                    <ion-col size="12">
-                      <ion-row>
-                        <ion-col size="8" class="ion-text-center">
-                          SUS PROGRAMAS
-                        </ion-col>
-                        <ion-col size="4">
 
-                        </ion-col>
-                        <ion-col size="4" (click)="openEspecificWorkout(user.toEmail)">
-                          <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
-                        </ion-col>
-                        <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                        <ion-col size="4" (click)="openEspecificNutrition(user.toEmail)" style="border-right: 1px solid #fff;">
-                          <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
-                        </ion-col>
-                        <ion-col size="4" (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail)">
-                          <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 "></ion-badge>
-                          <img class="icon-circle" src="/assets/imgs/icons/message.png" />
-                        </ion-col>
-                      </ion-row>
-                    </ion-col>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-content>
-    </ion-slide>
-  </ion-slides>
 </ion-content>
 
 <app-custom-tab></app-custom-tab>

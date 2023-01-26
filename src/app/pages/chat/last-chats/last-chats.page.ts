@@ -1,34 +1,25 @@
-import { WorkoutListParams } from 'src/app/models/workoutlistparams';
-import { ApiNutritionService } from './../../../services/nutrition/api-nutrition.service';
-import { ApiWorkoutsService } from './../../../services/workouts/api-workouts.service';
-import { UserService } from './../../../services/user.service';
-import { Title } from '@angular/platform-browser';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AvatarService, User } from './../../../services/auxiliar/avatar.service';
-
-import { CachingService } from './../../../services/auxiliar/caching.service';
 /* eslint-disable @typescript-eslint/naming-convention */
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NavController, AlertController, IonSlides, LoadingController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
-/* import { doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
-import {
-  getDownloadURL,
-  ref,
-  Storage,
-  uploadString,
-} from '@angular/fire/storage';
-import { Auth, user } from '@angular/fire/auth'; */
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { shareReplay } from 'rxjs/operators';
+import { AvatarService, User } from 'src/app/services/auxiliar/avatar.service';
+import { CachingService } from 'src/app/services/auxiliar/caching.service';
+import { ApiNutritionService } from 'src/app/services/nutrition/api-nutrition.service';
+import { UserService } from 'src/app/services/user.service';
+import { ApiWorkoutsService } from 'src/app/services/workouts/api-workouts.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 
 @Component({
-  selector: 'app-chats',
-  templateUrl: './chats.page.html',
-  styleUrls: ['./chats.page.scss'],
+  selector: 'app-last-chats',
+  templateUrl: './last-chats.page.html',
+  styleUrls: ['./last-chats.page.scss'],
 })
-export class ChatsPage implements OnInit {
-  @ViewChild('slides', { static: true }) slider: IonSlides;
+export class LastChatsPage implements OnInit {
+
   segment = 0;
   users: User[] = [];
   us: any;
@@ -51,9 +42,6 @@ export class ChatsPage implements OnInit {
   exerciseProgram;
   isLoaded = true;
 
-
-
-
   constructor(
     private navCtrl: NavController,
     private router: Router,
@@ -65,33 +53,25 @@ export class ChatsPage implements OnInit {
     private titleService: Title,
     private userService: UserService,
     private workOutService: ApiWorkoutsService,
-    private nutritionService: ApiNutritionService
-
-
+    private nutritionService: ApiNutritionService,
+    private alertController: AlertController,
   ) {
-    this.titleService.setTitle('All Chats');
+
+    this.titleService.setTitle('User And Patners ');
 
     this.getInitialLogicData();
-
-
-
-    //this.presentLoadingDefault();
   }
 
-  flattenDoc(res) {
-    return { id: res.id, };
+  ngOnInit() {
   }
-
-  ngOnInit() { }
 
   async getInitialLogicData() {
 
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.getProfile();
-      this.getLastChats();
-    /*   this.getUsers();
-      this.getLocation(); */
+      this.getUsers();
+      this.getLocation();
 
     });
 
@@ -109,25 +89,6 @@ export class ChatsPage implements OnInit {
       this.profile = data;
       console.log('el perfil->>', this.profile);
     });
-  }
-
-  async getLastChats() {
-    this.avatarService.getEspecificChats(this.userUid).pipe(
-      shareReplay()
-    ).subscribe(response => {
-      this.lastChats = response.map(item => item.img === 'undefined' ? { ...item, img: '', } : item);
-      console.log(this.lastChats);
-
-    });
-  }
-
-  async segmentChanged() {
-    await this.slider.slideTo(this.segment);
-  }
-
-  async slideChanged() {
-    this.segment = await this.slider.getActiveIndex();
-    //this.segment = k;
   }
 
   async openEspecificNutrition(email) {
@@ -213,40 +174,6 @@ export class ChatsPage implements OnInit {
 
   }
 
-  goFilter() {
-    this.router.navigateByUrl('filters-chat');
-  }
-
-  goToGymPartners() {
-    this.router.navigateByUrl('/last-chats');
-  }
-
-
-  async seePlans() {
-    const alert = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
-      header: 'Atención',
-      message: `Sólo para suscritos`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Ver Planes',
-          handler: () => {
-            this.router.navigate(['/subscriptions']);
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-  // geolocation
-
   async getLocation() {
     const loading = await this.loadingController.create({
       spinner: 'bubbles',
@@ -266,17 +193,28 @@ export class ChatsPage implements OnInit {
           this.usersAround = this.users.map(item => ({
             ...item,
             distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
-          })).sort((a, b) => a.distance - b.distance);
+          }));
 
-          const k = this.usersAround;
+          const k = this.usersAround.sort((a, b) => a.distance - b.distance);
 
           console.log('users:::', this.users);
 
           console.log('users around:::', k);
 
-          loading.dismiss();
 
-          this.isLoaded = false;
+
+          if (this.usersAround.length > 0) {
+            this.isLoaded = false;
+            loading.dismiss();
+          } else {
+            this.isLoaded = true;
+            loading.dismiss();
+            const msg = 'Ocorreu um problema ao carregar os dados, tente novamente em alguns instantes';
+            this.errorAlert(msg);
+            this.router.navigateByUrl('home-auth');
+          }
+
+
         }
       })
       .catch((error) => {
@@ -289,7 +227,10 @@ export class ChatsPage implements OnInit {
     const c = Math.cos;
     const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((lon1 - lon2) * p))) / 2;
     const dis = (12742 * Math.asin(Math.sqrt(a)));
-    return Math.trunc(dis);
+    if (dis >= 0 ) {
+      return Math.trunc(dis);
+    }
+    return 99999999999999999;
   }
 
   isNumber(value) {
@@ -309,6 +250,17 @@ export class ChatsPage implements OnInit {
     setTimeout(() => {
       loading.dismiss();
     }, 1500);
+  }
+
+  async errorAlert(msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Oops!!',
+      message: msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
 }

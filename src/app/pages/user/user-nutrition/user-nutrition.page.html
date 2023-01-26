@@ -1,7 +1,37 @@
 <ion-header>
   <app-nav-header></app-nav-header>
 </ion-header>
-<ion-content *ngIf="this.nutritionProgram === null" class="no-padding">
+<ion-content *ngIf="isLoaded">
+  <ion-list >
+    <ion-list-header>
+      <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+    </ion-list-header>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content *ngIf="this.nutritionProgram === null && !isLoaded" class="no-padding">
   <p style="color: #ffffff;">Ainda não tem um Plano de Nutrição escolhido.</p>
 </ion-content>
 <ion-content *ngIf="this.nutritionProgram !== null" class="no-padding">
@@ -94,14 +124,14 @@
                 <ion-icon color="danger" name="radio-button-on-outline"></ion-icon> {{ recipe.label }} <br>
               </ion-col>
               <ion-col size="12" class="no-padding">
-                <span style="font-size: 14px; font-weight: 16px;" >Suplementos</span>
+                <span style="font-size: 14px; font-weight: 16px;" *ngIf="meal.supplements.length > 0" >Suplementos</span>
               </ion-col>
               <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of meal.supplements">
                 <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>
               </ion-col>
-              <ion-col size="12" class="no-padding text-inst">
+             <!--  <ion-col size="12" class="no-padding text-inst">
                 {{ meal.description }}
-              </ion-col>
+              </ion-col> -->
             </ion-row>
           </ion-col>
         </ion-row>

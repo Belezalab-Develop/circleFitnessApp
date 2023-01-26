@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { UserService } from './../../../services/user.service';
-import { IonSlides, NavController } from '@ionic/angular';
+import { IonSlides, NavController, LoadingController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { Title } from '@angular/platform-browser';
@@ -17,14 +17,18 @@ export class UserNutritionPage implements OnInit {
   isFav: boolean;
   showMoreOptions: boolean;
   nutritionProgram = null;
+  isLoaded = true;
 
   constructor(
     public navCtrl: NavController,
     private userService: UserService,
     public router: Router,
     private titleService: Title,
-    private analitycs: AnalyticsService
-  ) { }
+    private analitycs: AnalyticsService,
+    private loadingController: LoadingController,
+  ) {
+
+  }
 
   ngOnInit() {
 
@@ -54,16 +58,35 @@ export class UserNutritionPage implements OnInit {
 
   }
 
-  getNutritionDAta() {
+  async getNutritionDAta() {
     //TODO: PAsar esto al storage, al momento del login,
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+
+    loading.present();
     this.userService.getNutritionProgram()
       .subscribe((nutritionProgram: any) => {
-        this.nutritionProgram = nutritionProgram;
-        this.titleService.setTitle(`USER - PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
+
+        if (nutritionProgram !== null) {
+          this.nutritionProgram = nutritionProgram;
+          console.log('nutritionProgram:::', this.nutritionProgram);
+          this.titleService.setTitle(`USER - PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
           this.analitycs.setScreenName(`USER - PLANO DE NUTRIÇÃO - ${this.nutritionProgram.label}`);
-        console.log(nutritionProgram);
+          this.isLoaded = false;
+          loading.dismiss();
+
+        } else {
+          this.nutritionProgram = null;
+          this.isLoaded = false;
+          loading.dismiss();
+        }
+
       }, err => {
         this.nutritionProgram = null;
+        this.isLoaded = false;
+        loading.dismiss();
         console.log(err);
       });
   }
@@ -71,8 +94,6 @@ export class UserNutritionPage implements OnInit {
   goFoodDetail(food, nutritionProgram) {
     this.router.navigateByUrl('/food-detail', { state: { food, nutritionProgram } });
   }
-
-
 
   totalProteins() {
     return _.sumBy(this.nutritionProgram.days[0].meals, (meal) => _.sumBy(meal.recipes, 'proteins'));
@@ -90,12 +111,15 @@ export class UserNutritionPage implements OnInit {
     return _.sumBy(this.nutritionProgram.days[0].meals, (meal) => _.sumBy(meal.recipes, 'calories'));
   }
 
+  loadingData() {
+
+  }
 
   goInfluencerDetail(influencer: any) {
     console.log(influencer);
     this.router.navigate(['/influencer-details'], {
       state: { influencer },
-      replaceUrl:true
+      replaceUrl: true
     });
   }
 

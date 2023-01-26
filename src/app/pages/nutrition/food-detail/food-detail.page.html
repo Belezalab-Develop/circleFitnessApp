@@ -73,7 +73,8 @@
                 <span style="font-size: 14px; font-weight: bold;">{{ recipe.label }}</span>
                 <br> <br>
                 <span *ngIf="!recipe.showMore">
-                  {{trimString(recipe.instruc,190)}}
+                  <!-- {{trimString(recipe.instrucTrunc,190)}} -->
+                  {{recipe.instrucTrunc[0]}} {{recipe.instrucTrunc[1]}} {{recipe.instrucTrunc[2]}}
                 </span>
                 <span *ngIf="recipe.showMore" [innerHTML]="recipe.instruc"> </span>
                 <a style="color: #d20303; font-weight: bold; float: right;"

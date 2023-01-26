@@ -151,6 +151,10 @@ const routes: Routes = [
     path: 'user-galery',
     loadChildren: () => import('./pages/user/user-galery/user-galery.module').then( m => m.UserGaleryPageModule)
   },
+  {
+    path: 'last-chats',
+    loadChildren: () => import('./pages/chat/last-chats/last-chats.module').then( m => m.LastChatsPageModule)
+  },
 ];
 
 @NgModule({

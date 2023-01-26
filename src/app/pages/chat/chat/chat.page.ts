@@ -61,6 +61,7 @@ export class ChatPage implements OnInit {
     this.name = sessionStorage.getItem('name');
     this.oUid = sessionStorage.getItem('oUid');
     this.imagenUrl = sessionStorage.getItem('imagen');
+    console.log('esta es la imagen',this.imagenUrl);
     this.uid = sessionStorage.getItem('uid');
     this.fromName = sessionStorage.getItem('fromName');
     this.toEmail = sessionStorage.getItem('toEmail');
@@ -83,13 +84,13 @@ export class ChatPage implements OnInit {
         this.chats.push(child);
       });
     });
-
+    //this.content.scrollToBottom();
   }
 
 
-  ionViewWillEnter() {
-    this.content.scrollToBottom();
-  }
+ /*  ionViewWillEnter() {
+
+  } */
 
   async sendMessage() {
     this.afs.collection('chats')

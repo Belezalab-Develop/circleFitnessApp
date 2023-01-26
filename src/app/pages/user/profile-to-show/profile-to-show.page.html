@@ -50,11 +50,11 @@
 
         <div *ngIf="showMore === false" maxlength="190">
           <div *ngIf="user?.personal_information.bio !== null" style="font-size: 12px;">
-            <p style="font-size: 12px;"> {{ user?.personal_information.bio | truncate:190}}</p>
+            <p style="font-size: 12px; text-align: left !important;"> {{ user?.personal_information.bio | truncate:190}}</p>
           </div>
 
         </div>
-        <div *ngIf="showMore === true"><p style="font-size: 12px;">{{ user?.personal_information.bio}}</p></div>
+        <div *ngIf="showMore === true"><p style="font-size: 12px; text-align: left !important;">{{ user?.personal_information.bio}}</p></div>
         <a style="color: #d20303; font-weight: bold; float: right" (click)="showMore = !showMore">Mostrar
           <span [innerHtml]="showMore ? 'Menos' : 'Mais'"> </span></a>
       </ion-text>

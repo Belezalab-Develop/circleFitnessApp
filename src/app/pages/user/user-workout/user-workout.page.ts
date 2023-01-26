@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 /* eslint-disable no-console */
 import { Router } from '@angular/router';
 import { UserService } from './../../../services/user.service';
@@ -26,8 +27,9 @@ export class UserWorkoutPage implements OnInit {
   viewLocation = false;
   influencer: [];
   subscribe = true;
-  exerciseProgram: any = {};
+  exerciseProgram: any = null;
   showMore = false;
+  isLoaded = true;
 
   constructor(
     public navCtrl: NavController,
@@ -35,14 +37,22 @@ export class UserWorkoutPage implements OnInit {
     private alertCtrl: AlertController,
     public router: Router,
     private titleService: Title,
-    private analitycs: AnalyticsService
+    private analitycs: AnalyticsService,
+    private loadingController: LoadingController,
   ) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     console.info('USER WORKOUT');
     //TODO: pasar eso a storage en el inicio y llamar  desde ahi.
+
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+
+    loading.present();
     this.userService.getExerciseProgram().subscribe(
       (exerciseProgram: any) => {
 
@@ -54,8 +64,12 @@ export class UserWorkoutPage implements OnInit {
           console.log('WORKOUT   :>> ', exerciseProgram);
           this.titleService.setTitle(`USER - PLANO DE TREINAMENTO - ${this.exerciseProgram.label}`);
           this.analitycs.setScreenName(`USER - PLANO DE TREINAMENTO - ${this.exerciseProgram.label}`);
+          this.isLoaded = false;
+          loading.dismiss();
         } else {
           this.exerciseProgram = null;
+          this.isLoaded = false;
+          loading.dismiss();
         }
 
 

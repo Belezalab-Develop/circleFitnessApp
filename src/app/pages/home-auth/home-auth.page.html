@@ -8,14 +8,14 @@
 
         <ion-button (click)="goGalery()">
           <div class="custom-button-content">
-            <ion-icon color="white" slot="start" name="images-outline"></ion-icon>
+            <ion-icon color="white" slot="start" name="images-outline" style="margin-right: 0px;"></ion-icon>
             <ion-label color="white" class="my-label">GALERIA </ion-label>
           </div>
 
         </ion-button>
         <ion-button (click)="goProfile()">
           <div class="custom-button-content">
-            <ion-icon color="white" slot="end" name="person-outline"></ion-icon>
+            <ion-icon color="white" slot="end" name="person-outline" style="margin-left: 0px;"></ion-icon>
             <ion-label color="white" class="my-label">PERFIL</ion-label>
           </div>
 
@@ -34,7 +34,7 @@
               <ion-col size="12" class="ion-text-center" >
                   <ion-text>
                       <img
-                          style="margin-top: 20px; margin-left: 10px; width: 50%;"
+                          style="margin-top: 1px; margin-left: 10px; width: 50%;"
                           src="assets/imgs/logo-fit-ola.png"
                       />
                       <h1 style="margin-top: -2px">{{this.generalService?.user?.nick_name | uppercase}}</h1>
@@ -48,7 +48,7 @@
                       shape="round"
                       expand="block"
                       (click)="goWorkoutRoutine(null)"
-                      style="font-family: Roboto-Black;"
+                      style="font-family: Roboto-Black; font-size: 12px;"
                   >
                       {{'iniciar workout'|translate | uppercase}}</ion-button
                   >
