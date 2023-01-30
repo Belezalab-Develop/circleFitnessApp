@@ -1,3 +1,5 @@
+import { AvatarService } from './../../../services/auxiliar/avatar.service';
+import { CachingService } from './../../../services/auxiliar/caching.service';
 import { Title } from '@angular/platform-browser';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
@@ -9,6 +11,7 @@ import * as _ from 'lodash';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { FirebasePerformance } from '@capacitor-firebase/performance';
+
 
 
 @Component({
@@ -25,6 +28,7 @@ export class NutritionDetailsPage implements OnInit {
   nutritionIndicator = false;
   showMore = false;
   subscribe = false;
+  userUid;
 
 
 
@@ -35,7 +39,9 @@ export class NutritionDetailsPage implements OnInit {
     private userService: UserService,
     private router: Router,
     private titleService: Title,
-    private analitycs: AnalyticsService
+    private analitycs: AnalyticsService,
+    private storageService: CachingService,
+    private avatarService: AvatarService,
 
   ) {
 
@@ -62,6 +68,11 @@ export class NutritionDetailsPage implements OnInit {
       // entra por nutrition program
       console.info('// entra por nutrition program', this.nutritionProgram);
     }
+
+    this.storageService.getStorage('user_uid').then(res => {
+      this.userUid = res;
+
+    });
 
     FirebasePerformance.stopTrace({ traceName: 'nutrition - Detail' });
   }
@@ -144,7 +155,9 @@ export class NutritionDetailsPage implements OnInit {
               }, err => {
                 console.log(err);
               });
+            this.avatarService.updateNutritionId(this.userUid, this.nutritionProgram.id);
           }
+
         }
       ]
     });

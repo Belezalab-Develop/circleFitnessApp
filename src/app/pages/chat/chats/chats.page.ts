@@ -21,6 +21,7 @@ import {
 } from '@angular/fire/storage';
 import { Auth, user } from '@angular/fire/auth'; */
 import { shareReplay } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-chats',
@@ -65,7 +66,9 @@ export class ChatsPage implements OnInit {
     private titleService: Title,
     private userService: UserService,
     private workOutService: ApiWorkoutsService,
-    private nutritionService: ApiNutritionService
+    private nutritionService: ApiNutritionService,
+    private alertController: AlertController,
+    private storage: Storage,
 
 
   ) {
@@ -130,31 +133,43 @@ export class ChatsPage implements OnInit {
     //this.segment = k;
   }
 
-  async openEspecificNutrition(email) {
+  async openEspecificNutrition(user) {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+    loading.present();
 
-    this.userService.getIndividualUser(email).subscribe(async (data) => {
-      this.espUser = data[0];
-      if (this.espUser) {
-
-        this.nutritionService.individual(this.espUser.customer.nutrition_program.nutrition_program_id).subscribe(async (res) => {
-          const nutritionProgram = res[0];
-          await this.router.navigateByUrl('nutrition-details', {
-            state: { showMoreOptions: false, nutritionProgram },
-          });
+    if (user.toNutritionId !== 0) {
+      this.nutritionService.individual(user.toNutritionId).subscribe(async (res) => {
+        const nutritionProgram = res[0];
+        await this.router.navigateByUrl('nutrition-details', {
+          state: { showMoreOptions: false, nutritionProgram },
         });
 
+        loading.dismiss();
+      });
+    }
 
-      }
-    });
+    if (user.nutrition_id === 0) {
+      loading.dismiss();
+      this.errorAlert('Este parceiro não tem um programa de nutrição selecionado');
+    }
 
   }
 
-  openEspecificWorkout(email: string) {
+  async openEspecificWorkout(user) {
 
-    this.userService.getIndividualUser(email).subscribe((data) => {
-      this.espUser = data[0];
-      if (this.espUser) {
-        this.workOutService.individual(this.espUser.customer.exercise_program.exercise_program_id).subscribe(async (resp) => {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+    loading.present();
+    console.log(user);
+    if (user.toWorkoutId !== 0) {
+      this.workOutService.individual(user.toWorkoutId)
+        .subscribe(async (resp) => {
+          console.log(resp);
           const workout = resp[0];
 
           const params = new WorkoutListParams();
@@ -164,37 +179,35 @@ export class ChatsPage implements OnInit {
           await this.router.navigate(['/workout-details'], {
             queryParams: { params, workout },
           });
-        });
-      }
-    });
+          loading.dismiss();
+        }
+          , err => {
+            console.log(err);
+          });
+    }
+    if (user.workout_id === 0) {
+      loading.dismiss();
+      this.errorAlert('este parceiro não tem treino selecionado');
+    }
 
   }
 
-  goDetail(email: string, photo_url: string, uid: string) {
+
+  goDetail(email: string, photo_url: string, uid: string, workout_id: number, nutrition_id: number) {
     this.router.navigateByUrl('/profile', {
       replaceUrl: true, state: {
         email,
         photo_url,
-        uid
+        uid,
+        workout_id,
+        nutrition_id
       }
     });
   }
 
-  goChat(name, oUdi, imageUrl, toEmail) {
-    console.log('el email->>', toEmail);
-    const badge = 0;
-    this.avatarService.updateRecivedMessage(oUdi, badge);
-    sessionStorage.setItem('uid', this.userUid);
-    sessionStorage.setItem('name', name);
-    sessionStorage.setItem('fromName', this.profile.name);
-    sessionStorage.setItem('imagen', imageUrl);
-    sessionStorage.setItem('oUid', oUdi);
-    sessionStorage.setItem('toEmail', toEmail);
-    this.router.navigateByUrl('/chat');
 
-  }
 
-  goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail) {
+  goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail, toWorkoutId, toNutritionId) {
     const badge = 0;
     console.log('el email->>', toEmail);
 
@@ -208,6 +221,8 @@ export class ChatsPage implements OnInit {
     sessionStorage.setItem('imagen', imageUrl);
     sessionStorage.setItem('oUid', oUdi);
     sessionStorage.setItem('toEmail', toEmail);
+    sessionStorage.setItem('toWorkoutId', toWorkoutId);
+    sessionStorage.setItem('toNutritionId', toNutritionId);
     this.router.navigateByUrl('/chat');
 
 
@@ -309,6 +324,17 @@ export class ChatsPage implements OnInit {
     setTimeout(() => {
       loading.dismiss();
     }, 1500);
+  }
+
+  async errorAlert(msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Oops!!',
+      message: msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
 }

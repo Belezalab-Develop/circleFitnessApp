@@ -50,12 +50,19 @@
 
               <ion-label text-wrap class="ion-text-justify" style="padding-left:1.5em ;">
                 <h3>{{ exerciseProgram.finisher1.label }}</h3>
-                <p class="finisher-text" [innerHTML]="textVideo1"></p>
+                <!-- <p class="finisher-text" [innerHTML]="textVideo1"></p> -->
 
-                <!-- <ion-button fill="outline" color="dark" class="special-button" (click)="seeVideo1()">
-                  ver video
-                  <ion-icon slot="end" name="play-outline"></ion-icon>
-                </ion-button> -->
+                <div *ngIf="!showMore1">
+                  <p class="finisher-text">{{trimString(textVideo1,190)}}</p>
+
+                </div>
+                <div *ngIf="showMore1">
+                  <p class="finisher-text" [innerHTML]="textVideo1"></p>
+                </div>
+                <a style="color: #d20303; font-weight: bold; float: right; padding-right: 1.5rem;" (click)="showMore1 = !showMore1">Ver <span
+                    [innerHtml]="showMore1 ? 'menos' : 'mais'"> </span></a>
+
+
               </ion-label>
 
             </ion-item>
@@ -90,11 +97,19 @@
               </ion-thumbnail> -->
               <ion-label text-wrap class="ion-text-justify" style="padding-left:1.5em ;">
                 <h3>{{ exerciseProgram.finisher2.label }}</h3>
-                <p class="finisher-text" [innerHTML]="textVideo2"></p>
-                <!-- <ion-button outline fill="outline" color="dark"  (click)="seeVideo2()" class="special-button">
-                  ver video
-                  <ion-icon slot="end" name="play-outline"></ion-icon>
-                </ion-button> -->
+                <!-- <p class="finisher-text" [innerHTML]="textVideo2"></p> -->
+
+                <div *ngIf="!showMore2">
+                  <p class="finisher-text">{{trimString(textVideo2,190)}}</p>
+
+                </div>
+                <div *ngIf="showMore2">
+                  <p class="finisher-text" [innerHTML]="textVideo2"></p>
+                </div>
+                <a style="color: #d20303; font-weight: bold; float: right; padding-right: 1.5rem;" (click)="showMore2 = !showMore2">Ver <span
+                    [innerHtml]="showMore2 ? 'menos' : 'mais'"> </span></a>
+
+
               </ion-label>
 
             </ion-item>

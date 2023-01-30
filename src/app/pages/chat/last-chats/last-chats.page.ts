@@ -1,24 +1,23 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { shareReplay } from 'rxjs/operators';
 import { AvatarService, User } from 'src/app/services/auxiliar/avatar.service';
 import { CachingService } from 'src/app/services/auxiliar/caching.service';
 import { ApiNutritionService } from 'src/app/services/nutrition/api-nutrition.service';
-import { UserService } from 'src/app/services/user.service';
 import { ApiWorkoutsService } from 'src/app/services/workouts/api-workouts.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-last-chats',
   templateUrl: './last-chats.page.html',
   styleUrls: ['./last-chats.page.scss'],
 })
-export class LastChatsPage implements OnInit {
+export class LastChatsPage implements OnInit, OnDestroy {
 
   segment = 0;
   users: User[] = [];
@@ -43,18 +42,16 @@ export class LastChatsPage implements OnInit {
   isLoaded = true;
 
   constructor(
-    private navCtrl: NavController,
+
     private router: Router,
-    private alertCtrl: AlertController,
     private storageService: CachingService,
     private avatarService: AvatarService,
     private loadingController: LoadingController,
-    private afs: AngularFirestore,
     private titleService: Title,
-    private userService: UserService,
     private workOutService: ApiWorkoutsService,
     private nutritionService: ApiNutritionService,
     private alertController: AlertController,
+    private storage: Storage,
   ) {
 
     this.titleService.setTitle('User And Patners ');
@@ -70,8 +67,14 @@ export class LastChatsPage implements OnInit {
     this.storageService.getStorage('user_uid').then(res => {
       this.userUid = res;
       this.getProfile();
-      this.getUsers();
+      //this.getUsers();
       this.getLocation();
+
+    });
+
+    this.storageService.getStorage('users-around').then(resp => {
+      this.users = resp.res.filter(item => item.id !== this.userUid)
+        .map(item => item.imageUrl === 'undefined' ? { ...item, imageUrl: '', } : item);
 
     });
 
@@ -91,31 +94,43 @@ export class LastChatsPage implements OnInit {
     });
   }
 
-  async openEspecificNutrition(email) {
+  async openEspecificNutrition(user) {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+    loading.present();
 
-    this.userService.getIndividualUser(email).subscribe(async (data) => {
-      this.espUser = data[0];
-      if (this.espUser) {
-
-        this.nutritionService.individual(this.espUser.customer.nutrition_program.nutrition_program_id).subscribe(async (res) => {
-          const nutritionProgram = res[0];
-          await this.router.navigateByUrl('nutrition-details', {
-            state: { showMoreOptions: false, nutritionProgram },
-          });
+    if (user.nutrition_id !== 0) {
+      this.nutritionService.individual(user.nutrition_id).subscribe(async (res) => {
+        const nutritionProgram = res[0];
+        await this.router.navigateByUrl('nutrition-details', {
+          state: { showMoreOptions: false, nutritionProgram },
         });
 
+        loading.dismiss();
+      });
+    }
 
-      }
-    });
+    if (user.nutrition_id === 0) {
+      loading.dismiss();
+      this.errorAlert('Este parceiro não tem um programa de nutrição selecionado');
+    }
 
   }
 
-  openEspecificWorkout(email: string) {
+  async openEspecificWorkout(user) {
 
-    this.userService.getIndividualUser(email).subscribe((data) => {
-      this.espUser = data[0];
-      if (this.espUser) {
-        this.workOutService.individual(this.espUser.customer.exercise_program.exercise_program_id).subscribe(async (resp) => {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+    loading.present();
+    console.log(user);
+    if (user.workout_id !== 0) {
+      this.workOutService.individual(user.workout_id)
+        .subscribe(async (resp) => {
+          console.log(resp);
           const workout = resp[0];
 
           const params = new WorkoutListParams();
@@ -125,23 +140,33 @@ export class LastChatsPage implements OnInit {
           await this.router.navigate(['/workout-details'], {
             queryParams: { params, workout },
           });
-        });
-      }
-    });
+          loading.dismiss();
+        }
+          , err => {
+            console.log(err);
+          });
+    }
+    if (user.workout_id === 0) {
+      loading.dismiss();
+      this.errorAlert('este parceiro não tem treino selecionado');
+    }
 
   }
 
-  goDetail(email: string, photo_url: string, uid: string) {
+  goDetail(email: string, photo_url: string, uid: string, workout_id, nutrition_id) {
+
     this.router.navigateByUrl('/profile', {
-      replaceUrl: true, state: {
+      state: {
         email,
         photo_url,
-        uid
+        uid,
+        workout_id,
+        nutrition_id
       }
     });
   }
 
-  goChat(name, oUdi, imageUrl, toEmail) {
+  goChat(name, oUdi, imageUrl, toEmail, toWorkoutId, toNutritionId) {
     console.log('el email->>', toEmail);
     const badge = 0;
     this.avatarService.updateRecivedMessage(oUdi, badge);
@@ -151,28 +176,12 @@ export class LastChatsPage implements OnInit {
     sessionStorage.setItem('imagen', imageUrl);
     sessionStorage.setItem('oUid', oUdi);
     sessionStorage.setItem('toEmail', toEmail);
+    sessionStorage.setItem('toWorkoutId', toWorkoutId);
+    sessionStorage.setItem('toNutritionId', toNutritionId);
     this.router.navigateByUrl('/chat');
 
   }
 
-  goSpecificChat(name, oUdi, imageUrl, messageSent, toEmail) {
-    const badge = 0;
-    console.log('el email->>', toEmail);
-
-    if (messageSent === 1) {
-      this.avatarService.updateSpecificMessajeSent(this.userUid, oUdi, badge);
-    }
-
-    sessionStorage.setItem('uid', this.userUid);
-    sessionStorage.setItem('name', name);
-    sessionStorage.setItem('fromName', this.profile.name);
-    sessionStorage.setItem('imagen', imageUrl);
-    sessionStorage.setItem('oUid', oUdi);
-    sessionStorage.setItem('toEmail', toEmail);
-    this.router.navigateByUrl('/chat');
-
-
-  }
 
   async getLocation() {
     const loading = await this.loadingController.create({
@@ -227,7 +236,7 @@ export class LastChatsPage implements OnInit {
     const c = Math.cos;
     const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((lon1 - lon2) * p))) / 2;
     const dis = (12742 * Math.asin(Math.sqrt(a)));
-    if (dis >= 0 ) {
+    if (dis >= 0) {
       return Math.trunc(dis);
     }
     return 99999999999999999;
@@ -261,6 +270,13 @@ export class LastChatsPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  ngOnDestroy(): void {
+    this.storageService.remove('users-around');
+    this.avatarService.getUsersToWork().subscribe(res => {
+      this.storage.set('users-around', { res });
+    });
   }
 
 }

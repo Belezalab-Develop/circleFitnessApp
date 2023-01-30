@@ -3,7 +3,7 @@
   <app-nav-header></app-nav-header>
   <ion-item lines="none" class="item-trns" >
     <ion-avatar slot="start">
-      <img *ngIf="!imagenUrl || imagenUrl === 'undefined' "  src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;"/>
+      <!-- <img *ngIf="!imagenUrl || imagenUrl === 'undefined' "  src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;"/> -->
       <img *ngIf="imagenUrl !== '' || imagenUrl !== 'undefined' " [src]="imagenUrl" alt="" style="width: 100%; !important"/>
     </ion-avatar>
     <ion-label>
@@ -14,8 +14,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <ion-grid fixed *ngFor="let chat of chats">
+  <!-- <ion-button (click)="scrollToBottom()"> Scroll </ion-button> -->
+  <ion-grid fixed *ngFor="let chat of chats; let last = last">
 
       <ion-row size="6" class="ion-justify-content-start" *ngIf="chat.fromUid !== uid">
 
@@ -24,6 +24,7 @@
 
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.5rem;">
             <p>{{chat.msg}}</p>
+
             <div *ngIf="chat.time">
               <small><i>{{formatDate(chat.time)}}</i></small>
             </div>
@@ -40,6 +41,7 @@
             <img [src]="chat.imageUrl" alt="" *ngIf="chat.imageUrl !== '' " style="margin-top: 0.5rem;">
             <h2 color="dark"><b>você</b></h2>
             <p class="ion-text-left">{{chat.msg}}</p>
+
             <div *ngIf="chat.time">
               <small><i>{{formatDate(chat.time)}}</i></small>
             </div>
@@ -49,7 +51,7 @@
         </ion-item>
       </ion-row>
 
-
+      {{last ? scrollToBottom() : ''}}
   </ion-grid>
 
 

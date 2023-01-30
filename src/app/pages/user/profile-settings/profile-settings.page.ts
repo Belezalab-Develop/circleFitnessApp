@@ -90,6 +90,8 @@ export class ProfileSettingsPage implements OnInit {
 
       });
     });
+    const data= this.form;
+    this.avatarService.update(this.userUid, data);
 
 
   }

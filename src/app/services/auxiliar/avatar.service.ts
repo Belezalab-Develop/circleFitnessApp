@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-len */
-import { map, share } from 'rxjs/operators';
+import { filter, map, share, shareReplay } from 'rxjs/operators';
 import { FirebaseService } from './firebase.service';
 import { Observable } from 'rxjs';
 
@@ -52,21 +53,33 @@ export class AvatarService {
   lat = null;
   lon = null;
 
+  public usersAround: User[] = [];
   constructor(
     private auth: Auth,
     private firestore: Firestore,
     private afs: AngularFirestore,
     private storage: Storage,
     private serviceStorage: CachingService,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+     private storageService: CachingService,
   ) {
     this.getLocation();
+    this.storageService.getStorage('user_uid').then(res => {
+      this.userUid = res;
+    });
   }
   //TODO::incluir el calculo de la distancia aqui
   getUsers(): Observable<User[]> {
     const userRef = collection(this.firestore, 'users');
     return collectionData(userRef, { idField: 'id' }) as Observable<User[]>;
   }
+
+  getUsersToWork() {
+    const userRef = collection(this.firestore, 'users');
+    return collectionData(userRef, { idField: 'id' }) ;
+  }
+
+
 
   async getLocation() {
     await Geolocation
@@ -177,7 +190,8 @@ export class AvatarService {
     }
   }
 
-  async setParticipants(uid, ouid, time, img, toUid, toName, messageSent, fromName, toEmail) {
+  async setParticipants(uid, ouid, time, img, toUid, toName, messageSent, fromName, toEmail, toWorkoutId,
+    toNutritionId) {
 
     try {
       const userDocRef = doc(this.firestore, `lastChats/${uid}/participantes/${ouid}/`);
@@ -189,7 +203,9 @@ export class AvatarService {
         messageSent,
         fromName,
         fromUid: uid,
-        toEmail
+        toEmail,
+        toWorkoutId,
+        toNutritionId
       });
       return true;
     } catch (e) {
@@ -236,6 +252,32 @@ export class AvatarService {
 
     }
   }
+  async updateWorkoutId(uid, workout_id) {
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+        workout_id
+      });
+      return true;
+
+    } catch (error) {
+
+    }
+  }
+
+  async updateNutritionId(uid, nutrition_id) {
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await updateDoc(userDocRef, {
+        nutrition_id
+      });
+      return true;
+
+    } catch (error) {
+
+    }
+  }
+
 
   async uploadImage(cameraFile: Photo, uid) {
     const path = `uploads/${uid}/profile.png`;

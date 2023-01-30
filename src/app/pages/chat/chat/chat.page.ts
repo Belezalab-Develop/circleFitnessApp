@@ -1,3 +1,4 @@
+import { shareReplay } from 'rxjs/operators';
 /* eslint-disable @typescript-eslint/no-shadow */
 
 import { PreviewPagePage } from './../../auxiliar/preview-page/preview-page.page';
@@ -13,7 +14,7 @@ import {
   Storage,
   uploadString,
 } from '@angular/fire/storage';
-import { IonContent, PopoverController, LoadingController, AlertController } from '@ionic/angular';
+import { IonContent, PopoverController, LoadingController, AlertController, IonList } from '@ionic/angular';
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { format, formatDistance, formatDistanceToNow } from 'date-fns';
@@ -28,8 +29,9 @@ import { AnalyticsService } from 'src/app/services/analytics.service';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   @ViewChild('fileToSend', { static: true }) fileToSend: ElementRef;
+  @ViewChild(IonList, {read: ElementRef}) chatList: ElementRef;
 
 
   messages: Observable<any[]>;
@@ -42,8 +44,11 @@ export class ChatPage implements OnInit {
   imagenUrl;
   fromName;
   toEmail;
+  toWorkoutId;
+  toNutritionId;
 
   chats = [];
+  private mutationObserver: MutationObserver;
 
   constructor(
     private afs: AngularFirestore,
@@ -61,14 +66,12 @@ export class ChatPage implements OnInit {
     this.name = sessionStorage.getItem('name');
     this.oUid = sessionStorage.getItem('oUid');
     this.imagenUrl = sessionStorage.getItem('imagen');
-    console.log('esta es la imagen',this.imagenUrl);
+    console.log('esta es la imagen', this.imagenUrl);
     this.uid = sessionStorage.getItem('uid');
     this.fromName = sessionStorage.getItem('fromName');
     this.toEmail = sessionStorage.getItem('toEmail');
-  }
-
-  ngOnInit() {
-
+    this.toWorkoutId = sessionStorage.getItem('toWorkoutId');
+    this.toNutritionId = sessionStorage.getItem('toNutritionId');
 
     this.messages = this.afs.collection('chats')
       .doc(this.uid)
@@ -77,20 +80,32 @@ export class ChatPage implements OnInit {
       .collection('mensajes', ref => ref.orderBy('time'))
       .valueChanges();
 
-    this.messages.subscribe(res => {
+    this.messages.pipe(shareReplay(1)).subscribe(res => {
       console.log(res);
       this.chats = [];
       res.forEach(child => {
         this.chats.push(child);
       });
     });
-    //this.content.scrollToBottom();
+
+  }
+
+  ngOnInit() {
+
+
+
+
   }
 
 
- /*  ionViewWillEnter() {
+  ionViewWillLoad() {
+    console.log('Ioni will ener::');
+  /*   setTimeout(() => {
 
-  } */
+      this.scrollToBottom();
+
+    }, 500); */
+  }
 
   async sendMessage() {
     this.afs.collection('chats')
@@ -104,6 +119,8 @@ export class ChatPage implements OnInit {
         toUid: this.oUid,
         toName: this.name,
         fromName: this.fromName
+      }).then(() => {
+        this.newMsg = '';
       });
 
     this.afs.collection('chats')
@@ -118,7 +135,6 @@ export class ChatPage implements OnInit {
         fromName: this.fromName
       }).then(() => {
         this.newMsg = '';
-        this.content.scrollToBottom();
       });
 
     const messageSent = 1;
@@ -132,7 +148,9 @@ export class ChatPage implements OnInit {
         this.name,
         messageStand,
         this.fromName,
-        this.toEmail)
+        this.toEmail,
+        this.toWorkoutId,
+        this.toNutritionId)
       .then(res => {
         console.log('respuesta respuesta--->', res);
       });
@@ -211,7 +229,6 @@ export class ChatPage implements OnInit {
           fromName: this.fromName
         }).then(() => {
           this.newMsg = '';
-          this.content.scrollToBottom();
         });
 
 
@@ -221,6 +238,17 @@ export class ChatPage implements OnInit {
     }
   }
 
+  scrollToBottom() {
+    // Passing a duration to the method makes it so the scroll slowly
+    // goes to the bottom instead of instantly
+    this.content.scrollToBottom();
+  }
+
+  scrollToTop() {
+    // Passing a duration to the method makes it so the scroll slowly
+    // goes to the top instead of instantly
+    this.content.scrollToTop(500);
+  }
 
 
 

@@ -23,11 +23,11 @@
 
       </ion-col>
       <ion-col size="9" class="ion-text-center">
-        <ion-button expand="round" (click)="startWorkout()" color="danger" *ngIf="!isStarted">
+        <ion-button expand="round" (click)="startWorkout()" color="red" *ngIf="!isStarted">
           {{ 'start workout' | translate}}
           <ion-icon slot="end" name="play"></ion-icon>
         </ion-button>
-        <ion-button expand="round" (click)="finishWorkout()" color="danger" *ngIf="isStarted">
+        <ion-button expand="round" (click)="finishWorkout()" color="red" *ngIf="isStarted">
           <ion-icon slot="end" name="stop-circle"></ion-icon>
           {{ 'finish workout' | translate}}
         </ion-button>
@@ -83,7 +83,7 @@
                 <ion-card tappable [class.current]="exercise.current_serie_index === i"
                   (click)="editExerciseSeries(exercise,serie.order)" [attr.data-serie_order]="serie.id">
                   <ion-card-content>
-                    
+
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.weight_in_kg }} {{ 'lbs'|translate }}</p>
                     <p *ngIf="!exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'reps'|translate }}</p>
                     <p *ngIf="exercise.pivot.is_time_based">{{ serie.repetitions }} {{ 'seconds'|translate }}</p>

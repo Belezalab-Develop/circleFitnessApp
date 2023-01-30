@@ -84,7 +84,10 @@ export class LoginPage implements OnInit {
 
       console.log('error', err.error.message);
 
-      const msg = err.error.message;
+      /*  const msg = err.error.message; */
+      this.loading.dismiss();
+      const msg = 'As credenciais do usuário estavam incorretas.';
+
       this.errorAlert(msg);
 
     });
@@ -148,7 +151,10 @@ export class LoginPage implements OnInit {
       const data = {
         email: form.email,
         password: form.password,
-        nickName: result.nick_name
+        nickName: result.nick_name,
+        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/circlefitnessapp.appspot.com/o/uploads%2Fusers_avatars%2Flogo-fit-ola_200x200.png?alt=media&token=30f559de-122f-4148-9648-dcbcb005ae0f',
+        workout_id: 0,
+        nutrition_id: 0
       };
 
       this.firebaseService.signup(data).then(res => { })

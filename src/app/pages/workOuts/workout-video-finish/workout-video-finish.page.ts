@@ -27,6 +27,10 @@ export class WorkoutVideoFinishPage implements OnInit {
   exerciseFinish: any;
   textVideo1;
   textVideo2;
+  truncTextVideo1;
+  truncTextVideo2;
+  showMore1 = false;
+  showMore2 = false;
 
   constructor(
 
@@ -50,6 +54,8 @@ export class WorkoutVideoFinishPage implements OnInit {
         this.router.getCurrentNavigation().extras.state.routine;
         this.textVideo1 = this.exerciseProgram.finisher1.description.split('\n').join('<br />');
         this.textVideo2 = this.exerciseProgram.finisher2.description.split('\n').join('<br />');
+        this.truncTextVideo1 = this.exerciseProgram.finisher1.description.split('\n').slice(0, 190);
+        this.truncTextVideo2 = this.exerciseProgram.finisher1.description.split('\n').slice(0, 190);
       console.log(this.exerciseFinish);
       console.log('ESTA ES LA RUTINA:::', this.routine);
     }
@@ -172,5 +178,11 @@ export class WorkoutVideoFinishPage implements OnInit {
       cssClass: 'transparent-modal'
     });
     modal.present();
+  }
+
+  trimString(text: string, length: number) {
+    return text.length > length
+      ? text.substring(0, length) + '...'
+      : text;
   }
 }

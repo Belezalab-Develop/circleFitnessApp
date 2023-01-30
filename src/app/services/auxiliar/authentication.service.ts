@@ -1,3 +1,4 @@
+import { AvatarService } from 'src/app/services/auxiliar/avatar.service';
 import { ApiInfluencersService } from './../influencers/api-influencers.service';
 import { ApiNutritionService } from './../nutrition/api-nutrition.service';
 import { ApiWorkoutsService } from './../workouts/api-workouts.service';
@@ -11,6 +12,7 @@ import { Injectable } from '@angular/core';
 import { Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { client, environment } from 'src/environments/environment.prod';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,8 @@ export class AuthenticationService {
     private workoutService: ApiWorkoutsService,
     private nutritionService: ApiNutritionService,
     private influencerService: ApiInfluencersService,
+    private avatarService: AvatarService,
+    private storage: Storage,
   ) {
 
      this.platform.ready().then(async () => {
@@ -98,6 +102,7 @@ export class AuthenticationService {
       this.router.navigate(['login']);
       this.authState.next(false);
     });
+    this.storageService.remove('users-around');
   }
 
   isAuthenticated() {
@@ -117,6 +122,9 @@ export class AuthenticationService {
     this.nutritionService.indexGoals('-nutri-goals', true).subscribe();
     this.nutritionService.indexSegments('-nutri-segments', true).subscribe();
     this.influencerService.index('-influencers', true).subscribe();
+    this.avatarService.getUsersToWork().subscribe(res => {
+      this.storage.set('users-around', { res });
+    });
 
   }
 

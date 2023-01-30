@@ -28,7 +28,7 @@
     <ion-col size="12" class="item-row" *ngFor="let user of lastChats ">
       <ion-row class="ion-align-items-start">
         <ion-col size="3">
-          <ion-avatar (click)="goDetail(user.toEmail, user.img, user.toUid)" style="margin-bottom: 8px;">
+          <ion-avatar (click)="goDetail(user.toEmail, user.img, user.toUid, user.toWorkoutId, user.toNutritionId)" style="margin-bottom: 8px;">
             <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
             <img *ngIf="user?.img === ''" src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;" />
             <img *ngIf="user?.img" [src]="user.img" alt="user.name" style="width: 100% !important; " />
@@ -61,16 +61,16 @@
                   <ion-col size="4">
 
                   </ion-col>
-                  <ion-col size="4" (click)="openEspecificWorkout(user.toEmail)">
+                  <ion-col size="4" (click)="openEspecificWorkout(user)">
                     <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
                   </ion-col>
                   <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                  <ion-col size="4" (click)="openEspecificNutrition(user.toEmail)"
+                  <ion-col size="4" (click)="openEspecificNutrition(user)"
                     style="border-right: 1px solid #fff;">
                     <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                   </ion-col>
                   <ion-col size="4"
-                    (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail)">
+                    (click)="goSpecificChat(user.toName, user.toUid, user.img, user.messageSent, user.toEmail, user.toWorkoutId, user.toNutritionId)">
                     <ion-badge size="large" color="danger" class="messages" *ngIf="user.messageSent === 1 "></ion-badge>
                     <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                   </ion-col>

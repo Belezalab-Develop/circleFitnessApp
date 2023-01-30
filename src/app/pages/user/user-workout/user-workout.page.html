@@ -101,7 +101,7 @@
       <ion-row>
 
           <ion-col size="12" class="ion-text-center no-padding" *ngIf="viewReorder === true">
-              <ion-button *ngIf="subscribe === true" expand="full" color="danger"
+              <ion-button *ngIf="subscribe === true" expand="full" color="red"
                   (click)="selectedWorkoutRoutineOutside(exerciseProgram)">
                   <ion-icon name="play" class="ion-padding-end"></ion-icon>
                   {{'Iniciar Treinamento' | translate | uppercase}}
@@ -110,7 +110,7 @@
       </ion-row>
       <ion-row style="margin-top: -15px">
           <ion-col size="12">
-              <ion-text color="dark">
+              <ion-text color="white">
                   <h5>{{ 'Descrição do Treinamento' | translate }}</h5>
 
                   <div *ngIf="showMore === false" maxlength="190">
@@ -126,9 +126,9 @@
 
           <ion-col size="12">
 
-              <div *ngIf="this.viewReorder" ion-text color="dark" class="text-rigth"
+              <div *ngIf="this.viewReorder" ion-text color="white" class="text-rigth"
                   (click)="reorderActive = !reorderActive">
-                  <ion-text color="dark">
+                  <ion-text color="white">
                       {{(reorderActive ? 'listo' : 'reordenar') |translate}}
                   </ion-text>
               </div>

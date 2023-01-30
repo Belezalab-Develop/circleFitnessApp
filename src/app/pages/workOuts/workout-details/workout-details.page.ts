@@ -1,3 +1,4 @@
+import { AvatarService } from './../../../services/auxiliar/avatar.service';
 import { UserService } from './../../../services/user.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
@@ -34,6 +35,7 @@ export class WorkoutDetailsPage implements OnInit {
   showMore = false;
   modfText: string;
   custom_url: string;
+  userUid;
 
 
 
@@ -45,7 +47,8 @@ export class WorkoutDetailsPage implements OnInit {
     private userService: UserService,
     private modalCtrl: ModalController,
     private titleService: Title,
-    private analitycs: AnalyticsService
+    private analitycs: AnalyticsService,
+    private avatarService: AvatarService,
 
   ) {
     this.user = {};
@@ -73,6 +76,11 @@ export class WorkoutDetailsPage implements OnInit {
     this.routines = this.workout.routines;
     this.reorderActive = false;
     this.modfText = this.workout.description.split('\n').join('<br />');
+
+    this.storageService.getStorage('user_uid').then(res => {
+      this.userUid = res;
+
+    });
 
     FirebasePerformance.stopTrace({ traceName: 'workout - Detail' });
 
@@ -187,6 +195,9 @@ export class WorkoutDetailsPage implements OnInit {
               }, err => {
                 console.log(err);
               });
+
+
+            this.avatarService.updateWorkoutId(this.userUid, this.workout.id);
           }
         }
       ]

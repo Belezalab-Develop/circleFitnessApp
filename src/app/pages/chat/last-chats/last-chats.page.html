@@ -12,7 +12,7 @@
     <ion-col size="12" class="item-row" *ngIf="user.distance < 99999999999999999">
       <ion-row class="ion-align-items-start">
         <ion-col size="3">
-          <ion-avatar (click)="goDetail(user.email, user.imageUrl, user.id)" style="margin-bottom: 8px;">
+          <ion-avatar (click)="goDetail(user.email, user.imageUrl, user.id, user.workout_id, user.nutrition_id)" style="margin-bottom: 8px;">
             <img *ngIf="!user.imageUrl" src="assets/imgs/logo-fit-ola.png" alt="" style="object-fit: contain;" />
             <img *ngIf="user.imageUrl" [src]="user.imageUrl " alt="" style="width: 100%; !important" />
           </ion-avatar>
@@ -43,14 +43,14 @@
                   <ion-col size="4">
 
                   </ion-col>
-                  <ion-col size="4" (click)="openEspecificWorkout(user.email)">
-                    <img class="icon-circle" src="/assets/imgs/icons/workout.png" />
+                  <ion-col size="4" (click)="openEspecificWorkout(user)">
+                    <img class="icon-circle" src="/assets/imgs/icons/workout.png"  />
                   </ion-col>
                   <!-- <ion-col size="4" (click)="openNutrition()" *ngIf="chat.user.personal_information?.is_nutrition_program_visible"> -->
-                  <ion-col size="4" (click)="openEspecificNutrition(user.email)" style="border-right: 1px solid #fff;">
+                  <ion-col size="4" (click)="openEspecificNutrition(user)" style="border-right: 1px solid #fff;">
                     <img class="icon-circle" src="/assets/imgs/icons/nutrition.png" />
                   </ion-col>
-                  <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl, user.email)">
+                  <ion-col size="4" (click)="goChat(user.name, user.uid, user.imageUrl, user.email, user.workout_id, user.nutrition_id )">
                     <ion-badge size="large" color="danger" class="messages" *ngIf="user.badge === 1"></ion-badge>
                     <img class="icon-circle" src="/assets/imgs/icons/message.png" />
                   </ion-col>

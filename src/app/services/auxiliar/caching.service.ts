@@ -34,6 +34,12 @@ export class CachingService {
     return this.storage.set(url, { validUntil, data });
   }
 
+  cacheRequestChats(url, individual,  data): Promise<any> {
+    const validUntil = (new Date().getTime()) + TTL * 1000;
+    url = `${CACHE_KEY}${individual}`;
+    return this.storage.set(url, { validUntil, data });
+  }
+
   // Try to load cached data
   async getCachedRequest(url, individual ): Promise<any> {
     const currentTime = new Date().getTime();

@@ -7,7 +7,7 @@ import { InAppBrowserObject } from '@awesome-cordova-plugins/in-app-browser/ngx'
 import { UserService } from './../../../services/user.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { AppAvailability } from '@awesome-cordova-plugins/app-availability/ngx';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -25,6 +25,8 @@ export class ProfilePage implements OnInit {
   exerciseProgram;
   showAge;
   uid: string;
+  workout_id;
+  nutrition_id;
 
   constructor(
     private router: Router,
@@ -33,33 +35,39 @@ export class ProfilePage implements OnInit {
     private inAppBrowser: InAppBrowser,
     private userService: UserService,
     private workOutService: ApiWorkoutsService,
-    private nutritionService: ApiNutritionService
+    private nutritionService: ApiNutritionService,
+    private alertController: AlertController,
+
   ) {
     if (this.router.getCurrentNavigation() != null) {
       this.email = this.router.getCurrentNavigation().extras.state.email;
       this.userImageUrl = this.router.getCurrentNavigation().extras.state.photo_url;
       this.uid = this.router.getCurrentNavigation().extras.state.uid;
-      console.log('la imagen', this.userImageUrl);
+      this.workout_id = this.router.getCurrentNavigation().extras.state.workout_id;
+      this.nutrition_id = this.router.getCurrentNavigation().extras.state.nutrition_id;
+
+      console.log('nutrition_id', this.nutrition_id);
     }
 
     this.userService.getIndividualUser(this.email).subscribe((data) => {
       this.user = data[0];
       console.log(this.user);
       if (this.user) {
-        if (this.user.customer.exercise_program === null) {
+        if (this.workout_id === 0) {
           this.exerciseProgram = null;
         } else {
-          this.workOutService.individual(this.user.customer.exercise_program.exercise_program_id).subscribe((resp) => {
+          this.workOutService.individual(this.workout_id).subscribe((resp) => {
             this.exerciseProgram = resp[0];
 
           });
 
         }
 
-        if (this.user.customer.nutrition_program === null) {
+        if (this.nutrition_id === 0) {
           this.nutritionProgram = null;
         } else {
-          this.nutritionService.individual(this.user.customer.nutrition_program.nutrition_program_id).subscribe((res) => {
+          this.nutritionService.individual(this.nutrition_id).subscribe((res) => {
+            console.log('profile nutri:::', res);
             this.nutritionProgram = res[0];
 
           });
@@ -88,9 +96,15 @@ export class ProfilePage implements OnInit {
       await this.router.navigate(['/workout-details'], {
         queryParams: { params, workout },
       });
+    }else{
+      this.errorAlert('Este parceiro não tem treino selecionado');
+      return;
     }
 
-    return;
+
+
+
+
 
 
   }
@@ -100,8 +114,11 @@ export class ProfilePage implements OnInit {
       await this.router.navigateByUrl('nutrition-details', {
         state: { showMoreOptions: false, nutritionProgram },
       });
-    }
+    }else{
+    this.errorAlert('Este parceiro não tem um programa de nutrição selecionado');
     return;
+    }
+
   }
 
   async goUserLifeStyle(user, email, photo_url, uid) {
@@ -143,6 +160,17 @@ export class ProfilePage implements OnInit {
           const browser: InAppBrowserObject = this.inAppBrowser.create('https://www.instagram.com/' + this.user.personal_information.instagram, '_system');
         }
       );
+  }
+
+  async errorAlert(msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Oops!!',
+      message: msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
 }
