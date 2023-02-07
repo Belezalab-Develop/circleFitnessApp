@@ -7,7 +7,34 @@
   <div class="title-program ion-padding">
     INFLUENCERS & TRAINERS
   </div>
-  <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;">
+  <ion-list  lines="none" *ngIf="isLoaded" >
+    <ion-list-header>
+      <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+    </ion-list-header>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-row padding style="padding-top: 0 !important; padding-bottom: 0 !important;" *ngIf="!isLoaded">
     <ion-col size="12" class="item-row">
       <ion-row class="ion-align-items-start">
         <ion-col size="4">
@@ -31,14 +58,15 @@
       </ion-row>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="!isLoaded">
     <ion-col size="12">
       <h4 class="subtitle">Treinamentos <br> by <b>{{influencerData?.user.nick_name  }}</b></h4>
     </ion-col>
   </ion-row>
 
+
   <!--  <div *ngFor="let section of workoutSections"> -->
-  <div>
+  <div *ngIf="!isLoaded">
 
     <!-- <div *ngFor="let category of section.categories"> -->
     <div>
@@ -59,6 +87,19 @@
       </div>
     </div>
     <br>
+  </div>
+  <div *ngIf="influencerData?.exercise_programs.length === 0 && !isloaded">
+    <ion-row>
+      <ion-col size="12" class="item-row">
+        <ion-card>
+          <ion-card-content>
+            {{influencerData?.user.nick_name  }}, ainda não tem treinos atribuídos.
+          </ion-card-content>
+
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </div>
 
 

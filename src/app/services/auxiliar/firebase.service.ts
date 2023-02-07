@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { CachingService } from './caching.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -50,7 +52,7 @@ export class FirebaseService {
   }
 
 
-  async signup({ email, password, nickName }): Promise<any> {
+  async signup({ email, password, nickName, imageUrl, workout_id, nutrition_id }): Promise<any> {
     const credential = await createUserWithEmailAndPassword(
       this.auth,
       email,
@@ -65,6 +67,9 @@ export class FirebaseService {
       `users/${uid}`
     ).set({
       uid,
+      workout_id,
+      nutrition_id,
+      imageUrl,
       name: nickName,
       email: credential.user.email,
     });
@@ -78,7 +83,15 @@ export class FirebaseService {
     } catch (e) {
 
       await this.storageService.getStorage('user').then((user) => {
-        this.signup({ email, password, nickName: '' });
+        this.signup(
+          {
+            email,
+            password,
+            nickName: '',
+            imageUrl: 'https://firebasestorage.googleapis.com/v0/b/circlefitnessapp.appspot.com/o/uploads%2Fusers_avatars%2Flogo-fit-ola_200x200.png?alt=media&token=30f559de-122f-4148-9648-dcbcb005ae0f',
+            workout_id: 0,
+            nutrition_id: 0,
+          });
 
       }).catch(err => {
         console.log('Login firebase error 1::', err);

@@ -71,4 +71,33 @@ export class UserGaleryPage implements OnInit {
     }
   }
 
+  async deleteImage(id){
+
+    const alert = await this.alertController.create({
+      header: 'Excluir imagem',
+      message: 'Você quer deletar a imagem.',
+      buttons: [
+        {
+          text: 'FECHAR',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+
+          }
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.avatarService.deleteUserGaleryImage(this.userUid, id);
+          }
+        }
+
+      ],
+    });
+    await alert.present();
+
+  }
+
 }

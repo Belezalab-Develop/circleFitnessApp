@@ -10,6 +10,8 @@ import { NavController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Smartlook, SmartlookNavigationEvent, SmartlookUserIdentifier, SmartlookViewState } from '@awesome-cordova-plugins/smartlook/ngx';
 
+import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 @Component({
   selector: 'app-home-auth',
   templateUrl: './home-auth.page.html',
@@ -80,18 +82,22 @@ export class HomeAuthPage implements OnInit {
     this.router.navigateByUrl('user-workout', { replaceUrl: true });
   }
 
-  goInfluencers() {
+  async goInfluencers() {
+
     this.router.navigateByUrl('influencer-list', { replaceUrl: true });
   }
 
-  goExploreWorkouts() {
+  async goExploreWorkouts() {
+
     this.router.navigateByUrl('workouts-list', { replaceUrl: true });
   }
 
-  goExploreNutrition() {
+  async goExploreNutrition() {
+
     this.router.navigateByUrl('nutrition-list', { replaceUrl: true });
   }
-  goToChat() {
+  async goToChat() {
+    await this.delay(1500);
     this.router.navigateByUrl('last-chats', {
       state: { last: 0 }
     });
@@ -103,6 +109,20 @@ export class HomeAuthPage implements OnInit {
 
   async goGalery() {
     this.router.navigateByUrl('user-galery');
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async crash(): Promise<void> {
+    await FirebaseAnalytics.logEvent({
+      name: 'crash_triggered',
+      params: {
+        method: 'test',
+      }
+    });
+    await FirebaseCrashlytics.crash({ message: 'Test' });
   }
 
 

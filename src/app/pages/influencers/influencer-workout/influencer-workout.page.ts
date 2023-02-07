@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { ApiWorkoutsService } from './../../../services/workouts/api-workouts.service';
 import { Router } from '@angular/router';
 import { ApiInfluencersService } from './../../../services/influencers/api-influencers.service';
@@ -14,6 +15,7 @@ export class InfluencerWorkoutPage implements OnInit {
   influencer: any;
   influencerData: any;
   workouts: any;
+  isLoaded = true;
   sliderConfig = {
     spaceBetween: 0,
     centeredSlides: false,
@@ -23,9 +25,28 @@ export class InfluencerWorkoutPage implements OnInit {
   constructor(
     public workout: ApiWorkoutsService,
     public router: Router,
-    public influencerService: ApiInfluencersService
+    public influencerService: ApiInfluencersService,
+    private loadingController: LoadingController,
   ) {
+    this.getData();
+  }
+
+  async ngOnInit() {
+   /*  const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
+    });
+    loading.present(); */
+    console.log('influencer workout page');
+
+   /*  loading.dismiss(); */
+
+  }
+
+  async getData(){
+
     if (this.router.getCurrentNavigation() != null) {
+
       this.influencer =
         this.router.getCurrentNavigation().extras.state.influencer;
 
@@ -33,14 +54,12 @@ export class InfluencerWorkoutPage implements OnInit {
         (response: any) => {
           this.influencerData = response;
           console.log('influencer', this.influencerData);
+          this.isLoaded = false;
+
         },
         (err) => { }
       );
     }
-  }
-
-  ngOnInit() {
-    console.log('influencer workout page');
   }
 
 

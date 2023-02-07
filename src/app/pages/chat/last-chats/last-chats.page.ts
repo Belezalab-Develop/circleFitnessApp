@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, takeUntil } from 'rxjs/operators';
 import { AvatarService, User } from 'src/app/services/auxiliar/avatar.service';
 import { CachingService } from 'src/app/services/auxiliar/caching.service';
 import { ApiNutritionService } from 'src/app/services/nutrition/api-nutrition.service';
@@ -11,6 +11,8 @@ import { ApiWorkoutsService } from 'src/app/services/workouts/api-workouts.servi
 import { Geolocation } from '@capacitor/geolocation';
 import { WorkoutListParams } from 'src/app/models/workoutlistparams';
 import { Storage } from '@ionic/storage';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-last-chats',
@@ -18,6 +20,8 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./last-chats.page.scss'],
 })
 export class LastChatsPage implements OnInit, OnDestroy {
+
+  destroy$ = new Subject<void>();
 
   segment = 0;
   users: User[] = [];
@@ -55,11 +59,10 @@ export class LastChatsPage implements OnInit, OnDestroy {
   ) {
 
     this.titleService.setTitle('User And Patners ');
-
-    this.getInitialLogicData();
   }
 
   ngOnInit() {
+    this.getInitialLogicData();
   }
 
   async getInitialLogicData() {
@@ -81,17 +84,22 @@ export class LastChatsPage implements OnInit, OnDestroy {
 
   }
   async getUsers() {
-    this.avatarService.getUsers().pipe(shareReplay()).subscribe(res => {
+    this.avatarService.getUsers().pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.users = res.filter(item => item.id !== this.userUid)
         .map(item => item.imageUrl === 'undefined' ? { ...item, imageUrl: '', } : item);
 
     });
   }
   async getProfile() {
-    this.avatarService.getUserProfile(this.userUid).pipe(shareReplay()).subscribe((data) => {
-      this.profile = data;
-      console.log('el perfil->>', this.profile);
-    });
+    this.avatarService.getUserProfile(this.userUid)
+      .pipe(
+        takeUntil(this.destroy$),
+        shareReplay()
+      )
+      .subscribe((data) => {
+        this.profile = data;
+        console.log('el perfil->>', this.profile);
+      });
   }
 
   async openEspecificNutrition(user) {
@@ -102,7 +110,7 @@ export class LastChatsPage implements OnInit, OnDestroy {
     loading.present();
 
     if (user.nutrition_id !== 0) {
-      this.nutritionService.individual(user.nutrition_id).subscribe(async (res) => {
+      this.nutritionService.individual(user.nutrition_id).pipe(takeUntil(this.destroy$),).subscribe(async (res) => {
         const nutritionProgram = res[0];
         await this.router.navigateByUrl('nutrition-details', {
           state: { showMoreOptions: false, nutritionProgram },
@@ -114,7 +122,7 @@ export class LastChatsPage implements OnInit, OnDestroy {
 
     if (user.nutrition_id === 0) {
       loading.dismiss();
-      this.errorAlert('Este parceiro não tem um programa de nutrição selecionado');
+      this.errorAlert('Este partner não tem um programa de nutrição selecionado');
     }
 
   }
@@ -129,6 +137,7 @@ export class LastChatsPage implements OnInit, OnDestroy {
     console.log(user);
     if (user.workout_id !== 0) {
       this.workOutService.individual(user.workout_id)
+        .pipe(takeUntil(this.destroy$))
         .subscribe(async (resp) => {
           console.log(resp);
           const workout = resp[0];
@@ -148,7 +157,7 @@ export class LastChatsPage implements OnInit, OnDestroy {
     }
     if (user.workout_id === 0) {
       loading.dismiss();
-      this.errorAlert('este parceiro não tem treino selecionado');
+      this.errorAlert('este partner não tem treino selecionado');
     }
 
   }
@@ -273,6 +282,12 @@ export class LastChatsPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('last chats destroy');
+
+    this.destroy$.next();
+    this.destroy$.complete();
+
+
     this.storageService.remove('users-around');
     this.avatarService.getUsersToWork().subscribe(res => {
       this.storage.set('users-around', { res });

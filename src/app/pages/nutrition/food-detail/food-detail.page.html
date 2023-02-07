@@ -1,5 +1,5 @@
 <ion-header>
-  <app-nav-header  (goBack)="goBack()"></app-nav-header>
+  <app-nav-header (goBack)="goBack()"></app-nav-header>
 </ion-header>
 
 <ion-content>
@@ -21,32 +21,32 @@
       <ion-col size="4">
         <ion-row class="ion-text-start">
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">{{ 'Total calorias' | translate }}</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">{{ 'Total calorias' | translate }}</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">Proteinas</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">Proteinas</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">Carboidratos</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">Carboidratos</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">Gorduras</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">Gorduras</ion-text>
           </ion-col>
         </ion-row>
       </ion-col>
       <ion-col size="3">
         <ion-row class="ion-text-end">
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">{{ totalCalories() }}kcal</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">{{ totalCalories() }}kcal</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">{{ totalProteins() }}g</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">{{ totalProteins() }}g</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">{{ totalCarbohydrates() }}g</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">{{ totalCarbohydrates() }}g</ion-text>
           </ion-col>
           <ion-col size="12" class="no-padding">
-            <ion-text color="dark">{{ totalFats() }}g</ion-text>
+            <ion-text color="dark" style="font-size: 12px;">{{ totalFats() }}g</ion-text>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -116,6 +116,24 @@
                   </ion-col>
                 </ion-row>
               </ion-col>
+
+              <ion-col size="12" class="no-padding">
+                <span style="font-size: 14px; font-weight: 16px;" *ngIf="supplements.length > 0">Suplementos</span> <br>
+              </ion-col>
+              <ion-col size="12" class="no-padding text-des" *ngFor="let supplement of supplements">
+                <ion-icon color="danger" name="radio-button-on-outline"></ion-icon>{{ supplement.label }} <br>
+                <ion-row>
+                  <ion-col size="12">
+                    <p  *ngIf="!supplement.showMore">{{trimString(supplement.comments,150)}}</p>
+                    <p *ngIf="supplement.showMore" [innerHTML]="supplement.comments"> </p>
+                <a style=" color: #d20303; font-weight: bold; float: right;"
+                      (click)="supplement.showMore = !supplement.showMore">Mostrar <span
+                        [innerHtml]="supplement.showMore ? 'Menos' : 'Más'"> </span></a>
+                      <br>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+
             </ion-row>
 
           </ion-col>

@@ -9,10 +9,11 @@ import { CachingService } from './caching.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController, LoadingController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { client, environment } from 'src/environments/environment.prod';
 import { Storage } from '@ionic/storage';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,16 +33,17 @@ export class AuthenticationService {
     private influencerService: ApiInfluencersService,
     private avatarService: AvatarService,
     private storage: Storage,
+    private loadingController: LoadingController,
   ) {
 
-     this.platform.ready().then(async () => {
+    this.platform.ready().then(async () => {
       this.ifLoggedIn();
     });
   }
 
   ifLoggedIn() {
     this.storageService.getStorage('TOKEN_INFO').then(response => {
-     // console.log(response);
+      // console.log(response);
       if (response) {
         this.authState.next(true);
       }
@@ -109,22 +111,32 @@ export class AuthenticationService {
     return this.authState.value;
   }
 
-  userInfo(user){
+  userInfo(user) {
     this.generalService.user = user;
-        this.storageService.setStorage('user', user);
+    this.storageService.setStorage('user', user);
   }
 
-  cacheInfo(){
-
-    this.workoutService.indexGoals('-work-goals',true).subscribe();
-    this.workoutService.indexSegments('-work-segments',true).subscribe();
+  async cacheInfo() {
+    console.log('cache info start:::');
+    /*  const loading = await this.loadingController.create({
+       spinner: 'bubbles',
+       message: 'carregando as informações.'
+     });
+     loading.present(); */
+    //TODO:: check si toda la informacion ya fue cargada en el storage
+    this.avatarService.getUsersToWork().pipe(shareReplay()).subscribe(res => {
+      this.storage.set('users-around', { res });
+      //loading.dismiss();
+    });
+    this.workoutService.indexGoals('-work-goals', true).subscribe();
+    this.workoutService.indexSegments('-work-segments', true).subscribe();
     this.nutritionService.indexConstraint('-nutri-constraint', true).subscribe();
     this.nutritionService.indexGoals('-nutri-goals', true).subscribe();
     this.nutritionService.indexSegments('-nutri-segments', true).subscribe();
     this.influencerService.index('-influencers', true).subscribe();
-    this.avatarService.getUsersToWork().subscribe(res => {
-      this.storage.set('users-around', { res });
-    });
+
+
+    console.log('cache info finish:::');
 
   }
 

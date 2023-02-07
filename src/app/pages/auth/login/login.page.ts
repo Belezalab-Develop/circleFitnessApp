@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
 
       /*  const msg = err.error.message; */
       this.loading.dismiss();
-      const msg = 'As credenciais do usuário estavam incorretas.';
+      const msg = 'usuário ou senha incorretas.';
 
       this.errorAlert(msg);
 
@@ -152,7 +152,7 @@ export class LoginPage implements OnInit {
         email: form.email,
         password: form.password,
         nickName: result.nick_name,
-        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/circlefitnessapp.appspot.com/o/uploads%2Fusers_avatars%2Flogo-fit-ola_200x200.png?alt=media&token=30f559de-122f-4148-9648-dcbcb005ae0f',
+        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/circlefitnessapp.appspot.com/o/uploads%2Fusers_avatars%2Flogo-fit-ola_4_90x90.png?alt=media&token=f5b68e25-4c4e-41cf-87ea-c1428ac1da80',
         workout_id: 0,
         nutrition_id: 0
       };
@@ -247,7 +247,10 @@ export class LoginPage implements OnInit {
     const data = {
       email: formResult.email,
       password: formResult.password,
-      nickName: formResult.nick_name
+      nickName: formResult.nick_name,
+      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/circlefitnessapp.appspot.com/o/uploads%2Fusers_avatars%2Flogo-fit-ola_4_90x90.png?alt=media&token=f5b68e25-4c4e-41cf-87ea-c1428ac1da80',
+      workout_id: 0,
+      nutrition_id: 0
     };
 
     this.firebaseService.signup(data).then(res => { })

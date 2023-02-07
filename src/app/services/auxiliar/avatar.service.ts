@@ -19,7 +19,8 @@ import {
   updateDoc,
   addDoc,
   getDocs,
-  getDocsFromServer
+  getDocsFromServer,
+  deleteDoc
 } from '@angular/fire/firestore';
 import {
   getDownloadURL,
@@ -313,6 +314,7 @@ export class AvatarService {
       await addDoc(userDocRef, {
         uid,
         imageUrl,
+        fileName
       });
       return true;
     } catch (e) {
@@ -321,6 +323,20 @@ export class AvatarService {
     }
   }
 
+
+  async deleteUserGaleryImage(uid, id) {
+
+    try {
+
+
+      const userDocRef = doc(this.firestore, `usersGallery/${uid}/media/${id}`);
+      await deleteDoc(userDocRef);
+      return true;
+    } catch (e) {
+      console.log('error en la imagen->>', e);
+      return null;
+    }
+  }
 
 
 

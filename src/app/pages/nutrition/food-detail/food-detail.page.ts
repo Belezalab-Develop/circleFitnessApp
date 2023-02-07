@@ -16,6 +16,7 @@ export class FoodDetailPage implements OnInit {
   nutritionProgram: any = {};
   showMore = false;
   mealOptions;
+  supplements;
 
   constructor(
     @Optional() private routerOutlet: IonRouterOutlet,
@@ -39,7 +40,13 @@ export class FoodDetailPage implements OnInit {
         instrucTrunc: item.instructions.split('\n').slice(0, 190),
         showMore: false
       }));
+      this.supplements = this.meal.supplements.map(item => ({
+        ...item,
+        showMore: false
+      }));
       console.log('mealoption', this.mealOptions);
+      console.log('suplements', this.supplements);
+
     }
 
     if (this.router.getCurrentNavigation().extras.state.nutritionProgram) {

@@ -10,26 +10,20 @@ import { CachingService } from './../../../services/auxiliar/caching.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { NavController, AlertController, IonSlides, LoadingController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
-/* import { doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
-import {
-  getDownloadURL,
-  ref,
-  Storage,
-  uploadString,
-} from '@angular/fire/storage';
-import { Auth, user } from '@angular/fire/auth'; */
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, takeUntil } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.page.html',
   styleUrls: ['./chats.page.scss'],
 })
-export class ChatsPage implements OnInit {
+export class ChatsPage implements OnInit, OnDestroy {
   @ViewChild('slides', { static: true }) slider: IonSlides;
+  destroy$ = new Subject<void>();
   segment = 0;
   users: User[] = [];
   us: any;
@@ -74,7 +68,7 @@ export class ChatsPage implements OnInit {
   ) {
     this.titleService.setTitle('All Chats');
 
-    this.getInitialLogicData();
+
 
 
 
@@ -85,7 +79,11 @@ export class ChatsPage implements OnInit {
     return { id: res.id, };
   }
 
-  ngOnInit() { }
+  async ngOnInit() {
+
+    this.getInitialLogicData();
+
+  }
 
   async getInitialLogicData() {
 
@@ -93,35 +91,34 @@ export class ChatsPage implements OnInit {
       this.userUid = res;
       this.getProfile();
       this.getLastChats();
-    /*   this.getUsers();
-      this.getLocation(); */
+
 
     });
 
 
-  }
-  async getUsers() {
-    this.avatarService.getUsers().pipe(shareReplay()).subscribe(res => {
-      this.users = res.filter(item => item.id !== this.userUid)
-        .map(item => item.imageUrl === 'undefined' ? { ...item, imageUrl: '', } : item);
-
-    });
   }
   async getProfile() {
-    this.avatarService.getUserProfile(this.userUid).pipe(shareReplay()).subscribe((data) => {
+    this.avatarService.getUserProfile(this.userUid).pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.profile = data;
       console.log('el perfil->>', this.profile);
     });
   }
 
   async getLastChats() {
-    this.avatarService.getEspecificChats(this.userUid).pipe(
-      shareReplay()
-    ).subscribe(response => {
-      this.lastChats = response.map(item => item.img === 'undefined' ? { ...item, img: '', } : item);
-      console.log(this.lastChats);
-
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles',
+      message: 'carregando as informações.'
     });
+    loading.present();
+    this.avatarService.getEspecificChats(this.userUid)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        this.lastChats = response.map(item => item.img === 'undefined' ? { ...item, img: '', } : item);
+        console.log(this.lastChats);
+        this.isLoaded = false;
+        loading.dismiss();
+
+      });
   }
 
   async segmentChanged() {
@@ -141,19 +138,21 @@ export class ChatsPage implements OnInit {
     loading.present();
 
     if (user.toNutritionId !== 0) {
-      this.nutritionService.individual(user.toNutritionId).subscribe(async (res) => {
-        const nutritionProgram = res[0];
-        await this.router.navigateByUrl('nutrition-details', {
-          state: { showMoreOptions: false, nutritionProgram },
-        });
+      this.nutritionService.individual(user.toNutritionId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(async (res) => {
+          const nutritionProgram = res[0];
+          await this.router.navigateByUrl('nutrition-details', {
+            state: { showMoreOptions: false, nutritionProgram },
+          });
 
-        loading.dismiss();
-      });
+          loading.dismiss();
+        });
     }
 
     if (user.nutrition_id === 0) {
       loading.dismiss();
-      this.errorAlert('Este parceiro não tem um programa de nutrição selecionado');
+      this.errorAlert('Este partner não tem um programa de nutrição selecionado');
     }
 
   }
@@ -168,6 +167,7 @@ export class ChatsPage implements OnInit {
     console.log(user);
     if (user.toWorkoutId !== 0) {
       this.workOutService.individual(user.toWorkoutId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe(async (resp) => {
           console.log(resp);
           const workout = resp[0];
@@ -187,7 +187,7 @@ export class ChatsPage implements OnInit {
     }
     if (user.workout_id === 0) {
       loading.dismiss();
-      this.errorAlert('este parceiro não tem treino selecionado');
+      this.errorAlert('este partner não tem treino selecionado');
     }
 
   }
@@ -260,52 +260,6 @@ export class ChatsPage implements OnInit {
     });
     await alert.present();
   }
-  // geolocation
-
-  async getLocation() {
-    const loading = await this.loadingController.create({
-      spinner: 'bubbles',
-      message: 'carregando as informações.'
-    });
-
-
-    loading.present();
-    await Geolocation
-      .getCurrentPosition()
-      .then((resp) => {
-        if (resp) {
-          this.latitude = resp.coords.latitude;
-          this.longitude = resp.coords.longitude;
-          const result = this.avatarService.updatePosition(this.userUid, this.latitude, this.longitude);
-
-          this.usersAround = this.users.map(item => ({
-            ...item,
-            distance: this.calculateDistance(this.longitude, item.long, this.latitude, item.lat)
-          })).sort((a, b) => a.distance - b.distance);
-
-          const k = this.usersAround;
-
-          console.log('users:::', this.users);
-
-          console.log('users around:::', k);
-
-          loading.dismiss();
-
-          this.isLoaded = false;
-        }
-      })
-      .catch((error) => {
-        console.log('Error getting location', error);
-      });
-  }
-
-  calculateDistance(lon1, lon2, lat1, lat2) {
-    const p = 0.017453292519943295;
-    const c = Math.cos;
-    const a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((lon1 - lon2) * p))) / 2;
-    const dis = (12742 * Math.asin(Math.sqrt(a)));
-    return Math.trunc(dis);
-  }
 
   isNumber(value) {
     return Number.isNaN(value);
@@ -335,6 +289,19 @@ export class ChatsPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  ngOnDestroy(): void {
+    console.log('chats actives destroy');
+
+    this.destroy$.next();
+    this.destroy$.complete();
+
+
+    this.storageService.remove('users-around');
+    this.avatarService.getUsersToWork().subscribe(res => {
+      this.storage.set('users-around', { res });
+    });
   }
 
 }

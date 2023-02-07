@@ -7,7 +7,7 @@
       <img *ngIf="imagenUrl !== '' || imagenUrl !== 'undefined' " [src]="imagenUrl" alt="" style="width: 100%; !important"/>
     </ion-avatar>
     <ion-label>
-      {{name}}
+      {{name | uppercase}}
     </ion-label>
   </ion-item>
 

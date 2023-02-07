@@ -47,7 +47,7 @@
   <ion-grid class="pad ion-margin-top">
       <ion-row class="head-pad ion-align-item-center">
           <ion-col size="3">
-              <ion-button icon-only fill="clear" color="dark" (click)="showPad = !showPad">
+              <ion-button icon-only fill="clear" (click)="showPad = !showPad" style="color: black;">
                   <ion-icon *ngIf="showPad"  mode="ios" name="arrow-up"></ion-icon>
                   <ion-icon *ngIf="!showPad"  mode="ios" name="arrow-down"></ion-icon>
               </ion-button>
@@ -70,29 +70,29 @@
               </div>
           </ion-col>
           <ion-col size="4">
-              <ion-button  fill="clear" color="dark" (click)="goNext()" >
+              <ion-button  fill="clear"  (click)="goNext()" style="color: black;">
                   {{'next'|translate}}
               </ion-button>
           </ion-col>
       </ion-row>
       <ion-row class="plus-pad" *ngIf="showPad">
           <ion-col size="3">
-              <ion-button  fill="clear" color="dark" (click)="sum(1)">
+              <ion-button  fill="clear"  (click)="sum(1)" style="color: black;">
                   +1
               </ion-button>
           </ion-col>
           <ion-col size="3">
-              <ion-button fill="clear" color="dark" (click)="sum(2)">
+              <ion-button fill="clear"  (click)="sum(2)" style="color: black;">
                   +2
               </ion-button>
           </ion-col>
           <ion-col size="3">
-              <ion-button fill="clear" color="dark" (click)="sum(5)">
+              <ion-button fill="clear"  (click)="sum(5)" style="color: black;">
                   +5
               </ion-button>
           </ion-col>
           <ion-col size="3">
-              <ion-button fill="clear" color="dark" (click)="sum(10)">
+              <ion-button fill="clear"  (click)="sum(10)" style="color: black;">
                   +10
               </ion-button>
           </ion-col>

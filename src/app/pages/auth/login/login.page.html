@@ -57,7 +57,7 @@
       <ion-row *ngIf="register && !email" class="ion-padding" style="margin-top: 40px;">
         <ion-col class="ion-text-center">
           <ion-text color="white">
-            Bem-vindo a  <br> Circle Fitness
+            Bem-vindo a <br> Circle Fitness
           </ion-text> <br><br>
           <ion-text color="white">
             Vamos iniciar o seu cadastro?
@@ -97,18 +97,18 @@
             <ion-row>
               <ion-col size="12">
                 <ion-item class="custom-input">
-                  <ion-input placeholder="Nome" name="name" formControlName="name" ></ion-input>
+                  <ion-input placeholder="Nome" name="name" formControlName="name"></ion-input>
                 </ion-item>
                 <ion-item class="custom-input">
-                  <ion-input placeholder="Sobrenome" name="paternal_surname" formControlName="paternal_surname">
+                  <ion-input type="text" placeholder="Sobrenome" name="nick_name" formControlName="nick_name">
                   </ion-input>
                 </ion-item>
                 <ion-item class="custom-input">
                   <ion-input type="E-mail" placeholder="Email" name="email" formControlName="email"></ion-input>
                 </ion-item>
                 <ion-item class="custom-input">
-                  <ion-input type="text" placeholder="Apelido" name="nick_name" formControlName="nick_name">
-                  </ion-input>
+                  <ion-input placeholder="Apelido" name="paternal_surname"
+                    formControlName="paternal_surname"></ion-input>
                 </ion-item>
                 <ion-item class="custom-input">
                   <ion-input type="password" placeholder="Senha" name="password" formControlName="password"></ion-input>
