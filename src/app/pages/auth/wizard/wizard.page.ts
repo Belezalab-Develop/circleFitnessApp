@@ -195,7 +195,7 @@ export class WizardPage implements OnInit {
   }
 
   selectLocationOk(genders, selection) {
-    _.each(genders, function (gender) {
+    _.each(genders, function(gender) {
       if (gender.type !== selection.type) {
         gender.isSelected = false;
       }
@@ -209,7 +209,7 @@ export class WizardPage implements OnInit {
   }
 
   selectBodyOk(bodies, selection) {
-    _.each(bodies, function (body) {
+    _.each(bodies, function(body) {
       if (body.type !== selection.type) {
         body.isSelected = false;
       }
