@@ -104,7 +104,11 @@ export class WizardPage implements OnInit {
     this.buildFormMeasurements();
     this.storageService.getStorage('user').then(user => {
       if (user) {
-        this.user = user;
+        if (user.has_completed_onboarding) {
+          this.router.navigate(['/home-auth'], { replaceUrl: true });
+        } else {
+          this.user = user;
+        }
       }
     });
 
@@ -191,7 +195,7 @@ export class WizardPage implements OnInit {
   }
 
   selectLocationOk(genders, selection) {
-    _.each(genders, function(gender) {
+    _.each(genders, function (gender) {
       if (gender.type !== selection.type) {
         gender.isSelected = false;
       }
@@ -205,7 +209,7 @@ export class WizardPage implements OnInit {
   }
 
   selectBodyOk(bodies, selection) {
-    _.each(bodies, function(body) {
+    _.each(bodies, function (body) {
       if (body.type !== selection.type) {
         body.isSelected = false;
       }
